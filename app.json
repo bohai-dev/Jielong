@@ -1,40 +1,46 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/add/add",
     "pages/comments/comments",
-    "pages/login/login",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/publish/publish",
+    "pages/personal/personal"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTitleText": "创享接龙",
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "backgroundColor": "#fff",
     "borderStyle": "black",
+    "selectedColor": "#1afa29",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/home_black.png",
-        "selectedIconPath": "images/home.png"
+        "iconPath": "images/home.png",
+        "selectedIconPath": "./images/selected/home.png",
+        "text": "首页"
       },
       {
         "pagePath": "pages/add/add",
-        "iconPath": "images/add_black.png",
-        "selectedIconPath": "images/add.png"
+        "iconPath": "images/add.png",
+        "selectedIconPath": "./images/selected/add.png",
+        "text": "发布"
       },
       {
         "pagePath": "pages/comments/comments",
-        "iconPath": "images/comments_black.png",
-        "selectedIconPath": "images/comments.png"
+        "iconPath": "images/message.png",
+        "selectedIconPath": "images/selected/message.png",
+        "text": "消息"
       },
       {
-        "pagePath": "pages/login/login",
-        "iconPath": "images/personal_black.png",
-        "selectedIconPath": "images/personal.png"
+        "pagePath": "pages/personal/personal",
+        "iconPath": "images/personal.png",
+        "selectedIconPath": "images/selected/personal.png",
+        "text": "我的"
       }
     ]
   }

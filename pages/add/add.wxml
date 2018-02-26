@@ -1,2 +1,19 @@
 <!--pages/add/add.wxml-->
-<text>pages/add/add.wxml</text>
+
+<view id='container'>
+<!--自发接龙-->
+<view id='selfJl'>
+  <view>
+   <text id='jlTitle'>自发接龙</text>
+  </view>
+  <view >
+    <text id='jlIntro'>发布团购接龙卖货</text>
+   </view>
+  <view id='jlPublish'>
+     <text id='textPublish'>发布自发接龙</text>
+  </view>
+</view>
+
+  
+
+</view>
