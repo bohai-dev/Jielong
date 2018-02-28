@@ -1,2 +1,12 @@
-<!--pages/comments/comments.wxml-->
-<text>pages/comments/comments.wxml</text>
+<view class="listWrap" data-c_e_id="wx_view_73b58de5">
+    <view class="listitem01" data-c_e_id="wx_viewd43566f3">
+        <navigator class="listitem-navigator" data-c_e_id="wx_navigatorb90d9a0d" hover-class="navigator-hover">
+            <image class="wx-image_tBcdCT2" data-c_e_id="wx_image692947c7" mode="aspectFill" src="http://qty83k.creatby.com/materials/origin/d142783088b632980283a188f9dff128_origin.jpg" style="background-size: cover; background-position: center center; background-repeat: no-repeat; background-image: url(http://qty83k.creatby.com/materials/origin/d142783088b632980283a188f9dff128_origin.jpg); "/>
+            <text class="c-block wx-text_C6B0YE" data-c_e_id="wx_text_676b55db">群团购接龙客服</text>
+        </navigator>
+        <navigator class="listitem-navigator" data-c_e_id="wx_navigator4fac525f" hover-class="navigator-hover">
+            <image class="wx-image_tBcdCT2" data-c_e_id="wx_image1d2e067d" mode="aspectFill" src="http://qty83k.creatby.com/materials/origin/545bcfac69a09ea9ff9147614a2d541c_origin.jpg" style="background-size: cover; background-position: center center; background-repeat: no-repeat; background-image: url(http://qty83k.creatby.com/materials/origin/545bcfac69a09ea9ff9147614a2d541c_origin.jpg); "/>
+            <text class="c-block wx-text_C6B0YE" data-c_e_id="wx_text05ac3c49">系统通知</text>
+        </navigator>
+    </view>
+</view>

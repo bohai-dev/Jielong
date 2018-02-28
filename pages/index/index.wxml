@@ -1,13 +1,53 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<swiper class="wx-swiper_ECOzck" data-c_e_id="wx_swiper_7ec4a212" indicator-dots="True" lower-threshold="50">
+    <swiper-item class="c-full wx-swiper-item_l83bcq" data-c_e_id="wx_swiper_item_15c8fd4c"/>
+    <swiper-item class="c-full wx-swiper-item_H5LKqa" data-c_e_id="wx_swiper_item_b1682428"/>
+    <swiper-item class="c-full wx-swiper-item_hBpuSA" data-c_e_id="wx_swiper_item_7603c774"/>
+</swiper>
+<view class="listWrap" data-c_e_id="wx_view848f9f58">
+    <text class="c-block bottomGrayboder wx-text_hDebWU" data-c_e_id="wx_texte31b3517">热门推荐</text>
+    <view class="listitem01" data-c_e_id="wx_viewcdacad14">
+        <view class="wx-view_pOFBSt" data-c_e_id="wx_viewb839873a"/>
+        <view class="c-minheight wx-view_G0RuxH" data-c_e_id="wx_view_680efc9e">
+            <image class="wx-image_iafQfx" data-c_e_id="wx_image_ad5cfcde" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
+            <text class="c-block wx-text_aTwIEv" data-c_e_id="wx_text_5527511b">小花</text>
+            <view class="c-minheight wx-view_7XgB9U" data-c_e_id="wx_view_e2858311">
+                <text class="c-block wx-text_BOWbJk" data-c_e_id="wx_text_56df7798">多肉植物批发</text>
+                <text class="c-block wx-text_Z7Cm87" data-c_e_id="wx_text_253b3645">02-26  |  164人浏览   |   转发有奖</text>
+                <image class="wx-image_DV57iw" data-c_e_id="wx_image_f16f919a" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
+                <image class="wx-image_BvXSzx" data-c_e_id="wx_image_af3e247d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
+                <image class="wx-image_Pjptvk" data-c_e_id="wx_image_057610cd" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
+                <text class="c-block wx-text_AlJ5as" data-c_e_id="wx_text_8ea676e8">扬州市，多肉植物中心</text>
+            </view>
+        </view>
+    </view>
+    <view class="listitem01" data-c_e_id="wx_viewb56b645d">
+        <view class="wx-view_pOFBSt" data-c_e_id="wx_viewb4c5aa99"/>
+        <view class="c-minheight wx-view_G0RuxH" data-c_e_id="wx_viewb9bf0fe1">
+            <image class="wx-image_iafQfx" data-c_e_id="wx_imagecd8376a0" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
+            <text class="c-block wx-text_aTwIEv" data-c_e_id="wx_text64361d01">小花</text>
+            <view class="c-minheight wx-view_7XgB9U" data-c_e_id="wx_viewf520aea3">
+                <text class="c-block wx-text_BOWbJk" data-c_e_id="wx_textba653fd5">多肉植物批发</text>
+                <text class="c-block wx-text_Z7Cm87" data-c_e_id="wx_text50a75898">02-26  |  164人浏览   |   转发有奖</text>
+                <image class="wx-image_DV57iw" data-c_e_id="wx_image0a31a418" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
+                <image class="wx-image_BvXSzx" data-c_e_id="wx_imageeeeabac9" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
+                <image class="wx-image_Pjptvk" data-c_e_id="wx_image292e6a63" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
+                <text class="c-block wx-text_AlJ5as" data-c_e_id="wx_text906bcb15">扬州市，多肉植物中心</text>
+            </view>
+        </view>
+    </view>
+    <view class="listitem01" data-c_e_id="wx_viewe754903e">
+        <view class="wx-view_pOFBSt" data-c_e_id="wx_viewc5c38b89"/>
+        <view class="c-minheight wx-view_G0RuxH" data-c_e_id="wx_view065f2c7f">
+            <image class="wx-image_iafQfx" data-c_e_id="wx_image30cf39a9" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
+            <text class="c-block wx-text_aTwIEv" data-c_e_id="wx_text505515b6">小花</text>
+            <view class="c-minheight wx-view_7XgB9U" data-c_e_id="wx_viewa2ee268b">
+                <text class="c-block wx-text_BOWbJk" data-c_e_id="wx_textaed13ba2">多肉植物批发</text>
+                <text class="c-block wx-text_Z7Cm87" data-c_e_id="wx_text373bcea2">02-26  |  164人浏览   |   转发有奖</text>
+                <image class="wx-image_DV57iw" data-c_e_id="wx_image07892846" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
+                <image class="wx-image_BvXSzx" data-c_e_id="wx_imageddcff4cf" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
+                <image class="wx-image_Pjptvk" data-c_e_id="wx_image3939c7a9" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
+                <text class="c-block wx-text_AlJ5as" data-c_e_id="wx_textf3a939c6">扬州市，多肉植物中心</text>
+            </view>
+        </view>
+    </view>
 </view>
