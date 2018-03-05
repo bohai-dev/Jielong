@@ -10,7 +10,7 @@ Page({
   /**
    * 页面名称
    */
-  name: "comments",
+  name: "release",
   /**
    * 页面的初始数据
    */

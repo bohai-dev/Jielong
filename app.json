@@ -5,7 +5,8 @@
     "pages/comments/comments",
     "pages/logs/logs",
     "pages/publish/publish",
-    "pages/personal/personal"
+    "pages/personal/personal",
+    "pages/release/release"
   ],
   "window": {
     "backgroundTextStyle": "light",

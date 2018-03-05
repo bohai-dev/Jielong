@@ -1,5 +1,9 @@
 <view class="c-minheight wx-view_y7f4Qf" data-c_e_id="wx_view_dd47b4d1">
+<navigator url="../release/release">
+<view class="c-minheight wx-view_y7f4Qf" data-c_e_id="wx_view_dd47b4d1">
     <text class="c-block wx-text_mPbeYC" data-c_e_id="wx_text_ac6df1f7">自发接龙</text>
     <text class="c-block wx-text_pNkCz0" data-c_e_id="wx_text_66ef8cb3">发布团购接龙卖货</text>
     <text class="c-block wx-text_Vobu5W" data-c_e_id="wx_text_72828afa">发布自发接龙</text>
+</view>
+    </navigator>
 </view>
