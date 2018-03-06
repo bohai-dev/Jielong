@@ -4,7 +4,6 @@
     "pages/add/add",
     "pages/comments/comments",
     "pages/logs/logs",
-    "pages/publish/publish",
     "pages/personal/personal",
     "pages/release/release",
     "pages/detail/detail"

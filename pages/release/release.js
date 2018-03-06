@@ -17,7 +17,7 @@ Page({
 
   data: {
 
-
+    imagePaths:['hufud']
 
 
 
@@ -64,11 +64,29 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-
+      
   },
 
+  uploadImage:function(){
+    console.log(this.data.imagePaths)
+    var self=this
+    wx.chooseImage({   //可选择多个图片
+      success: function(res) {
+        var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
+       // console.log(tempFilePaths)
+        var imageArray=self.data.imagePaths
 
-  //以下为自定义点击事件
+        for (var i = 0; i < tempFilePaths.length;i++){
+          imageArray.push(tempFilePaths[i])
+        }
+        self.setData({
+          imagePaths: imageArray
+        })
+
+       // console.log(self.data.imagePaths)
+      },
+    })
+  }
 
 })
 

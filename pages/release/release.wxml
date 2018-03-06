@@ -6,7 +6,7 @@
 </form>
 <view class="c-minheight wx-view_juFaKu" data-c_e_id="wx_view_a257981a">
     <view class="c-minheight wx-view_wKhucp" data-c_e_id="wx_view_bbf95aa9">
-        <text class="c-block wx-text_iVp7YK" data-c_e_id="wx_text_e6c34ceb">点击上传</text>
+        <text class="c-block wx-text_iVp7YK" data-c_e_id="wx_text_e6c34ceb" bindtap='uploadImage'>点击上传</text>
     </view>
 </view>
 <view class="c-minheight wx-view_Sowo5P" data-c_e_id="wx_view_19c7b439">
