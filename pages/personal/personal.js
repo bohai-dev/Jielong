@@ -17,7 +17,7 @@ Page({
 
   data: {
 
-
+    userInfo:{}
 
 
 
@@ -29,6 +29,13 @@ Page({
   onLoad() {
     // 注册coolsite360交互模块
     app.coolsite360.register(this);
+    if (app.globalData.userInfo) {
+      console.log(app.globalData.userInfo)
+      this.setData({
+        userInfo: app.globalData.userInfo
+      })
+    }
+
   },
 
   /**
