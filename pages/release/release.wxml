@@ -8,6 +8,7 @@
     <view class="c-minheight wx-view_wKhucp" data-c_e_id="wx_view_bbf95aa9">
         <text class="c-block wx-text_iVp7YK" data-c_e_id="wx_text_e6c34ceb">点击上传</text>
     </view>
+    <image class="wx-image_GjTWoa" data-c_e_id="wx_imagee5222a5c" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
 </view>
 <view class="c-minheight wx-view_Sowo5P" data-c_e_id="wx_view_19c7b439">
     <image class="wx-image_kfv1qb" data-c_e_id="wx_image_c1c93b7d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
@@ -46,6 +47,7 @@
         <view class="c-minheight wx-view_wKhucp" data-c_e_id="wx_view471acef8">
             <text class="c-block wx-text_iVp7YK" data-c_e_id="wx_text65244f35">点击上传</text>
         </view>
+        <image class="wx-image_GjTWoa" data-c_e_id="wx_imagee5222a5c" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
     </view>
     <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_viewc1ad3f96">
         <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_textad9ab741">分类</text>
