@@ -1,8 +1,10 @@
 <view class="c-minheight wx-view_GJgCI5" data-c_e_id="wx_view_5c9c6a51">
-    <image class="wx-image_9eoHLh" data-c_e_id="wx_image_2b1f526d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-    <text class="c-block wx-text_4nBXUW" data-c_e_id="wx_text_b9185864">小花</text>
+    <image class="wx-image_9eoHLh" data-c_e_id="wx_image_2b1f526d" mode="scaleToFill"  style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"  src="{{userInfo.avatarUrl}}"/>
+    <text class="c-block wx-text_4nBXUW" data-c_e_id="wx_text_b9185864">{{userInfo.nickName}}</text>
 </view>
+
 <view class="c-minheight wx-view_i1Ivzk" data-c_e_id="wx_view_cc314868"/>
+
 <view class="c-minheight wx-view_HAvxsl" data-c_e_id="wx_view_64a93c02">
     <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_view_179b49f5">
         <image class="wx-image_MUz3xd" data-c_e_id="wx_image_49c4adbd" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
