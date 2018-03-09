@@ -18,7 +18,7 @@
     <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_view79126538">
         <image class="wx-image_MUz3xd" data-c_e_id="wx_imagefb55f402" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
         <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_viewbd7215d9">
-            <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text6eeacc5f">我发起的接龙</text>
+            <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text6eeacc5f">我参与的接龙</text>
             <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_textdb6e4d8d">0次 ></text>
         </view>
     </view>

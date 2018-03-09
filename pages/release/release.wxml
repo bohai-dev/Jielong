@@ -1,83 +1,96 @@
 <form class="c-minheight wx-form_ahhvuU" data-c_e_id="wx_form_71c97754">
-    <view class="c-minheight wx-view_W69FQd" data-c_e_id="wx_view_5c2d2ca1">
-        <input class="c-block c-fullwidth wx-input_ihvbns" data-c_e_id="wx_input_439d1123" name="input1" placeholder="接龙主题" type="text"/>
-        <textarea class="c-block c-fullwidth wx-textarea_34Ow4k" data-c_e_id="wx_textarea_b2224170" name="textarea1" placeholder="介绍您的接龙活动，方便大家了解和参与。" type="textarea"/>
-    </view>
+  <view class="c-minheight wx-view_W69FQd" data-c_e_id="wx_view_5c2d2ca1">
+    <input class="c-block c-fullwidth wx-input_ihvbns" data-c_e_id="wx_input_439d1123" name="input1" placeholder="接龙主题" type="text" />
+    <textarea class="c-block c-fullwidth wx-textarea_34Ow4k" data-c_e_id="wx_textarea_b2224170" name="textarea1" placeholder="介绍您的接龙活动，方便大家了解和参与。" type="textarea" />
+  </view>
 </form>
 <view class="c-minheight wx-view_juFaKu" data-c_e_id="wx_view_a257981a">
-    <view class="c-minheight wx-view_wKhucp" data-c_e_id="wx_view_bbf95aa9">
-        <text class="c-block wx-text_iVp7YK" data-c_e_id="wx_text_e6c34ceb" bindtap='uploadImage'>点击上传</text>
-    </view>
-    <image class="wx-image_GjTWoa" data-c_e_id="wx_imagee5222a5c" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
+ 
+  <block wx:for="{{imageLocalPaths}}" wx:key="unique" class="imageContainer">
+    <image class="wx-image_GjTWoa" data-c_e_id="wx_imagee5222a5c" mode="scaleToFill" src="{{item.path}}" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+    />
+  </block>
+   <view class="c-minheight wx-view_wKhucp" data-c_e_id="wx_view_bbf95aa9">
+    <text class="c-block wx-text_iVp7YK" data-c_e_id="wx_text_e6c34ceb" bindtap='uploadImage'>点击上传</text>
+  </view>
+
 </view>
-<view class="c-minheight wx-view_Sowo5P" data-c_e_id="wx_view_19c7b439">
-    <image class="wx-image_kfv1qb" data-c_e_id="wx_image_c1c93b7d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-    <view class="c-minheight wx-view_WNlFJl" data-c_e_id="wx_view_ca551fbe">
-        <text class="c-block wx-text_qVgbly" data-c_e_id="wx_text_1a8977a0">定位活动地址</text>
-        <text class="c-block wx-text_6DwZH2" data-c_e_id="wx_text_2389e24f">></text>
-    </view>
+<view class="c-minheight wx-view_Sowo5P" data-c_e_id="wx_view_19c7b439" bindtap='chooseAddress'>
+  <image class="wx-image_kfv1qb" data-c_e_id="wx_image_c1c93b7d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+  />
+  <view class="c-minheight wx-view_WNlFJl" data-c_e_id="wx_view_ca551fbe">
+    <text class="c-block wx-text_qVgbly" data-c_e_id="wx_text_1a8977a0">{{addressName}}</text>
+    <text class="c-block wx-text_6DwZH2" data-c_e_id="wx_text_2389e24f">></text>
+  </view>
+
 </view>
-<view class="c-minheight wx-view_fBBdFL" data-c_e_id="wx_view_3b97d618"/>
+<view class="c-minheight wx-view_fBBdFL" data-c_e_id="wx_view_3b97d618" />
 <view class="c-minheight wx-view_Sowo5P" data-c_e_id="wx_viewf34262ec">
-    <image class="wx-image_kfv1qb" data-c_e_id="wx_imaged0e89ddc" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-    <view class="c-minheight wx-view_WNlFJl" data-c_e_id="wx_viewf59f16f3">
-        <text class="c-block wx-text_qVgbly" data-c_e_id="wx_texte428d890">截止时间</text>
-        <switch class="wx-switch_f7c0YD" data-c_e_id="wx_switch_6542b5c9" type="switch"/>
-    </view>
+  <image class="wx-image_kfv1qb" data-c_e_id="wx_imaged0e89ddc" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+  />
+  <view class="c-minheight wx-view_WNlFJl" data-c_e_id="wx_viewf59f16f3">
+    <text class="c-block wx-text_qVgbly" data-c_e_id="wx_texte428d890">设置截止时间</text>
+    <switch class="wx-switch_f7c0YD" data-c_e_id="wx_switch_6542b5c9" type="switch" bindchange="timeChange" />
+  </view>
 </view>
-<view class="c-minheight wx-view_Sowo5P" data-c_e_id="wx_viewfac8e34f">
-    <image class="wx-image_kfv1qb" data-c_e_id="wx_imaged1004a9d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-    <view class="c-minheight wx-view_WNlFJl" data-c_e_id="wx_view4b6e8f57">
-        <text class="c-block wx-text_qVgbly" data-c_e_id="wx_text1607a74f">设置截止时间</text>
-        <text class="c-block wx-text_6DwZH2" data-c_e_id="wx_text81c4f26b">></text>
-    </view>
+<view class="c-minheight wx-view_Sowo5P" data-c_e_id="wx_viewfac8e34f" wx:if='{{setFinishTime}}'>
+  <image class="wx-image_kfv1qb" data-c_e_id="wx_imaged1004a9d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+  />
+  <view class="c-minheight wx-view_WNlFJl" data-c_e_id="wx_view4b6e8f57">
+    <text class="c-block wx-text_qVgbly" data-c_e_id="wx_text1607a74f">截止时间</text>
+    <text class="c-block wx-text_6DwZH2" data-c_e_id="wx_text81c4f26b">></text>
+  </view>
 </view>
-<view class="c-minheight wx-view_fBBdFL" data-c_e_id="wx_view3f93ab71"/>
-<view class="c-minheight wx-view_9AaTvC" data-c_e_id="wx_view_6755e4c4">
-    <label class="c-minheight c-block wx-label_h0CG24" data-c_e_id="wx_label_0731536c">
-        <view class="c-minheight wx-view_E8I7BP" data-c_e_id="wx_view_b22a9e2c"/>
-        <text class="c-block wx-text_xboXUQ" data-c_e_id="wx_text_85bd1179">商品1</text>
-        <image class="wx-image_rM9Lk5" data-c_e_id="wx_image_514c5f77" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-    </label>
-    <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_view_b68322e8">
-        <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_text_62909592">产品名称</text>
-        <input class="c-block c-fullwidth wx-input_SqMAbX" data-c_e_id="wx_input_92fc9063" name="input1" placeholder="请输入商品名称" type="text"/>
+<view class="c-minheight wx-view_fBBdFL" data-c_e_id="wx_view3f93ab71" />
+<view class="c-minheight wx-view_9AaTvC" data-c_e_id="wx_view_6755e4c4" wx:for="{{goodsArray}}" wx:key="unique">
+
+  <label class="c-minheight c-block wx-label_h0CG24" data-c_e_id="wx_label_0731536c">
+    <view class="c-minheight wx-view_E8I7BP" data-c_e_id="wx_view_b22a9e2c" />
+    <text class="c-block wx-text_xboXUQ" data-c_e_id="wx_text_85bd1179">{{"商品" +(index+1)}}</text>
+    <image class="wx-image_rM9Lk5" data-c_e_id="wx_image_514c5f77" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+    />
+  </label>
+  <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_view_b68322e8">
+    <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_text_62909592">产品名称</text>
+    <input class="c-block c-fullwidth wx-input_SqMAbX" data-c_e_id="wx_input_92fc9063" name="input1" placeholder="请输入商品名称" type="text" />
+  </view>
+  <view class="c-minheight wx-view_juFaKu" data-c_e_id="wx_view559bdc20">
+    <view class="c-minheight wx-view_wKhucp" data-c_e_id="wx_view471acef8">
+      <text class="c-block wx-text_iVp7YK" data-c_e_id="wx_text65244f35">点击上传</text>
     </view>
-    <view class="c-minheight wx-view_juFaKu" data-c_e_id="wx_view559bdc20">
-        <view class="c-minheight wx-view_wKhucp" data-c_e_id="wx_view471acef8">
-            <text class="c-block wx-text_iVp7YK" data-c_e_id="wx_text65244f35">点击上传</text>
-        </view>
-        <image class="wx-image_GjTWoa" data-c_e_id="wx_imagee5222a5c" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-    </view>
-    <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_viewc1ad3f96">
-        <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_textad9ab741">分类</text>
-        <text class="c-block wx-text_cKKkGO" data-c_e_id="wx_text_cd8c601b">></text>
-    </view>
-    <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_view866963b1">
-        <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_textfb8ffe4a">规格</text>
-        <input class="c-block c-fullwidth wx-input_SqMAbX" data-c_e_id="wx_input41a81fc1" name="input1" placeholder="请输入商品规格" type="text"/>
-    </view>
-    <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_viewbcc85cfb">
-        <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_text422e8fc2">价格</text>
-        <input class="c-block c-fullwidth wx-input_SqMAbX" data-c_e_id="wx_inputa1257cd5" name="input1" placeholder="请输入商品价格" type="text"/>
-    </view>
-    <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_view004b71c4">
-        <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_textbd8d9d8e">库存</text>
-        <input class="c-block c-fullwidth wx-input_SqMAbX" data-c_e_id="wx_inpute93117e0" name="input1" placeholder="请输入商品库存" type="text"/>
-    </view>
-    <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_viewa0d4b5d7">
-        <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_textabb96ed3">参团人数</text>
-        <switch class="wx-switch_rJBpKp" data-c_e_id="wx_switch_d3d7e117" type="switch"/>
-    </view>
-    <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_viewe958ef3d">
-        <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_text658d0c9a">设置参团人数</text>
-        <input class="c-block c-fullwidth wx-input_SqMAbX" data-c_e_id="wx_input8e79efd6" name="input1" placeholder="请输入参团人数" type="text"/>
-    </view>
-    <view class="c-minheight wx-view_xU53R7" data-c_e_id="wx_view_6ffab1bd">
-        <text class="c-block wx-text_3qaQWU" data-c_e_id="wx_text_62ffb70f">新增商品</text>
-    </view>
+    <image class="wx-image_GjTWoa" data-c_e_id="wx_imagee5222a5c" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+    />
+  </view>
+  <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_viewc1ad3f96">
+    <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_textad9ab741">分类</text>
+    <text class="c-block wx-text_cKKkGO" data-c_e_id="wx_text_cd8c601b">></text>
+  </view>
+  <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_view866963b1">
+    <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_textfb8ffe4a">规格</text>
+    <input class="c-block c-fullwidth wx-input_SqMAbX" data-c_e_id="wx_input41a81fc1" name="input1" placeholder="请输入商品规格" type="text" />
+  </view>
+  <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_viewbcc85cfb">
+    <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_text422e8fc2">价格</text>
+    <input class="c-block c-fullwidth wx-input_SqMAbX" data-c_e_id="wx_inputa1257cd5" name="input1" placeholder="请输入商品价格" type="text" />
+  </view>
+  <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_view004b71c4">
+    <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_textbd8d9d8e">库存</text>
+    <input class="c-block c-fullwidth wx-input_SqMAbX" data-c_e_id="wx_inpute93117e0" name="input1" placeholder="请输入商品库存" type="text" />
+  </view>
+  <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_viewa0d4b5d7">
+    <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_textabb96ed3">设置最小成团数量</text>
+    <switch class="wx-switch_rJBpKp" data-c_e_id="wx_switch_d3d7e117" type="switch" />
+  </view>
+  <view class="c-minheight wx-view_ZwVMNH" data-c_e_id="wx_viewe958ef3d">
+    <text class="c-block wx-text_1PPBfC" data-c_e_id="wx_text658d0c9a">最小成团数量</text>
+    <input class="c-block c-fullwidth wx-input_SqMAbX" data-c_e_id="wx_input8e79efd6" name="input1" placeholder="请输入参团人数" type="text" />
+  </view>
+  
 </view>
-<view class="c-minheight wx-view_UlQSpP" data-c_e_id="wx_view_05d7c32e"/>
-<button class="wx-button_AILwqb" data-c_e_id="wx_button_8ff6952c" hover-class="button-hover" size="default" type="default">
-    发布接龙
+<view class="c-minheight wx-view_xU53R7" data-c_e_id="wx_view_6ffab1bd">
+    <text class="c-block wx-text_3qaQWU" data-c_e_id="wx_text_62ffb70f">新增商品</text>
+</view>  
+<view class="c-minheight wx-view_UlQSpP" data-c_e_id="wx_view_05d7c32e" />
+<button class="wx-button_AILwqb" data-c_e_id="wx_button_8ff6952c" hover-class="button-hover" size="default" type="default" bindtap='publish'>
+  发布接龙
 </button>

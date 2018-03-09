@@ -4,7 +4,7 @@
     <swiper-item class="c-full wx-swiper-item_hBpuSA" data-c_e_id="wx_swiper_item_7603c774"/>
 </swiper>
 <view class="listWrap" data-c_e_id="wx_view848f9f58">
-    <text class="c-block bottomGrayboder wx-text_hDebWU" data-c_e_id="wx_texte31b3517">热门推荐</text>
+    <!-- <text class="c-block bottomGrayboder wx-text_hDebWU" data-c_e_id="wx_texte31b3517">热门推荐</text> -->
     <view class="listitem01" data-c_e_id="wx_viewcdacad14">
         <view class="wx-view_pOFBSt" data-c_e_id="wx_viewb839873a"/>
         <view class="c-minheight wx-view_G0RuxH" data-c_e_id="wx_view_680efc9e">
@@ -13,7 +13,7 @@
             <navigator url="../detail/detail">
             <view class="c-minheight wx-view_7XgB9U" data-c_e_id="wx_view_e2858311">
                 <text class="c-block wx-text_BOWbJk" data-c_e_id="wx_text_56df7798">多肉植物批发</text>
-                <text class="c-block wx-text_Z7Cm87" data-c_e_id="wx_text_253b3645">02-26  |  164人浏览   |   转发有奖</text>
+                <text class="c-block wx-text_Z7Cm87" data-c_e_id="wx_text_253b3645">02-26  |  164人浏览  </text>
                 <image class="wx-image_DV57iw" data-c_e_id="wx_image_f16f919a" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
                 <image class="wx-image_BvXSzx" data-c_e_id="wx_image_af3e247d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
                 <image class="wx-image_Pjptvk" data-c_e_id="wx_image_057610cd" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
@@ -29,7 +29,7 @@
             <text class="c-block wx-text_aTwIEv" data-c_e_id="wx_text64361d01">小花</text>
             <view class="c-minheight wx-view_7XgB9U" data-c_e_id="wx_viewf520aea3">
                 <text class="c-block wx-text_BOWbJk" data-c_e_id="wx_textba653fd5">多肉植物批发</text>
-                <text class="c-block wx-text_Z7Cm87" data-c_e_id="wx_text50a75898">02-26  |  164人浏览   |   转发有奖</text>
+                <text class="c-block wx-text_Z7Cm87" data-c_e_id="wx_text50a75898">02-26  |  164人浏览 </text>
                 <image class="wx-image_DV57iw" data-c_e_id="wx_image0a31a418" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
                 <image class="wx-image_BvXSzx" data-c_e_id="wx_imageeeeabac9" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
                 <image class="wx-image_Pjptvk" data-c_e_id="wx_image292e6a63" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
@@ -44,7 +44,7 @@
             <text class="c-block wx-text_aTwIEv" data-c_e_id="wx_text505515b6">小花</text>
             <view class="c-minheight wx-view_7XgB9U" data-c_e_id="wx_viewa2ee268b">
                 <text class="c-block wx-text_BOWbJk" data-c_e_id="wx_textaed13ba2">多肉植物批发</text>
-                <text class="c-block wx-text_Z7Cm87" data-c_e_id="wx_text373bcea2">02-26  |  164人浏览   |   转发有奖</text>
+                <text class="c-block wx-text_Z7Cm87" data-c_e_id="wx_text373bcea2">02-26  |  164人浏览  </text>
                 <image class="wx-image_DV57iw" data-c_e_id="wx_image07892846" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
                 <image class="wx-image_BvXSzx" data-c_e_id="wx_imageddcff4cf" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
                 <image class="wx-image_Pjptvk" data-c_e_id="wx_image3939c7a9" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
