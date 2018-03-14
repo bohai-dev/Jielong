@@ -1,0 +1,3 @@
+<!--pages/personal/address/address.wxml-->
+<text>pages/personal/address/address.wxml</text>
+<button bindtap='addAddress'>新增地点</button>

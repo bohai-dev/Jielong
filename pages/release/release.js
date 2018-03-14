@@ -16,32 +16,33 @@ Page({
    */
 
   data: {
-  
-      topic:null,          //主题
-      description:null,    //活动描述  
-      addressName: "定位活动地址" ,          //地址名称
-      addressDetail:null ,                 //详细地址
-      imageLocalPaths: [],                //本地介绍图片数组 { id:1, unique: 'unique_1',path:''}
-      imageServerPaths: [],               //服务器图片介绍数组 { id:1, unique: 'unique_1',path:''}
-      setFinishTime:false,               //是否设置截止时间
-      goodsArray: [                     //商品数组 
-         {
-            unique:'unique_0',            // 该item在数组中的唯一标识符
-            goodsName:null,              //商品名称 
-            goodsLocalPaths:[],         // 商品本地图片路径 数组
-            goodsLocalPaths: [],       // 商品服务器图片路径 数组
-            goodsParentClass:null,     //商品一级分类 id
-            goodsSubClass:null ,      // 商品二级分类 id
-            goodsSpec:null,          //商品规格
-            goodsPrice:null,        //商品价格 
-            goodsRepertory:null,   //商品库存
-            setGroup:false,       //是否设置最低参团人数,默认false
-            groupSum:null        //最低参团人数
 
-         }
+    topic: null,          //主题
+    description: null,    //活动描述  
+    addressName: "定位活动地址",          //地址名称
+    addressDetail: null,                 //详细地址
+    imageLocalPaths: [],                //本地介绍图片数组 { id:1, unique: 'unique_1',path:''}
+    imageServerPaths: [],               //服务器图片介绍数组 { id:1, unique: 'unique_1',path:''}
+    setFinishTime: false,               //是否设置截止时间
+    finishTime: null,
+    goodsArray: [                     //商品数组 
+      {
+        unique: 'unique_0',            // 该item在数组中的唯一标识符
+        name: null,              //商品名称 
+        localPaths: [],         // 商品本地图片路径 数组
+        serverPaths: [],       // 商品服务器图片路径 数组
+        parentClassId: null,     //商品一级分类 id
+        subClassId: null,      // 商品二级分类 id
+        specification: null,          //商品规格
+        price: null,        //商品价格 
+        repertory: null,   //商品库存
+        isSetGroup: false,       //是否设置最低成团数量，0否，1是
+        groupSum: null        //最低成团数量
+
+      }
 
 
-      ]                  
+    ]
 
 
 
@@ -84,17 +85,17 @@ Page({
 
   },
 
- 
 
-  uploadImage:function(){
- 
-    var self=this
+
+  uploadImage: function () {
+
+    var self = this
     wx.chooseImage({   //可选择多个图片
-      success: function(res) {
+      success: function (res) {
         var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
-      
+
         var length = self.data.imageLocalPaths.length
-        for (var i = 0; i < tempFilePaths.length;i++){
+        for (var i = 0; i < tempFilePaths.length; i++) {
           var loalImg = [{ id: length, unique: 'unique_' + length, path: tempFilePaths[i] }];
           self.data.imageLocalPaths = self.data.imageLocalPaths.concat(loalImg)   //concat拼接多个数组
           length++;
@@ -105,51 +106,90 @@ Page({
         })
 
         console.log(self.data.imageLocalPaths)
-       
+
       },
     })
   },
 
+  
+
 
   //选择活动地址
-  chooseAddress:function(){
+  chooseAddress: function () {
     console.log('chooseAddress')
-    var self=this
+    var self = this
 
     wx.chooseLocation({
       success: function (res) {
         self.setData({
-          addressName:res.name,
-          addressDetail:res.address
+          addressName: res.name,
+          addressDetail: res.address
         })
       },
       fail: function (res) {
         console.log(res)
       }
     })
-    
-    
+
+
   },
   //设置截止时间  
-  timeChange:function(e){
+  timeChange: function (e) {
     console.log(e.detail.value)
     this.setData({
       setFinishTime: e.detail.value
 
     })
   },
+  //上传商品图片
+  uploadGoodsImage: function (index) {
+    var self = this
+    wx.chooseImage({
+      success: function (res) {
+
+      },
+    })
+  },
+  inputGoodsName:function(e){
+       console.log(e)
+
+  },
+  //新增商品
+  addGoods: function () {
+    var goods = [{
+      unique: 'unique_' + this.data.goodsArray.length,            // 该item在数组中的唯一标识符
+      name: null,              //商品名称 
+      localPaths: [],         // 商品本地图片路径 数组
+      serverPaths: [],       // 商品服务器图片路径 数组
+      parentClassId: null,     //商品一级分类 id
+      subClassId: null,      // 商品二级分类 id
+      specification: null,          //商品规格
+      price: null,        //商品价格 
+      repertory: null,   //商品库存
+      isSetGroup: false,       //是否设置最低成团数量，0否，1是
+      groupSum: null        //最低成团数量
+
+    }]
+    
+    this.data.goodsArray = this.data.goodsArray.concat(goods)
+    this.setData({
+      goodsArray: this.data.goodsArray
+
+    })
+
+  },
   //发布接龙
-  publish:function(){
-    var localImages=this.data.imageLocalPaths
+  publish: function () {
+    var localImages = this.data.imageLocalPaths
     //先循环上传接龙介绍图片，得到url
-    for (var i=0;i<localImages.length;i++){   
-     
+    for (var i = 0; i < localImages.length; i++) {
+
       wx.uploadFile({
-        url: app.globalData.domain +'/uploadImage',        //服务器上传地址
+        url: app.globalData.domain + '/uploadImage',        //服务器上传地址
         filePath: localImages[i].path,
         name: 'image',
         success: function (res) {
-          var data = res.data
+          var data = res.data   //会返回图片服务器存储路径
           console.log(data)
         }
       })
@@ -159,7 +199,7 @@ Page({
 
 
 
-  
+
 
 })
 

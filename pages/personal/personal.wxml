@@ -1,54 +1,64 @@
 <view class="c-minheight wx-view_GJgCI5" data-c_e_id="wx_view_5c9c6a51">
-    <image class="wx-image_9eoHLh" data-c_e_id="wx_image_2b1f526d" mode="scaleToFill"  style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"  src="{{userInfo.avatarUrl}}"/>
-    <text class="c-block wx-text_4nBXUW" data-c_e_id="wx_text_b9185864">{{userInfo.nickName}}</text>
+  <image class="wx-image_9eoHLh" data-c_e_id="wx_image_2b1f526d" mode="scaleToFill" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+    src="{{userInfo.avatarUrl}}" />
+  <text class="c-block wx-text_4nBXUW" data-c_e_id="wx_text_b9185864">{{userInfo.nickName}}</text>
 </view>
 
-<view class="c-minheight wx-view_i1Ivzk" data-c_e_id="wx_view_cc314868"/>
+<view class="c-minheight wx-view_i1Ivzk" data-c_e_id="wx_view_cc314868" />
 
 <view class="c-minheight wx-view_HAvxsl" data-c_e_id="wx_view_64a93c02">
-    <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_view_179b49f5">
-        <image class="wx-image_MUz3xd" data-c_e_id="wx_image_49c4adbd" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-        <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_view_1279f1f3">
-            <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text_0f47f002">我发起的接龙</text>
-            <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_text_533f055c">0个 ></text>
-        </view>
+  <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_view_179b49f5">
+    <image class="wx-image_MUz3xd" data-c_e_id="wx_image_49c4adbd" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+    />
+    <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_view_1279f1f3">
+      <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text_0f47f002">我发起的接龙</text>
+      <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_text_533f055c">0个 ></text>
     </view>
+  </view>
 </view>
 <view class="c-minheight wx-view_HAvxsl" data-c_e_id="wx_view1a68bd58">
-    <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_view79126538">
-        <image class="wx-image_MUz3xd" data-c_e_id="wx_imagefb55f402" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-        <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_viewbd7215d9">
-            <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text6eeacc5f">我参与的接龙</text>
-            <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_textdb6e4d8d">0次 ></text>
-        </view>
+  <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_view79126538">
+    <image class="wx-image_MUz3xd" data-c_e_id="wx_imagefb55f402" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+    />
+    <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_viewbd7215d9">
+      <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text6eeacc5f">我参与的接龙</text>
+      <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_textdb6e4d8d">0次 ></text>
     </view>
+  </view>
 </view>
-<view class="c-minheight wx-view_i1Ivzk" data-c_e_id="wx_view5ff580c0"/>
+<view class="c-minheight wx-view_i1Ivzk" data-c_e_id="wx_view5ff580c0" />
 <view class="c-minheight wx-view_HAvxsl" data-c_e_id="wx_view9ae3b4b9">
-    <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_viewae72b8d0">
-        <image class="wx-image_MUz3xd" data-c_e_id="wx_imageb46dae4d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-        <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_view99f00564">
-            <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text39308d98">个人资料</text>
-            <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_text249dca98">></text>
-        </view>
+
+  <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_viewae72b8d0">
+    <image class="wx-image_MUz3xd" data-c_e_id="wx_imageb46dae4d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+    />
+    <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_view99f00564">
+      <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text39308d98">个人资料</text>
+      <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_text249dca98">></text>
     </view>
+  </view>
+
 </view>
 <view class="c-minheight wx-view_HAvxsl" data-c_e_id="wx_view3d1cf13f">
+  <navigator url='./address/address'>
     <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_view7b0934bb">
-        <image class="wx-image_MUz3xd" data-c_e_id="wx_image5e52a14d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-        <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_view5979065e">
-            <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text1a6e5fa2">自提点管理</text>
-            <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_textae2489c0">></text>
-        </view>
+      <image class="wx-image_MUz3xd" data-c_e_id="wx_image5e52a14d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+      />
+      <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_view5979065e">
+        <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text1a6e5fa2">自提点管理</text>
+        <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_textae2489c0">></text>
+      </view>
     </view>
+  </navigator>
 </view>
 <view class="c-minheight wx-view_HAvxsl" data-c_e_id="wx_view1a386f08">
-    <view class="c-minheight wx-view_i1Ivzk" data-c_e_id="wx_viewbda0a339"/>
-    <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_viewe0ecd909">
-        <image class="wx-image_MUz3xd" data-c_e_id="wx_imagec9f86721" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-        <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_view21d1f738">
-            <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text43a7089d">帮助中心</text>
-            <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_text2b2e63dc">></text>
-        </view>
+  <view class="c-minheight wx-view_i1Ivzk" data-c_e_id="wx_viewbda0a339" />
+  <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_viewe0ecd909">
+    <image class="wx-image_MUz3xd" data-c_e_id="wx_imagec9f86721" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+    />
+    <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_view21d1f738">
+      <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text43a7089d">帮助中心</text>
+      <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_text2b2e63dc">></text>
     </view>
+  </view>
 </view>

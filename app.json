@@ -6,7 +6,8 @@
     "pages/logs/logs",
     "pages/personal/personal",
     "pages/release/release",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/personal/address/address"
   ],
   "window": {
     "backgroundTextStyle": "light",
