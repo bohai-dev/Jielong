@@ -5,6 +5,15 @@ require('coolsite.config.js');
 
 // 获取全局应用程序实例对象
 var app = getApp();
+/**接口参数 
+{
+
+  pageNum :1,
+  pageSize:4
+
+}
+
+*/
 
 // 创建页面实例对象
 Page({

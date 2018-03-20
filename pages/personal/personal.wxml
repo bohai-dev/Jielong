@@ -28,16 +28,16 @@
 </view>
 <view class="c-minheight wx-view_i1Ivzk" data-c_e_id="wx_view5ff580c0" />
 <view class="c-minheight wx-view_HAvxsl" data-c_e_id="wx_view9ae3b4b9">
-
-  <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_viewae72b8d0">
-    <image class="wx-image_MUz3xd" data-c_e_id="wx_imageb46dae4d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
-    />
-    <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_view99f00564">
-      <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text39308d98">个人资料</text>
-      <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_text249dca98">></text>
+  <navigator url='./userInfo/userInfo'>
+    <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_viewae72b8d0">
+      <image class="wx-image_MUz3xd" data-c_e_id="wx_imageb46dae4d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+      />
+      <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_view99f00564">
+        <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text39308d98">个人资料</text>
+        <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_text249dca98">></text>
+      </view>
     </view>
-  </view>
-
+  </navigator>
 </view>
 <view class="c-minheight wx-view_HAvxsl" data-c_e_id="wx_view3d1cf13f">
   <navigator url='./address/address'>

@@ -32,7 +32,7 @@
     </view>
 
     <!--设置自提点-->
-    <view class='containerView rowIconView' bindtap='chooseAddress'>
+    <view class='containerView rowIconView'>
       <text>设置自提点</text>
       <text>已设置0个</text>
       <text> > </text>
@@ -46,7 +46,7 @@
       </view>
     </view>
     <!--截止时间-->
-    <view class="containerView rowIconView" wx:if='{{setFinishTime}}'>
+    <view class="containerView rowIconView" wx:if='{{setFinishTime==1}}'>
       <text>截止时间</text>
       <text>2018/03/09/17:00</text>
       <text>></text>
@@ -54,7 +54,7 @@
 
 </view>
     <!--商品列表-->
-    <view class=" goodsListView" style="margin-top:8rpx" wx:for="{{goodsArray}}" wx:key="unique">
+    <view class=" goodsListView" style="margin-top:8rpx" wx:for="{{goodsList}}" wx:key="unique">
       <!--商品-->
       <view>
         <!--商品标签-->

@@ -29,12 +29,6 @@ App({
    
      this.getUserInfo()      //获取个人信息
 
-  
-
-
-
-
-
   },
 
  

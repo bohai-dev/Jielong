@@ -1,0 +1,46 @@
+/* pages/personal/userInfo/userInfo.wxss */
+.body{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #EEEEEE;  /*灰色背景*/ 
+}
+.block{
+  background-color: #FFFFFF;
+  margin-top: 15rpx;
+  display: flex;
+  flex-direction: row;
+  padding-left: 15rpx;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
+}
+label{
+  font-size: 35rpx;
+}
+input{
+  font-size: 30rpx;
+  margin-left: 20rpx;
+  width: 80%;
+}
+
+.address{
+  background-color: #FFFFFF;
+  margin-top: 15rpx;
+  display: flex;
+  flex-direction: column;
+  padding-left: 15rpx;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
+}
+textarea{
+  font-size: 30rpx;
+  margin-top: 15rpx;
+  width: 100%;
+}
+
+button{
+  font-size: 35rpx;
+  width: 90%;
+  margin-top: 50rpx;
+}

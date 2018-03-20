@@ -16,28 +16,30 @@ Page({
    */
 
   data: {
-
-    topic: null,          //主题
-    description: null,    //活动描述  
+    userId:14,
+    topic: "",          //主题
+    description: "",    //活动描述  
     addressName: "定位活动地址",          //地址名称
-    addressDetail: null,                 //详细地址
+    addressDetail: "",                 //详细地址
     imageLocalPaths: [],                //本地介绍图片数组 { id:1, unique: 'unique_1',path:''}
-    imageServerPaths: [],               //服务器图片介绍数组 { id:1, unique: 'unique_1',path:''}
-    setFinishTime: false,               //是否设置截止时间
-    finishTime: null,
-    goodsArray: [                     //商品数组 
+    introImages:"001.png,002.png",      //服务器图片介绍数组 用逗号隔开
+    goodsAddresses:"1,2,3" ,            //用户自提地址id数组，用逗号隔开
+    phoneNumber:"",                    //用户手机号
+    setFinishTime: 0,               //是否设置截止时间
+    finishTime: "2018-03-15 12:00:05",
+    goodsList: [                     //商品数组 
       {
         unique: 'unique_0',            // 该item在数组中的唯一标识符
-        name: null,              //商品名称 
+        name: "",              //商品名称 
         localPaths: [],         // 商品本地图片路径 数组
-        serverPaths: [],       // 商品服务器图片路径 数组
-        parentClassId: null,     //商品一级分类 id
-        subClassId: null,      // 商品二级分类 id
-        specification: null,          //商品规格
-        price: null,        //商品价格 
-        repertory: null,   //商品库存
-        isSetGroup: false,       //是否设置最低成团数量，0否，1是
-        groupSum: null        //最低成团数量
+        serverPaths: "1.png,2.png",       // 商品服务器图片路径数组,用逗号隔开
+        parentClassId: 0,     //商品一级分类 id
+        subClassId: 0,      // 商品二级分类 id
+        specification: "",          //商品规格
+        price: 10,        //商品价格 
+        repertory: 10,   //商品库存
+        isSetGroup: 0,       //是否设置最低成团数量，0否，1是
+        groupSum: 5        //最低成团数量
 
       }
 
@@ -157,7 +159,7 @@ Page({
   //新增商品
   addGoods: function () {
     var goods = [{
-      unique: 'unique_' + this.data.goodsArray.length,            // 该item在数组中的唯一标识符
+      unique: 'unique_' + this.data.goodsList.length,            // 该item在数组中的唯一标识符
       name: null,              //商品名称 
       localPaths: [],         // 商品本地图片路径 数组
       serverPaths: [],       // 商品服务器图片路径 数组
@@ -171,9 +173,9 @@ Page({
 
     }]
     
-    this.data.goodsArray = this.data.goodsArray.concat(goods)
+    this.data.goodsList = this.data.goodsList.concat(goods)
     this.setData({
-      goodsArray: this.data.goodsArray
+      goodsList: this.data.goodsList
 
     })
 
