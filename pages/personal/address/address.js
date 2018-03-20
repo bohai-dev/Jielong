@@ -64,7 +64,10 @@ Page({
    var data={
      userId: wx.getStorageSync("userId"),
      name:'银桥大厦',
-     detail:'浦东新区新金桥路28号'
+     detail:'浦东新区新金桥路28号',
+     longitude:50,       //经度
+     latitude:20         //纬度
+
    } 
 
    wx.request({

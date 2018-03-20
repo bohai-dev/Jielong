@@ -1,7 +1,4 @@
 
-// 引入coolsite360交互配置设定
-require('coolsite.config.js');
-
 // 获取全局应用程序实例对象
 var app = getApp();
 
@@ -19,8 +16,10 @@ Page({
     userId:14,
     topic: "",          //主题
     description: "",    //活动描述  
-    addressName: "定位活动地址",          //地址名称
-    addressDetail: "",                 //详细地址
+    addressName: "定位活动地址",           //活动地址名称
+    addressDetail: "",                   //活动详细地址
+    addressLongitude:60,                 //活动地址经度
+    addressLatitude:30,                  //活动地址纬度
     imageLocalPaths: [],                //本地介绍图片数组 { id:1, unique: 'unique_1',path:''}
     introImages:"001.png,002.png",      //服务器图片介绍数组 用逗号隔开
     goodsAddresses:"1,2,3" ,            //用户自提地址id数组，用逗号隔开
@@ -54,8 +53,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    // 注册coolsite360交互模块
-    app.coolsite360.register(this)
+    //加载分类数据  ' /getAllGoodsClass '
   },
 
   /**
