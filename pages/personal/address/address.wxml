@@ -1,3 +1,12 @@
 <!--pages/personal/address/address.wxml-->
-<text>pages/personal/address/address.wxml</text>
-<button bindtap='addAddress'>新增地点</button>
+<view wx:for="{{addressList}}"  wx:key="addrItems" class='section' data-selfid='{{item.id}}' bindtap='deleteAddr'>
+  <view>
+    <text class='showOL addrDetail'>{{item.detail}}</text>
+  </view>
+    <image src='../../../images/rightShot.png' class='rightShotImg'></image>
+</view>
+
+<navigator url='./addAddress/addAddress' class='pos_bot'>
+  <button>新增地点</button>
+</navigator>
+

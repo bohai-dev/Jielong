@@ -7,14 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    addressList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  
+  onLoad: function () {
+
   },
 
   /**
@@ -28,7 +28,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    console.log(app);
+    var _this = this;
+    wx.request({
+      url: app.globalData.domain + '/userAddress/selectByUserId',
+      data: {
+        userId: wx.getStorageSync("userId")
+      },
+      success: function (res) {
+        console.dir(res);
+        if (res.data.errorCode == 0) {
+          console.dir(_this);
+          _this.setData({ addressList: res.data.data })
+          console.log(_this.data.addressList);
+
+        }
+      }
+    })  
   },
 
   /**
@@ -58,33 +74,10 @@ Page({
   onReachBottom: function () {
   
   },
-
- //新增地点
-  addAddress:function(){
-   var data={
-     userId: wx.getStorageSync("userId"),
-     name:'银桥大厦',
-     detail:'浦东新区新金桥路28号',
-     longitude:50,       //经度
-     latitude:20         //纬度
-
-   } 
-
-   wx.request({
-     url: app.globalData.domain +'/userAddress/insert',
-     method:'POST',
-     header: {
-       'content-type': 'application/json' // 默认值
-     },
-     data:data,
-     success:function(res){
-       var data=res.data
-       if(data.errorCode==0){
-         console.log('插入地址成功')
-       }
-     }
-
-   })
+  // 删除自提点
+  deleteAddr:function(e){
+    console.log(e);
 
   }
+ 
 })
