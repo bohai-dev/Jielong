@@ -8,7 +8,8 @@
     "pages/release/release",
     "pages/detail/detail",
     "pages/personal/address/address",
-    "pages/personal/userInfo/userInfo"
+    "pages/personal/userInfo/userInfo",
+    "pages/personal/address/addAddress/addAddress"
   ],
   "window": {
     "backgroundTextStyle": "light",

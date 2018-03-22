@@ -149,7 +149,8 @@ App({
   //全局数据
   globalData: {
     userInfo: null,
-    domain: 'http://192.168.16.110:8080'
+    // domain: 'http://192.168.16.110:8080'
+    domain: "http://47.100.12.188:8081"
   }
 
 })

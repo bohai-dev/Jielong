@@ -1,0 +1,14 @@
+<!--pages/personal/address/addAddress/addAddress.wxml-->
+<form bindsubmit="formSubmit" bindreset='formReset'>
+<view class="section">
+  <textarea name="detail" bindblur="bindTextAreaBlur" placeholder="请填写自提点的详细地址" />
+</view>
+<view class='section getAddress'>
+  <image class='addrIcon' src='../../../../images/position.png'></image>
+  <text class='addrName' bindtap='findAddress'>{{addrName}}</text> 
+  <image src='../../../../images/rightShot.png' class='rightShotImg'></image>
+</view>
+<view>
+  <button formType="submit" class='subBtn'>保存</button>
+</view>
+</form>
