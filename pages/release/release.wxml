@@ -3,11 +3,11 @@
     <view>
     <!--接龙主题 -->
     <view class='containerView'>
-      <input placeholder="接龙主题" type="text" />
+      <input placeholder-class="phcolor" placeholder="接龙主题" type="text" />
     </view>
     <!--接龙介绍 -->
     <view class='containerView'>
-      <input type='text' placeholder="介绍您的接龙活动，方便大家了解和参与" style='height:100rpx;' />
+      <textarea placeholder-class="phcolor" placeholder="介绍您的接龙活动，方便大家了解和参与。" style='height:300rpx;' fixed="true"></textarea>
     </view>
 
     <!--接龙图片介绍-->
@@ -25,9 +25,11 @@
     </view>
     <!--定位活动地址-->
     <view class='containerView rowIconView' bindtap='chooseAddress'>
-      <image class='icon' mode="scaleToFill" src="../../images/position.png"></image>
-      <!--定位图标-->
-      <text>{{addressName}}</text>
+      <view class='center'>
+        <image class='icon' mode="scaleToFill" src="../../images/position.png"></image>
+        <!--定位图标-->
+        <text>{{addressName}}</text>
+      </view>
       <text> > </text>
     </view>
 
@@ -41,7 +43,7 @@
     <!--设置截止时间-->
     <view>
       <view class="containerView rowIconView">
-        <text>设置截止时间</text>
+        <text class='center'>设置截止时间</text>
         <switch type="switch" bindchange="timeChange" />
       </view>
     </view>
@@ -59,17 +61,17 @@
       <view>
         <!--商品标签-->
         <view class='containerView rowIconView'>
-          <view style="display: flex;flex-direction: row;">
+          <view style="display: flex;flex-direction: row;align-items: center;">
             <view class="goodsMark" />
-            <label style="margin-left:10rpx;">{{"商品" +(index+1)}}</label>
+            <label class='center' style="margin-left:10rpx;">{{"商品" +(index+1)}}</label>
           </view>
           <!--删除商品图标-->
           <image class='icon' mode="scaleToFill" src="../../images/delete.png" />
         </view>
         <!--商品名称-->
         <view class='containerView rowIconView'>
-          <text>商品名称</text>
-          <input class='input' data-index='{{index}}' bindinput='inputGoodsName' placeholder=" 请输入商品名称，最多20字"                           type="text" />
+          <text class='center'>商品名称</text>
+          <input class='input' placeholder-class="phcolor" data-index='{{index}}' bindinput='inputGoodsName' placeholder=" 请输入商品名称，最多20字" type="text" />
         </view>
         <!--商品图片介绍-->
         <view class='containerView imageIntroView'>
@@ -86,32 +88,32 @@
         </view>
         <!--商品分类-->
         <view class='containerView rowIconView'>
-          <text>分类</text>
+          <text class='center'>分类</text>
           <text>></text>
         </view>
         <!--商品规格-->
         <view class='containerView rowIconView'>
-          <text>规格</text>
-          <input class='input' placeholder="请输入商品规格" type="text" />
+          <text class='center'>规格</text>
+          <input class='input' placeholder-class="phcolor" placeholder="请输入商品规格" type="text" />
         </view>
         <!--商品价格-->
         <view class='containerView rowIconView'>
-          <text>价格</text>
-          <input class='input' placeholder="请输入商品价格" type="text" />
+          <text class='center'>价格</text>
+          <input class='input' placeholder-class="phcolor" placeholder="请输入商品价格" type="text" />
         </view>
         <!--商品库存-->
         <view class='containerView rowIconView'>
-          <text>库存</text>
-          <input class='input' placeholder="请输入商品库存" type="text" />
+          <text class='center'>库存</text>
+          <input class='input' placeholder-class="phcolor" placeholder="请输入商品库存" type="text" />
         </view>
         <!--设置最小成团数量-->
         <view class='containerView rowIconView'>
-          <text>设置最小成团数量</text>
+          <text class='center'>设置最小成团数量</text>
           <switch type="switch" />
         </view>
         <!--最小成团数量-->
         <view class='containerView rowIconView'>
-          <input placeholder="请输入最小成团数量" type="text" />
+          <input placeholder-class="phcolor" placeholder="请输入最小成团数量" type="text" />
         </view>
       </view>
 

@@ -11,15 +11,17 @@
   margin-top: 15rpx;
   display: flex;
   flex-direction: row;
-  padding-left: 15rpx;
+  align-items:center;
+  padding-left: 30rpx;
   padding-top: 15rpx;
   padding-bottom: 15rpx;
 }
 label{
-  font-size: 35rpx;
+  font-size: 30rpx;
+  color: #666;
 }
 input{
-  font-size: 30rpx;
+  font-size: 25rpx;
   margin-left: 20rpx;
   width: 80%;
 }
@@ -29,14 +31,16 @@ input{
   margin-top: 15rpx;
   display: flex;
   flex-direction: column;
-  padding-left: 15rpx;
+  padding-left: 30rpx;
   padding-top: 15rpx;
   padding-bottom: 15rpx;
 }
 textarea{
-  font-size: 30rpx;
-  margin-top: 15rpx;
-  width: 100%;
+  font-size: 25rpx;
+  margin-top: 35rpx;
+  width: 90%;
+  height: 100rpx;
+  padding-left:10rpx;
 }
 
 button{
