@@ -1,13 +1,10 @@
 /* pages/release/release.wxss */
 .container{
   height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 .body{
  background-color: #eee;  /*灰色背景*/ 
  font-size:  30rpx;
- flex: 1;
  overflow: auto;
 }
 .containerView{
@@ -18,18 +15,29 @@
   padding-top:4%;
   padding-bottom: 4%;
   font-size:30rpx;
+  font-family: "微软雅黑";
+}
+.describe{
+  height: 300rpx;
+  position:relative;
+  width:720rpx;
 }
 .phcolor{
   color: #ddd;
   font-size: 30rpx;
   letter-spacing: 2rpx;
+  font-family: "微软雅黑";
 }
 .rowIconView{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
-
+.rightShotImg{
+  width: 12rpx; 
+  height: 24rpx;
+}
 .input{
   width: 75%;
   padding-left: 3rpx;
@@ -37,6 +45,7 @@
 .introImage{
   height: 100rpx;
   width: 100rpx;
+  z-index: 1
 }
 .center{
   display:flex;
@@ -84,6 +93,23 @@
 
 }
 
-.publishView{
- height: 60rpx;
+.foot_nav{
+  width:100%;
+  height:100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom:0%;
+  left:0%;
+  box-shadow: 1rpx -2rpx 5rpx #e6e6e6;
+  z-index:10;
+}
+.foot_btn{
+  width:100%;
+  text-align: center;
+  color:#fff;
+  background:#1AAD19;
+  font:40rpx/100rpx "微软雅黑";
+  border-radius: 0;
 }

@@ -7,7 +7,7 @@
     </view>
     <!--接龙介绍 -->
     <view class='containerView'>
-      <textarea placeholder-class="phcolor" placeholder="介绍您的接龙活动，方便大家了解和参与。" style='height:300rpx;' fixed="true"></textarea>
+      <textarea class='describe' placeholder-class="phcolor" placeholder="介绍您的接龙活动，方便大家了解和参与。"/>
     </view>
 
     <!--接龙图片介绍-->
@@ -21,7 +21,6 @@
         <text>点击</text>
         <text>上传</text>
       </view>
-
     </view>
     <!--定位活动地址-->
     <view class='containerView rowIconView' bindtap='chooseAddress'>
@@ -30,14 +29,14 @@
         <!--定位图标-->
         <text>{{addressName}}</text>
       </view>
-      <text> > </text>
+      <image src='../../images/rightShot.png' class='rightShotImg'></image>
     </view>
 
     <!--设置自提点-->
     <view class='containerView rowIconView'>
       <text>设置自提点</text>
       <text>已设置0个</text>
-      <text> > </text>
+      <image src='../../images/rightShot.png' class='rightShotImg'></image>
     </view>
 
     <!--设置截止时间-->
@@ -51,10 +50,10 @@
     <view class="containerView rowIconView" wx:if='{{setFinishTime==1}}'>
       <text>截止时间</text>
       <text>2018/03/09/17:00</text>
-      <text>></text>
+      <image src='../../images/rightShot.png' class='rightShotImg'></image>
     </view>
 
-</view>
+  </view>
     <!--商品列表-->
     <view class=" goodsListView" style="margin-top:8rpx" wx:for="{{goodsList}}" wx:key="unique">
       <!--商品-->
@@ -89,7 +88,7 @@
         <!--商品分类-->
         <view class='containerView rowIconView'>
           <text class='center'>分类</text>
-          <text>></text>
+          <image src='../../images/rightShot.png' class='rightShotImg'></image>
         </view>
         <!--商品规格-->
         <view class='containerView rowIconView'>
@@ -125,8 +124,8 @@
   </view>
 
   <!--发布接龙-->
-  <view class='publishView'>
-    <button size="default" type="primary" bindtap='publish'>发布接龙</button>
+  <view class="foot_nav">
+    <button class="foot_btn" bindtap='publish'>发布接龙</button>
   </view>
 
 </view>
