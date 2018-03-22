@@ -5,8 +5,12 @@ App({
   onLaunch: function () {
    
     this.getPermissions()   //获取权限
-   
 
+   
+ },
+
+  checkLogin:function(){
+    var self = this
     var session = wx.getStorageSync("session");
     if (session) {
       wx.checkSession({
@@ -16,22 +20,16 @@ App({
         },
         fail: function () {
           //登录态过期
-          this.login()  //重新登录
+          self.login()  //重新登录
         }
 
       })
     } else {
       console.log('登录')
-      this.login()
+      self.login()
     }
 
-
-   
-     this.getUserInfo()      //获取个人信息
-
-  },
-
- 
+  } ,
 
   //登录方法
   login: function () {
@@ -42,7 +40,7 @@ App({
         var code = res.code
         if (code) {
           console.log('获取用户登录凭证：' + code);
-          console.log(self.globalData)
+       //   console.log(self.globalData)
 
           // 发送 res.code 到后台登录
           wx.request({
@@ -54,8 +52,14 @@ App({
               console.log(res.data)
               var response = res.data;
               if (response.errorCode == 0) {   //登录成功
+                var userId = response.data.userId;
                 wx.setStorageSync("session", response.data.sessionId)
-                wx.setStorageSync("userId", response.data.userId)
+                wx.setStorageSync("userId", userId)
+
+                //插入用户信息
+                console.log('插入用户信息')
+                self.insertUserInfo()
+
               }
 
             },
@@ -71,6 +75,26 @@ App({
     })
   },
 
+  insertUserInfo:function(){
+    var data={
+      userId: wx.getStorageSync("userId"),
+      nickName: this.globalData.userInfo.nickName,
+      avatarUrl: this.globalData.userInfo.avatarUrl
+    }
+     console.log(data)
+     wx.request({
+       url: this.globalData.domain + '/userInfo/insert',
+       method:'POST',
+       data:data,
+       success:function(res){
+         var response = res.data;
+         if(response.errorCode==0){
+           console.log('插入信息成功')
+         }
+       }
+
+     })
+  },
   showAutoModal: function (perssionName) {
     console.log('强行获取权限')
     var self=this
@@ -83,12 +107,16 @@ App({
         if (res.confirm) {
           wx.openSetting({
             success: function (res) {
-
-
+            
               if (!res.authSetting[perssionName] ) {  //
                  console.log('授权未成功')
                  //递归获取权限,直到授权成功
                  self.showAutoModal(perssionName)
+              }else{
+                   if (perssionName == 'scope.userInfo'){
+                       //获取用户信息
+                       self.getUserInfo()  
+                    }
               }
             }
           })
@@ -109,6 +137,8 @@ App({
             scope: 'scope.userInfo',
             success() {
               console.log('授权成功')
+              //获取用户信息
+              self.getUserInfo()      
             },
             fail() {  //授权失败
               console.log('授权失败')
@@ -135,7 +165,9 @@ App({
         var self = this
         wx.getUserInfo({
           success:function(res){
+          //  console.log(123)
             self.globalData.userInfo = res.userInfo   
+            self.checkLogin()
           },
           fail:function(res){
             console.log(res)
@@ -149,8 +181,8 @@ App({
   //全局数据
   globalData: {
     userInfo: null,
-    // domain: 'http://192.168.16.110:8080'
-    domain: "http://47.100.12.188:8081"
+    domain: 'http://192.168.16.110:8081'
+    //domain: "http://47.100.12.188:8081"
   }
 
 })
