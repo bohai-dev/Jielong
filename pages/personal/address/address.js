@@ -28,7 +28,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(app);
     var _this = this;
     wx.request({
       url: app.globalData.domain + '/userAddress/selectByUserId',
@@ -36,12 +35,8 @@ Page({
         userId: wx.getStorageSync("userId")
       },
       success: function (res) {
-        console.dir(res);
         if (res.data.errorCode == 0) {
-          console.dir(_this);
           _this.setData({ addressList: res.data.data })
-          console.log(_this.data.addressList);
-
         }
       }
     })  
@@ -76,7 +71,12 @@ Page({
   },
   // 删除自提点
   deleteAddr:function(e){
-    console.log(e);
+    if(e.currentTarget.dataset.selfid){
+      wx.navigateTo({
+        url: './addAddress/addAddress?id=' + e.currentTarget.dataset.selfid + "&detail=" + e.currentTarget.dataset.selfdetail + "&name=" + e.currentTarget.dataset.selfname,
+
+      })
+    }
 
   }
  

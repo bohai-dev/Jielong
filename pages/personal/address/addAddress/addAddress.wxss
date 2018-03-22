@@ -35,11 +35,15 @@ textarea{
   -webkit-line-clamp: 1;
   overflow: hidden;
 }
-.subBtn{
+.subBtn,.botBtn{
   background-color: rgb(44, 187, 107);
   color: white;
   width: calc(100% - 60rpx);
   margin-left: 30rpx;
+}
+.botBtn{
+  margin-top: 20rpx;
+  background-color: rgb(241, 97, 118);
 }
 .rightShotImg{
   width: 12rpx; 
