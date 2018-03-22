@@ -9,7 +9,6 @@ Page({
     phone: '',
     email:'',
     detail:'',
-    info:false,
     id:''
   },
 
@@ -30,23 +29,22 @@ Page({
       },
       success: function (res) {
         console.log(res.data)
-        //console.log(page.data.info+"111")  
-        var name = res.data.data.name;
-        var phone = res.data.data.phoneNumber;
-        var email = res.data.data.email;
-        var detail = res.data.data.deliveryAddress;
-        var id = res.data.data.id;
-        if (name){
-          var info = true;
+        console.log(res.data.data)
+        if (res.data.data){
+          console.log("success")
+          var name = res.data.data.name;
+          var phone = res.data.data.phoneNumber;
+          var email = res.data.data.email;
+          var detail = res.data.data.deliveryAddress;
+          var id = res.data.data.id;
           page.setData({
             name: name,
             phone: phone,
             email: email,
             detail: detail,
-            info: info,
             id: id
-          })
-        }         
+          })          
+        }   
         //console.log(info+"222"+"id:"+id)
       }
     })
@@ -152,51 +150,27 @@ Page({
         }
       })
     } else {
-      console.log(page.data.info)
-      if (page.data.info){
-        wx.request({
-          url: app.globalData.domain + '/userInfo/update',
-          method: 'POST',
-          data: {
-            name: name,
-            phoneNumber: phone,
-            email: email,
-            deliveryAddress: detail,
-            userId: userId,
-            id:id
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          success: function (res) {
-            wx.navigateBack({
-              url: '../personal/personalt'
-            })
-            console.log("更新成功")
-          }
-        })
-      }else{
-        wx.request({
-          url: app.globalData.domain + '/userInfo/insert',
-          method: 'POST',
-          data: {
-            name: name,
-            phoneNumber: phone,
-            email: email,
-            deliveryAddress: detail,
-            userId: userId
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          success: function (res) {
-            wx.navigateBack({
-              url: '../personal/personalt'
-            })
-            console.log("新建成功")
-          }
-        })
-      }      
+      wx.request({
+        url: app.globalData.domain + '/userInfo/update',
+        method: 'POST',
+        data: {
+          name: name,
+          phoneNumber: phone,
+          email: email,
+          deliveryAddress: detail,
+          userId: userId,
+          id:id
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          wx.navigateBack({
+            url: '../personal/personalt'
+          })
+          console.log("新建或更新成功")
+        }
+      })      
     }
   }
 })
