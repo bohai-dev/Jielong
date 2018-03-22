@@ -1,27 +1,27 @@
 <!--pages/personal/userInfo/userInfo.wxml-->
-<view class='body'>
-  <!--姓名-->
-  <view class='block'>
-    <label>姓名</label>
-    <input type='text' placeholder='请输入你的姓名' ></input>
-  </view>
-   <!--手机-->
-  <view class='block'>
-    <label>手机</label>
-    <input type='number' placeholder='请输入你的手机号'></input>
-  </view>
-   <!--姓名-->
-  <view class='block'>
-    <label>邮箱</label>
-    <input type='text' placeholder='请输入你的邮箱'></input>
-  </view>
+<form bindsubmit="formSubmit">
+  <view class='body'>
+    <!--姓名-->
+    <view class='block'>
+      <label>姓名</label>
+      <input name="name" type='text' placeholder='请输入你的姓名' value='{{name}}'></input>
+    </view>
+    <!--手机-->
+    <view class='block'>
+      <label>手机</label>
+      <input name="phone" type='number' placeholder='请输入你的手机号' bindblur="telCheck" value='{{phone}}'></input>
+    </view>
+    <!--姓名-->
+    <view class='block'>
+      <label>邮箱</label>
+      <input name="email" type='text' placeholder='请输入你的邮箱' value='{{email}}'></input>
+    </view>
 
-  <!--收货地址-->
-  <view class='address'>
-    <label>收货地址</label>
-    <textarea placeholder='请输入你的详细地址' style='height:100rpx;'></textarea>
+    <!--收货地址-->
+    <view class='address'>
+      <label>收货地址</label>
+      <textarea name="detail" placeholder='请输入你的详细地址' value='{{detail}}'></textarea>
+    </view>
+    <button type='primary' formType="submit">保存</button>
   </view>
-
-  <button type='primary'>保存</button>
-
-</view>
+</form>
