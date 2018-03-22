@@ -1,5 +1,5 @@
 <!--pages/personal/address/address.wxml-->
-<view wx:for="{{addressList}}"  wx:key="addrItems" class='section' data-selfid='{{item.id}}' bindtap='deleteAddr'>
+<view wx:for="{{addressList}}"  wx:key="addrItems" class='section' data-selfid='{{item.id}}' data-selfdetail="{{item.detail}}" data-selfname="{{item.name}}" bindtap='deleteAddr'>
   <view>
     <text class='showOL addrDetail'>{{item.detail}}</text>
   </view>
