@@ -145,6 +145,9 @@ App({
               self.showAutoModal('scope.userInfo')
             }
           })
+        }else{
+          //获取用户信息
+          self.getUserInfo()   
         }
         if (!res.authSetting['scope.userLocation']) {
           //获取位置权限
