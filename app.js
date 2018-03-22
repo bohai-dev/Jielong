@@ -53,7 +53,7 @@ App({
             success: function (res) {
               console.log(res.data)
               var response = res.data;
-              if (response.errorCode == 0) {
+              if (response.errorCode == 0) {   //登录成功
                 wx.setStorageSync("session", response.data.sessionId)
                 wx.setStorageSync("userId", response.data.userId)
               }
