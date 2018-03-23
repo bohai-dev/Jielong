@@ -16,7 +16,28 @@ Page({
    */
 
   data: {
-
+    userDetialList:[{
+      mineIcon:"../../images/mine/training.png",
+      mineName:"我发起的接龙",
+      rlCont: "3个"
+    }, {
+      mineIcon: "../../images/mine/supplier-features.png",
+      mineName: "我参与的接龙",
+      mineMarginTop:"mineMarginTop",
+      rlCont: "0次"
+    },{
+      mineIcon: "../../images/mine/personal-center.png",
+      mineName: "个人资料",
+      navUrl: "./userInfo/userInfo"
+    }, {
+      mineIcon: "../../images/mine/map.png",
+      mineName: "自提点管理",
+      navUrl:  "./address/address",
+      mineMarginTop: "mineMarginTop"
+    }, {
+      mineIcon: "../../images/mine/comments.png",
+      mineName: "帮助中心",
+    }],
     userInfo:{}
 
 
