@@ -1,0 +1,54 @@
+/* pages/personal/address/address.wxss */
+page{
+  width: 100%;
+  height: 100%;
+  background-color: #EEEEEE;  /*灰色背景*/ 
+  font:30rpx "微软雅黑";
+}
+.section{
+  width: 100%;
+  background-color: white;
+  height: 80rpx;
+  border-top:1rpx solid gainsboro;
+  display: flex;
+  align-items: center; 
+  padding-left: 20rpx;
+}
+.section:nth-of-type(1){
+  border-top: 0;
+  margin-top: 30rpx;
+}
+.addrDetail{
+  width: 680rpx;
+  margin-left: 10rpx;
+}
+.showOL{
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp:1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.rightShotImg{
+  width: 12rpx; 
+  height: 24rpx;
+}
+
+.pos_bot{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.pos_bot button{
+  display: inline-block;
+  height: 90rpx;
+  background-color: rgb(44, 187, 107);
+  color: white;
+  border-radius: 0;
+  width: 50%;
+}
+.pos_bot button:nth-of-type(1){
+  color: rgb(44, 187, 107);
+  background-color: white;
+}
+  

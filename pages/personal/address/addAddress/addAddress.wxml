@@ -1,7 +1,7 @@
 <!--pages/personal/address/addAddress/addAddress.wxml-->
 <form bindsubmit="formSubmit" bindreset='formReset'>
 <view class="section">
-  <textarea name="detail" bindblur="bindTextAreaBlur" placeholder="请填写自提点的详细地址" value="{{addrDetail}}" />
+  <textarea name="detail" placeholder="请填写自提点的详细地址" value="{{addrDetail}}" />
 </view>
 <view class='section getAddress'>
   <image class='addrIcon' src='../../../../images/position.png'></image>

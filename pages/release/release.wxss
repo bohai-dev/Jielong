@@ -6,6 +6,7 @@
  background-color: #eee;  /*灰色背景*/ 
  font-size:  30rpx;
  overflow: auto;
+ margin-bottom: 100rpx;
 }
 .containerView{
   background-color: #FFFFFF;   /*白色*/
@@ -42,10 +43,25 @@
   width: 75%;
   padding-left: 3rpx;
 }
+.img-show{
+  position: relative;
+  margin-right: 10rpx;
+}
 .introImage{
   height: 100rpx;
   width: 100rpx;
   z-index: 1
+}
+.delete-btn{
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  top:-5rpx;
+  left:-5rpx;
+}
+.del-icon{
+  width:100%;
+  height:100%;
 }
 .center{
   display:flex;

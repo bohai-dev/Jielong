@@ -9,7 +9,8 @@
     "pages/detail/detail",
     "pages/personal/address/address",
     "pages/personal/userInfo/userInfo",
-    "pages/personal/address/addAddress/addAddress"
+    "pages/personal/address/addAddress/addAddress",
+    "pages/release/selectAddress/selectAddress"
   ],
   "window": {
     "backgroundTextStyle": "light",

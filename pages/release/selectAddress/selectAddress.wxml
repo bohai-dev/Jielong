@@ -1,0 +1,15 @@
+<!--pages/personal/address/address.wxml-->
+<view wx:for="{{addressList}}"  wx:key="addrItems" data-index="{{index}}" class='section'  bindtap='deleteAddr'>
+  <checkbox-group bindchange="listenCheckboxChange">
+      <checkbox  value='1'></checkbox>
+  </checkbox-group>
+  <view>
+    <text class='showOL addrDetail'>{{item.detail}}</text>
+  </view>
+</view>
+
+<view class='pos_bot'>
+  <button>新增自提点</button>
+  <button>确认</button>
+</view>
+

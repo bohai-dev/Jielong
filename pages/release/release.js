@@ -26,6 +26,7 @@ Page({
     phoneNumber:"",                    //用户手机号
     setFinishTime: 0,               //是否设置截止时间
     finishTime: "2018-03-15 12:00:05",
+    seleAddrNum: 3,
     goodsList: [                     //商品数组 
       {
         unique: 'unique_0',            // 该item在数组中的唯一标识符
@@ -85,35 +86,77 @@ Page({
 
   },
 
+  // 上传图片
+  uploadImage: function (e) {
 
-
-  uploadImage: function () {
-
-    var self = this
-    wx.chooseImage({   //可选择多个图片
-      success: function (res) {
-        var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
-
-        var length = self.data.imageLocalPaths.length
-        for (var i = 0; i < tempFilePaths.length; i++) {
-          var loalImg = [{ id: length, unique: 'unique_' + length, path: tempFilePaths[i] }];
-          self.data.imageLocalPaths = self.data.imageLocalPaths.concat(loalImg)   //concat拼接多个数组
-          length++;
-
+    var self = this;
+    var imgs = this.data.imageLocalPaths;
+    if (imgs.length >= 9) {
+      wx.showModal({
+        title: '提示',
+        content: '最多上传9张图片',
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else {
+            console.log('用户点击取消')
+          }
         }
-        self.setData({
-          imageLocalPaths: self.data.imageLocalPaths
-        })
-
-        console.log(self.data.imageLocalPaths)
-
-      },
-    })
+      })
+    } else {
+      var imgNumber = 9 - imgs.length;
+      console.log("imgnumber= " + imgNumber)
+      wx.chooseImage({   //可选择多个图片
+        count: imgNumber,
+        success: function (res) {
+          var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
+          var imgs = self.data.imageLocalPaths;
+          var length = self.data.imageLocalPaths.length;
+          console.log(tempFilePaths + '----');
+          if (Number(e.currentTarget.dataset.iscommon)) {
+            for (var i = 0; i < tempFilePaths.length; i++) {
+              var loalImg = { id: length, unique: 'unique_' + length, path: tempFilePaths[i] };
+              length++;
+              if (imgs.length >= 9) {
+                that.setData({
+                  imageLocalPaths: imgs
+                });
+                return false;
+              } else {
+                imgs.push(loalImg);
+              }
+            }
+            console.log(imgs);
+            self.setData({
+              imageLocalPaths: imgs
+            })
+            console.log(self.data.imageLocalPaths[0])
+            console.log(self.data.imageLocalPaths[0].path + "==D.O")
+          } else {
+            console.log(e.currentTarget.dataset.goodsindex)
+            for (var i = 0; i < tempFilePaths.length; i++) {
+              var loalImg = [{ id: length, unique: 'unique_' + length, path: tempFilePaths[i] }];
+              self.data.goodsList[e.currentTarget.dataset.goodsindex].localPaths = self.data.goodsList[e.currentTarget.dataset.goodsindex].localPaths.concat(loalImg)   //concat拼接多个数组
+              length++;
+            }
+            console.log(self);
+            self.setData({
+              goodsList: self.data.goodsList
+            })
+          }
+        },
+      })
+    }
   },
-
-  
-
-
+  // 删除图片
+  deleteImg: function (e) {
+    var imgs = this.data.imageLocalPaths;
+    var index = e.currentTarget.dataset.index;
+    imgs.splice(index, 1);
+    this.setData({
+      imageLocalPaths: imgs
+    });
+  },
   //选择活动地址
   chooseAddress: function () {
     console.log('chooseAddress')
@@ -131,6 +174,17 @@ Page({
       }
     })
 
+
+  },
+  //设置自提点
+  selectAddress:function(e){
+    wx.setStorage({
+      key: 'a',
+      data: 'a',
+    })
+    wx.navigateTo({
+      url: './selectAddress/selectAddress',
+    })
 
   },
   //设置截止时间  
@@ -153,6 +207,17 @@ Page({
   inputGoodsName:function(e){
        console.log(e)
 
+  },
+  //最小成团数量控制
+  chenTuanNum:function(res){
+      console.log(this)
+      console.log(res.target.dataset.setgroupnum)  //找到渲染数组的索引位置
+      console.log(this.data.goodsList[res.target.dataset.setgroupnum].isSetGroup) //找到遍历列表成团字段
+      res.detail.value = res.detail.value ? 1 : 0 ;
+      this.data.goodsList[res.target.dataset.setgroupnum].isSetGroup = res.detail.value;
+       this.setData({
+         goodsList:this.data.goodsList
+       })
   },
   //新增商品
   addGoods: function () {
@@ -196,7 +261,6 @@ Page({
     }
 
   }
-
 
 
 
