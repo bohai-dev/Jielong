@@ -26,7 +26,7 @@ Page({
     phoneNumber:"",                    //用户手机号
     setFinishTime: 0,               //是否设置截止时间
     finishTime: "2018-03-15 12:00:05",
-    seleAddrNum: 3,
+    seleAddrNum: 0,                  //已设置地址
     goodsList: [                     //商品数组 
       {
         unique: 'unique_0',            // 该item在数组中的唯一标识符
@@ -70,6 +70,7 @@ Page({
   onShow() {
     // 执行coolsite360交互组件展示
     // app.coolsite360.onShow(this);
+    console.log(this.getAddress())
   },
 
   /**
@@ -240,10 +241,6 @@ Page({
   },
   //设置自提点
   selectAddress:function(e){
-    wx.setStorage({
-      key: 'a',
-      data: 'a',
-    })
     wx.navigateTo({
       url: './selectAddress/selectAddress',
     })
@@ -322,6 +319,32 @@ Page({
       })
     }
 
+  },
+//公共方法
+  //获取自提点数据
+  getAddress:function(e){
+    var addrNum = 0;
+    var _this = this;
+    wx.getStorage({
+      key: 'seleAddrKey',
+      success: function(res) {
+        var addrParseJson = JSON.parse(res.data);
+        console.log(addrParseJson)
+        for(var i=0;i < addrParseJson.length;i++){
+          if(addrParseJson[i].value){
+            addrNum++;
+          }
+        }
+        console.log(addrNum)
+        _this.setData({
+          seleAddrNum:addrNum
+        })
+      },
+      fail:function(err){
+        return addrNum;
+      }
+    })
+    
   }
 
 

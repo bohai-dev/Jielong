@@ -1,7 +1,8 @@
 <!--pages/personal/address/address.wxml-->
-<view wx:for="{{addressList}}"  wx:key="addrItems" data-index="{{index}}" class='section'  bindtap='deleteAddr'>
-  <checkbox-group bindchange="listenCheckboxChange">
-      <checkbox  value='1'></checkbox>
+<view wx:for="{{addressList}}"  wx:key="addrItems" data-index="{{index}}" class='section'>
+  <checkbox-group bindchange="listenCheckboxChange" data-index="{{index}}" data-value='{{item.value}}'>
+      <checkbox value='{{item.value}}' wx:if="{{item.value}}" checked='true'></checkbox>
+      <checkbox value='{{item.value}}' wx:if="{{!item.value}}"></checkbox>
   </checkbox-group>
   <view>
     <text class='showOL addrDetail'>{{item.detail}}</text>
@@ -10,6 +11,6 @@
 
 <view class='pos_bot'>
   <button>新增自提点</button>
-  <button>确认</button>
+  <button bindtap="sureAddr">确认</button>
 </view>
 
