@@ -16,7 +16,7 @@
       <!--接龙图片列表-->
       <view  class="img-show" wx:for="{{imageLocalPaths}}" wx:key="unique" >
         <image class="introImage" data-index="{{index}}" mode="scaleToFill" src="{{item.path}}" />
-        <view class="delete-btn" data-index="{{index}}" catchtap="deleteImg">
+        <view class="delete-btn" data-index="{{index}}" catchtap="deleteImg" data-isCommon="1">
           <image class='del-icon' mode="scaleToFill" src="../../images/deleteImg.png"></image>
         </view>
       </view >
@@ -59,14 +59,14 @@
 
   </view>
     <!--商品列表-->
-    <view class=" goodsListView" style="margin-top:8rpx" wx:for="{{goodsList}}" wx:key="unique">
+    <view class=" goodsListView" style="margin-top:8rpx" wx:for="{{goodsList}}" wx:key="unique"  wx:for-index="goodsindex">
       <!--商品-->
       <view>
         <!--商品标签-->
         <view class='containerView rowIconView'>
           <view style="display: flex;flex-direction: row;align-items: center;">
             <view class="goodsMark" />
-            <label class='center' style="margin-left:10rpx;">{{"商品" +(index+1)}}</label>
+            <label class='center' style="margin-left:10rpx;">{{"商品" +(goodsindex+1)}}</label>
           </view>
           <!--删除商品图标-->
           <image class='icon' mode="scaleToFill" src="../../images/delete.png" />
@@ -79,11 +79,14 @@
         <!--商品图片介绍-->
         <view class='containerView imageIntroView'>
           <!--商品图片列表-->
-          <block wx:for="{{item.localPaths}}" wx:key="unique" wx:for-item="image">
+          <view class='img-show' wx:for="{{item.localPaths}}" wx:key="unique" wx:for-item="image">
             <image class="introImage" mode="scaleToFill" src="{{image.path}}" />
-          </block>
+            <view class="delete-btn" data-index="{{index}}" data-fatheridx="{{goodsindex}}" catchtap="deleteImg" data-isCommon="0">
+              <image class='del-icon' mode="scaleToFill" src="../../images/deleteImg.png"></image>
+            </view>
+          </view>
           <!--点击上传区域-->
-          <view class="uploadView" bindtap='uploadImage' data-goodsindex="{{index}}" data-isCommon="0">
+          <view class="uploadView" bindtap='uploadImage' data-goodsindex="{{goodsindex}}" data-isCommon="0">
             <text>点击</text>
             <text>上传</text>
           </view>

@@ -6,7 +6,7 @@
  background-color: #eee;  /*灰色背景*/ 
  font-size:  30rpx;
  overflow: auto;
- margin-bottom: 100rpx;
+ padding-bottom: 100rpx;
 }
 .containerView{
   background-color: #FFFFFF;   /*白色*/

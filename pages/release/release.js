@@ -88,43 +88,43 @@ Page({
 
   // 上传图片
   uploadImage: function (e) {
-
     var self = this;
-    var imgs = this.data.imageLocalPaths;
-    if (imgs.length >= 9) {
-      wx.showModal({
-        title: '提示',
-        content: '最多上传9张图片',
-        success: function (res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else {
-            console.log('用户点击取消')
+    if (Number(e.currentTarget.dataset.iscommon)) {
+      console.log(e.currentTarget.dataset.iscommon)
+      var imgs = self.data.imageLocalPaths;
+      if (imgs.length >= 9) {
+        wx.showModal({
+          title: '提示',
+          content: '最多上传9张图片',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else {
+              console.log('用户点击取消')
+            }
           }
-        }
-      })
-    } else {
-      var imgNumber = 9 - imgs.length;
-      console.log("imgnumber= " + imgNumber)
-      wx.chooseImage({   //可选择多个图片
-        count: imgNumber,
-        success: function (res) {
-          var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
-          var imgs = self.data.imageLocalPaths;
-          var length = self.data.imageLocalPaths.length;
-          console.log(tempFilePaths + '----');
-          if (Number(e.currentTarget.dataset.iscommon)) {
+        })
+      } else {
+        var imgNumber = 9 - imgs.length;
+        console.log("imgnumber= " + imgNumber)
+        wx.chooseImage({   //可选择多个图片
+          count: imgNumber,
+          success: function (res) {
+            var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
+            console.log(tempFilePaths + '----1');
+            //var imgs = self.data.imageLocalPaths;
+            var length = self.data.imageLocalPaths.length;
             for (var i = 0; i < tempFilePaths.length; i++) {
               var loalImg = { id: length, unique: 'unique_' + length, path: tempFilePaths[i] };
               length++;
-              if (imgs.length >= 9) {
-                that.setData({
-                  imageLocalPaths: imgs
-                });
-                return false;
-              } else {
-                imgs.push(loalImg);
-              }
+              //if (imgs.length >= 9) {
+               // that.setData({
+                //  imageLocalPaths: imgs
+                //});
+               // return false;
+              //} else {
+              imgs.push(loalImg);
+              //}
             }
             console.log(imgs);
             self.setData({
@@ -132,30 +132,92 @@ Page({
             })
             console.log(self.data.imageLocalPaths[0])
             console.log(self.data.imageLocalPaths[0].path + "==D.O")
-          } else {
-            console.log(e.currentTarget.dataset.goodsindex)
-            for (var i = 0; i < tempFilePaths.length; i++) {
-              var loalImg = [{ id: length, unique: 'unique_' + length, path: tempFilePaths[i] }];
-              self.data.goodsList[e.currentTarget.dataset.goodsindex].localPaths = self.data.goodsList[e.currentTarget.dataset.goodsindex].localPaths.concat(loalImg)   //concat拼接多个数组
-              length++;
+          }
+        })
+      }
+    } else {
+      console.log(e.currentTarget.dataset.iscommon)
+      console.log("goodsindex")
+      console.log(e.currentTarget.dataset.goodsindex)
+      var goodsindex = e.currentTarget.dataset.goodsindex;
+      var imgs = self.data.goodsList[goodsindex].localPaths;
+      console.log(imgs.length)
+      if (imgs.length >= 9) {
+        wx.showModal({
+          title: '提示',
+          content: '最多上传9张图片',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else {
+              console.log('用户点击取消')
             }
-            console.log(self);
+          }
+        })
+      }else{
+        var imgNumber = 9 - imgs.length;
+        console.log("goodsimgnumber= " + imgNumber)
+        wx.chooseImage({   //可选择多个图片
+          count: imgNumber,
+          success: function (res) {
+            var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
+            console.log(tempFilePaths + '----2');
+            var length = imgs.length;
+            for (var i = 0; i < tempFilePaths.length; i++) {
+              var loalImg = { id: length, unique: 'unique_' + length, path: tempFilePaths[i] };
+              length++;
+              imgs.push(loalImg);
+            }
+            console.log(imgs);
             self.setData({
               goodsList: self.data.goodsList
             })
+            console.log(self.data.goodsList)
+            console.log(self.data.goodsList[goodsindex].localPaths[0])
+            console.log(self.data.goodsList[goodsindex].localPaths[0].path + "222==D.O")
           }
-        },
-      })
+        })
+      }
+      // for (var i = 0; i < tempFilePaths.length; i++) {
+      //   var loalImg = [{ id: length, unique: 'unique_' + length, path: tempFilePaths[i] }];
+      //   self.data.goodsList[e.currentTarget.dataset.goodsindex].localPaths = self.data.goodsList[e.currentTarget.dataset.goodsindex].localPaths.concat(loalImg)   //concat拼接多个数组
+      //   length++;
+      // }
+      // console.log(self);
+      // self.setData({
+      //   goodsList: self.data.goodsList
+      // })
     }
   },
   // 删除图片
   deleteImg: function (e) {
-    var imgs = this.data.imageLocalPaths;
-    var index = e.currentTarget.dataset.index;
-    imgs.splice(index, 1);
-    this.setData({
-      imageLocalPaths: imgs
-    });
+    var _this = this;
+    if (Number(e.currentTarget.dataset.iscommon)) {
+      var imgs = _this.data.imageLocalPaths;
+      var index = e.currentTarget.dataset.index;
+      imgs.splice(index, 1);
+      for (var i = 0; i < imgs.length;i++){
+        imgs[i].id = i;
+        imgs[i].unique = "unique_" + i;
+      }
+      _this.setData({
+        imageLocalPaths: imgs
+      })
+      console.log(_this.data.imageLocalPaths) 
+    } else{
+      var goodsindex = e.currentTarget.dataset.fatheridx;
+      var imgs = _this.data.goodsList[goodsindex].localPaths;
+      var index = e.currentTarget.dataset.index;
+      imgs.splice(index, 1);
+      for (var i = 0; i < imgs.length; i++) {
+        imgs[i].id = i;
+        imgs[i].unique = "unique_" + i;
+      }
+      _this.setData({
+        goodsList: _this.data.goodsList
+      })
+      console.log(_this.data.goodsList)
+    }
   },
   //选择活动地址
   chooseAddress: function () {
