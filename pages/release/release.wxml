@@ -119,7 +119,7 @@
         <!--设置最小成团数量-->
         <view class='containerView rowIconView'>
           <text class='center'>设置最小成团数量</text>
-          <switch type="switch" bindchange='chenTuanNum'  data-setgroupnum="{{index}}" />
+          <switch type="switch" bindchange='chenTuanNum'  data-setgroupnum="{{goodsindex}}" />
         </view>
         <!--最小成团数量-->
         <view class='containerView rowIconView' wx:if="{{item.isSetGroup}}">
