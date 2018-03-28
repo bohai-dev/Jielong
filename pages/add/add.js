@@ -69,6 +69,15 @@ Page({
 
 
   //以下为自定义点击事件
+  //初始化数据
+  initData: function (e) {
+    wx.removeStorage({
+      key: 'seleAddrKey',
+      success: function (res) {
+        console.log(res);
+      },
+    })
+  }
 
 })
 

@@ -72,6 +72,7 @@ Page({
   onShow() {
     // 执行coolsite360交互组件展示
     // app.coolsite360.onShow(this);
+    console.log(this.getAddress())
   },
 
   /**
@@ -388,6 +389,32 @@ Page({
       multiArray: data.multiArray,
       multiIndex: data.multiIndex
     });
+  },
+  //公共方法
+  //获取自提点数据
+  getAddress: function (e) {
+    var addrNum = 0;
+    var _this = this;
+    wx.getStorage({
+      key: 'seleAddrKey',
+      success: function (res) {
+        var addrParseJson = JSON.parse(res.data);
+        console.log(addrParseJson)
+        for (var i = 0; i < addrParseJson.length; i++) {
+          if (addrParseJson[i].value) {
+            addrNum++;
+          }
+        }
+        console.log(addrNum)
+        _this.setData({
+          seleAddrNum: addrNum
+        })
+      },
+      fail: function (err) {
+        return addrNum;
+      }
+    })
+
   }
 
 

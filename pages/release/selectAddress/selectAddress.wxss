@@ -52,3 +52,38 @@ page{
   background-color: white;
 }
   
+/*模态框start  */
+.modal{
+  width: 650rpx;
+}
+.modalTitle{
+  font: 36rpx "微软雅黑";
+  display: flex;
+  justify-content: center;
+  color: gray;
+}
+.modalContent{
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+}
+.modal .modalTextarea{
+  width: 96%;
+  height: 240rpx;
+  margin-top: 10rpx;
+  background-color: rgb(245, 245, 245);
+}
+.addrIcon{
+  height: 32rpx;
+  width: 32rpx;
+}
+.addrName{
+  width: 480rpx;
+  padding-left: 10rpx;
+}
+.rightShotImg{
+  width: 12rpx; 
+  height: 24rpx;
+}
+/*模态框end  */

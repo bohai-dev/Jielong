@@ -1,5 +1,5 @@
 <view class="release">
-  <navigator url="../release/release" hover-class="none">
+  <navigator url="../release/release" hover-class="none" bindtap='initData'>
     <view class="from-jl">
       <text class='title'>自发接龙</text>
       <text class='describe'>发布团购接龙卖货</text>

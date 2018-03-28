@@ -1,16 +1,35 @@
 <!--pages/personal/address/address.wxml-->
-<view wx:for="{{addressList}}"  wx:key="addrItems" data-index="{{index}}" class='section'>
+<view wx:for="{{addressList}}"  wx:key="addrItems" data-index="{{index}}"  class='section'>
   <checkbox-group bindchange="listenCheckboxChange" data-index="{{index}}" data-value='{{item.value}}'>
       <checkbox value='{{item.value}}' wx:if="{{item.value}}" checked='true'></checkbox>
       <checkbox value='{{item.value}}' wx:if="{{!item.value}}"></checkbox>
   </checkbox-group>
-  <view>
+  <view bindtap='editAddr' data-index="{{index}}">
     <text class='showOL addrDetail'>{{item.detail}}</text>
   </view>
 </view>
 
 <view class='pos_bot'>
-  <button>新增自提点</button>
+  <button bindtap="addAddr">新增自提点</button>
   <button bindtap="sureAddr">确认</button>
 </view>
 
+<!--模态框  -->
+<modal class="modal" wx:if="{{hiddenModal}}" confirm-text="保存"
+     cancel-text="取消"
+     bindconfirm="listenerConfirm"
+     bindcancel="listenerCancel"  >
+  <view>
+    <view class='modalTitle'>
+     <text >{{modalTitle}}</text>
+    </view>
+    <view class='modalTextarea'>
+       <textarea placeholder='请填写自提点详细地址' focus='true' bindblur='getTextarea' value='{{addrDetail}}'></textarea>
+    </view>
+    <view class='modalContent' bindtap='findAddress'>
+      <image class='addrIcon' src='../../../images/position.png'></image>
+      <text class='addrName'>{{addrName}}</text>
+      <image src='../../../images/rightShot.png' class='rightShotImg'></image>
+    </view>
+  </view>
+</modal>
