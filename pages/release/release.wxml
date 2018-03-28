@@ -52,8 +52,12 @@
     </view>
     <!--截止时间-->
     <view class="containerView rowIconView" wx:if='{{setFinishTime==1}}'>
-      <text>截止时间</text>
-      <text>2018/03/09/17:00</text>
+      <picker mode="multiSelector" bindtap="initdate" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}" bindcancel="bindMultiPickerCancel">
+    <view class="picker">
+      <text>截至时间：</text>
+      <text class='endtime'>{{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}}</text>
+    </view>
+  </picker>
       <image src='../../images/rightShot.png' class='rightShotImg'></image>
     </view>
 

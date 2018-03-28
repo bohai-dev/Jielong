@@ -73,6 +73,19 @@
   height: 40rpx;
   margin-right:10rpx;
 }
+picker{
+  width: 100%;
+}
+.picker{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.endtime{
+  font-size:25rpx;
+  color:#1AAD19;
+  margin-right:15rpx;
+}
 .goodsMark{
   width: 10rpx;
   height: 40rpx;

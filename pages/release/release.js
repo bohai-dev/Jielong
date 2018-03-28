@@ -25,7 +25,9 @@ Page({
     goodsAddresses:"1,2,3" ,            //用户自提地址id数组，用逗号隔开
     phoneNumber:"",                    //用户手机号
     setFinishTime: 0,               //是否设置截止时间
-    finishTime: "2018-03-15 12:00:05",
+    multiArray: [],                 //截至时间日期
+    finishTime: [],                 //截至时间
+    multiIndex: [0, 0],             
     seleAddrNum: 0,                  //已设置地址
     goodsList: [                     //商品数组 
       {
@@ -70,7 +72,6 @@ Page({
   onShow() {
     // 执行coolsite360交互组件展示
     // app.coolsite360.onShow(this);
-    console.log(this.getAddress())
   },
 
   /**
@@ -91,7 +92,7 @@ Page({
   uploadImage: function (e) {
     var self = this;
     if (Number(e.currentTarget.dataset.iscommon)) {
-      console.log(e.currentTarget.dataset.iscommon)
+      //console.log(e.currentTarget.dataset.iscommon)
       var imgs = self.data.imageLocalPaths;
       if (imgs.length >= 9) {
         wx.showModal({
@@ -107,42 +108,29 @@ Page({
         })
       } else {
         var imgNumber = 9 - imgs.length;
-        console.log("imgnumber= " + imgNumber)
+        //console.log("imgnumber= " + imgNumber)
         wx.chooseImage({   //可选择多个图片
           count: imgNumber,
           success: function (res) {
             var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
-            console.log(tempFilePaths + '----1');
-            //var imgs = self.data.imageLocalPaths;
+            //console.log(tempFilePaths + '----1');
             var length = self.data.imageLocalPaths.length;
             for (var i = 0; i < tempFilePaths.length; i++) {
               var loalImg = { id: length, unique: 'unique_' + length, path: tempFilePaths[i] };
               length++;
-              //if (imgs.length >= 9) {
-               // that.setData({
-                //  imageLocalPaths: imgs
-                //});
-               // return false;
-              //} else {
               imgs.push(loalImg);
-              //}
             }
-            console.log(imgs);
+            //console.log(imgs);
             self.setData({
               imageLocalPaths: imgs
             })
-            console.log(self.data.imageLocalPaths[0])
-            console.log(self.data.imageLocalPaths[0].path + "==D.O")
           }
         })
       }
     } else {
-      console.log(e.currentTarget.dataset.iscommon)
-      console.log("goodsindex")
-      console.log(e.currentTarget.dataset.goodsindex)
       var goodsindex = e.currentTarget.dataset.goodsindex;
       var imgs = self.data.goodsList[goodsindex].localPaths;
-      console.log(imgs.length)
+      //console.log(imgs.length)
       if (imgs.length >= 9) {
         wx.showModal({
           title: '提示',
@@ -157,37 +145,25 @@ Page({
         })
       }else{
         var imgNumber = 9 - imgs.length;
-        console.log("goodsimgnumber= " + imgNumber)
+        //console.log("goodsimgnumber= " + imgNumber)
         wx.chooseImage({   //可选择多个图片
           count: imgNumber,
           success: function (res) {
             var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
-            console.log(tempFilePaths + '----2');
+            //console.log(tempFilePaths + '----2');
             var length = imgs.length;
             for (var i = 0; i < tempFilePaths.length; i++) {
               var loalImg = { id: length, unique: 'unique_' + length, path: tempFilePaths[i] };
               length++;
               imgs.push(loalImg);
             }
-            console.log(imgs);
+            //console.log(imgs);
             self.setData({
               goodsList: self.data.goodsList
             })
-            console.log(self.data.goodsList)
-            console.log(self.data.goodsList[goodsindex].localPaths[0])
-            console.log(self.data.goodsList[goodsindex].localPaths[0].path + "222==D.O")
           }
         })
       }
-      // for (var i = 0; i < tempFilePaths.length; i++) {
-      //   var loalImg = [{ id: length, unique: 'unique_' + length, path: tempFilePaths[i] }];
-      //   self.data.goodsList[e.currentTarget.dataset.goodsindex].localPaths = self.data.goodsList[e.currentTarget.dataset.goodsindex].localPaths.concat(loalImg)   //concat拼接多个数组
-      //   length++;
-      // }
-      // console.log(self);
-      // self.setData({
-      //   goodsList: self.data.goodsList
-      // })
     }
   },
   // 删除图片
@@ -204,7 +180,7 @@ Page({
       _this.setData({
         imageLocalPaths: imgs
       })
-      console.log(_this.data.imageLocalPaths) 
+      //console.log(_this.data.imageLocalPaths) 
     } else{
       var goodsindex = e.currentTarget.dataset.fatheridx;
       var imgs = _this.data.goodsList[goodsindex].localPaths;
@@ -217,7 +193,7 @@ Page({
       _this.setData({
         goodsList: _this.data.goodsList
       })
-      console.log(_this.data.goodsList)
+      //console.log(_this.data.goodsList)
     }
   },
   //选择活动地址
@@ -249,6 +225,48 @@ Page({
   //设置截止时间  
   timeChange: function (e) {
     console.log(e.detail.value)
+    if (e.detail.value){
+      var nowDate = new Date();
+      var NowDayarr = [];
+      var enddayarr = [];
+      //设置天数
+      for (var i = 0; i < 8; i++) {
+        if (i == 0) {
+          NowDayarr[i] = new Date(nowDate.setDate(nowDate.getDate()));
+        } else {
+          NowDayarr[i] = new Date(nowDate.setDate(nowDate.getDate() + 1));
+        }
+        enddayarr[i] = NowDayarr[i].toLocaleDateString();
+      }
+      console.log(enddayarr);
+      //设置时间
+      var NowTime = nowDate.getHours();
+      var todaytime = [];
+      var othertime = [];
+      if (NowTime + 1 < 23) {
+        var num = 23 - (NowTime + 1);
+        for (var j = 0; j < num; j++) {
+          todaytime[j] = NowTime + (j + 2) + ":00";
+        }
+      }
+      for (var n = 0; n < 24; n++) {
+        othertime[n] = twonumber(n) + ":00"
+        function twonumber(num) {
+          if (num < 10) {
+            return "0" + num;
+          }
+          return num;
+        }
+      }
+      console.log(todaytime);
+      console.log(othertime);
+      var finishTime = [todaytime, othertime];
+      var multiArray = [enddayarr, todaytime];
+      this.setData({
+        multiArray: multiArray,
+        finishTime: finishTime
+      })
+    }
     this.setData({
       setFinishTime: e.detail.value
 
@@ -320,31 +338,56 @@ Page({
     }
 
   },
-//公共方法
-  //获取自提点数据
-  getAddress:function(e){
-    var addrNum = 0;
-    var _this = this;
-    wx.getStorage({
-      key: 'seleAddrKey',
-      success: function(res) {
-        var addrParseJson = JSON.parse(res.data);
-        console.log(addrParseJson)
-        for(var i=0;i < addrParseJson.length;i++){
-          if(addrParseJson[i].value){
-            addrNum++;
-          }
-        }
-        console.log(addrNum)
-        _this.setData({
-          seleAddrNum:addrNum
-        })
-      },
-      fail:function(err){
-        return addrNum;
-      }
+  bindMultiPickerChange: function (e) {
+    this.setData({
+      multiIndex: e.detail.value
     })
-    
+  },
+  bindMultiPickerColumnChange: function (e) {
+    var _this = this;
+    //console.log(_this.data.finishTime);
+    var data = {
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex
+    };
+    data.multiIndex[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        switch (data.multiIndex[0]) {
+          case 0:
+            data.multiArray[1] = this.data.finishTime[0];
+            break;
+          case 1:
+            data.multiArray[1] = this.data.finishTime[1];
+            break;
+          case 2:
+            data.multiArray[1] = this.data.finishTime[1];
+            break;
+          case 3:
+            data.multiArray[1] = this.data.finishTime[1];
+            break;
+          case 4:
+            data.multiArray[1] = this.data.finishTime[1];
+            break;
+          case 5:
+            data.multiArray[1] = this.data.finishTime[1];
+            break;
+          case 6:
+            data.multiArray[1] = this.data.finishTime[1];
+            break;
+          case 7:
+            data.multiArray[1] = this.data.finishTime[1];
+            break;
+        }
+        data.multiIndex[1] = 0;
+        break;
+        console.log(data.multiIndex);
+        break;
+    }
+    this.setData({
+      multiArray: data.multiArray,
+      multiIndex: data.multiIndex
+    });
   }
 
 
