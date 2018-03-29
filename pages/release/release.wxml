@@ -52,15 +52,22 @@
     </view>
     <!--截止时间-->
     <view class="containerView rowIconView" wx:if='{{setFinishTime==1}}'>
-      <picker mode="multiSelector" bindtap="initdate" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}" bindcancel="bindMultiPickerCancel">
-    <view class="picker">
-      <text>截至时间：</text>
-      <text class='endtime'>{{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}}</text>
-    </view>
-  </picker>
+      <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+        <view class="picker">
+          <text>截至时间：</text>
+          <input disabled="true" class='endtime' value='{{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}}'></input>
+        </view>
+      </picker>
       <image src='../../images/rightShot.png' class='rightShotImg'></image>
     </view>
-
+    <!--设置添加多个商品-->
+    <view>
+      <view class="containerView rowIconView">
+        <text class='center'>是否允许添加多个商品</text>
+        <switch type="switch" bindchange="goodsChange" wx:if="{{!judeToMost}}" />
+        <switch type="switch" bindchange="goodsChange" wx:if="{{judeToMost}}" checked='true' />
+      </view>
+    </view>
   </view>
     <!--商品列表-->
     <view class=" goodsListView" style="margin-top:8rpx" wx:for="{{goodsList}}" wx:key="unique"  wx:for-index="goodsindex">
@@ -98,7 +105,12 @@
         </view>
         <!--商品分类-->
         <view class='containerView rowIconView'>
-          <text class='center'>分类</text>
+         <picker mode="multiSelector" bindchange="bindGoodsPickerChange"  data-goodsindex="{{goodsindex}}"bindcolumnchange="bindGoodsPickerColumnChange" value="{{item.classIndex}}" range="{{item.parentClassId}}" >
+            <view class="goodspicker">
+              分类
+              <input class='goodsclass' disabled="true" value='{{item.parentClassId[0][item.classIndex[0]]}} {{item.parentClassId[1][item.classIndex[1]]}}'></input>
+            </view>
+          </picker>
           <image src='../../images/rightShot.png' class='rightShotImg'></image>
         </view>
         <!--商品规格-->
@@ -117,7 +129,7 @@
           <input class='input' placeholder-class="phcolor" placeholder="请输入商品库存" type="text" />
         </view>
         <!--设置最小成团数量-->
-        <view class='containerView rowIconView'>
+        <view class='containerView rowIconView' wx:if="{{!judeToMost}}">
           <text class='center'>设置最小成团数量</text>
           <switch type="switch" bindchange='chenTuanNum'  data-setgroupnum="{{goodsindex}}" />
         </view>
@@ -129,7 +141,7 @@
 
     </view>
     <!--新增商品-->
-    <view class="containerView addGood">
+    <view class="containerView addGood"  wx:if="{{judeToMost}}">
       <text style='color:#1afa29;' bindtap='addGoods'>新增商品</text>
     </view>
   </view>

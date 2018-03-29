@@ -86,6 +86,14 @@ picker{
   color:#1AAD19;
   margin-right:15rpx;
 }
+.goodspicker{
+  display:flex;
+  justify-content:row;
+  align-items:center;
+}
+.goodsclass{
+  margin-left:3rem;
+}
 .goodsMark{
   width: 10rpx;
   height: 40rpx;

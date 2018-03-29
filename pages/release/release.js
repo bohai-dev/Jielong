@@ -1,6 +1,7 @@
 
 // 获取全局应用程序实例对象
 var app = getApp();
+var pushData = {}; //发布的全局数据
 
 // 创建页面实例对象
 Page({
@@ -21,22 +22,37 @@ Page({
     addressLongitude:60,                 //活动地址经度
     addressLatitude:30,                  //活动地址纬度
     imageLocalPaths: [],                //本地介绍图片数组 { id:1, unique: 'unique_1',path:''}
-    introImages:"001.png,002.png",      //服务器图片介绍数组 用逗号隔开
-    goodsAddresses:"1,2,3" ,            //用户自提地址id数组，用逗号隔开
+    introImages:[],              //服务器图片介绍数组 用逗号隔开"001.png,002.png"
+    goodsAddresses: [],            //用户自提地址id数组，用逗号隔开"1,2"
     phoneNumber:"",                    //用户手机号
     setFinishTime: 0,               //是否设置截止时间
     multiArray: [],                 //截至时间日期
     finishTime: [],                 //截至时间
     multiIndex: [0, 0],             
     seleAddrNum: 0,                  //已设置地址
+    judeToMost:false,                //是否为多个商品
+    toMostModal:true,                 //多个商品提示信息
     goodsList: [                     //商品数组 
       {
         unique: 'unique_0',            // 该item在数组中的唯一标识符
         name: "",              //商品名称 
         localPaths: [],         // 商品本地图片路径 数组
-        serverPaths: "1.png,2.png",       // 商品服务器图片路径数组,用逗号隔开
-        parentClassId: 0,     //商品一级分类 id
-        subClassId: 0,      // 商品二级分类 id
+        serverPaths: [],       // 商品服务器图片路径数组,用逗号隔开"1.png,2.png"
+        parentClassId: [["美食特产", "运动健身", "生活用品", "衣装服饰", "母婴用品", "家用电器", "美妆护肤", "家居家纺", "手机数码", "学习教辅", "花卉园艺", "其他"], ["休闲零食", "生鲜果蔬", "粮油调味", "水产鲜肉", "美酒佳酿", "牛奶饮料", "四季茗茶", "滋补养生", "地方特产"]],     //商品一级分类
+        Allsubclass: [["休闲零食", "生鲜果蔬", "粮油调味", "水产鲜肉", "美酒佳酿", "牛奶饮料", "四季茗茶", "滋补养生", "地方特产"],
+        ["运动潮鞋", "运动服", "骑行装备", "球类运动", "户外野营", "健身仪器", "瑜伽舞蹈", "垂钓用品", "运动包", "电动车"],
+        ["居家日用", "收纳整理", "个人清洁", "清洁工具", "厨房工具", "盆碗碟筷", "茶具杯具", "家用杂物", "汽车用品"],
+        ["时尚男装", "性感内衣", "羽绒服", "外套", "裤子", "针织毛衫", "丝袜", "衬衫/T恤", "鞋类", "箱包", "潮流女装", "珠宝首饰", "配饰/发饰"],
+        ["奶粉", "婴童用品", "孕产必备", "辅食营养", "纸尿裤", "童装童鞋", "亲子鞋服", "儿童玩具", "童车", "早教启蒙"],
+        ["厨房电器", "生活电器", "个护电器", "影音电器", "大家电"],
+        ["美容护肤", "美妆美甲", "精油", "美发造型", "纤体塑身", "男士护理"],
+        ["家具", "床品", "家居摆件", "墙饰壁饰"],
+        ["手机", "平板", "电脑", "笔记本", "智能设备", "电玩", "网络设备", "MP3/MP4", "相机", "数码配件", "存储"],
+        ["书籍资料", "课程辅导", "乐器", "文具用品"],
+        ["种子", "花盆", "园艺工具", "花卉", "多肉", "植株"],
+        []
+        ],                          // 商品二级分类
+        classIndex: [0, 0],
         specification: "",          //商品规格
         price: 10,        //商品价格 
         repertory: 10,   //商品库存
@@ -125,6 +141,7 @@ Page({
             self.setData({
               imageLocalPaths: imgs
             })
+            self.changeImgStyle(imgs, "common");//每次上传图片获取本地地址
           }
         })
       }
@@ -162,6 +179,7 @@ Page({
             self.setData({
               goodsList: self.data.goodsList
             })
+            self.changeImgStyle(imgs, "no-common", e.currentTarget.dataset.goodsindex); //每次上传图片获取本地地址
           }
         })
       }
@@ -174,6 +192,8 @@ Page({
       var imgs = _this.data.imageLocalPaths;
       var index = e.currentTarget.dataset.index;
       imgs.splice(index, 1);
+      var introImages = _this.data.introImages;
+      introImages.splice(index,1);
       for (var i = 0; i < imgs.length;i++){
         imgs[i].id = i;
         imgs[i].unique = "unique_" + i;
@@ -187,6 +207,8 @@ Page({
       var imgs = _this.data.goodsList[goodsindex].localPaths;
       var index = e.currentTarget.dataset.index;
       imgs.splice(index, 1);
+      var introImages = _this.data.goodsList[goodsindex].serverPaths;
+      introImages.splice(index, 1);
       for (var i = 0; i < imgs.length; i++) {
         imgs[i].id = i;
         imgs[i].unique = "unique_" + i;
@@ -273,6 +295,28 @@ Page({
 
     })
   },
+  //判断多个商品还是一个
+  goodsChange:function(e){
+    var _this = this;
+    if (this.data.toMostModal){
+      wx.showModal({
+        title: '注意',
+        content: '多个商品时，不可以设置成团数量；一个商品时，可以设置成团数量！',
+        confirmText: '不在提示',
+        cancelText: "取消",
+        success:function(res){
+          if(res.confirm){
+            _this.data.toMostModal = false;
+          }else if(res.cancel){
+            _this.data.toMostModal = true;
+          }
+        }
+      })
+    }
+    _this.setData({
+      judeToMost: e.detail.value
+    })
+  },
   //上传商品图片
   uploadGoodsImage: function (index) {
     var self = this
@@ -304,8 +348,22 @@ Page({
       name: null,              //商品名称 
       localPaths: [],         // 商品本地图片路径 数组
       serverPaths: [],       // 商品服务器图片路径 数组
-      parentClassId: null,     //商品一级分类 id
-      subClassId: null,      // 商品二级分类 id
+      parentClassId: [["美食特产", "运动健身", "生活用品", "衣装服饰", "母婴用品", "家用电器", "美妆护肤", "家居家纺", "手机数码", "学习教辅", "花卉园艺", "其他"], ["休闲零食", "生鲜果蔬", "粮油调味", "水产鲜肉", "美酒佳酿", "牛奶饮料", "四季茗茶", "滋补养生", "地方特产"]],     //商品一级分类
+      Allsubclass: [["休闲零食", "生鲜果蔬", "粮油调味", "水产鲜肉", "美酒佳酿", "牛奶饮料", "四季茗茶", "滋补养生", "地方特产"],
+      ["运动潮鞋", "运动服", "骑行装备", "球类运动", "户外野营", "健身仪器", "瑜伽舞蹈", "垂钓用品", "运动包", "电动车"],
+      ["居家日用", "收纳整理", "个人清洁", "清洁工具", "厨房工具", "盆碗碟筷", "茶具杯具", "家用杂物", "汽车用品"],
+      ["时尚男装", "性感内衣", "羽绒服", "外套", "裤子", "针织毛衫", "丝袜", "衬衫/T恤", "鞋类", "箱包", "潮流女装", "珠宝首饰", "配饰/发饰"],
+      ["奶粉", "婴童用品", "孕产必备", "辅食营养", "纸尿裤", "童装童鞋", "亲子鞋服", "儿童玩具", "童车", "早教启蒙"],
+      ["厨房电器", "生活电器", "个护电器", "影音电器", "大家电"],
+      ["美容护肤", "美妆美甲", "精油", "美发造型", "纤体塑身", "男士护理"],
+      ["家具", "床品", "家居摆件", "墙饰壁饰"],
+      ["手机", "平板", "电脑", "笔记本", "智能设备", "电玩", "网络设备", "MP3/MP4", "相机", "数码配件", "存储"],
+      ["书籍资料", "课程辅导", "乐器", "文具用品"],
+      ["种子", "花盆", "园艺工具", "花卉", "多肉", "植株"],
+      []
+      ],                          // 商品二级分类
+      classIndex: [0, 0],
+      specification: "", 
       specification: null,          //商品规格
       price: null,        //商品价格 
       repertory: null,   //商品库存
@@ -323,20 +381,10 @@ Page({
   },
   //发布接龙
   publish: function () {
-    var localImages = this.data.imageLocalPaths
-    //先循环上传接龙介绍图片，得到url
-    for (var i = 0; i < localImages.length; i++) {
-
-      wx.uploadFile({
-        url: app.globalData.domain + '/uploadImage',        //服务器上传地址
-        filePath: localImages[i].path,
-        name: 'image',
-        success: function (res) {
-          var data = res.data   //会返回图片服务器存储路径
-          console.log(data)
-        }
-      })
-    }
+    console.log(this)
+    // wx.request({
+    //   url: app.globalData.domain +'/jielong/insert',
+    // })
 
   },
   bindMultiPickerChange: function (e) {
@@ -380,9 +428,7 @@ Page({
             data.multiArray[1] = this.data.finishTime[1];
             break;
         }
-        data.multiIndex[1] = 0;
-        break;
-        console.log(data.multiIndex);
+        //console.log(data.multiIndex);
         break;
     }
     this.setData({
@@ -414,6 +460,113 @@ Page({
         return addrNum;
       }
     })
+
+  },
+
+  //商品分类
+  bindGoodsPickerChange: function (e) {
+    //console.log(e)
+    var _this = this;
+    var goodsindex = e.currentTarget.dataset.goodsindex;
+    _this.data.goodsList[goodsindex].classIndex = e.detail.value
+    this.setData({
+      goodsList: _this.data.goodsList
+    })
+  },
+  bindGoodsPickerColumnChange: function (e) {
+    var _this = this;
+    var goodsindex = e.currentTarget.dataset.goodsindex;
+    var data = {
+      parentClassId: this.data.goodsList[goodsindex].parentClassId,
+      classIndex: this.data.goodsList[goodsindex].classIndex
+    };
+    data.classIndex[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        switch (data.classIndex[0]) {
+          case 0:
+            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[0];
+            break;
+          case 1:
+            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[1];
+            break;
+          case 2:
+            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[2];
+            break;
+          case 3:
+            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[3];
+            break;
+          case 4:
+            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[4];
+            break;
+          case 5:
+            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[5];
+            break;
+          case 6:
+            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[6];
+            break;
+          case 7:
+            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[7];
+            break;
+          case 8:
+            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[8];
+            break;
+          case 9:
+            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[9];
+            break;
+          case 10:
+            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[10];
+            break;
+          case 11:
+            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[11];
+            break;
+          case 12:
+            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[12];
+            break;
+        }
+        //console.log(data.classIndex);
+        break;
+    }
+    _this.setData({
+      goodsList: _this.data.goodsList
+    });
+    //console.log(this.data);
+  },
+  //改变图片格式
+  changeImgStyle:function(e,types,goodsIndex){
+    var localImages = e
+    var _this = this;
+    console.log(localImages);
+    if (types == "common"){
+      //先循环上传接龙介绍图片，得到url
+      for (var i = 0; i < localImages.length; i++) {
+        _this.data.introImages = [];
+        wx.uploadFile({
+          url: app.globalData.domain + '/uploadImage',        //服务器上传地址
+          filePath: localImages[i].path,
+          name: 'image',
+          success: function (res) {
+            var data = JSON.parse(res.data)  //会返回图片服务器存储路径
+            _this.data.introImages.push(data.data);
+          }
+        })
+      }
+    }else{
+      _this.data.goodsList[goodsIndex].serverPaths = [];
+      //先循环上传接龙介绍图片，得到url
+      for (var i = 0; i < localImages.length; i++) {
+        wx.uploadFile({
+          url: app.globalData.domain + '/uploadImage',        //服务器上传地址
+          filePath: localImages[i].path,
+          name: 'image',
+          success: function (res) {
+            var data = JSON.parse(res.data)  //会返回图片服务器存储路径
+            _this.data.goodsList[goodsIndex].serverPaths.push(data.data);
+          }
+        })
+      }
+    }
+
 
   }
 
