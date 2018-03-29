@@ -300,10 +300,10 @@ Page({
     var _this = this;
     if (this.data.toMostModal){
       wx.showModal({
-        title: '注意',
-        content: '多个商品时，不可以设置成团数量；一个商品时，可以设置成团数量！',
+        title: '提示',
+        content: '多个商品，无法设置成团数量！',
         confirmText: '不在提示',
-        cancelText: "取消",
+        cancelText: "确定",
         success:function(res){
           if(res.confirm){
             _this.data.toMostModal = false;
