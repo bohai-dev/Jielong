@@ -1,0 +1,20 @@
+<!--pages/release/bindingPhone/bindingPhone.wxml-->
+<form bindsubmit="formSubmit">
+  <view class='container'>
+    <!--提示-->
+    <view class='promptView columnView'>
+      <text class='prompt'>*初次发布接龙活动，需要绑定手机</text>
+    </view>
+    <!--姓名-->
+    <view class='columnView block'>
+      <label>姓名</label>
+      <input name="name" type='text'value='{{name}}' maxlength="5"></input>
+    </view>
+    <!--手机-->
+    <view class='columnView block'>
+      <label>手机</label>
+      <input name="phone" type='number' bindblur="telCheck" value='{{phone}}' maxlength="11"></input>
+    </view>
+    <button type='primary' formType="submit">绑定手机</button>
+  </view>
+</form>

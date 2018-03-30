@@ -1,7 +1,11 @@
 
 // 获取全局应用程序实例对象
 var app = getApp();
-var pushData = {}; //发布的全局数据
+var classifyData = [];     //分类总的数据
+var firstClassify = [];    //分类一级数据
+var secondClassify = [];   //分类二级数据
+var initClassify = [];
+//var pushData = {}; //发布的全局数据
 
 // 创建页面实例对象
 Page({
@@ -14,50 +18,43 @@ Page({
    */
 
   data: {
-    userId:14,
+    userId: wx.getStorageSync("userId"),
     topic: "",          //主题
     description: "",    //活动描述  
+    noteMaxLen: 300,             //描述最多字数
+    noteNowLen: 0,               //描述当前字数
     addressName: "定位活动地址",           //活动地址名称
     addressDetail: "",                   //活动详细地址
-    addressLongitude:60,                 //活动地址经度
-    addressLatitude:30,                  //活动地址纬度
+    addressLongitude: "",                 //活动地址经度
+    addressLatitude: "",                  //活动地址纬度
     imageLocalPaths: [],                //本地介绍图片数组 { id:1, unique: 'unique_1',path:''}
-    introImages:[],              //服务器图片介绍数组 用逗号隔开"001.png,002.png"
+    introImages: [],              //服务器图片介绍数组 用逗号隔开"001.png,002.png"
     goodsAddresses: [],            //用户自提地址id数组，用逗号隔开"1,2"
-    phoneNumber:"",                    //用户手机号
+    phoneNumber: "",                    //用户手机号
     setFinishTime: 0,               //是否设置截止时间
     multiArray: [],                 //截至时间日期
     finishTime: [],                 //截至时间
-    multiIndex: [0, 0],             
-    seleAddrNum: 0,                  //已设置地址
-    judeToMost:false,                //是否为多个商品
-    toMostModal:true,                 //多个商品提示信息
+    multiIndex: [0, 0],
+    seleAddrNum: 0,                  //已设置地址数量
+    judeToMost: false,                //是否为多个商品
+    toMostModal: true,                 //多个商品提示信息
+    showdelete: true,                 //显示删除图标
     goodsList: [                     //商品数组 
       {
         unique: 'unique_0',            // 该item在数组中的唯一标识符
         name: "",              //商品名称 
         localPaths: [],         // 商品本地图片路径 数组
         serverPaths: [],       // 商品服务器图片路径数组,用逗号隔开"1.png,2.png"
-        parentClassId: [["美食特产", "运动健身", "生活用品", "衣装服饰", "母婴用品", "家用电器", "美妆护肤", "家居家纺", "手机数码", "学习教辅", "花卉园艺", "其他"], ["休闲零食", "生鲜果蔬", "粮油调味", "水产鲜肉", "美酒佳酿", "牛奶饮料", "四季茗茶", "滋补养生", "地方特产"]],     //商品一级分类
-        Allsubclass: [["休闲零食", "生鲜果蔬", "粮油调味", "水产鲜肉", "美酒佳酿", "牛奶饮料", "四季茗茶", "滋补养生", "地方特产"],
-        ["运动潮鞋", "运动服", "骑行装备", "球类运动", "户外野营", "健身仪器", "瑜伽舞蹈", "垂钓用品", "运动包", "电动车"],
-        ["居家日用", "收纳整理", "个人清洁", "清洁工具", "厨房工具", "盆碗碟筷", "茶具杯具", "家用杂物", "汽车用品"],
-        ["时尚男装", "性感内衣", "羽绒服", "外套", "裤子", "针织毛衫", "丝袜", "衬衫/T恤", "鞋类", "箱包", "潮流女装", "珠宝首饰", "配饰/发饰"],
-        ["奶粉", "婴童用品", "孕产必备", "辅食营养", "纸尿裤", "童装童鞋", "亲子鞋服", "儿童玩具", "童车", "早教启蒙"],
-        ["厨房电器", "生活电器", "个护电器", "影音电器", "大家电"],
-        ["美容护肤", "美妆美甲", "精油", "美发造型", "纤体塑身", "男士护理"],
-        ["家具", "床品", "家居摆件", "墙饰壁饰"],
-        ["手机", "平板", "电脑", "笔记本", "智能设备", "电玩", "网络设备", "MP3/MP4", "相机", "数码配件", "存储"],
-        ["书籍资料", "课程辅导", "乐器", "文具用品"],
-        ["种子", "花盆", "园艺工具", "花卉", "多肉", "植株"],
-        []
-        ],                          // 商品二级分类
+        parentClass: [],       //分类初始化数据
+        Allsubclass: [],       //分类子类数据
+        parentClassId: 0,     //商品一级分类 id
+        subClassId: 0,      // 商品二级分类 id
         classIndex: [0, 0],
         specification: "",          //商品规格
-        price: 10,        //商品价格 
-        repertory: 10,   //商品库存
+        price: null,        //商品价格 
+        repertory: null,   //商品库存
         isSetGroup: 0,       //是否设置最低成团数量，0否，1是
-        groupSum: 5        //最低成团数量
+        groupSum: null        //最低成团数量
 
       }
 
@@ -88,7 +85,8 @@ Page({
   onShow() {
     // 执行coolsite360交互组件展示
     // app.coolsite360.onShow(this);
-    console.log(this.getAddress())
+    this.getAddress();
+    this.getClassify();    //获取分类数据
   },
 
   /**
@@ -161,7 +159,7 @@ Page({
             }
           }
         })
-      }else{
+      } else {
         var imgNumber = 9 - imgs.length;
         //console.log("goodsimgnumber= " + imgNumber)
         wx.chooseImage({   //可选择多个图片
@@ -193,8 +191,8 @@ Page({
       var index = e.currentTarget.dataset.index;
       imgs.splice(index, 1);
       var introImages = _this.data.introImages;
-      introImages.splice(index,1);
-      for (var i = 0; i < imgs.length;i++){
+      introImages.splice(index, 1);
+      for (var i = 0; i < imgs.length; i++) {
         imgs[i].id = i;
         imgs[i].unique = "unique_" + i;
       }
@@ -202,7 +200,7 @@ Page({
         imageLocalPaths: imgs
       })
       //console.log(_this.data.imageLocalPaths) 
-    } else{
+    } else {
       var goodsindex = e.currentTarget.dataset.fatheridx;
       var imgs = _this.data.goodsList[goodsindex].localPaths;
       var index = e.currentTarget.dataset.index;
@@ -228,7 +226,9 @@ Page({
       success: function (res) {
         self.setData({
           addressName: res.name,
-          addressDetail: res.address
+          addressDetail: res.address,
+          addressLongitude: res.longitude,
+          addressLatitude: res.latitude
         })
       },
       fail: function (res) {
@@ -239,7 +239,7 @@ Page({
 
   },
   //设置自提点
-  selectAddress:function(e){
+  selectAddress: function (e) {
     wx.navigateTo({
       url: './selectAddress/selectAddress',
     })
@@ -248,7 +248,7 @@ Page({
   //设置截止时间  
   timeChange: function (e) {
     console.log(e.detail.value)
-    if (e.detail.value){
+    if (e.detail.value) {
       var nowDate = new Date();
       var NowDayarr = [];
       var enddayarr = [];
@@ -291,23 +291,23 @@ Page({
       })
     }
     this.setData({
-      setFinishTime: e.detail.value
+      setFinishTime: e.detail.value ? 1 : 0
 
     })
   },
   //判断多个商品还是一个
-  goodsChange:function(e){
+  goodsChange: function (e) {
     var _this = this;
-    if (this.data.toMostModal){
+    if (this.data.toMostModal) {
       wx.showModal({
         title: '提示',
         content: '多个商品，无法设置成团数量！',
-        confirmText: '不在提示',
+        confirmText: '不再提示',
         cancelText: "确定",
-        success:function(res){
-          if(res.confirm){
+        success: function (res) {
+          if (res.confirm) {
             _this.data.toMostModal = false;
-          }else if(res.cancel){
+          } else if (res.cancel) {
             _this.data.toMostModal = true;
           }
         }
@@ -326,65 +326,126 @@ Page({
       },
     })
   },
-  inputGoodsName:function(e){
-       console.log(e)
-
-  },
+  //修改商品名称
+  // inputGoodsName: function (e) {
+  //   var goodsindex = e.currentTarget.dataset.goodsindex;
+  //   this.data.goodsList[goodsindex].name = e.detail.value;
+  // },
+  // //修改商品规格
+  // inputGoodsSpecification: function (e) {
+  //   var goodsindex = e.currentTarget.dataset.goodsindex;
+  //   this.data.goodsList[goodsindex].specification = e.detail.value;
+  // },
+  // //修改商品价格
+  // inputGoodsPrice: function (e) {
+  //   var goodsindex = e.currentTarget.dataset.goodsindex;
+  //   this.data.goodsList[goodsindex].price = e.detail.value;
+  // },
+  // //修改商品库存
+  // inputGoodsRepertory: function (e) {
+  //   var goodsindex = e.currentTarget.dataset.goodsindex;
+  //   this.data.goodsList[goodsindex].repertory = e.detail.value;
+  // },
+  // //修改商品成团数量
+  // inputGoodsGroupSum: function (e) {
+  //   var goodsindex = e.currentTarget.dataset.goodsindex;
+  //   this.data.goodsList[goodsindex].groupSum = e.detail.value;
+  // },
   //最小成团数量控制
-  chenTuanNum:function(res){
-      console.log(this)
-      console.log(res.target.dataset.setgroupnum)  //找到渲染数组的索引位置
-      console.log(this.data.goodsList[res.target.dataset.setgroupnum].isSetGroup) //找到遍历列表成团字段
-      res.detail.value = res.detail.value ? 1 : 0 ;
-      this.data.goodsList[res.target.dataset.setgroupnum].isSetGroup = res.detail.value;
-       this.setData({
-         goodsList:this.data.goodsList
-       })
+  chenTuanNum: function (res) {
+    console.log(this)
+    console.log(res.target.dataset.setgroupnum)  //找到渲染数组的索引位置
+    console.log(this.data.goodsList[res.target.dataset.setgroupnum].isSetGroup) //找到遍历列表成团字段
+    res.detail.value = res.detail.value ? 1 : 0;
+    this.data.goodsList[res.target.dataset.setgroupnum].isSetGroup = res.detail.value;
+    this.setData({
+      goodsList: this.data.goodsList
+    })
   },
   //新增商品
   addGoods: function () {
     var goods = [{
       unique: 'unique_' + this.data.goodsList.length,            // 该item在数组中的唯一标识符
-      name: null,              //商品名称 
+      name: "",              //商品名称 
       localPaths: [],         // 商品本地图片路径 数组
       serverPaths: [],       // 商品服务器图片路径 数组
-      parentClassId: [["美食特产", "运动健身", "生活用品", "衣装服饰", "母婴用品", "家用电器", "美妆护肤", "家居家纺", "手机数码", "学习教辅", "花卉园艺", "其他"], ["休闲零食", "生鲜果蔬", "粮油调味", "水产鲜肉", "美酒佳酿", "牛奶饮料", "四季茗茶", "滋补养生", "地方特产"]],     //商品一级分类
-      Allsubclass: [["休闲零食", "生鲜果蔬", "粮油调味", "水产鲜肉", "美酒佳酿", "牛奶饮料", "四季茗茶", "滋补养生", "地方特产"],
-      ["运动潮鞋", "运动服", "骑行装备", "球类运动", "户外野营", "健身仪器", "瑜伽舞蹈", "垂钓用品", "运动包", "电动车"],
-      ["居家日用", "收纳整理", "个人清洁", "清洁工具", "厨房工具", "盆碗碟筷", "茶具杯具", "家用杂物", "汽车用品"],
-      ["时尚男装", "性感内衣", "羽绒服", "外套", "裤子", "针织毛衫", "丝袜", "衬衫/T恤", "鞋类", "箱包", "潮流女装", "珠宝首饰", "配饰/发饰"],
-      ["奶粉", "婴童用品", "孕产必备", "辅食营养", "纸尿裤", "童装童鞋", "亲子鞋服", "儿童玩具", "童车", "早教启蒙"],
-      ["厨房电器", "生活电器", "个护电器", "影音电器", "大家电"],
-      ["美容护肤", "美妆美甲", "精油", "美发造型", "纤体塑身", "男士护理"],
-      ["家具", "床品", "家居摆件", "墙饰壁饰"],
-      ["手机", "平板", "电脑", "笔记本", "智能设备", "电玩", "网络设备", "MP3/MP4", "相机", "数码配件", "存储"],
-      ["书籍资料", "课程辅导", "乐器", "文具用品"],
-      ["种子", "花盆", "园艺工具", "花卉", "多肉", "植株"],
-      []
-      ],                          // 商品二级分类
+      parentClass: initClassify,
+      Allsubclass: firstClassify,
+      parentClassId: 0,     //商品一级分类 id
+      subClassId: 0,      // 商品二级分类 id
       classIndex: [0, 0],
-      specification: "", 
-      specification: null,          //商品规格
+      specification: "",
+      specification: "",          //商品规格
       price: null,        //商品价格 
       repertory: null,   //商品库存
-      isSetGroup: false,       //是否设置最低成团数量，0否，1是
+      isSetGroup: 0,       //是否设置最低成团数量，0否，1是
       groupSum: null        //最低成团数量
 
     }]
-    
+    var showdelete = false;
     this.data.goodsList = this.data.goodsList.concat(goods)
     this.setData({
-      goodsList: this.data.goodsList
-
+      goodsList: this.data.goodsList,
+      showdelete: showdelete
     })
 
   },
   //发布接龙
-  publish: function () {
+  formSubmit: function (e) {
+    console.log(e);
     console.log(this)
-    // wx.request({
-    //   url: app.globalData.domain +'/jielong/insert',
+    console.log(classifyData)
+    var _this = this;
+    var _thisData = _this.data;
+    var _detailValue = e.detail.value;
+    //封装发布数据
+    var pushData = {};
+    pushData.userId = _thisData.userId;
+    pushData.topic = _detailValue.topic;
+    pushData.description = _detailValue.topic;
+    pushData.introImages = _thisData.introImages.join(",");
+    pushData.addressName = _thisData.addressName;
+    pushData.addressDetail = _thisData.addressDetail;
+    pushData.addressLongitude = _thisData.addressLongitude;
+    pushData.addressLatitude = _thisData.addressLatitude;
+    pushData.goodsAddresses = _thisData.goodsAddresses;
+    pushData.setFinishTime = _thisData.setFinishTime;
+    pushData.finishTime = _detailValue.finishTime;
+    pushData.goodsList = [];
+    for (var i = 0; i < _thisData.goodsList.length; i++) {
+      pushData.goodsList[i] = {};
+      var _name = "name" + i;
+      console.log(_detailValue[_name])
+      pushData.goodsList[i].name = _detailValue["name" + i];
+      pushData.goodsList[i].serverPaths = _thisData.goodsList[i].serverPaths.join(",");
+      pushData.goodsList[i].parentClassId = classifyData[_thisData.goodsList[i].classIndex[0]].id;
+      pushData.goodsList[i].subClassId = classifyData[_thisData.goodsList[i].classIndex[0]].goodsSubClasses[_thisData.goodsList[i].classIndex[1]].id;
+      pushData.goodsList[i].specification = _detailValue["specification" + i];
+      pushData.goodsList[i].price = Number(_detailValue["price" + i]);
+      pushData.goodsList[i].repertory = Number(_detailValue["repertory" + i]);
+      pushData.goodsList[i].isSetGroup = _thisData.goodsList[i].isSetGroup;
+      pushData.goodsList[i].groupSum = Number(_detailValue["groupSum" + i]);
+    }
+    console.log(pushData);
+
+    //发布接龙
+    wx.request({
+      url: app.globalData.domain + '/jielong/insert',
+      method: 'POST',
+      header: {
+        "content-type": "application/json"
+      },
+      data: pushData,
+      success: function (res) {
+        console.log(res)
+      }
+    })
+
+
+    // wx.navigateTo({
+    //   url: './bindingPhone/bindingPhone',
     // })
+
 
   },
   bindMultiPickerChange: function (e) {
@@ -441,6 +502,7 @@ Page({
   getAddress: function (e) {
     var addrNum = 0;
     var _this = this;
+    var arr = [];
     wx.getStorage({
       key: 'seleAddrKey',
       success: function (res) {
@@ -449,11 +511,14 @@ Page({
         for (var i = 0; i < addrParseJson.length; i++) {
           if (addrParseJson[i].value) {
             addrNum++;
+            arr.push(addrParseJson[i].id);
           }
         }
-        console.log(addrNum)
+        console.log(addrNum);
+        console.log(arr.join(","));
         _this.setData({
-          seleAddrNum: addrNum
+          seleAddrNum: addrNum,
+          goodsAddresses: arr.join(",")
         })
       },
       fail: function (err) {
@@ -477,54 +542,17 @@ Page({
     var _this = this;
     var goodsindex = e.currentTarget.dataset.goodsindex;
     var data = {
-      parentClassId: this.data.goodsList[goodsindex].parentClassId,
+      parentClass: this.data.goodsList[goodsindex].parentClass,
       classIndex: this.data.goodsList[goodsindex].classIndex
     };
     data.classIndex[e.detail.column] = e.detail.value;
     switch (e.detail.column) {
       case 0:
-        switch (data.classIndex[0]) {
-          case 0:
-            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[0];
-            break;
-          case 1:
-            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[1];
-            break;
-          case 2:
-            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[2];
-            break;
-          case 3:
-            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[3];
-            break;
-          case 4:
-            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[4];
-            break;
-          case 5:
-            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[5];
-            break;
-          case 6:
-            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[6];
-            break;
-          case 7:
-            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[7];
-            break;
-          case 8:
-            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[8];
-            break;
-          case 9:
-            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[9];
-            break;
-          case 10:
-            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[10];
-            break;
-          case 11:
-            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[11];
-            break;
-          case 12:
-            data.parentClassId[1] = _this.data.goodsList[goodsindex].Allsubclass[12];
-            break;
+        for (var i = 0; i < firstClassify.length; i++) {
+          if (data.classIndex[0] == i) {
+            data.parentClass[1] = secondClassify[i];
+          }
         }
-        //console.log(data.classIndex);
         break;
     }
     _this.setData({
@@ -533,11 +561,11 @@ Page({
     //console.log(this.data);
   },
   //改变图片格式
-  changeImgStyle:function(e,types,goodsIndex){
+  changeImgStyle: function (e, types, goodsIndex) {
     var localImages = e
     var _this = this;
     console.log(localImages);
-    if (types == "common"){
+    if (types == "common") {
       //先循环上传接龙介绍图片，得到url
       for (var i = 0; i < localImages.length; i++) {
         _this.data.introImages = [];
@@ -551,7 +579,7 @@ Page({
           }
         })
       }
-    }else{
+    } else {
       _this.data.goodsList[goodsIndex].serverPaths = [];
       //先循环上传接龙介绍图片，得到url
       for (var i = 0; i < localImages.length; i++) {
@@ -566,8 +594,72 @@ Page({
         })
       }
     }
+  },
+  //描述字数限制
+  bindTextAreaChange: function (e) {
+    var that = this;
+    var value = e.detail.value, len = parseInt(value.length);
+    if (len > that.data.noteMaxLen) return;
+    that.setData({
+      description: value,
+      noteNowLen: len
+    })
+  },
+  //删除商品
+  deleteGoods: function (e) {
+    var _this = this;
+    var goodsindex = e.currentTarget.dataset.goodsindex;
+    var goodsList = _this.data.goodsList;
+    var showdelete = false;
+    goodsList.splice(goodsindex, 1);
+    for (var i = 0; i < goodsList.length; i++) {
+      goodsList[i].unique = "unique_" + i;
+    }
+    if (goodsList.length == 1) {
+      showdelete = true;
+    }
+    console.log(showdelete);
+    _this.setData({
+      goodsList: goodsList,
+      showdelete: showdelete
+    })
+    console.log(goodsList);
+  },
+  //获取分类数据
+  getClassify: function (e) {
+    var _this = this;
+    var arr = [];
+    classifyData = [];
+    firstClassify = [];
+    secondClassify = [];
+    initClassify = [];
+    //获取分类数据
+    wx.request({
+      url: app.globalData.domain + '/getAllGoodsClass',
+      method: 'POST',
+      header: {
+        "content-type": "application/json"
+      },
+      success: function (res) {
+        classifyData = res.data.data;
+        for (var i = 0; i < res.data.data.length; i++) {
+          arr = [];
+          firstClassify.push(res.data.data[i].className);   //赋值一级数组数据
+          for (var j = 0; j < res.data.data[i].goodsSubClasses.length; j++) {
+            arr.push(res.data.data[i].goodsSubClasses[j].className);
+          }
+          secondClassify.push(arr);  //赋值二级数组数据
+        }
+        initClassify.push(firstClassify, secondClassify[1]);
+        _this.data.goodsList[0].parentClass.push(firstClassify, secondClassify[0]);
+        _this.data.goodsList[0].Allsubclass.push(secondClassify);
+        _this.setData({
+          goodsList: _this.data.goodsList
+        })
 
 
+      }
+    })
   }
 
 

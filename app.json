@@ -10,7 +10,8 @@
     "pages/personal/address/address",
     "pages/personal/userInfo/userInfo",
     "pages/personal/address/addAddress/addAddress",
-    "pages/release/selectAddress/selectAddress"
+    "pages/release/selectAddress/selectAddress",
+    "pages/release/bindingPhone/bindingPhone"
   ],
   "window": {
     "backgroundTextStyle": "light",

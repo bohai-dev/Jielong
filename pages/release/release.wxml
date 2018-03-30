@@ -1,14 +1,18 @@
 
 <view class='container'>
+<form bindsubmit='formSubmit'>
   <view class='body'>
     <view>
     <!--接龙主题 -->
     <view class='containerView'>
-      <input placeholder-class="phcolor" placeholder="接龙主题" type="text" />
+      <input name="topic" placeholder-class="phcolor" placeholder="接龙主题" type="text" />
     </view>
     <!--接龙介绍 -->
     <view class='containerView'>
-      <textarea class='describe' placeholder-class="phcolor" placeholder="介绍您的接龙活动，方便大家了解和参与。"/>
+       <textarea name="description" class='describe' placeholder-class="phcolor" placeholder="介绍您的接龙活动，方便大家了解和参与。" bindinput="bindTextAreaChange" maxlength="{{noteMaxLen}}" value="{{description}}"/>
+      <view class="number-limit">
+        <text class="greenfont">{{noteNowLen}}</text>/{{noteMaxLen}}
+      </view>
     </view>
 
     <!--接龙图片介绍-->
@@ -55,7 +59,7 @@
       <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
         <view class="picker">
           <text>截至时间：</text>
-          <input disabled="true" class='endtime' value='{{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}}'></input>
+          <input name="finishTime" disabled="true" class='endtime' value='{{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}}'></input>
         </view>
       </picker>
       <image src='../../images/rightShot.png' class='rightShotImg'></image>
@@ -63,7 +67,7 @@
     <!--设置添加多个商品-->
     <view>
       <view class="containerView rowIconView">
-        <text class='center'>是否允许添加多个商品</text>
+        <text class='center'>添加多个商品</text>
         <switch type="switch" bindchange="goodsChange" wx:if="{{!judeToMost}}" />
         <switch type="switch" bindchange="goodsChange" wx:if="{{judeToMost}}" checked='true' />
       </view>
@@ -80,12 +84,13 @@
             <label class='center' style="margin-left:10rpx;">{{"商品" +(goodsindex+1)}}</label>
           </view>
           <!--删除商品图标-->
-          <image class='icon' mode="scaleToFill" src="../../images/delete.png" />
+          <image wx:if="{{!showdelete}}" data-goodsindex="{{goodsindex}}" class='icon' bindtap="deleteGoods" mode="scaleToFill" src="../../images/delete.png" />
+          <image wx:if="{{showdelete}}" class='icon' mode="scaleToFill" src="../../images/delete1.png" />
         </view>
         <!--商品名称-->
         <view class='containerView rowIconView'>
           <text class='center'>商品名称</text>
-          <input class='input' placeholder-class="phcolor" data-index='{{index}}' bindinput='inputGoodsName' placeholder=" 请输入商品名称，最多20字" type="text" />
+          <input name="name{{goodsindex}}" class='input' placeholder-class="phcolor" data-goodsindex='{{goodsindex}}'  placeholder=" 请输入商品名称，最多20字" type="text" bindinput='inputGoodsName' value='{{item.name}}' />
         </view>
         <!--商品图片介绍-->
         <view class='containerView imageIntroView'>
@@ -105,10 +110,10 @@
         </view>
         <!--商品分类-->
         <view class='containerView rowIconView'>
-         <picker mode="multiSelector" bindchange="bindGoodsPickerChange"  data-goodsindex="{{goodsindex}}"bindcolumnchange="bindGoodsPickerColumnChange" value="{{item.classIndex}}" range="{{item.parentClassId}}" >
+         <picker mode="multiSelector" bindchange="bindGoodsPickerChange"  data-goodsindex="{{goodsindex}}"bindcolumnchange="bindGoodsPickerColumnChange" value="{{item.classIndex}}" range="{{item.parentClass}}" >
             <view class="goodspicker">
               分类
-              <input class='goodsclass' disabled="true" value='{{item.parentClassId[0][item.classIndex[0]]}} {{item.parentClassId[1][item.classIndex[1]]}}'></input>
+              <input class='goodsclass' disabled="true" value='{{item.parentClass[0][item.classIndex[0]]}} {{item.parentClass[1][item.classIndex[1]]}}'></input>
             </view>
           </picker>
           <image src='../../images/rightShot.png' class='rightShotImg'></image>
@@ -116,17 +121,17 @@
         <!--商品规格-->
         <view class='containerView rowIconView'>
           <text class='center'>规格</text>
-          <input class='input' placeholder-class="phcolor" placeholder="请输入商品规格" type="text" />
+          <input name="specification{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsSpecification' placeholder-class="phcolor" placeholder="请输入商品规格" type="text" value='{{item.specification}}' />
         </view>
         <!--商品价格-->
         <view class='containerView rowIconView'>
           <text class='center'>价格</text>
-          <input class='input' placeholder-class="phcolor" placeholder="请输入商品价格" type="text" />
+          <input name="price{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsPrice' placeholder-class="phcolor" placeholder="请输入商品价格" type="text" value='{{item.price}}' />
         </view>
         <!--商品库存-->
         <view class='containerView rowIconView'>
           <text class='center'>库存</text>
-          <input class='input' placeholder-class="phcolor" placeholder="请输入商品库存" type="text" />
+          <input name="repertory{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsRepertory' placeholder-class="phcolor" placeholder="请输入商品库存" type="text" value='{{item.repertory}}' />
         </view>
         <!--设置最小成团数量-->
         <view class='containerView rowIconView' wx:if="{{!judeToMost}}">
@@ -134,9 +139,11 @@
           <switch type="switch" bindchange='chenTuanNum'  data-setgroupnum="{{goodsindex}}" />
         </view>
         <!--最小成团数量-->
+      <view wx:if="{{!judeToMost}}">
         <view class='containerView rowIconView' wx:if="{{item.isSetGroup}}">
-          <input placeholder-class="phcolor" placeholder="请输入最小成团数量" type="text" />
+          <input name="groupSum{{goodsindex}}" placeholder-class="phcolor" placeholder="请输入最小成团数量" type="text" />
         </view>
+      </view>
       </view>
 
     </view>
@@ -148,6 +155,7 @@
 
   <!--发布接龙-->
   <view class="foot_nav">
-    <button class="foot_btn" bindtap='publish' >发布接龙</button>
+    <button class="foot_btn" form-type='submit'  >发布接龙</button>
   </view>
+  </form>
 </view>

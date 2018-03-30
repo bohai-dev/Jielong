@@ -23,6 +23,14 @@
   position:relative;
   width:720rpx;
 }
+.number-limit{
+  width:100%;
+  font-size:20rpx;
+  text-align:right;
+}
+.greenfont{
+  color: #1AAD19;
+}
 .phcolor{
   color: #ddd;
   font-size: 30rpx;
