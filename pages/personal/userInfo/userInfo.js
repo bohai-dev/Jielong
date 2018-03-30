@@ -7,9 +7,9 @@ Page({
   data: {
     name: '',
     phone: '',
-    email:'',
-    detail:'',
-    id:''
+    email: '',
+    detail: '',
+    id: ''
   },
 
   /**
@@ -20,7 +20,7 @@ Page({
     var userid = wx.getStorageSync("userId")
     var app = getApp();
     wx.request({
-      url: app.globalData.domain +'/userInfo/selectByUserId',
+      url: app.globalData.domain + '/userInfo/selectByUserId',
       data: {
         userId: userid
       },
@@ -30,7 +30,7 @@ Page({
       success: function (res) {
         console.log(res.data)
         console.log(res.data.data)
-        if (res.data.data){
+        if (res.data.data) {
           console.log("success")
           var name = res.data.data.name;
           var phone = res.data.data.phoneNumber;
@@ -43,8 +43,8 @@ Page({
             email: email,
             detail: detail,
             id: id
-          })          
-        }   
+          })
+        }
         //console.log(info+"222"+"id:"+id)
       }
     })
@@ -54,49 +54,49 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   },
   //检查手机号
   telCheck: function (e) {
@@ -137,10 +137,10 @@ Page({
           }
         }
       })
-    } else if (!e.detail.value.phone) {
+    } else if (!(/^1(3|4|5|7|8)\d{9}$/.test(phone))) {
       wx.showModal({
         title: '提示',
-        content: '请输入手机',
+        content: '请输入正确手机号码',
         showCancel: false,
         success: function (res) {
           console.log(res)
@@ -159,7 +159,7 @@ Page({
           email: email,
           deliveryAddress: detail,
           userId: userId,
-          id:id
+          id: id
         },
         header: {
           'content-type': 'application/json'
@@ -170,7 +170,7 @@ Page({
           })
           console.log("新建或更新成功")
         }
-      })      
+      })
     }
   }
 })

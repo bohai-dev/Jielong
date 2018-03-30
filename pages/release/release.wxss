@@ -84,15 +84,17 @@
 picker{
   width: 100%;
 }
-.picker{
+.elasticbox{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  width: 100%;
 }
-.endtime{
+.rightgreen{
   font-size:25rpx;
   color:#1AAD19;
   margin-right:15rpx;
+  text-align:right;
 }
 .goodspicker{
   display:flex;

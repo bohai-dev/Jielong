@@ -5,7 +5,6 @@ var classifyData = [];     //分类总的数据
 var firstClassify = [];    //分类一级数据
 var secondClassify = [];   //分类二级数据
 var initClassify = [];
-//var pushData = {}; //发布的全局数据
 
 // 创建页面实例对象
 Page({
@@ -30,7 +29,7 @@ Page({
     imageLocalPaths: [],                //本地介绍图片数组 { id:1, unique: 'unique_1',path:''}
     introImages: [],              //服务器图片介绍数组 用逗号隔开"001.png,002.png"
     goodsAddresses: [],            //用户自提地址id数组，用逗号隔开"1,2"
-    phoneNumber: "",                    //用户手机号
+    phoneNumber: 0,                    //用户手机号
     setFinishTime: 0,               //是否设置截止时间
     multiArray: [],                 //截至时间日期
     finishTime: [],                 //截至时间
@@ -87,6 +86,7 @@ Page({
     // app.coolsite360.onShow(this);
     this.getAddress();
     this.getClassify();    //获取分类数据
+    this.getPhoneNumber();
   },
 
   /**
@@ -298,20 +298,50 @@ Page({
   //判断多个商品还是一个
   goodsChange: function (e) {
     var _this = this;
-    if (this.data.toMostModal) {
-      wx.showModal({
-        title: '提示',
-        content: '多个商品，无法设置成团数量！',
-        confirmText: '不再提示',
-        cancelText: "确定",
-        success: function (res) {
-          if (res.confirm) {
-            _this.data.toMostModal = false;
-          } else if (res.cancel) {
-            _this.data.toMostModal = true;
+    var toMostModal = wx.getStorageSync('toMostModal')
+    if (e.detail.value) {
+      //console.log(e.detail.value)
+      if (!toMostModal) {
+        wx.showModal({
+          title: '提示',
+          content: '多个商品，无法设置成团数量！',
+          confirmText: '不再提示',
+          cancelText: "确定",
+          success: function (res) {
+            if (res.confirm) {
+              wx.setStorageSync('toMostModal', "1")
+            }
           }
-        }
-      })
+        })
+      }
+    } else {
+      var showdelete = true;
+      var len = _this.data.goodsList.length;
+      if (len > 1) {
+        wx.showModal({
+          title: '提示',
+          content: '点击确定将保留第一个商品信息，其他将清除',
+          confirmText: '确定',
+          cancelText: "取消",
+          success: function (res) {
+            if (res.confirm) {
+              console.log("用户点击确定")
+              _this.data.goodsList = _this.data.goodsList.splice(0, 1);
+              _this.setData({
+                goodsList: _this.data.goodsList,
+                showdelete: showdelete
+              })
+            } else if (res.cancel) {
+              console.log("用户点击取消")
+              var judeToMost = true;
+              _this.setData({
+                judeToMost: judeToMost
+              })
+            }
+          }
+        })
+      }
+      //console.log(e.detail.value)
     }
     _this.setData({
       judeToMost: e.detail.value
@@ -340,6 +370,7 @@ Page({
   inputGoodsPrice: function (e) {
     var goodsindex = e.currentTarget.dataset.goodsindex;
     this.data.goodsList[goodsindex].price = e.detail.value;
+    console.log()
   },
   //修改商品库存
   inputGoodsRepertory: function (e) {
@@ -394,41 +425,53 @@ Page({
   formSubmit: function (e) {
     console.log(e);
     console.log(this)
-    console.log(app.globalData.classifyData)
     var _this = this;
     var _thisData = _this.data;
     var _detailValue = e.detail.value;
+    // var veriData;
     //封装发布数据
     var pushData = {};
     pushData.userId = _thisData.userId;
     pushData.topic = _detailValue.topic;
-    pushData.description = _detailValue.topic;
+    pushData.description = _detailValue.description;
     pushData.introImages = _thisData.introImages.join(",");
     pushData.addressName = _thisData.addressName;
     pushData.addressDetail = _thisData.addressDetail;
     pushData.addressLongitude = _thisData.addressLongitude;
     pushData.addressLatitude = _thisData.addressLatitude;
     pushData.goodsAddresses = _thisData.goodsAddresses;
+    pushData.phoneNumber = _thisData.phoneNumber;
     pushData.setFinishTime = _thisData.setFinishTime;
     pushData.finishTime = _detailValue.finishTime;
     pushData.goodsList = [];
     for (var i = 0; i < _thisData.goodsList.length; i++) {
       pushData.goodsList[i] = {};
       var _name = "name" + i;
-      console.log(_detailValue[_name])
       pushData.goodsList[i].name = _detailValue["name" + i];
       pushData.goodsList[i].serverPaths = _thisData.goodsList[i].serverPaths.join(",");
       pushData.goodsList[i].parentClassId = app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].id;
       pushData.goodsList[i].subClassId = app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].goodsSubClasses[_thisData.goodsList[i].classIndex[1]].id;
       pushData.goodsList[i].specification = _detailValue["specification" + i];
-      pushData.goodsList[i].price = Number(_detailValue["price" + i]);
+      pushData.goodsList[i].price = Math.round(Number(_detailValue["price" + i]) * 100) / 100 ;
       pushData.goodsList[i].repertory = Number(_detailValue["repertory" + i]);
       pushData.goodsList[i].isSetGroup = _thisData.goodsList[i].isSetGroup;
       pushData.goodsList[i].groupSum = Number(_detailValue["groupSum" + i]);
     }
-    console.log(this)
     console.log(pushData);
 
+    //手机号码不存在
+    if (!pushData.phoneNumber){
+    wx.navigateTo({
+      url: './bindingPhone/bindingPhone',
+    })
+    return;
+    }
+
+    //数据验证
+    
+    var  veriData = _this.verifPushData(pushData);
+    console.log(veriData);
+    if (veriData.pushForm){
     //发布接龙
     wx.request({
       url: app.globalData.domain + '/jielong/insert',
@@ -439,14 +482,36 @@ Page({
       data: pushData,
       success: function (res) {
         console.log(res)
+        if(res.data.errorCode == 0){
+          wx.showModal({
+            title: '发布接龙成功！',
+            showCancel: false,
+            success:function(res){
+              if(res.confirm){
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }
+            }
+          })
+        }else{
+          var errMessage = res.data.errorMessage || "请填写正确的发布接龙信息！";
+          if (errMessage){
+            wx.showModal({
+              title: errMessage,
+              showCancel: false
+            })
+          }
+
+        }
       }
     })
-
-
-    // wx.navigateTo({
-    //   url: './bindingPhone/bindingPhone',
-    // })
-
+    }else{
+      wx.showModal({
+        title: veriData.remData || "请填写正确的发布接龙信息！",
+        showCancel: false
+      })
+    }
 
   },
   bindMultiPickerChange: function (e) {
@@ -661,7 +726,72 @@ Page({
       }
     })
     }
+  },
+  //获取手机号码
+  getPhoneNumber:function(e){
+    var _this = this;
+    wx.request({
+      url: app.globalData.domain + '/userInfo/selectByUserId',
+      data: {
+        userId: wx.getStorageSync("userId")
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res)
+        if(res.data.data){
+          _this.setData({
+            phoneNumber: res.data.data.phoneNumber
+          })
+        }
+
+      }
+
+    })
+  },
+  //发布数据验证
+  verifPushData:function(data){
+    console.log(data);
+    var remindDataObj = {};
+    if (!data.topic){
+      remindDataObj = { pushForm: 0, remData: "请填写接龙主题！"};
+    } else if (!data.description){
+      remindDataObj = { pushForm: 0, remData: "请填写接龙描述！" };
+    } else if (!data.introImages) {
+      remindDataObj = { pushForm: 0, remData: "请上传接龙图片！" };
+    } else if (!data.addressDetail || !data.addressName || !data.addressLongitude || !data.addressLatitude) {
+      remindDataObj = { pushForm: 0, remData: "请选择接龙地址！" };
+    } else if (!this.data.seleAddrNum) {
+      remindDataObj = { pushForm: 0, remData: "请设置自提点！" };
+    } else if (this.data.setFinishTime && !data.finishTime) {
+      remindDataObj = { pushForm: 0, remData: "请设置截止时间！" };
+    } else{
+      for(var i=0; i < data.goodsList.length; i++){
+        if (!data.goodsList[i].name){
+          remindDataObj = { pushForm: 0, remData: "请设置商品名称！" };
+        } else if (!data.goodsList[i].serverPaths){
+          remindDataObj = { pushForm: 0, remData: "请设置商品图片！" };
+        } else if (!data.goodsList[i].parentClassId && !data.goodsList[i].subClassId) {
+          remindDataObj = { pushForm: 0, remData: "请设置商品分类！" };
+        } else if (!data.goodsList[i].specification) {
+          remindDataObj = { pushForm: 0, remData: "请设置商品规格！" };
+        } else if (!data.goodsList[i].price) {
+            remindDataObj = { pushForm: 0, remData: "请设置商品价格！" };
+        } else if (!data.goodsList[i].repertory) {
+            remindDataObj = { pushForm: 0, remData: "请设置商品库存！" };
+        } else if (data.goodsList[i].isSetGroup && !data.goodsList[i].groupSum) {
+           remindDataObj = { pushForm: 0, remData: "请设置商品的最小成团数据！" };
+        }else{
+          remindDataObj = { pushForm: 1, remData: "" };
+        }
+      }
+
+
+    }
+    return remindDataObj;
   }
+
 
 
 

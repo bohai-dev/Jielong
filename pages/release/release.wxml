@@ -42,8 +42,10 @@
 
     <!--设置自提点-->
     <view class='containerView rowIconView' bindtap='selectAddress'>
-      <text>设置自提点</text>
-      <text>已设置{{seleAddrNum}}个</text>
+      <view class="elasticbox">
+        <text>设置自提点</text>
+        <text class='rightgreen'>已设置{{seleAddrNum}}个</text>
+      </view>
       <image src='../../images/rightShot.png' class='rightShotImg'></image>
     </view>
 
@@ -57,9 +59,9 @@
     <!--截止时间-->
     <view class="containerView rowIconView" wx:if='{{setFinishTime==1}}'>
       <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
-        <view class="picker">
+        <view class="elasticbox">
           <text>截至时间：</text>
-          <input name="finishTime" disabled="true" class='endtime' value='{{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}}'></input>
+          <input name="finishTime" disabled="true" class='rightgreen' value='{{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}}'></input>
         </view>
       </picker>
       <image src='../../images/rightShot.png' class='rightShotImg'></image>
@@ -90,7 +92,7 @@
         <!--商品名称-->
         <view class='containerView rowIconView'>
           <text class='center'>商品名称</text>
-          <input name="name{{goodsindex}}" class='input' placeholder-class="phcolor" data-goodsindex='{{goodsindex}}'  placeholder=" 请输入商品名称，最多20字" type="text" bindinput='inputGoodsName' value='{{item.name}}' />
+          <input name="name{{goodsindex}}" class='input' placeholder-class="phcolor" data-goodsindex='{{goodsindex}}'  placeholder=" 请输入商品名称，最多20字" type="text" bindinput='inputGoodsName' value='{{item.name}}' maxlength='20' />
         </view>
         <!--商品图片介绍-->
         <view class='containerView imageIntroView'>
@@ -126,12 +128,12 @@
         <!--商品价格-->
         <view class='containerView rowIconView'>
           <text class='center'>价格</text>
-          <input name="price{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsPrice' placeholder-class="phcolor" placeholder="请输入商品价格" type="text" value='{{item.price}}' />
+          <input name="price{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsPrice' placeholder-class="phcolor" placeholder="请输入商品价格" type="digit" value='{{item.price}}' />
         </view>
         <!--商品库存-->
         <view class='containerView rowIconView'>
           <text class='center'>库存</text>
-          <input name="repertory{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsRepertory' placeholder-class="phcolor" placeholder="请输入商品库存" type="text" value='{{item.repertory}}' />
+          <input name="repertory{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsRepertory' placeholder-class="phcolor" placeholder="请输入商品库存" type="number" value='{{item.repertory}}' />
         </view>
         <!--设置最小成团数量-->
         <view class='containerView rowIconView' wx:if="{{!judeToMost}}">
@@ -141,7 +143,7 @@
         <!--最小成团数量-->
       <view wx:if="{{!judeToMost}}">
         <view class='containerView rowIconView' wx:if="{{item.isSetGroup}}">
-          <input name="groupSum{{goodsindex}}" placeholder-class="phcolor" placeholder="请输入最小成团数量" type="text" />
+          <input name="groupSum{{goodsindex}}" placeholder-class="phcolor" placeholder="请输入最小成团数量" type="number" />
         </view>
       </view>
       </view>

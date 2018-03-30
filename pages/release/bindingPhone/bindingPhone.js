@@ -122,10 +122,10 @@ Page({
           }
         }
       })
-    } else if (!e.detail.value.phone) {
+    } else if (!(/^1(3|4|5|7|8)\d{9}$/.test(phone))) {
       wx.showModal({
         title: '提示',
-        content: '请输入手机',
+        content: '请输入正确手机号码',
         showCancel: false,
         success: function (res) {
           console.log(res)
