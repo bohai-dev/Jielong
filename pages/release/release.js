@@ -327,36 +327,36 @@ Page({
     })
   },
   //修改商品名称
-  // inputGoodsName: function (e) {
-  //   var goodsindex = e.currentTarget.dataset.goodsindex;
-  //   this.data.goodsList[goodsindex].name = e.detail.value;
-  // },
-  // //修改商品规格
-  // inputGoodsSpecification: function (e) {
-  //   var goodsindex = e.currentTarget.dataset.goodsindex;
-  //   this.data.goodsList[goodsindex].specification = e.detail.value;
-  // },
-  // //修改商品价格
-  // inputGoodsPrice: function (e) {
-  //   var goodsindex = e.currentTarget.dataset.goodsindex;
-  //   this.data.goodsList[goodsindex].price = e.detail.value;
-  // },
-  // //修改商品库存
-  // inputGoodsRepertory: function (e) {
-  //   var goodsindex = e.currentTarget.dataset.goodsindex;
-  //   this.data.goodsList[goodsindex].repertory = e.detail.value;
-  // },
-  // //修改商品成团数量
-  // inputGoodsGroupSum: function (e) {
-  //   var goodsindex = e.currentTarget.dataset.goodsindex;
-  //   this.data.goodsList[goodsindex].groupSum = e.detail.value;
-  // },
+  inputGoodsName: function (e) {
+    var goodsindex = e.currentTarget.dataset.goodsindex;
+    this.data.goodsList[goodsindex].name = e.detail.value;
+  },
+  //修改商品规格
+  inputGoodsSpecification: function (e) {
+    var goodsindex = e.currentTarget.dataset.goodsindex;
+    this.data.goodsList[goodsindex].specification = e.detail.value;
+  },
+  //修改商品价格
+  inputGoodsPrice: function (e) {
+    var goodsindex = e.currentTarget.dataset.goodsindex;
+    this.data.goodsList[goodsindex].price = e.detail.value;
+  },
+  //修改商品库存
+  inputGoodsRepertory: function (e) {
+    var goodsindex = e.currentTarget.dataset.goodsindex;
+    this.data.goodsList[goodsindex].repertory = e.detail.value;
+  },
+  //修改商品成团数量
+  inputGoodsGroupSum: function (e) {
+    var goodsindex = e.currentTarget.dataset.goodsindex;
+    this.data.goodsList[goodsindex].groupSum = e.detail.value;
+  },
   //最小成团数量控制
   chenTuanNum: function (res) {
     console.log(this)
     console.log(res.target.dataset.setgroupnum)  //找到渲染数组的索引位置
     console.log(this.data.goodsList[res.target.dataset.setgroupnum].isSetGroup) //找到遍历列表成团字段
-    res.detail.value = res.detail.value ? 1 : 0;
+    res.detail.value = Number(res.detail.value) ? 1 : 0;
     this.data.goodsList[res.target.dataset.setgroupnum].isSetGroup = res.detail.value;
     this.setData({
       goodsList: this.data.goodsList
@@ -369,8 +369,8 @@ Page({
       name: "",              //商品名称 
       localPaths: [],         // 商品本地图片路径 数组
       serverPaths: [],       // 商品服务器图片路径 数组
-      parentClass: initClassify,
-      Allsubclass: firstClassify,
+      parentClass: app.globalData.initClassify,
+      Allsubclass: app.globalData.firstClassify,
       parentClassId: 0,     //商品一级分类 id
       subClassId: 0,      // 商品二级分类 id
       classIndex: [0, 0],
@@ -394,7 +394,7 @@ Page({
   formSubmit: function (e) {
     console.log(e);
     console.log(this)
-    console.log(classifyData)
+    console.log(app.globalData.classifyData)
     var _this = this;
     var _thisData = _this.data;
     var _detailValue = e.detail.value;
@@ -418,14 +418,15 @@ Page({
       console.log(_detailValue[_name])
       pushData.goodsList[i].name = _detailValue["name" + i];
       pushData.goodsList[i].serverPaths = _thisData.goodsList[i].serverPaths.join(",");
-      pushData.goodsList[i].parentClassId = classifyData[_thisData.goodsList[i].classIndex[0]].id;
-      pushData.goodsList[i].subClassId = classifyData[_thisData.goodsList[i].classIndex[0]].goodsSubClasses[_thisData.goodsList[i].classIndex[1]].id;
+      pushData.goodsList[i].parentClassId = app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].id;
+      pushData.goodsList[i].subClassId = app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].goodsSubClasses[_thisData.goodsList[i].classIndex[1]].id;
       pushData.goodsList[i].specification = _detailValue["specification" + i];
       pushData.goodsList[i].price = Number(_detailValue["price" + i]);
       pushData.goodsList[i].repertory = Number(_detailValue["repertory" + i]);
       pushData.goodsList[i].isSetGroup = _thisData.goodsList[i].isSetGroup;
       pushData.goodsList[i].groupSum = Number(_detailValue["groupSum" + i]);
     }
+    console.log(this)
     console.log(pushData);
 
     //发布接龙
@@ -548,9 +549,9 @@ Page({
     data.classIndex[e.detail.column] = e.detail.value;
     switch (e.detail.column) {
       case 0:
-        for (var i = 0; i < firstClassify.length; i++) {
+        for (var i = 0; i < app.globalData.firstClassify.length; i++) {
           if (data.classIndex[0] == i) {
-            data.parentClass[1] = secondClassify[i];
+            data.parentClass[1] = app.globalData.secondClassify[i];
           }
         }
         break;
@@ -627,12 +628,10 @@ Page({
   },
   //获取分类数据
   getClassify: function (e) {
+    console.log(app.globalData.classifyVaule);
     var _this = this;
     var arr = [];
-    classifyData = [];
-    firstClassify = [];
-    secondClassify = [];
-    initClassify = [];
+    if (!app.globalData.classifyData.length && !app.globalData.firstClassify.length && !app.globalData.secondClassify.length && !initClassify.length){
     //获取分类数据
     wx.request({
       url: app.globalData.domain + '/getAllGoodsClass',
@@ -641,18 +640,19 @@ Page({
         "content-type": "application/json"
       },
       success: function (res) {
-        classifyData = res.data.data;
+        classifyVaule = false;
+        app.globalData.classifyData = res.data.data;
         for (var i = 0; i < res.data.data.length; i++) {
           arr = [];
-          firstClassify.push(res.data.data[i].className);   //赋值一级数组数据
+          app.globalData.firstClassify.push(res.data.data[i].className);   //赋值一级数组数据
           for (var j = 0; j < res.data.data[i].goodsSubClasses.length; j++) {
             arr.push(res.data.data[i].goodsSubClasses[j].className);
           }
-          secondClassify.push(arr);  //赋值二级数组数据
+          app.globalData.secondClassify.push(arr);  //赋值二级数组数据
         }
-        initClassify.push(firstClassify, secondClassify[1]);
-        _this.data.goodsList[0].parentClass.push(firstClassify, secondClassify[0]);
-        _this.data.goodsList[0].Allsubclass.push(secondClassify);
+        app.globalData.initClassify.push(app.globalData.firstClassify, app.globalData.secondClassify[0]);
+        _this.data.goodsList[0].parentClass.push(app.globalData.firstClassify, app.globalData.secondClassify[0]);
+        _this.data.goodsList[0].Allsubclass.push(app.globalData.secondClassify);
         _this.setData({
           goodsList: _this.data.goodsList
         })
@@ -660,6 +660,7 @@ Page({
 
       }
     })
+    }
   }
 
 

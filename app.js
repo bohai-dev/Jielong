@@ -185,7 +185,12 @@ App({
   globalData: {
     userInfo: null,
     //domain: 'http://192.168.16.110:8081'
-    domain: "http://47.100.12.188:8081"
+   domain: "http://47.100.12.188:8081"
+    // domain: "http://192.168.1.108:8081",
+    classifyData:[],
+    firstClassify:[],   //分类一级数据
+    secondClassify:[],   //分类二级数据
+    initClassify:[]
   }
 
 })
