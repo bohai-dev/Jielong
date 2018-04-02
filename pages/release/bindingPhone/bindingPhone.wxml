@@ -8,7 +8,7 @@
     <!--姓名-->
     <view class='columnView block'>
       <label>姓名</label>
-      <input name="name" type='text'value='{{name}}' maxlength="5"></input>
+      <input name="name" type='text'value='{{name}}'></input>
     </view>
     <!--手机-->
     <view class='columnView block'>
