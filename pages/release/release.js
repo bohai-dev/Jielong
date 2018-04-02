@@ -44,8 +44,8 @@ Page({
         name: "",              //商品名称 
         localPaths: [],         // 商品本地图片路径 数组
         serverPaths: [],       // 商品服务器图片路径数组,用逗号隔开"1.png,2.png"
-        parentClass: [],       //分类初始化数据
-        Allsubclass: [],       //分类子类数据
+        parentClass: app.globalData.initClassify,       //分类初始化数据
+        Allsubclass: app.globalData.firstClassify,       //分类子类数据
         parentClassId: 0,     //商品一级分类 id
         subClassId: 0,      // 商品二级分类 id
         classIndex: [0, 0],
@@ -452,7 +452,7 @@ Page({
       pushData.goodsList[i].parentClassId = app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].id;
       pushData.goodsList[i].subClassId = app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].goodsSubClasses[_thisData.goodsList[i].classIndex[1]].id;
       pushData.goodsList[i].specification = _detailValue["specification" + i];
-      pushData.goodsList[i].price = Math.round(Number(_detailValue["price" + i]) * 100) / 100 ;
+      pushData.goodsList[i].price = Math.round(Number(_detailValue["price" + i]) * 100) / 100;
       pushData.goodsList[i].repertory = Number(_detailValue["repertory" + i]);
       pushData.goodsList[i].isSetGroup = _thisData.goodsList[i].isSetGroup;
       pushData.goodsList[i].groupSum = Number(_detailValue["groupSum" + i]);
@@ -460,53 +460,53 @@ Page({
     console.log(pushData);
 
     //手机号码不存在
-    if (!pushData.phoneNumber){
-    wx.navigateTo({
-      url: './bindingPhone/bindingPhone',
-    })
-    return;
+    if (!pushData.phoneNumber) {
+      wx.navigateTo({
+        url: './bindingPhone/bindingPhone',
+      })
+      return;
     }
 
     //数据验证
-    
-    var  veriData = _this.verifPushData(pushData);
-    console.log(veriData);
-    if (veriData.pushForm){
-    //发布接龙
-    wx.request({
-      url: app.globalData.domain + '/jielong/insert',
-      method: 'POST',
-      header: {
-        "content-type": "application/json"
-      },
-      data: pushData,
-      success: function (res) {
-        console.log(res)
-        if(res.data.errorCode == 0){
-          wx.showModal({
-            title: '发布接龙成功！',
-            showCancel: false,
-            success:function(res){
-              if(res.confirm){
-                wx.navigateBack({
-                  delta: 1,
-                })
-              }
-            }
-          })
-        }else{
-          var errMessage = res.data.errorMessage || "请填写正确的发布接龙信息！";
-          if (errMessage){
-            wx.showModal({
-              title: errMessage,
-              showCancel: false
-            })
-          }
 
+    var veriData = _this.verifPushData(pushData);
+    console.log(veriData);
+    if (veriData.pushForm) {
+      //发布接龙
+      wx.request({
+        url: app.globalData.domain + '/jielong/insert',
+        method: 'POST',
+        header: {
+          "content-type": "application/json"
+        },
+        data: pushData,
+        success: function (res) {
+          console.log(res)
+          if (res.data.errorCode == 0) {
+            wx.showModal({
+              title: '发布接龙成功！',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  wx.navigateBack({
+                    delta: 1,
+                  })
+                }
+              }
+            })
+          } else {
+            var errMessage = res.data.errorMessage || "请填写正确的发布接龙信息！";
+            if (errMessage) {
+              wx.showModal({
+                title: errMessage,
+                showCancel: false
+              })
+            }
+
+          }
         }
-      }
-    })
-    }else{
+      })
+    } else {
       wx.showModal({
         title: veriData.remData || "请填写正确的发布接龙信息！",
         showCancel: false
@@ -693,42 +693,40 @@ Page({
   },
   //获取分类数据
   getClassify: function (e) {
-    console.log(app.globalData.classifyVaule);
     var _this = this;
     var arr = [];
-    if (!app.globalData.classifyData.length && !app.globalData.firstClassify.length && !app.globalData.secondClassify.length && !initClassify.length){
-    //获取分类数据
-    wx.request({
-      url: app.globalData.domain + '/getAllGoodsClass',
-      method: 'POST',
-      header: {
-        "content-type": "application/json"
-      },
-      success: function (res) {
-        classifyVaule = false;
-        app.globalData.classifyData = res.data.data;
-        for (var i = 0; i < res.data.data.length; i++) {
-          arr = [];
-          app.globalData.firstClassify.push(res.data.data[i].className);   //赋值一级数组数据
-          for (var j = 0; j < res.data.data[i].goodsSubClasses.length; j++) {
-            arr.push(res.data.data[i].goodsSubClasses[j].className);
+    if (!app.globalData.classifyData.length && !app.globalData.firstClassify.length && !app.globalData.secondClassify.length && !initClassify.length) {
+      //获取分类数据
+      wx.request({
+        url: app.globalData.domain + '/getAllGoodsClass',
+        method: 'POST',
+        header: {
+          "content-type": "application/json"
+        },
+        success: function (res) {
+          app.globalData.classifyData = res.data.data;
+          for (var i = 0; i < res.data.data.length; i++) {
+            arr = [];
+            app.globalData.firstClassify.push(res.data.data[i].className);   //赋值一级数组数据
+            for (var j = 0; j < res.data.data[i].goodsSubClasses.length; j++) {
+              arr.push(res.data.data[i].goodsSubClasses[j].className);
+            }
+            app.globalData.secondClassify.push(arr);  //赋值二级数组数据
           }
-          app.globalData.secondClassify.push(arr);  //赋值二级数组数据
+          app.globalData.initClassify.push(app.globalData.firstClassify, app.globalData.secondClassify[0]);
+          _this.data.goodsList[0].parentClass.push(app.globalData.firstClassify, app.globalData.secondClassify[0]);
+          _this.data.goodsList[0].Allsubclass.push(app.globalData.secondClassify);
+          _this.setData({
+            goodsList: _this.data.goodsList
+          })
+
+
         }
-        app.globalData.initClassify.push(app.globalData.firstClassify, app.globalData.secondClassify[0]);
-        _this.data.goodsList[0].parentClass.push(app.globalData.firstClassify, app.globalData.secondClassify[0]);
-        _this.data.goodsList[0].Allsubclass.push(app.globalData.secondClassify);
-        _this.setData({
-          goodsList: _this.data.goodsList
-        })
-
-
-      }
-    })
+      })
     }
   },
   //获取手机号码
-  getPhoneNumber:function(e){
+  getPhoneNumber: function (e) {
     var _this = this;
     wx.request({
       url: app.globalData.domain + '/userInfo/selectByUserId',
@@ -740,7 +738,7 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        if(res.data.data){
+        if (res.data.data) {
           _this.setData({
             phoneNumber: res.data.data.phoneNumber
           })
@@ -751,12 +749,12 @@ Page({
     })
   },
   //发布数据验证
-  verifPushData:function(data){
+  verifPushData: function (data) {
     console.log(data);
     var remindDataObj = {};
-    if (!data.topic){
-      remindDataObj = { pushForm: 0, remData: "请填写接龙主题！"};
-    } else if (!data.description){
+    if (!data.topic) {
+      remindDataObj = { pushForm: 0, remData: "请填写接龙主题！" };
+    } else if (!data.description) {
       remindDataObj = { pushForm: 0, remData: "请填写接龙描述！" };
     } else if (!data.introImages) {
       remindDataObj = { pushForm: 0, remData: "请上传接龙图片！" };
@@ -766,23 +764,23 @@ Page({
       remindDataObj = { pushForm: 0, remData: "请设置自提点！" };
     } else if (this.data.setFinishTime && !data.finishTime) {
       remindDataObj = { pushForm: 0, remData: "请设置截止时间！" };
-    } else{
-      for(var i=0; i < data.goodsList.length; i++){
-        if (!data.goodsList[i].name){
+    } else {
+      for (var i = 0; i < data.goodsList.length; i++) {
+        if (!data.goodsList[i].name) {
           remindDataObj = { pushForm: 0, remData: "请设置商品名称！" };
-        } else if (!data.goodsList[i].serverPaths){
+        } else if (!data.goodsList[i].serverPaths) {
           remindDataObj = { pushForm: 0, remData: "请设置商品图片！" };
         } else if (!data.goodsList[i].parentClassId && !data.goodsList[i].subClassId) {
           remindDataObj = { pushForm: 0, remData: "请设置商品分类！" };
         } else if (!data.goodsList[i].specification) {
           remindDataObj = { pushForm: 0, remData: "请设置商品规格！" };
         } else if (!data.goodsList[i].price) {
-            remindDataObj = { pushForm: 0, remData: "请设置商品价格！" };
+          remindDataObj = { pushForm: 0, remData: "请设置商品价格！" };
         } else if (!data.goodsList[i].repertory) {
-            remindDataObj = { pushForm: 0, remData: "请设置商品库存！" };
+          remindDataObj = { pushForm: 0, remData: "请设置商品库存！" };
         } else if (data.goodsList[i].isSetGroup && !data.goodsList[i].groupSum) {
-           remindDataObj = { pushForm: 0, remData: "请设置商品的最小成团数据！" };
-        }else{
+          remindDataObj = { pushForm: 0, remData: "请设置商品的最小成团数据！" };
+        } else {
           remindDataObj = { pushForm: 1, remData: "" };
         }
       }
