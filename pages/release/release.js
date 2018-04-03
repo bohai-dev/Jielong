@@ -386,6 +386,7 @@ Page({
   },
   //最小成团数量控制
   chenTuanNum: function (res) {
+    console.log(app.globalData.classifyData);
     console.log(this)
     console.log(res.target.dataset.setgroupnum)  //找到渲染数组的索引位置
     console.log(this.data.goodsList[res.target.dataset.setgroupnum].isSetGroup) //找到遍历列表成团字段
@@ -425,6 +426,7 @@ Page({
   },
   //发布接龙
   formSubmit: function (e) {
+    console.log(app.globalData.classifyData)
     console.log(e);
     console.log(this)
     var _this = this;
@@ -433,6 +435,9 @@ Page({
     wx.showLoading({
       title: 'loading',
     })
+    setTimeout(function(){
+      wx.hideLoading();   //关闭模态框
+    },60000)
     // var veriData;
     //封装发布数据
     var pushData = {};
@@ -455,12 +460,22 @@ Page({
       pushData.goodsList[i].name = _detailValue["name" + i];
       pushData.goodsList[i].serverPaths = _thisData.goodsList[i].serverPaths.join(",");
       pushData.goodsList[i].parentClassId = app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].id;
-      pushData.goodsList[i].subClassId = app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].goodsSubClasses[_thisData.goodsList[i].classIndex[1]].id;
+      if (!app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].goodsSubClasses.length){
+        pushData.goodsList[i].subClassId = 0;
+      }else{
+        pushData.goodsList[i].subClassId = app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].goodsSubClasses[_thisData.goodsList[i].classIndex[1]].id;
+      }
       pushData.goodsList[i].specification = _detailValue["specification" + i];
       pushData.goodsList[i].price = Math.round(Number(_detailValue["price" + i]) * 100) / 100;
       pushData.goodsList[i].repertory = Number(_detailValue["repertory" + i]);
-      pushData.goodsList[i].isSetGroup = _thisData.goodsList[i].isSetGroup;
-      pushData.goodsList[i].groupSum = Number(_detailValue["groupSum" + i]);
+      if (!_this.data.judeToMost){
+        pushData.goodsList[i].isSetGroup = _thisData.goodsList[i].isSetGroup;
+        pushData.goodsList[i].groupSum = Number(_detailValue["groupSum" + i]);
+      }else{
+        pushData.goodsList[i].isSetGroup = 0;
+        pushData.goodsList[i].groupSum = null;
+      }
+
     }
     console.log(pushData);
 
@@ -704,7 +719,7 @@ Page({
   getClassify: function (e) {
     var _this = this;
     var arr = [];
-    if (!app.globalData.classifyData.length && !app.globalData.firstClassify.length && !app.globalData.secondClassify.length && !initClassify.length) {
+    if (!app.globalData.classifyData.length && !app.globalData.firstClassify.length && !app.globalData.secondClassify.length && !app.globalData.initClassify.length) {
       //获取分类数据
       wx.request({
         url: app.globalData.domain + '/getAllGoodsClass',
@@ -713,6 +728,7 @@ Page({
           "content-type": "application/json"
         },
         success: function (res) {
+          console.log(res)
           app.globalData.classifyData = res.data.data;
           for (var i = 0; i < res.data.data.length; i++) {
             arr = [];

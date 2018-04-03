@@ -8,8 +8,7 @@
 	    </swiper>
 
 <!-- 首页内容 -->
-<view class='container' wx:for="{{containerList}}" wx:for-index="index" wx:key="index" >
-<navigator url='../detail/detail?id={{item.id}}'>
+<view class='container' wx:for="{{containerList}}" wx:for-index="index" wx:key="index" bindtap='navToDetail' data-data='{{item}}' >
   <view class='listContent'>
   <!--接龙名称，主页  -->
     <view class='listHead'>
@@ -37,7 +36,6 @@
       <text class='conAddrText'>{{item.addressDetail}}</text>
     </view>  
 </view>
-</navigator>
 </view>
 
 <!--正在加载显示  -->

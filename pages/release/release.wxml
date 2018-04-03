@@ -138,12 +138,12 @@
         <!--设置最小成团数量-->
         <view class='containerView rowIconView' wx:if="{{!judeToMost}}">
           <text class='center'>设置最小成团数量</text>
-          <switch type="switch" bindchange='chenTuanNum'  data-setgroupnum="{{goodsindex}}" />
+          <switch type="switch" bindchange='chenTuanNum'  data-setgroupnum="{{goodsindex}}" checked="{{item.isSetGroup}}" />
         </view>
         <!--最小成团数量-->
       <view wx:if="{{!judeToMost}}">
         <view class='containerView rowIconView' wx:if="{{item.isSetGroup}}">
-          <input name="groupSum{{goodsindex}}" placeholder-class="phcolor" placeholder="请输入最小成团数量" type="number" />
+          <input name="groupSum{{goodsindex}}" placeholder-class="phcolor" placeholder="请输入最小成团数量" type="number"/>
         </view>
       </view>
       </view>
