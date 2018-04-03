@@ -297,6 +297,7 @@ Page({
   },
   //判断多个商品还是一个
   goodsChange: function (e) {
+    console.log(e);
     var _this = this;
     var toMostModal = wx.getStorageSync('toMostModal')
     if (e.detail.value) {
@@ -311,6 +312,7 @@ Page({
             if (res.confirm) {
               wx.setStorageSync('toMostModal', "1")
             }
+            // _this.data.
           }
         })
       }
@@ -428,6 +430,9 @@ Page({
     var _this = this;
     var _thisData = _this.data;
     var _detailValue = e.detail.value;
+    wx.showLoading({
+      title: 'loading',
+    })
     // var veriData;
     //封装发布数据
     var pushData = {};
@@ -461,6 +466,7 @@ Page({
 
     //手机号码不存在
     if (!pushData.phoneNumber) {
+      wx.hideLoading();   //关闭模态框
       wx.navigateTo({
         url: './bindingPhone/bindingPhone',
       })
@@ -483,6 +489,7 @@ Page({
         success: function (res) {
           console.log(res)
           if (res.data.errorCode == 0) {
+            wx.hideLoading();   //关闭模态框
             wx.showModal({
               title: '发布接龙成功！',
               showCancel: false,
@@ -497,6 +504,7 @@ Page({
           } else {
             var errMessage = res.data.errorMessage || "请填写正确的发布接龙信息！";
             if (errMessage) {
+              wx.hideLoading();   //关闭模态框
               wx.showModal({
                 title: errMessage,
                 showCancel: false
@@ -507,6 +515,7 @@ Page({
         }
       })
     } else {
+      wx.hideLoading();   //关闭模态框
       wx.showModal({
         title: veriData.remData || "请填写正确的发布接龙信息！",
         showCancel: false
