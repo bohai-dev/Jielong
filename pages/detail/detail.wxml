@@ -19,8 +19,8 @@
   </view>
   <!-- 商品地址 -->
   <block wx:for="{{GoodsDetialList}}" wx:key="">
-    <view class='section' wx:if="{{item.show}}">
-      <view class='columnCenter' wx:if="{{item.show}}">
+    <view class='section' wx:if="{{item.show}}" bindtap='{{item.bindTap}}'>
+      <view class='columnCenter'>
         <image class='tempIcon' src='{{item.mineIcon}}'></image>
         <text class='tempName' bindtap='findAddress'>{{item.mineName}}</text>
       </view>

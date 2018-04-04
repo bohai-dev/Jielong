@@ -10,18 +10,19 @@ Page({
   name: "detail",
   data: {
     appGlobalUrl: app.globalData.domain,
-    userImg: "",            //发布用户头像
-    goodstopic: "",                  //接龙主题
-    goodsdata:"",                          //接龙日期
-    person:0,                                 //浏览人数
-    goodsdescribe:"",             //接龙描述
-    goodsImg: [],          //接龙图片
+    userImg: "",                                //发布用户头像
+    goodstopic: "",                             //接龙主题
+    goodsdata:"",                               //接龙日期
+    person:0,                                   //浏览人数
+    goodsdescribe:"",                           //接龙描述
+    goodsImg: [],                               //接龙图片
     goodsnum:0,                                 //购买数量
     joinnum:0,                                  //参与数量
     GoodsDetialList: [{                         //接龙信息
       mineIcon: "../../images/bigposition.png",
       mineName: "",
       show: true,
+      bindTap:"showMap",
       addressDetail:"",
       addressLatitude:"",
       addressLongitude:""
@@ -29,27 +30,21 @@ Page({
       mineIcon: "../../images/phone.png",
       mineName: "",
       phone:"",
-      show: true
+      show: true,
+      bindTap: "callPhone"
     }, {
       mineIcon: "../../images/location.png",
       mineName: "查看并选择自提点",
       goodsAddresses:"",
-      show: true
+      show: true,
+      bindTap: "showLocation"
     }, {
       mineIcon: "../../images/time.png",
-      mineName: "接龙截至时间: 2018-04-02 16:00",
+      mineName: "",
       show:true,
       rightArrow:"dn"
     }],
-    GoodList: [
-    //   {                                //商品列表
-    //   img: ["../../images/deleteImg.png"],      //商品图片
-    //   name: "多肉植物",                          //商品名称
-    //   price:10.00,                              //商品价格
-    //   specification:"盆",                       //商品规格
-    //   repertory:100,                            //商品库存
-    // }
-    ],
+    GoodList: [],
     record:[{                                   //接龙记录
       recordNumber:0,
       recordText:"参与接龙(人)",
@@ -59,7 +54,7 @@ Page({
       recordText: "接龙金额(元)"
     }],
     partakeRecord: [{                            //参与记录
-      userimg: '../../images/deleteImg.png',           //用户头像
+      userimg: '../../images/deleteImg.png',     //用户头像
       username:"迪欧大魔王",                      //用户名称
       joinnumber:1,                              //购买数量
       partakedate: "2018-03-28 22:03"            //参与日期
@@ -153,6 +148,14 @@ Page({
 
 
   //以下为自定义点击事件
-
+  showMap:function(){
+    console.log(1)
+  },
+  callPhone: function () {
+    console.log(2)
+  },
+  showLocation: function () {
+    console.log(3)
+  }
 })
 
