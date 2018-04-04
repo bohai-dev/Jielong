@@ -39,9 +39,9 @@
         <text class='goodsrepertory'>库存{{item.repertory}}</text>
       </view>
       <view class='goodsnumber'>
-        <view class='btnnum'><image class='numimg' src='../../images/minusnum.png'></image></view>
-        <view class='goodsnum'>{{goodsnum}}</view>
-        <view class='btnnum'><image class='numimg' src='../../images/addnum.png'></image></view>
+        <view class='btnnum' data-index="{{index}}" bindtap='minusNumber' hover-class="minusbtnnum"><image class='numimg' src='../../images/minusnum.png'></image></view>
+        <view class='goodsnum'>{{item.goodsnum}}</view>
+        <view class='btnnum' data-index="{{index}}" bindtap='addNumber' hover-class="addbtnnum"><image class='numimg' src='../../images/addnum.png'></image></view>
       </view>
     </view>
     <view class="partake">

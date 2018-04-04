@@ -16,7 +16,6 @@ Page({
     person:0,                                   //浏览人数
     goodsdescribe:"",                           //接龙描述
     goodsImg: [],                               //接龙图片
-    goodsnum:0,                                 //购买数量
     joinnum:0,                                  //参与数量
     GoodsDetialList: [{                         //接龙信息
       mineIcon: "../../images/bigposition.png",
@@ -95,7 +94,8 @@ Page({
     _this.data.GoodsDetialList[3].mineName = "接龙截至时间: "+data.finishTime;
     _this.data.GoodList = data.goodsList;
     for (var i = 0; i < (_this.data.GoodList.length); i++){
-      _this.data.GoodList[i].serverPaths = _this.data.GoodList[i].serverPaths.split(",")
+      _this.data.GoodList[i].serverPaths = _this.data.GoodList[i].serverPaths.split(",");
+      _this.data.GoodList[i]["goodsnum"] = 0;
     }
     _this.setData({
       userImg: userImg,
@@ -148,14 +148,68 @@ Page({
 
 
   //以下为自定义点击事件
+  //查看地图
   showMap:function(){
-    console.log(1)
+    var _this = this;
+    wx.openLocation({
+      //当前经纬度
+      latitude: _this.data.GoodsDetialList[0].addressLatitude,
+      longitude: _this.data.GoodsDetialList[0].addressLongitude,
+      //缩放级别默认28
+      scale: 28,
+      //位置名
+      name: _this.data.GoodsDetialList[0].mineName,
+      //详细地址
+      address: _this.data.GoodsDetialList[0].addressDetail
+    })
   },
+  //拨打电话
   callPhone: function () {
-    console.log(2)
+    var _this = this;
+    wx.makePhoneCall({
+      phoneNumber: _this.data.GoodsDetialList[1].phone
+    })
   },
   showLocation: function () {
     console.log(3)
+  },
+  //减少购买数量
+  minusNumber:function(e){
+    var index = e.currentTarget.dataset.index;
+    if (this.data.GoodList[index].goodsnum>0){
+      this.data.GoodList[index].goodsnum--;
+    }
+    this.setData({
+      GoodList: this.data.GoodList
+    })
+  },
+  //增加购买数量
+  addNumber: function (e) {
+    console.log("加1")
+    var index = e.currentTarget.dataset.index;
+    var repertory = this.data.GoodList[index].repertory;
+    console.log(repertory)
+    if (this.data.GoodList[index].goodsnum >= repertory){
+      wx.showModal({
+        title: '',
+        content: '抱歉，该商品库存不足!',
+        showCancel: false,
+        confirmText: "确定",
+        confirmColor: "#08CF40",
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }else{
+      this.data.GoodList[index].goodsnum++;
+    }
+    this.setData({
+      GoodList: this.data.GoodList
+    })
   }
 })
 
