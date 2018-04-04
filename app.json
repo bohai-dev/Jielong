@@ -22,30 +22,30 @@
   "tabBar": {
     "backgroundColor": "#fff",
     "borderStyle": "black",
-    "selectedColor": "#1afa29",
+    "selectedColor": "#0dad1a",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/home.png",
-        "selectedIconPath": "./images/selected/home.png",
+        "iconPath": "./images/navIcon/home1.png",
+        "selectedIconPath": "./images/navIcon/home.png",
         "text": "首页"
       },
       {
         "pagePath": "pages/add/add",
-        "iconPath": "images/add.png",
-        "selectedIconPath": "./images/selected/add.png",
+        "iconPath": "./images/navIcon/add1.png",
+        "selectedIconPath": "./images/navIcon/add.png",
         "text": "发布"
       },
       {
         "pagePath": "pages/comments/comments",
-        "iconPath": "images/message.png",
-        "selectedIconPath": "images/selected/message.png",
+        "iconPath": "./images/navIcon/message1.png",
+        "selectedIconPath": "./images/navIcon/message.png",
         "text": "消息"
       },
       {
         "pagePath": "pages/personal/personal",
-        "iconPath": "images/personal.png",
-        "selectedIconPath": "images/selected/personal.png",
+        "iconPath": "./images/navIcon/personal1.png",
+        "selectedIconPath": "./images/navIcon/personal.png",
         "text": "我的"
       }
     ]

@@ -111,11 +111,11 @@
 
         </view>
         <!--商品分类-->
-        <view class='containerView rowIconView'>
+        <view class='containerView rowIconView multiCont'>
          <picker mode="multiSelector" bindchange="bindGoodsPickerChange"  data-goodsindex="{{goodsindex}}"bindcolumnchange="bindGoodsPickerColumnChange" value="{{item.classIndex}}" range="{{item.parentClass}}" >
             <view class="goodspicker">
               分类
-              <input class='goodsclass' disabled="true" value='{{item.parentClass[0][item.classIndex[0]]}} {{item.parentClass[1][item.classIndex[1]]}}'></input>
+               <input class='goodsclass' disabled="true" value='{{item.parentClass[0][item.classIndex[0]]}} {{item.parentClass[1][item.classIndex[1]]}}'></input> 
             </view>
           </picker>
           <image src='../../images/rightShot.png' class='rightShotImg'></image>

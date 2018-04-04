@@ -18,6 +18,9 @@
   font-size:30rpx;
   font-family: "微软雅黑";
 }
+.multiCont{
+  padding-left: 2.5%;
+}
 .describe{
   height: 300rpx;
   position:relative;
@@ -92,7 +95,7 @@ picker{
 }
 .rightgreen{
   font-size:25rpx;
-  color:#1AAD19;
+  color:#0dad1a;
   margin-right:15rpx;
   text-align:right;
 }
@@ -107,7 +110,7 @@ picker{
 .goodsMark{
   width: 10rpx;
   height: 40rpx;
-  background-color: #1afa29;   /*绿色*/
+  background-color: #0dad1a;   /*绿色*/
 }
 .imageIntroView{
   display: flex;
