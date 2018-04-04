@@ -1,0 +1,14 @@
+<!--pages/personal/address/address.wxml-->
+<view>
+  <radio-group  bindchange="radioChange">
+    <label class='section' wx:for="{{addressList}}" data-index="{{index}}" wx:key="addrItems"  >
+      <radio type="radio" value='{{item.id}}'></radio>
+      <radio type="radio" value='{{item.id}}' wx:if="{{item.selectVal}}" checked='true'></radio>      
+      <text>{{item.detail}}</text>
+    </label>
+  </radio-group>
+</view>
+
+<view class='pos_bottom'>
+  <button bindtap="sureAddr">确认</button>
+</view>

@@ -58,7 +58,7 @@ Page({
       joinnumber:1,                              //购买数量
       partakedate: "2018-03-28 22:03"            //参与日期
     }, {
-        userimg: '../../images/personal.png',
+        userimg: '../../images/navIcon/personal1.png',
       username: "MonsterDO",
       joinnumber: 2,
       partakedate: "2018-04-01 15:35"
@@ -72,6 +72,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(e) {
+    console.log(e)
+    if (e.addrJson){
+      console.log("设置了自提点");
+    }else{
+      console.log("没有设置自提点");
+    }
     // 注册coolsite360交互模块
     app.coolsite360.register(this);
     var _this = this;
@@ -105,7 +111,8 @@ Page({
       goodsdescribe: goodsdescribe,
       goodsImg: goodsImg,
       GoodsDetialList: _this.data.GoodsDetialList,
-      GoodList: _this.data.GoodList
+      GoodList: _this.data.GoodList,
+      takeGoodsAddressList: data.takeGoodsAddressList      
     })
     console.log(_this.data)
   },
@@ -171,7 +178,11 @@ Page({
     })
   },
   showLocation: function () {
-    console.log(3)
+    console.log(this.data.takeGoodsAddressList)
+    var jsonStr = JSON.stringify(this.data.takeGoodsAddressList);
+    wx.navigateTo({
+      url: './selectAddress/selectAddress?jsonStr=' + jsonStr
+    })
   },
   //减少购买数量
   minusNumber:function(e){
@@ -185,7 +196,6 @@ Page({
   },
   //增加购买数量
   addNumber: function (e) {
-    console.log("加1")
     var index = e.currentTarget.dataset.index;
     var repertory = this.data.GoodList[index].repertory;
     console.log(repertory)
@@ -210,6 +220,28 @@ Page({
     this.setData({
       GoodList: this.data.GoodList
     })
+  },
+  //预览图片
+  preViewImg:function(e){
+    var imgUrl = [];
+    var _this = this;
+    if(e.currentTarget.dataset.viewlist == "head"){
+      _this.data.goodsImg.forEach(function (e) {
+        imgUrl.push(_this.data.appGlobalUrl + e);
+      })
+      
+    }else{
+      console.log(_this.data.GoodList)
+      _this.data.GoodList[e.currentTarget.dataset.index].serverPaths.forEach(function (e) {
+        imgUrl.push(_this.data.appGlobalUrl + e);
+      })
+    }
+    wx.previewImage({
+      current: e.currentTarget.dataset.imgsrc,
+      urls: imgUrl,
+    })
   }
+
+
 })
 

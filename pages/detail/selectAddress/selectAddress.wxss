@@ -1,0 +1,16 @@
+/* pages/detail/selectAddress/selectAddress.wxss */
+@import "../../release/selectAddress/selectAddress.wxss";
+
+.pos_bottom{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.pos_bottom button{
+  display: inline-block;
+  height: 90rpx;
+  background-color: rgb(44, 187, 107);
+  color: white;
+  border-radius: 0;
+  width: 100%;
+}

@@ -777,7 +777,9 @@ Page({
   verifPushData: function (data) {
     console.log(data);
     var remindDataObj = {};
-    if (!data.topic) {
+    if (!data.userId){
+      remindDataObj = { pushForm: 0, remData: "用户id已经过期!" };
+    } else if (!data.topic) {
       remindDataObj = { pushForm: 0, remData: "请填写接龙主题！" };
     } else if (!data.description) {
       remindDataObj = { pushForm: 0, remData: "请填写接龙描述！" };

@@ -13,8 +13,8 @@
   </view>
   <!-- 商品图品 -->
   <view class="goodsimgbox">
-    <block wx:for="{{goodsImg}}" wx:key="">
-      <image class="goodsimg" mode="aspectFill" src="{{appGlobalUrl + item}}"/>
+    <block wx:for="{{goodsImg}}" wx:for-index="index" wx:key="">
+      <image class="goodsimg" mode="aspectFill" src="{{appGlobalUrl + item}}" bindtap='preViewImg' data-index="{{index}}" data-imgSrc="{{appGlobalUrl + item}}" data-viewList='head' />
     </block> 
   </view>
   <!-- 商品地址 -->
@@ -30,18 +30,20 @@
 </view>
 <!-- 购买商品 -->
 <view class="container">
-  <block wx:for="{{GoodList}}" wx:key="">
+  <block wx:for="{{GoodList}}" wx:for-index="goodsIndex" wx:key="">
     <view class='goodsbuy'>
-      <image class="goodsbugimg" mode="aspectFill" src="{{appGlobalUrl + item.serverPaths[0]}}"></image>
+      <image class="goodsbugimg" mode="aspectFill" src="{{appGlobalUrl + item.serverPaths[0]}}" bindtap='preViewImg' data-index="{{goodsIndex}}" data-imgSrc="{{appGlobalUrl + item.serverPaths[0]}}" data-viewList='goods' >
+      <view class='imgNum'>{{item.serverPaths.length}}张</view>
+      </image>
       <view class='goodsinfo'>
         <text class='goodsname'>{{item.name}}</text>
         <text class='goodsprice'>￥<text class='blod'>{{item.price}}</text>/{{item.specification}}</text>
         <text class='goodsrepertory'>库存{{item.repertory}}</text>
       </view>
       <view class='goodsnumber'>
-        <view class='btnnum' data-index="{{index}}" bindtap='minusNumber' hover-class="minusbtnnum"><image class='numimg' src='../../images/minusnum.png'></image></view>
+        <view class='btnnum' data-index="{{goodsIndex}}" bindtap='minusNumber' hover-class="minusbtnnum"><image class='numimg' src='../../images/minusnum.png'></image></view>
         <view class='goodsnum'>{{item.goodsnum}}</view>
-        <view class='btnnum' data-index="{{index}}" bindtap='addNumber' hover-class="addbtnnum"><image class='numimg' src='../../images/addnum.png'></image></view>
+        <view class='btnnum' data-index="{{goodsIndex}}" bindtap='addNumber' hover-class="addbtnnum"><image class='numimg' src='../../images/addnum.png'></image></view>
       </view>
     </view>
     <view class="partake">

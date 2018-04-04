@@ -11,7 +11,8 @@
     "pages/personal/userInfo/userInfo",
     "pages/personal/address/addAddress/addAddress",
     "pages/release/selectAddress/selectAddress",
-    "pages/release/bindingPhone/bindingPhone"
+    "pages/release/bindingPhone/bindingPhone",
+    "pages/detail/selectAddress/selectAddress"
   ],
   "window": {
     "backgroundTextStyle": "light",
