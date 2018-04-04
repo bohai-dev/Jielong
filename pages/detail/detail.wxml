@@ -1,61 +1,74 @@
-<view class="listitem01" data-c_e_id="wx_viewcdacad14">
-    <view class="c-minheight wx-view_G0RuxH" data-c_e_id="wx_view_680efc9e">
-        <image class="wx-image_iafQfx" data-c_e_id="wx_image_ad5cfcde" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-        <text class="c-block wx-text_aTwIEv" data-c_e_id="wx_text_5527511b">小花</text>
-        <view class="c-minheight wx-view_7XgB9U" data-c_e_id="wx_view_e2858311">
-            <text class="c-block wx-text_BOWbJk" data-c_e_id="wx_text_56df7798">多肉植物批发</text>
-            <text class="c-block wx-text_Z7Cm87" data-c_e_id="wx_text_253b3645">02-26  |  164人浏览   |   转发有奖</text>
-            <view class="c-minheight wx-view_4LHwR2" data-c_e_id="wx_view_99162671"/>
-            <image class="wx-image_DV57iw" data-c_e_id="wx_image_f16f919a" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-            <image class="wx-image_BvXSzx" data-c_e_id="wx_image_af3e247d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-            <image class="wx-image_Pjptvk" data-c_e_id="wx_image_057610cd" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-        </view>
+<!-- 商品信息 -->
+<view class="goodsshow">
+  <!-- 商品头部 -->
+  <view class='goodsdes'>
+    <view class="userimgbox">
+      <image class="userimg" mode="scaleToFill" src="{{userImg}}"/>
     </view>
+    <text class="goodstitle">{{goodstopic}}</text>
+    <view class='goodsdatabox'>
+      <text class="goodsdata">{{goodsdata}}  <text class='gray'>|</text>  {{person}}人浏览</text>
+    </view>
+      <text class='goodsdescribe'>{{goodsdescribe}}</text>
+  </view>
+  <!-- 商品图品 -->
+  <view class="goodsimgbox">
+    <block wx:for="{{goodsImg}}" wx:key="">
+      <image class="goodsimg" mode="aspectFill" src="{{appGlobalUrl + item}}"/>
+    </block> 
+  </view>
+  <!-- 商品地址 -->
+  <block wx:for="{{GoodsDetialList}}" wx:key="">
+    <view class='section' wx:if="{{item.show}}">
+      <view class='columnCenter' wx:if="{{item.show}}">
+        <image class='tempIcon' src='{{item.mineIcon}}'></image>
+        <text class='tempName' bindtap='findAddress'>{{item.mineName}}</text>
+      </view>
+      <image src='../../images/rightShot.png' class='rightShotImg {{item.rightArrow}}'></image>
+    </view>
+  </block> 
 </view>
-<view class="c-minheight wx-view_p5iRqF" data-c_e_id="wx_view_1549f8a5">
-    <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_viewae72b8d0">
-        <image class="wx-image_MUz3xd" data-c_e_id="wx_imageb46dae4d" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-        <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_view99f00564">
-            <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text39308d98">上海市</text>
-            <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_text249dca98">&gt;</text>
+<!-- 购买商品 -->
+<view class="container">
+  <block wx:for="{{GoodList}}" wx:key="">
+    <view class='goodsbuy'>
+      <image class="goodsbugimg" mode="aspectFill" src="{{appGlobalUrl + item.serverPaths[0]}}"></image>
+      <view class='goodsinfo'>
+        <text class='goodsname'>{{item.name}}</text>
+        <text class='goodsprice'>￥<text class='blod'>{{item.price}}</text>/{{item.specification}}</text>
+        <text class='goodsrepertory'>库存{{item.repertory}}</text>
+      </view>
+      <view class='goodsnumber'>
+        <view class='btnnum'><image class='numimg' src='../../images/minusnum.png'></image></view>
+        <view class='goodsnum'>{{goodsnum}}</view>
+        <view class='btnnum'><image class='numimg' src='../../images/addnum.png'></image></view>
+      </view>
+    </view>
+    <view class="partake">
+      <view class="joinfont">您已参与{{joinnum}}份</view>
+    </view>
+  </block>
+  <!-- 接龙记录 -->
+  <view class="record">
+    <block wx:for="{{record}}" wx:key="">
+      <view class="joinRecord {{item.rightBorder}}">
+          <text class="recordnum">{{item.recordNumber}}</text>
+          <text class="recordtext">{{item.recordText}}</text>
+      </view>
+    </block>
+  </view>
+  <view class="partake">
+    <view class="joinfont">参与记录</view> 
+    <block wx:for="{{partakeRecord}}" wx:key="">
+      <view class="joinfont">
+        <text>NO.{{index+1}}</text>
+        <view class='userinfo'>
+          <image class='userinfoimg' src='{{item.userimg}}'></image>
+          <view class='userinfoname'>{{item.username}}</view>
         </view>
-    </view>
-    <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_view00ccbddc">
-        <image class="wx-image_MUz3xd" data-c_e_id="wx_image97fabb84" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-        <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_viewd4916ed2">
-            <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text3b0152bf">15591547****</text>
-            <text class="c-block wx-text_C8T2bw" data-c_e_id="wx_text573aefa1">&gt;</text>
-        </view>
-    </view>
-    <view class="c-minheight wx-view_yqlqOe" data-c_e_id="wx_view7bced500">
-        <image class="wx-image_MUz3xd" data-c_e_id="wx_imagea6fc9aee" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-        <view class="c-minheight wx-view_dP5qP9" data-c_e_id="wx_view2bfc1ace">
-            <text class="c-block wx-text_rzYJUR" data-c_e_id="wx_text4d5c9e21">接龙截止时间</text>
-        </view>
-    </view>
-    <view class="c-minheight wx-view_i6YJ0C" data-c_e_id="wx_view_eeededee"/>
-</view>
-<view class="c-minheight wx-view_QXbprr" data-c_e_id="wx_view_554356cc">
-    <image class="wx-image_rfcCVP" data-c_e_id="wx_image_4ef43583" mode="scaleToFill" src="http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"/>
-    <view class="c-minheight wx-view_J6ka7K" data-c_e_id="wx_view_039ffdf9">
-        <text class="c-block wx-text_qbdNHz" data-c_e_id="wx_text_bcbf60a3">多肉植物</text>
-        <text class="c-block wx-text_XspJ52" data-c_e_id="wx_text_96840eb6">$10.00/盆</text>
-        <text class="c-block wx-text_a5FUID" data-c_e_id="wx_text_38d74807">库存1000</text>
-        <text class="c-block wx-text_DfzwKi" data-c_e_id="wx_text_35df3cda">-</text>
-        <text class="c-block wx-text_PdbrUB" data-c_e_id="wx_text_b9196198">0</text>
-        <text class="c-block wx-text_ZiuONL" data-c_e_id="wx_text_d90c97c8">+</text>
-    </view>
-    <view class="c-minheight wx-view_W6jXPJ" data-c_e_id="wx_view_db790187">
-        <text class="c-block wx-text_oAa3jp" data-c_e_id="wx_text_5b0489fd">您已参与0份</text>
-    </view>
-    <view class="c-minheight wx-view_i6YJ0C" data-c_e_id="wx_view0293e15a"/>
-    <view class="c-minheight wx-view_mkMUfY" data-c_e_id="wx_view_23e27f4a">
-        <text class="c-block wx-text_ZVB4Zs" data-c_e_id="wx_text_08e30328">0</text>
-        <text class="c-block wx-text_Emd46K" data-c_e_id="wx_text_da3525d1">0.00</text>
-        <text class="c-block wx-text_qFkJvq" data-c_e_id="wx_text_bb079362">参与接龙（人）</text>
-        <text class="c-block wx-text_t314tU" data-c_e_id="wx_text_192a8b6e">接龙金额（元）</text>
-    </view>
-    <view class="c-minheight wx-view_2ZMoia" data-c_e_id="wx_view_443b16f4">
-        <text class="c-block wx-text_sRxQXl" data-c_e_id="wx_text_a906dfdb">参与记录</text>
-    </view>
+        <text class='joinnumber'>+{{item.joinnumber}}</text>
+        <text class='partakedate'>{{item.partakedate}}</text>
+      </view>
+    </block>
+  </view>
 </view>

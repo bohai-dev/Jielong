@@ -1,1 +1,219 @@
 /* pages/detail/detail.wxss */
+.goodsshow{
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  border-top: 2rpx solid #F0EFF5;
+}
+.goodsdes{
+  padding:0 30rpx 40rpx;
+  border-bottom: 2rpx solid #F0EFF5;
+}
+.userimgbox{
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+}
+.userimg{
+  width: 50rpx; 
+  height: 50rpx; 
+  border-radius: 25rpx;
+}
+.goodstitle{
+  font: bold 37rpx "微软雅黑";
+  color: #333; 
+}
+.goodsdatabox{
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+}
+.goodsdata{
+  font-size: 25rpx;
+  color: #8c8080;
+}
+.gray{
+  color: #ccc;
+}
+.goodsdescribe{
+  font: 30rpx "微软雅黑";
+  color: #666;
+}
+.goodsimgbox{
+  display:flex;
+  flex-flow:row wrap;
+  justify-content:space-around;
+  padding:3% 1.5% 0;
+  border-bottom: 2rpx solid #F0EFF5;
+}
+.goodsimg{
+  width:220rpx;
+  height:220rpx;
+  margin-bottom: 3%;
+}
+.section{
+  width: 100%;
+  height: 100rpx;
+  padding:0 30rpx;
+  border-bottom: 2rpx solid #F0EFF5;
+  /* background: #eee; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.columnCenter{
+  display: flex;
+  align-items: center;
+}
+.tempIcon{
+  height: 40rpx;
+  width: 40rpx;
+}
+.tempName{
+  font: 25rpx "微软雅黑";
+  margin-left: 10rpx
+}
+.rightShotImg{
+  width: 12rpx; 
+  height: 24rpx;
+}
+.dn{
+  display: none;
+}
+.container{
+  background: #F0EFF5;
+  padding:20rpx 0 80rpx;
+}
+.goodsbuy{
+  height: 210rpx;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items:center;
+  padding:15rpx 30rpx;
+  background: white;
+  border-bottom: 2rpx solid #F0EFF5;
+}
+.goodsbugimg{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 20rpx;
+}
+.goodsinfo{
+  height: 100%;
+  display: flex;
+  flex-direction:column;
+  margin-left: 30rpx
+}
+.goodsname{
+  font: 37rpx "微软雅黑";
+  color: #333;
+  margin-top: 10rpx;
+}
+.goodsprice{
+  font-size: 30rpx;
+  color: rgb(245, 10, 24);
+  margin-top:30rpx; 
+}
+.blod{
+  font-weight: bold;
+  font-size: 40rpx;
+}
+.goodsrepertory{
+  font-size: 30rpx;
+  color: #ababab;
+  margin-top: 15rpx;
+}
+.goodsnumber{
+  display: flex;
+  flex-direction: row;
+  align-self:flex-end;
+  position:absolute;
+  right:30rpx;
+}
+.goodsnum{
+  width: 70rpx;
+  height: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 30rpx "微软雅黑";
+  color: #ababab;
+}
+.btnnum{
+  width:50rpx;
+  height:50rpx;
+}
+.numimg{
+  width: 100%;
+  height: 100%;
+  border-radius: 5rpx;
+}
+.partake{
+  background:white;
+  margin-bottom:20rpx;
+}
+.joinfont{
+  width: 100%;
+  height:80rpx;
+  padding:0 30rpx;
+  color: #AAAAAA;
+  font-size: 25rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 2rpx solid #F0EFF5;
+}
+.record{
+  height:120rpx;
+  padding:20rpx 0;
+  background: white;
+  display:flex;
+  flex-direction:row;
+  border-bottom: 2rpx solid #F0EFF5;
+}
+.joinRecord{
+  width:50%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  height:100%;
+  justify-content:center;
+}
+.rightborder{
+  border-right:1px solid #eee;
+}
+.recordnum{
+  color: #08CF40;
+  font-size: 35rpx;
+}
+.recordtext{
+  color: #ABABAB;
+  font-size: 25rpx;
+}
+.userinfo{
+  width: 200rpx;
+  height: 100%;
+  display:flex;
+  align-items:center;
+  margin-left:50rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.userinfoimg{
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 25rpx;
+  margin-right: 10rpx;
+}
+.userinfoname{
+  width:140rpx;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.joinnumber{
+  margin-left:80rpx;
+}
+.partakedate{
+  margin-left:50rpx;
+}
