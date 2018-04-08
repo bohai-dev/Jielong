@@ -73,4 +73,15 @@
       </view>
     </block>
   </view>
+  <view class="foot_nav">
+    <view class="foot_left">
+      <block wx:for="{{footnav}}" wx:key="">
+        <navigator url='{{item.navUrl}}' open-type="redirect" class='footNavTo {{item.navborder}}'>
+          <image class='navimg' src='{{item.navIcon}}'></image>
+          <text class="navtext">{{item.navText}}</text>
+        </navigator>
+      </block>
+    </view>
+    <view class="{{count > 0 ? 'foot_right_green' : 'foot_right'}}" bindtap="Cart">{{buy}}</view>
+  </view>
 </view>

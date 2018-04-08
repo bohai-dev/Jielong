@@ -17,6 +17,9 @@ Page({
     goodsdescribe:"",                           //接龙描述
     goodsImg: [],                               //接龙图片
     joinnum:0,                                  //参与数量
+    buy: "请选择商品",                           //购买商品
+    count: 0,                                   //商品总数
+    total: 0,                                   //商品总价
     GoodsDetialList: [{                         //接龙信息
       mineIcon: "../../images/bigposition.png",
       mineName: "",
@@ -58,14 +61,22 @@ Page({
       joinnumber:1,                              //购买数量
       partakedate: "2018-03-28 22:03"            //参与日期
     }, {
-        userimg: '../../images/navIcon/personal1.png',
+      userimg: '../../images/navIcon/personal1.png',
       username: "MonsterDO",
       joinnumber: 2,
       partakedate: "2018-04-01 15:35"
-    }]    
-
-
-
+    }],
+    footnav: [{
+      navIcon: "../../images/home.png",
+      navText: "首页",
+      navUrl: "../index/index",
+      navborder: "footNavrightborder"
+    }, {
+      navIcon: "../../images/add.png",
+      navText: "发布接龙",
+      navUrl: "../add/add"
+    }],
+    
   },
 
   /**
@@ -185,21 +196,39 @@ Page({
     })
   },
   //减少购买数量
-  minusNumber:function(e){
+  minusNumber: function (e) {
     var index = e.currentTarget.dataset.index;
-    if (this.data.GoodList[index].goodsnum>0){
+    if (this.data.GoodList[index].goodsnum > 0) {
       this.data.GoodList[index].goodsnum--;
+      this.data.count--;
+      if (this.data.count < 0) {
+        this.data.count = 0;
+      }
+      this.data.total -= this.data.GoodList[index].price;
+      if (this.data.total == 0) {
+        var buy = "请选择商品";
+      } else {
+        var buy = "已选：￥" + this.data.total;
+      }
+    } else {
+      if (this.data.total <= 0) {
+        var buy = "请选择商品";
+      } else {
+        var buy = "已选：￥" + this.data.total;
+      }
     }
+    console.log(this.data.count)
     this.setData({
-      GoodList: this.data.GoodList
+      GoodList: this.data.GoodList,
+      count: this.data.count,
+      buy: buy
     })
   },
   //增加购买数量
   addNumber: function (e) {
     var index = e.currentTarget.dataset.index;
     var repertory = this.data.GoodList[index].repertory;
-    console.log(repertory)
-    if (this.data.GoodList[index].goodsnum >= repertory){
+    if (this.data.GoodList[index].goodsnum >= repertory) {
       wx.showModal({
         title: '',
         content: '抱歉，该商品库存不足!',
@@ -209,16 +238,21 @@ Page({
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
           }
         }
       })
-    }else{
+      var buy = "已选：￥" + this.data.total;
+    } else {
       this.data.GoodList[index].goodsnum++;
+      this.data.count++;
+      this.data.total += this.data.GoodList[index].price;
+      var buy = "已选：￥" + this.data.total;
     }
+    console.log(this.data.total)
     this.setData({
-      GoodList: this.data.GoodList
+      GoodList: this.data.GoodList,
+      count: this.data.count,
+      buy: buy
     })
   },
   //预览图片
