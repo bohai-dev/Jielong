@@ -14,7 +14,8 @@
     "pages/release/bindingPhone/bindingPhone",
     "pages/detail/selectAddress/selectAddress",
     "pages/personal/joinJieLong/joinJieLong",
-    "pages/personal/mineJieLong/mineJieLong"
+    "pages/personal/mineJieLong/mineJieLong",
+    "pages/comments/systemNotice/systemNotice"
   ],
   "window": {
     "backgroundTextStyle": "light",

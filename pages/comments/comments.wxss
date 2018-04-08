@@ -12,6 +12,9 @@
   border-top:  1px solid rgb(237, 237, 237);
   border-bottom:  1px solid rgb(237, 237, 237);
 }
+.navigator-hover{
+  background: #eee;
+}
 .list-image{
   width: 90rpx;
   height: 90rpx;
