@@ -24,7 +24,8 @@ Page({
       mineIcon: "../../images/mine/supplier-features.png",
       mineName: "我参与的接龙",
       mineMarginTop:"mineMarginTop",
-      rlCont: "0次"
+      rlCont: "0次",
+      navUrl: "./joinJieLong/joinJieLong"
     },{
       mineIcon: "../../images/mine/personal-center.png",
       mineName: "个人资料",

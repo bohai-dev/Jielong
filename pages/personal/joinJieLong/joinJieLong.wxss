@@ -1,0 +1,22 @@
+/* pages/personal/joinJieLong/joinJieLong.wxss */
+.body{
+  width: 100%;
+  height: 100%;
+  background-color: #EEEEEE;  /*灰色背景*/ 
+}
+.no-record{
+  height:40%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+.recordimg{
+  width:120rpx;
+  height:120rpx;
+}
+.news{
+  color:#bfbfbf;
+  font:25rpx "微软雅黑";
+  margin-top:15rpx;
+}

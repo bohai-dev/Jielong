@@ -12,7 +12,8 @@
     "pages/personal/address/addAddress/addAddress",
     "pages/release/selectAddress/selectAddress",
     "pages/release/bindingPhone/bindingPhone",
-    "pages/detail/selectAddress/selectAddress"
+    "pages/detail/selectAddress/selectAddress",
+    "pages/personal/joinJieLong/joinJieLong"
   ],
   "window": {
     "backgroundTextStyle": "light",

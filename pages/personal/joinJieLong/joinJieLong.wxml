@@ -1,0 +1,7 @@
+<!--pages/personal/joinJieLong/joinJieLong.wxml-->
+<view class='body'>
+  <view class='no-record'>
+    <image class='recordimg' src='../../../images/norecord.png'></image>
+    <text class='news'>你还没有参与过任何接龙活动</text>
+  </view>
+</view>
