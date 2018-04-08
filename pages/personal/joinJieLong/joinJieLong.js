@@ -5,6 +5,20 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isShow:false,
+    data:[{
+      time:"2018",
+      work:"已发货",
+      topic:"蛋黄酥"
+    }, {
+      time: "2018",
+      work: "已发货",
+      topic: "蛋黄酥"
+      }, {
+        time: "2018",
+        work: "已发货",
+        topic: "蛋黄酥"
+      }]
   
   },
 

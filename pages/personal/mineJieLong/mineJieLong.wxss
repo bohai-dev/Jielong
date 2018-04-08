@@ -1,0 +1,62 @@
+/* pages/personal/mineJieLong/mineJieLong.wxss */
+page{
+  background-color: #EEE;
+}
+.JLPage{
+    font-family: '微软雅黑','PingFang SC', 'Helvetica Neue', Helvetica, 'Droid Sans Fallback', 'Microsoft Yahei', sans-serif;
+    background: #fff;
+    overflow: hidden;
+    color:#506070;
+}
+.content{
+  height: 180rpx;
+  border-bottom: 1px solid #ECECEC;
+  padding: 20rpx 30rpx;
+}
+.headCont{
+  color: #203040;
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+}
+.midCont{
+  line-height: 26rpx;
+  margin-bottom: 15rpx;
+}
+.midCont view{
+  display: inline-block;
+  font-size: 26rpx;
+}
+.midCont .right{
+   float: right; 
+}
+.blue{
+  color: blue;
+}
+.red{
+  color: red;
+}
+.green{
+  color: green;
+}
+
+.body{
+  width: 100%;
+  height: 100%;
+  background-color: #EEEEEE;  /*灰色背景*/ 
+}
+.no-record{
+  height:40%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+.recordimg{
+  width:120rpx;
+  height:120rpx;
+}
+.news{
+  color:#bfbfbf;
+  font:25rpx "微软雅黑";
+  margin-top:15rpx;
+}

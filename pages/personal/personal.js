@@ -19,7 +19,8 @@ Page({
     userDetialList:[{
       mineIcon:"../../images/mine/training.png",
       mineName:"我发起的接龙",
-      rlCont: "3个"
+      rlCont: "0个",
+      navUrl: "./mineJieLong/mineJieLong"
     }, {
       mineIcon: "../../images/mine/supplier-features.png",
       mineName: "我参与的接龙",
@@ -51,11 +52,8 @@ Page({
   onLoad() {
     // 注册coolsite360交互模块
     app.coolsite360.register(this);
-    console.log(123)
-    console.log(app.globalData)
     console.log(app.globalData.userInfo)
     if (app.globalData.userInfo) {
-      console.log(456)
       this.setData({
         userInfo: app.globalData.userInfo
       })
@@ -76,6 +74,21 @@ Page({
   onShow() {
     // 执行coolsite360交互组件展示
     app.coolsite360.onShow(this);
+    var _this = this;
+    wx.request({
+      url: app.globalData.domain + '/jielong/selectByUserId',
+      method: "GET",
+      data: { userId: wx.getStorageSync("userId") },
+      success: function (res) {
+        console.log(res)
+        if (res.statusCode == 200 && res.data.data.length) {
+          _this.data.userDetialList[0].rlCont = res.data.data.length + "个";
+          _this.setData({
+            userDetialList: _this.data.userDetialList
+          })
+        }
+      }
+    })
   },
 
   /**

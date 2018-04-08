@@ -1,29 +1,31 @@
-<!--pages/personal/joinJieLong/joinJieLong.wxml-->
 <view class="JLPage" wx:if="{{isShow}}">
   <view class='content' wx:for="{{data}}"  wx:key="id" wx:for-index="index" wx:for-item="item" data-id="{{item.id}}" bindtap='navToDetail'>
+    <view class='headCont'>{{item.topic}}</view>
     <view class='midCont'>
       <view class='left' >
-         参与时间：<text>{{item.time}}</text>
+         接龙状态：<text class='{{item.status == 0 ? "blue" : item.status == 1 ? "green" : "red"}}'>{{item.status == 0 ? "活动结束" : item.status == 1 ? "正在进行中" : "平台终止"}}</text> 
       </view>
       <view class='right'>
-        <text>{{item.work}}</text>
+        接龙类型：<text>自发接龙</text>
       </view>
     </view>
     <view class='midCont'>
       <view class='left'>
-         <text>{{item.topic}}</text>
+        是否自提：<text>是</text>
       </view>
       <view class='right'>
+        创建时间：<text>{{item.createdAt}}</text>
       </view>
     </view>
   </view>
 </view>
-
 
 
 <view class='body' wx:if="{{!isShow}}">
   <view class='no-record'>
     <image class='recordimg' src='../../../images/norecord.png'></image>
-    <text class='news'>你还没有参与过任何接龙活动</text>
+    <text class='news'>你还没有发起过任何接龙活动</text>
   </view>
 </view>
+
+
