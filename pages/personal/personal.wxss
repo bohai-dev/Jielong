@@ -9,7 +9,7 @@ page{
 .c-minheight {
         min-height: 80px;
 }
-.image_head{
+.user_image{
    width:  60px; 
    height:  60px; 
    border-radius:  30px; 
@@ -17,7 +17,9 @@ page{
    margin-left: 42%; 
    margin-right:  40%; 
    display:  inline-block; 
-   justify-content:  center; }
+   justify-content:  center;
+}
+
 .text_username{
   margin-left:  35%; 
   margin-right:  35%; 
