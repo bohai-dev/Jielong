@@ -8,15 +8,16 @@
   align-items:  center;
   flex-direction:  row;
   justify-content:  flex-start;
-  padding:  2% 0rpx 2% 2%;
+  padding:  2% 0rpx 2% 40rpx;
   border-top:  1px solid rgb(237, 237, 237);
   border-bottom:  1px solid rgb(237, 237, 237);
 }
 .list-image{
-  width: 100rpx;
-  height: 100rpx;
+  width: 90rpx;
+  height: 90rpx;
 }
 .text_note{
   margin-left: 15rpx;
-  font-size: 15px;
+  font-size: 28rpx;
+  color: #333;
 }
