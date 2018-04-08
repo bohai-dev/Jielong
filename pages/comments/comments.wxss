@@ -1,1 +1,30 @@
 /* pages/comments/comments.wxss */
+/* pages/comments/comments.wxss */
+.listitem01{
+  background-color: rgb(255, 255, 255);
+   margin-bottom: 37.5rpx; 
+   }
+.listitem-navigator{
+  display:  flex; 
+  align-items:  flex-start; 
+  flex-direction:  row; 
+  justify-content:  flex-start; 
+  padding:  2% 0rpx 2% 2%; 
+  border-bottom:  1px solid rgb(237, 237, 237); 
+  padding-right: 0rpx; 
+  }
+.list-image{
+  width:  50px; 
+  height:  50px; 
+  border-radius:  30px; 
+  border-bottom-right-radius: 30px; 
+  border-bottom-left-radius: 30px;
+  }
+.c-block {
+  display: block;
+  }
+.text_note{
+  margin-left:  5%;
+  margin-top:  4%; 
+  font-size: 15px;
+  }

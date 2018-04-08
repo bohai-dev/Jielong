@@ -1,7 +1,7 @@
-<view class="c-minheight wx-view_GJgCI5" data-c_e_id="wx_view_5c9c6a51">
-  <image class="wx-image_9eoHLh" data-c_e_id="wx_image_2b1f526d" mode="scaleToFill" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://o3bnyc.creatby.com/diazo/images/image-placeholder.svg);"
+<view class="c-minheight" data-c_e_id="wx_view_5c9c6a51">
+  <image class="image_head" data-c_e_id="wx_image_2b1f526d" mode="scaleToFill" 
     src="{{userInfo.avatarUrl}}" />
-  <text class="c-block wx-text_4nBXUW" data-c_e_id="wx_text_b9185864">{{userInfo.nickName}}</text>
+  <text class="c-block text_username">{{userInfo.nickName}}</text>
 </view>
 
 <!--模板start  -->
