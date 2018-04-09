@@ -39,6 +39,7 @@ Page({
     }, {
       mineIcon: "../../images/mine/comments.png",
       mineName: "帮助中心",
+      navUrl: "./helpCenter/helpCenter"
     }],
     userInfo:{}
 

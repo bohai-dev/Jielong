@@ -5,13 +5,13 @@
 
 <!--模板start  -->
 <block wx:for="{{userDetialList}}" wx:key="">
-<view class='section getTemp {{item.mineMarginTop}}'>
-<navigator url='{{item.navUrl}}' class='mineNavTo'>
-  <image class='tempIcon' src='{{item.mineIcon}}'></image>
-  <text class='tempName' bindtap='findAddress'>{{item.mineName}}</text> 
-  <text class='tempRlCont'>{{item.rlCont}}</text>
-  <image src='../../images/rightShot.png' class='rightShotImg'></image>
-  </navigator>
-</view>
+  <view class='section getTemp {{item.mineMarginTop}}'>
+    <navigator url='{{item.navUrl}}' class='mineNavTo'>
+      <image class='tempIcon' src='{{item.mineIcon}}'></image>
+      <text class='tempName' bindtap='findAddress'>{{item.mineName}}</text> 
+      <text class='tempRlCont'>{{item.rlCont}}</text>
+      <image src='../../images/rightShot.png' class='rightShotImg'></image>
+    </navigator>
+  </view>
 </block>
 <!--模板end  -->

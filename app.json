@@ -15,7 +15,8 @@
     "pages/detail/selectAddress/selectAddress",
     "pages/personal/joinJieLong/joinJieLong",
     "pages/personal/mineJieLong/mineJieLong",
-    "pages/comments/systemNotice/systemNotice"
+    "pages/comments/systemNotice/systemNotice",
+    "pages/personal/helpCenter/helpCenter"
   ],
   "window": {
     "backgroundTextStyle": "light",
