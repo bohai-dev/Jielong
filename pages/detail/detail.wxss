@@ -178,6 +178,52 @@
   align-items: center;
   border-bottom: 2rpx solid #F0EFF5;
 }
+.joinperson{
+  height:170rpx;
+  background: white;
+  display:flex;
+  flex-direction:column;
+  margin-bottom: 20rpx;
+}
+.jointitle{
+  width:100%;
+  height:50rpx;
+  padding:0 30rpx;
+  border-bottom:2rpx solid #F0EFF5;
+  font:25rpx "微软雅黑";
+  display:flex;
+  align-items:center;
+  color:#666;
+}
+.joincontainer{
+  width:100%;
+  height:120rpx;
+  padding:0 30rpx;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.joinimg{
+  width:500rpx;
+  height:80rpx;
+  display:flex;
+  flex-flow:row wrap;
+  align-items:center;
+  overflow:hidden;
+}
+.joinuserimg{
+  width: 80rpx;
+  height: 80rpx;
+}
+.jointext{
+  color:#333;
+  font:25rpx "微软雅黑";
+  margin-top:40rpx;
+}
+.greenfont{
+  color:#08CF40;
+  margin-left:5rpx;
+}
 .record{
   height:120rpx;
   padding:20rpx 0;

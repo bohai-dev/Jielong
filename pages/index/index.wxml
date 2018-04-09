@@ -9,6 +9,7 @@
 
 <!-- 首页内容 -->
 <view class='container' wx:for="{{containerList}}" wx:for-index="index" wx:key="index" bindtap='navToDetail' data-data='{{item}}' >
+<navigator url='../detail/detail?id={{item.id}}'>
   <view class='listContent'>
   <!--接龙名称，主页  -->
     <view class='listHead'>
@@ -35,7 +36,8 @@
     <view class='conAddr'>
       <text class='conAddrText'>{{item.addressDetail}}</text>
     </view>  
-</view>
+  </view>
+</navigator>
 </view>
 
 <!--正在加载显示  -->

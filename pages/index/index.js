@@ -178,14 +178,14 @@ Page({
     })
   },
   //跳转到每个接龙详细信息
-  navToDetail:function(e){
-    var jsonStr = JSON.stringify(e.currentTarget.dataset.data);
-    if (e.currentTarget.dataset.data){
-      wx.navigateTo({
-        url: '../detail/detail?jsonStr=' + jsonStr,
-      })
-    }
-  }
+  // navToDetail:function(e){
+  //   var jsonStr = JSON.stringify(e.currentTarget.dataset.data);
+  //   if (e.currentTarget.dataset.data){
+  //     wx.navigateTo({
+  //       url: '../detail/detail?jsonStr=' + jsonStr,
+  //     })
+  //   }
+  // }
 
 })
 

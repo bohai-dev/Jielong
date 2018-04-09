@@ -50,6 +50,19 @@
       <view class="joinfont">您已参与{{joinnum}}份</view>
     </view>
   </block>
+  <!-- 参团人数 -->
+  <view class="joinperson" wx:if='{{SetGroup}}'>
+    <view class='jointitle'>{{joinperson}}人正在参团，可直接参与</view>
+    <view class='joincontainer'>
+      <view class='joinimg'>
+        <block wx:for="{{joinUserImg}}" wx:key="">
+          <image class='joinuserimg' src='{{item}}'></image>
+        </block>
+      </view>
+      <view class='jointext' wx:if='{{Group-joinperson > 0 ? true : false}}'>还差<text class='greenfont'>{{Group-joinperson}}人</text>拼成</view>
+      <view class='jointext' wx:if='{{Group-joinperson > 0 ? false : true}}'><text class='greenfont'>拼团成功</text></view>
+    </view>
+  </view>
   <!-- 接龙记录 -->
   <view class="record">
     <block wx:for="{{record}}" wx:key="">
@@ -82,6 +95,6 @@
         </navigator>
       </block>
     </view>
-    <view class="{{count > 0 ? 'foot_right_green' : 'foot_right'}}" bindtap="Cart">{{buy}}</view>
+    <view class="{{count > 0 ? 'foot_right_green' : 'foot_right'}}" bindtap="buyGoods">{{buy}}</view>
   </view>
 </view>

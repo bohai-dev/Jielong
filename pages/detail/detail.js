@@ -17,6 +17,10 @@ Page({
     goodsdescribe:"",                           //接龙描述
     goodsImg: [],                               //接龙图片
     joinnum:0,                                  //参与数量
+    SetGroup:true,                              //是否设置最小成员团
+    joinperson:3,                               //参与人数
+    joinUserImg: ['../../images/navIcon/personal1.png', '../../images/navIcon/personal1.png', '../../images/navIcon/personal1.png', '../../images/navIcon/personal1.png'],
+    Group:5,                                    //最小开团人数
     buy: "请选择商品",                           //购买商品
     count: 0,                                   //商品总数
     total: 0,                                   //商品总价
@@ -83,49 +87,74 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(e) {
-    console.log(e)
+    var _this = this;
+    var id = e.id;
+    var app = getApp();
+    //增加页面浏览人数
+    wx.request({
+      url: this.data.appGlobalUrl + '/jielong/updateBrowse',
+      data: {
+        id: id
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res)
+      }
+    })
+    //获取页面数据
+    wx.request({
+      url: app.globalData.domain + '/jielong/selectById',
+      data: {
+        id: id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res.data.data)
+        if (res.data.data) {
+          _this.data.GoodsDetialList[0].mineName = res.data.data.addressName;
+          _this.data.GoodsDetialList[0].addressDetail = res.data.data.addressDetail;
+          _this.data.GoodsDetialList[0].addressLatitude = res.data.data.addressLatitude;
+          _this.data.GoodsDetialList[0].addressLongitude = res.data.data.addressLongitude;
+          _this.data.GoodsDetialList[1].mineName = res.data.data.phoneNumber + "(" + res.data.data.userInfo.name + ")";
+          _this.data.GoodsDetialList[1].phone = res.data.data.phoneNumber;
+          _this.data.GoodsDetialList[2].goodsAddresses = res.data.data.goodsAddresses;
+          _this.data.GoodsDetialList[3].show = (res.data.data.setFinishTime==1)?true:false;
+          _this.data.GoodsDetialList[3].mineName = "接龙截至时间: " + res.data.data.finishTime;
+          _this.data.GoodList = res.data.data.goodsList;
+          for (var i = 0; i < (_this.data.GoodList.length); i++){
+            _this.data.GoodList[i].serverPaths = _this.data.GoodList[i].serverPaths.split(",");
+            _this.data.GoodList[i]["goodsnum"] = 0;
+          }
+          _this.setData({
+            userImg: res.data.data.userInfo.avatarUrl,
+            goodstopic: res.data.data.topic,
+            goodsdata: res.data.data.createdAt,
+            person: res.data.data.browseSum,
+            goodsdescribe: res.data.data.description,
+            goodsImg: res.data.data.imageList,
+            GoodsDetialList: _this.data.GoodsDetialList,
+            GoodList: _this.data.GoodList,
+            takeGoodsAddressList: res.data.data.takeGoodsAddressList
+          })
+        }
+      }
+    })
+   
+
+
     if (e.addrJson){
       console.log("设置了自提点");
     }else{
       console.log("没有设置自提点");
     }
+    
     // 注册coolsite360交互模块
     app.coolsite360.register(this);
-    var _this = this;
-    var data = JSON.parse(e.jsonStr);
-    console.log(data)
-    var userImg = data.userInfo.avatarUrl;
-    var goodstopic = data.topic;
-    var goodsdata = data.createdAt;
-    var person = data.browseSum;
-    var goodsdescribe = data.description;
-    var goodsImg = data.imageList;
-    _this.data.GoodsDetialList[0].mineName = data.addressName;
-    _this.data.GoodsDetialList[0].addressDetail = data.addressDetail;
-    _this.data.GoodsDetialList[0].addressLatitude = data.addressLatitude;
-    _this.data.GoodsDetialList[0].addressLongitude = data.addressLongitude;
-    _this.data.GoodsDetialList[1].mineName = data.phoneNumber + "(" + data.userInfo.name + ")";
-    _this.data.GoodsDetialList[1].phone = data.phoneNumber;
-    _this.data.GoodsDetialList[2].goodsAddresses = data.goodsAddresses;
-    _this.data.GoodsDetialList[3].show = (data.setFinishTime==1)?true:false;
-    _this.data.GoodsDetialList[3].mineName = "接龙截至时间: "+data.finishTime;
-    _this.data.GoodList = data.goodsList;
-    for (var i = 0; i < (_this.data.GoodList.length); i++){
-      _this.data.GoodList[i].serverPaths = _this.data.GoodList[i].serverPaths.split(",");
-      _this.data.GoodList[i]["goodsnum"] = 0;
-    }
-    _this.setData({
-      userImg: userImg,
-      goodstopic: goodstopic,
-      goodsdata: goodsdata,
-      person: person,
-      goodsdescribe: goodsdescribe,
-      goodsImg: goodsImg,
-      GoodsDetialList: _this.data.GoodsDetialList,
-      GoodList: _this.data.GoodList,
-      takeGoodsAddressList: data.takeGoodsAddressList      
-    })
-    console.log(_this.data)
+    
   },
 
   /**
@@ -274,6 +303,32 @@ Page({
       current: e.currentTarget.dataset.imgsrc,
       urls: imgUrl,
     })
+  },
+  //提交购买商品
+  buyGoods:function(e){
+    var _this = this;
+    var count = this.data.count;
+    if(count == 0 ){
+      return false;
+    } else {
+      wx.showModal({
+        title: '确定下单吗？',
+        content: '确认购买信息无误请点击确定！',
+        confirmText: '确定',
+        cancelText: "取消",
+        success: function (res) {
+          if (res.confirm) {
+          // for (var i = 0; i < (_this.data.GoodList.length); i++) {
+            
+          // }
+            console.log("购买")
+          } else if (res.cancel){
+            console.log("点击取消")
+          }
+        }
+      })
+    }
+    console.log(count)
   }
 
 
