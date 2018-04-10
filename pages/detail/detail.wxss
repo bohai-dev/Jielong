@@ -92,6 +92,9 @@
   background: white;
   border-bottom: 2rpx solid #F0EFF5;
 }
+.marbottom{
+  margin-bottom:20rpx;
+}
 .goodsbugimg{
   width: 180rpx;
   height: 180rpx;

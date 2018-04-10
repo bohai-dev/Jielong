@@ -1,0 +1,62 @@
+/* pages/detail/confirmOrder/confirmOrder.wxss */
+.body{
+  width: 100%;
+  min-height: 100%;
+  background: #F0EFF5;
+}
+.goodslist,.goodssum,.userinfo,.address,.memobox{
+  background:white;
+  border-top:1px solid #F0EFF5;
+  height:80rpx;
+  display:flex;
+  align-items:center;
+  padding:0 30rpx;
+}
+.goodsname,.goodsnum,.goodsprice{
+  font:25rpx "微软雅黑";
+  color:#666;
+}
+.goodsname{
+  flex: 2.5;
+}
+.goodsnum{
+  flex: 1
+}
+.goodsprice{
+  flex: 1;
+  text-align: right;
+}
+.goodssum{
+  font:28rpx "微软雅黑";
+  color:#666;
+  justify-content:flex-end;
+  margin-bottom:20rpx;
+}
+.redfont{
+  color: red;
+}
+.userinfo,.address,.memobox{
+  height: 100rpx;
+  font:28rpx "微软雅黑";
+  color:#333;
+}
+input{
+  margin-left: 30rpx;
+  width:500rpx;
+}
+.marbottom{
+  margin-bottom:20rpx;
+}
+.memobox{
+  height: 150rpx;
+  align-items:flex-start;
+  padding:30rpx;
+}
+.memo{
+  height: 100%;
+}
+button{
+  width:95%;
+  margin-top:20rpx;
+  font-size:32rpx;
+}

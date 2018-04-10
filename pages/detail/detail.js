@@ -29,6 +29,7 @@ Page({
     jieLongId:"",                               //接龙id
     QR_CodeSrc:"",                              //二维码地址
     hiddenModal:false,                           
+    isMe:true,                                 //是否本人
     GoodsDetialList: [{                         //接龙信息
       mineIcon: "../../images/bigposition.png",
       mineName: "",
@@ -100,6 +101,7 @@ Page({
     var id = e.id;
     _this.data.jieLongId = id;
     var app = getApp();
+    var userid = wx.getStorageSync("userId");
     //增加页面浏览人数
     wx.request({
       url: this.data.appGlobalUrl + '/jielong/updateBrowse',
@@ -110,7 +112,9 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        console.log(res)
+        _this.setData({
+          id: id
+        })
       }
     })
     //获取页面数据
@@ -136,7 +140,13 @@ Page({
           _this.data.GoodsDetialList[3].mineName = "接龙截至时间: " + res.data.data.finishTime;
           _this.data.GoodList = res.data.data.goodsList;
           _this.data.record[0].recordNumber = res.data.data.browseSum;
+          _this.data.record[1].recordNumber = res.data.data.joinSum;
+          _this.data.record[2].recordNumber = res.data.data.joinMoney;
           var SetGroup = res.data.data.goodsList[0].isSetGroup;
+          var goodsUserid = res.data.data.userId;
+          if (goodsUserid == userid){
+            //_this.data.isMe = false
+          }
           for (var i = 0; i < (_this.data.GoodList.length); i++){
             _this.data.GoodList[i].serverPaths = _this.data.GoodList[i].serverPaths.split(",");
             _this.data.GoodList[i]["goodsnum"] = 0;
@@ -152,7 +162,9 @@ Page({
             GoodList: _this.data.GoodList,
             takeGoodsAddressList: res.data.data.takeGoodsAddressList,
             SetGroup: SetGroup,
-            record: _this.data.record
+            record: _this.data.record,
+            isMe: _this.data.isMe,
+            userId: goodsUserid
           })
         }
       }
@@ -344,23 +356,24 @@ Page({
     if(count == 0 ){
       return false;
     } else {
-      wx.showModal({
-        title: '确定下单吗？',
-        content: '确认购买信息无误请点击确定！',
-        confirmText: '确定',
-        cancelText: "取消",
-        success: function (res) {
-          if (res.confirm) {
-          // for (var i = 0; i < (_this.data.GoodList.length); i++) {
-            
-          // }
-            console.log("购买")
-          } else if (res.cancel){
-            console.log("点击取消")
-          }
+      var jielongId = Number(this.data.id);
+      var userId = this.data.userId;
+      var addressId = this.data.selectAddrId;
+      var addressName = this.data.selectAddrDetail;
+      var orderGoods = [];
+      for (var i = 0; i < this.data.GoodList.length; i++){
+        if (this.data.GoodList[i].goodsnum>0){
+          var orderGoodsList = { goodsId: this.data.GoodList[i].id, money: this.data.GoodList[i].price, sum: this.data.GoodList[i].goodsnum * this.data.GoodList[i].price, goodsname: this.data.GoodList[i].name, goodsnum: this.data.GoodList[i].goodsnum}
+          orderGoods.push(orderGoodsList)
         }
-      })
+      }
     }
+    var goodsInfo = { jielongId, userId, addressId, orderGoods, addressName };
+    var jsonStr = JSON.stringify(goodsInfo);
+    console.log(goodsInfo)
+    wx.navigateTo({
+      url: './confirmOrder/confirmOrder?jsonStr=' + jsonStr
+    })
     console.log(count)
   },
   //二维码

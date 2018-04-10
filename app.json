@@ -17,7 +17,8 @@
     "pages/personal/mineJieLong/mineJieLong",
     "pages/comments/systemNotice/systemNotice",
     "pages/personal/helpCenter/helpCenter",
-    "pages/personal/joinJieLong/joinMessage/joinMessage"
+    "pages/personal/joinJieLong/joinMessage/joinMessage",
+    "pages/detail/confirmOrder/confirmOrder"
   ],
   "window": {
     "backgroundTextStyle": "light",
