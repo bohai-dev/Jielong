@@ -1,0 +1,45 @@
+/* pages/comments/systemNotice/noticeContent/noticeContent.wxss */
+page{
+  background-color: #EEEEEE;
+  font:33rpx "微软雅黑";
+}
+.content{
+  border-top: 1rpx solid gainsboro;
+  background-color: white;
+  padding:15rpx;
+}
+.header-style{
+  font-size: 40rpx;
+  color: #666;
+}
+.content-header{
+  display: flex;
+  flex-direction: column; 
+}
+.time-style{
+  color:#999;
+  margin:10rpx 0;
+}
+.concrete{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+} 
+.concrete-style{
+  color: #666;
+  padding-bottom: 1rpx;
+}
+contentBold{
+  font: 600;
+}
+.isIndent{
+  text-indent: 2em;
+}
+.image-style{
+  width: 100%;
+  margin:-12rpx auto;
+  margin-bottom:1rpx;
+}
+.noImage{
+  display: none;
+}

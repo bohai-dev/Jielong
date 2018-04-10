@@ -17,8 +17,17 @@
     "pages/personal/mineJieLong/mineJieLong",
     "pages/comments/systemNotice/systemNotice",
     "pages/personal/helpCenter/helpCenter",
+<<<<<<< HEAD
     "pages/personal/joinJieLong/joinMessage/joinMessage",
     "pages/detail/confirmOrder/confirmOrder"
+=======
+
+    "pages/personal/helpCenter/answerPage/answerPage",
+    "pages/comments/systemNotice/noticeContent/noticeContent",
+
+    "pages/personal/joinJieLong/joinMessage/joinMessage"
+
+>>>>>>> 0b8cc9834c069a86a3315bbdba8a7683c3a40b60
   ],
   "window": {
     "backgroundTextStyle": "light",

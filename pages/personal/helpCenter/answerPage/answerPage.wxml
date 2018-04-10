@@ -1,0 +1,8 @@
+<!--pages/personal/helpCenter/answerPage/answerPage.wxml-->
+<view class='content'>
+    <!-- <text class='line'></text> -->
+      <text class='ques-style'>{{answerList.title}}</text>
+    <block wx:key="">
+      <text class='answer-style'>{{answerList.message}}</text>
+    </block>
+</view>
