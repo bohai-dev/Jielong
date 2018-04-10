@@ -1,13 +1,13 @@
 <!--pages/comments/systemNotice/systemNotice.wxml-->
 <view class='body'>
   <block wx:for="{{noticeList}}" wx:key="">
-    <view class='noticelist'>
+    <navigator class='noticelist' url='./noticeContent/noticeContent' hover-class='none'>
       <view class='time'>{{item.time}}</view>
       <view class='container'>
         <text class='title'>{{item.title}}</text>
         <text class='description'>{{item.description}}</text>
         <image src='{{item.imgUrl}}' mode='scaleToFill' class='img'></image>
       </view>
-    </view>
+    </navigator>
   </block>
 </view>

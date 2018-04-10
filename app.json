@@ -16,7 +16,9 @@
     "pages/personal/joinJieLong/joinJieLong",
     "pages/personal/mineJieLong/mineJieLong",
     "pages/comments/systemNotice/systemNotice",
-    "pages/personal/helpCenter/helpCenter"
+    "pages/personal/helpCenter/helpCenter",
+    "pages/personal/helpCenter/answerPage/answerPage",
+    "pages/comments/systemNotice/noticeContent/noticeContent"
   ],
   "window": {
     "backgroundTextStyle": "light",

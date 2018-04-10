@@ -1,0 +1,34 @@
+/* pages/personal/helpCenter/answerPage/answerPage.wxss */
+page{
+  width: 100%;
+  height: 100%;
+  background-color: #EEEEEE;/*灰色背景*/
+  font: 33rpx "微软雅黑";
+}
+.content{
+  width:100%;
+  background-color: white;
+  border-top: 1rpx solid gainsboro;
+  display: flex;
+  flex-direction: column;
+  padding:10rpx 30rpx;
+}
+.line{
+  border-bottom: 1rpx solid gainsboro;
+}
+.ques-style{ 
+  min-height: 60rpx;
+  font-size: 40rpx;
+  font-weight: 600;
+  padding-bottom:10rpx;
+  border-bottom: 1rpx solid gainsboro;
+} 
+.answer-style{
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+/* .img-style{
+  width: 100%;
+  margin:-12rpx auto;
+  margin-bottom:1rpx;
+} */

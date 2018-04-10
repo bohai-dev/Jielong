@@ -1,0 +1,17 @@
+<!--pages/comments/systemNotice/noticeContent/noticeContent.wxml-->
+<!-- <text>pages/comments/systemNotice/noticeContent/noticeContent.wxml</text> -->
+<view class='content'>
+    <text class='header-style'>{{contentList[0].noticeName}}</text>
+    <view class="content-header">
+      <text class="time-style">2018/02/09 15:39  <text class='time-style'>群团购接龙</text>
+      </text>
+      <text class="time-style">你转发,我撒币</text>
+    </view>
+    <block wx:for="{{contentList}}" wx:key="">
+      <view class='concrete'>
+        <text class='concrete-style {{item.contentBold}} {{item.isIndent}}'>{{item.noticeContent}}</text>
+        <image src="{{item.imgUrl}}" class='{{item.noImage}} img-style' mode="widthFix"></image>
+      </view>
+    </block>   
+</view>
+
