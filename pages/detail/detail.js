@@ -24,6 +24,11 @@ Page({
     buy: "请选择商品",                           //购买商品
     count: 0,                                   //商品总数
     total: 0,                                   //商品总价
+    selectAddrId: "",                           //接龙的自提点id
+    selectAddrDetail: "",                       //接龙的自提点详细地址
+    jieLongId:"",                               //接龙id
+    QR_CodeSrc:"",                              //二维码地址
+    hiddenModal:false,                           
     GoodsDetialList: [{                         //接龙信息
       mineIcon: "../../images/bigposition.png",
       mineName: "",
@@ -93,6 +98,7 @@ Page({
   onLoad(e) {
     var _this = this;
     var id = e.id;
+    _this.data.jieLongId = id;
     var app = getApp();
     //增加页面浏览人数
     wx.request({
@@ -151,14 +157,6 @@ Page({
         }
       }
     })
-   
-
-
-    if (e.addrJson){
-      console.log("设置了自提点");
-    }else{
-      console.log("没有设置自提点");
-    }
     
     // 注册coolsite360交互模块
     app.coolsite360.register(this);
@@ -175,7 +173,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow() {
+  onShow(e) {
     // 执行coolsite360交互组件展示
     app.coolsite360.onShow(this);
   },
@@ -199,6 +197,25 @@ Page({
    */
   onPullDownRefresh() {
 
+  },
+
+  /**
+   * 转发
+   */
+  onShareAppMessage(options){
+    var _this = this;
+    return {
+      title: _this.data.goodsdescribe,
+      imageUrl: _this.data.appGlobalUrl + _this.data.goodsImg[0],
+      success: function (res) {
+        // console.log(res)
+        // 转发成功
+      },
+      fail: function (res) {
+        // console.log(res)        
+        // 转发失败
+      }
+    }
   },
 
 
@@ -225,9 +242,17 @@ Page({
       phoneNumber: _this.data.GoodsDetialList[1].phone
     })
   },
+  //选择自提点
   showLocation: function () {
-    console.log(this.data.takeGoodsAddressList)
-    var jsonStr = JSON.stringify(this.data.takeGoodsAddressList);
+    var _this = this;
+    this.data.takeGoodsAddressList.forEach(function(e){
+      if (_this.data.selectAddrId == e.id){
+          e.selectVal = true;
+        }else{
+        e.selectVal = false;
+        }
+    })
+    var jsonStr = JSON.stringify(_this.data.takeGoodsAddressList);
     wx.navigateTo({
       url: './selectAddress/selectAddress?jsonStr=' + jsonStr
     })
@@ -337,6 +362,28 @@ Page({
       })
     }
     console.log(count)
+  },
+  //二维码
+  qrTap:function(e){
+    var _this = this;
+    _this.setData({
+      QR_CodeSrc: app.globalData.domain + '/getQRcode/' + _this.data.jieLongId,
+      hiddenModal:true
+    })
+  },
+  //取消二维码
+  listenerConfirm:function(e){
+    this.setData({
+      hiddenModal:false
+    })
+  },
+  //保存二维码图片
+  saveQr_code:function(e){
+    var _this = this;
+    wx.previewImage({
+      current: _this.data.QR_CodeSrc,
+      urls: _this.data.QR_CodeSrc.split(),
+    })
   }
 
 
