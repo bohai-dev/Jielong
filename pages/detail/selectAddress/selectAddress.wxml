@@ -2,8 +2,8 @@
 <view>
   <radio-group  bindchange="radioChange">
     <label class='section' wx:for="{{addressList}}" data-index="{{index}}" wx:key="addrItems"  >
-      <radio type="radio" value='{{item.id}}'></radio>
-      <radio type="radio" value='{{item.id}}' wx:if="{{item.selectVal}}" checked='true'></radio>      
+      <radio type="radio" value='{{item.id}}' checked='{{item.selectVal}}'></radio> 
+      <!-- <radio type="radio" value='{{item.id}}' wx:if="{{item.selectVal}}" checked='true'></radio>       -->
       <text>{{item.detail}}</text>
     </label>
   </radio-group>

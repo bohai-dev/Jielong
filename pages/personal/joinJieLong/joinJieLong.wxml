@@ -26,4 +26,5 @@
     <image class='recordimg' src='../../../images/norecord.png'></image>
     <text class='news'>你还没有参与过任何接龙活动</text>
   </view>
+  <navigator url='./joinMessage/joinMessage'>toMessage</navigator>
 </view>

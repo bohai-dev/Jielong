@@ -1,0 +1,41 @@
+<!--pages/personal/joinJieLong/joinMessage/joinMessage.wxml-->
+<view class='page'>
+  <view class='content'>
+    <view class='headContTop'>
+      <image src='../../../../images/notice.png'></image>
+      <text class='headName'>笑</text>
+    </view>
+    <text class='headTitle'>中国苹果</text>
+    
+  </view>
+
+  <view class='midContent'>
+    <view class='headContTop'>
+      <image src='../../../../images/mine/Category.png'></image>
+      <text>商品信息</text>
+    </view>
+    <view class='goodsCont'>
+      <text>上海评估破</text>
+      <text>5斤</text>
+      <text class='red'>￥28.00</text>
+    </view>
+    <view class='allPirce'>
+      合计：<text class='red'>￥28.00</text>
+    </view>
+  </view>
+
+
+    <view class='midContent'>
+    <view class='headContTop midTop'>
+      <view class='flexCenter'>
+          <image src='../../../../images/mine/Category.png'></image>
+          <text>订单信息</text>
+      </view>
+          <text>付款时间：2018-01-02</text>
+    </view>
+    <view class='goodsCont pirceCont'>
+      是否自提：<text>1</text>
+    </view>
+  </view>
+
+</view>

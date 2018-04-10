@@ -1,0 +1,70 @@
+/* pages/personal/joinJieLong/joinMessage/joinMessage.wxss */
+page{
+  background-color: #eee;
+  font-size: 30rpx;
+}
+.flexCenter{
+  display: flex;
+  align-items: center;
+}
+.content{
+  background-color: #fff;
+  border-top: 1rpx solid #ECECEC;
+  padding: 20rpx 30rpx;
+}
+.headContTop{
+  display: flex;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+.headContTop image{
+  width: 60rpx;
+  height: 60rpx;
+}
+.headContTop text{
+  margin-left: 10rpx;
+  font-size: 32rpx;
+}
+.headName{
+  color: #61D090;
+}
+.headTitle{
+  font-size: 34rpx;
+}
+
+.midContent{
+  background-color: #fff;
+  margin-top: 30rpx;
+  color: #666;
+}
+.midContent .headContTop{
+  padding: 20rpx 30rpx;
+  margin: 0;
+  border-bottom: 1rpx solid #ECECEC;  
+}
+.goodsCont{
+  padding: 20rpx 30rpx;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #ECECEC;
+}
+.allPirce{
+  padding: 20rpx 30rpx;
+  display: flex;
+  justify-content: flex-end;
+}
+.red{
+  color: red;
+}
+.inlineBlock{
+  display: inline-block;
+}
+.midTop{
+  justify-content: space-between;
+}
+
+.pirceCont{
+  justify-content: flex-start;
+  align-items: center;
+}
+

@@ -14,13 +14,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
     var data = JSON.parse(options.jsonStr);
-    console.log(data)
     data.forEach(function(e){
-      e.selectVal = false;
+      if(!e.selectVal){
+        e.selectVal = false;
+      }
     })
-    console.log(data)
     this.setData({
       addressList:data
     })
@@ -77,15 +76,21 @@ Page({
 
   //确认自提点
   sureAddr:function(){
-    console.log(this.data)
     var _this = this;
     if (_this.data.selectId){
       this.data.addressList.forEach(function(e){
         if (e.id == _this.data.selectId){
-          // var data = JSON.stringify(e);
-          // wx.navigateTo({
-          //   url: '../detail?addrJson='+e,
-          // })
+          var page = getCurrentPages();
+          var prePage = page[page.length - 2];
+          prePage.data.GoodsDetialList[2].mineName = "自提点：" + e.detail;
+          prePage.setData({
+            selectAddrId: _this.data.selectId,
+            GoodsDetialList: prePage.data.GoodsDetialList,
+            selectAddrDetail:e.detail
+          })
+          wx.navigateBack({
+            delta: 1
+          })
         }
       })
 
@@ -99,7 +104,6 @@ Page({
 
   //切换自提点
   radioChange:function(e){
-    console.log(e)
     this.data.selectId = e.detail.value;
   }
 

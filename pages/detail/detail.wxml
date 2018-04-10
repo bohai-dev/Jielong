@@ -98,3 +98,27 @@
     <view class="{{count > 0 ? 'foot_right_green' : 'foot_right'}}" bindtap="buyGoods">{{buy}}</view>
   </view>
 </view>
+
+<!--二维码/转发  -->
+<view class='qr_tran'>
+  <view class='qt_cont' bindtap='qrTap'>
+      <image src='../../images/home/qr_code.png'></image>
+  </view>
+  <button class='qt_cont'  open-type='share'>
+      <image src='../../images/home/transpond.png'></image>      
+  </button>
+</view>
+
+<!--模态框 -->
+<modal class="modal" wx:if="{{hiddenModal}}"   confirm-text="我知道了"
+     bindconfirm="listenerConfirm" no-cancel="true" >
+  <view>
+    <view class='modalContent' bindtap='findAddress'>
+        <image src='{{QR_CodeSrc}}' bindtap='saveQr_code'></image>
+        <view>点击小程序码保存</view>
+        <view>可转发到朋友圈</view>
+        <view>或</view>
+        <view>点击转发按钮,转发给好友</view>
+    </view>
+  </view>
+</modal>

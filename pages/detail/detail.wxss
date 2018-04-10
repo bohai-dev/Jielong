@@ -325,3 +325,52 @@
 .foot_right_green{
   background: #1AAD19;
 }
+/*
+  二维码
+  */
+.qr_tran{
+  position: fixed;
+  top: 10rpx;
+  right: 0;
+  width: 250rpx;
+  height: 100rpx;
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-around;
+}
+.qt_cont{
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 50%;
+    background-color: #2ABB6D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0;
+    padding: 0;
+}
+.qt_cont image{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+/*模态框start  */
+.modal{
+  width: 650rpx;
+  height: 650rpx;
+}
+.modalContent{
+  width: 100%;
+  height: 100%; 
+  text-align: center;
+}
+.modalContent image{
+  flex:1;
+  display: inline-block;
+  width: 250rpx;
+  height: 250rpx;
+}
+.modalContent view{
+  margin:10rpx 0;
+}
+/*模态框end  */
