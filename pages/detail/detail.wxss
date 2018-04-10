@@ -116,12 +116,11 @@
 .goodsname{
   font: 37rpx "微软雅黑";
   color: #333;
-  margin-top: 10rpx;
 }
 .goodsprice{
   font-size: 30rpx;
   color: rgb(245, 10, 24);
-  margin-top:30rpx; 
+  margin-top:20rpx; 
 }
 .blod{
   font-weight: bold;
@@ -233,7 +232,7 @@
   border-bottom: 2rpx solid #F0EFF5;
 }
 .joinRecord{
-  width:50%;
+  flex:1;
   display:flex;
   flex-direction:column;
   align-items:center;

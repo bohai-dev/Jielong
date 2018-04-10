@@ -6,9 +6,9 @@
   position:fixed;
 }
 .from-jl{
-  background:#33CCFF;
+  background:linear-gradient(to bottom right, #80DFFF, #33CCFF , #66D8FF , #33CCFF);
   width:90%;
-  height:200rpx;
+  height:252rpx;
   margin:100rpx auto 0;
   border-radius:20rpx;
   display:flex;
@@ -18,24 +18,24 @@
 }
 .title{
   color: white;
-  font-size: 30rpx;
+  font-size: 35rpx;
   display: block;
   letter-spacing:5rpx;
 }
 .describe{
   color: white;
-  font-size: 20rpx;
+  font-size: 22rpx;
   display: block;
-  margin:10rpx 0;
+  margin:20rpx 0;
 }
 .btn{
   color: #33CCFF;
   display: block;
-  font-size: 20rpx;
+  font-size: 22rpx;
   width: 300rpx;
-  height: 40rpx;
+  height: 50rpx;
   background: white;
   text-align:center;
-  line-height:40rpx;
+  line-height:50rpx;
   border-radius:20rpx;
 }

@@ -18,7 +18,7 @@ Page({
     goodsImg: [],                               //接龙图片
     joinnum:0,                                  //参与数量
     SetGroup:true,                              //是否设置最小成员团
-    joinperson:3,                               //参与人数
+    joinperson:5,                               //参与人数
     joinUserImg: ['../../images/navIcon/personal1.png', '../../images/navIcon/personal1.png', '../../images/navIcon/personal1.png', '../../images/navIcon/personal1.png'],
     Group:5,                                    //最小开团人数
     buy: "请选择商品",                           //购买商品
@@ -51,7 +51,11 @@ Page({
       rightArrow:"dn"
     }],
     GoodList: [],
-    record:[{                                   //接龙记录
+    record: [{                                   //接龙记录
+      recordNumber: 0,
+      recordText: "浏览(人)",
+      rightBorder: "rightborder"
+    }, {
       recordNumber:0,
       recordText:"参与接龙(人)",
       rightBorder: "rightborder"
@@ -125,6 +129,8 @@ Page({
           _this.data.GoodsDetialList[3].show = (res.data.data.setFinishTime==1)?true:false;
           _this.data.GoodsDetialList[3].mineName = "接龙截至时间: " + res.data.data.finishTime;
           _this.data.GoodList = res.data.data.goodsList;
+          _this.data.record[0].recordNumber = res.data.data.browseSum;
+          var SetGroup = res.data.data.goodsList[0].isSetGroup;
           for (var i = 0; i < (_this.data.GoodList.length); i++){
             _this.data.GoodList[i].serverPaths = _this.data.GoodList[i].serverPaths.split(",");
             _this.data.GoodList[i]["goodsnum"] = 0;
@@ -138,7 +144,9 @@ Page({
             goodsImg: res.data.data.imageList,
             GoodsDetialList: _this.data.GoodsDetialList,
             GoodList: _this.data.GoodList,
-            takeGoodsAddressList: res.data.data.takeGoodsAddressList
+            takeGoodsAddressList: res.data.data.takeGoodsAddressList,
+            SetGroup: SetGroup,
+            record: _this.data.record
           })
         }
       }
