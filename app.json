@@ -17,12 +17,12 @@
     "pages/personal/mineJieLong/mineJieLong",
     "pages/comments/systemNotice/systemNotice",
     "pages/personal/helpCenter/helpCenter",
-<<<<<<< HEAD
+
     "pages/personal/helpCenter/answerPage/answerPage",
-    "pages/comments/systemNotice/noticeContent/noticeContent"
-=======
+    "pages/comments/systemNotice/noticeContent/noticeContent",
+
     "pages/personal/joinJieLong/joinMessage/joinMessage"
->>>>>>> cb44276a52c8ef3bfc19cb6b0004e61c05d0e864
+
   ],
   "window": {
     "backgroundTextStyle": "light",
