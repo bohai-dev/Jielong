@@ -31,7 +31,7 @@
 <!-- 购买商品 -->
 <view class="container">
   <block wx:for="{{GoodList}}" wx:for-index="goodsIndex" wx:key="">
-    <view class='goodsbuy {{isMe}} ? "marbottom" : "" '>
+    <view class='goodsbuy {{isMe ? "" : "marbottom"}} '>
       <image class="goodsbugimg" mode="aspectFill" src="{{appGlobalUrl + item.serverPaths[0]}}" bindtap='preViewImg' data-index="{{goodsIndex}}" data-imgSrc="{{appGlobalUrl + item.serverPaths[0]}}" data-viewList='goods' >
       <view class='imgNum'>{{item.serverPaths.length}}张</view>
       </image>

@@ -164,7 +164,7 @@ Page({
             SetGroup: SetGroup,
             record: _this.data.record,
             isMe: _this.data.isMe,
-            userId: goodsUserid
+            goodsUserid: goodsUserid
           })
         }
       }
@@ -357,23 +357,36 @@ Page({
       return false;
     } else {
       var jielongId = Number(this.data.id);
-      var userId = this.data.userId;
+      var goodsUserid = this.data.goodsUserid;
       var addressId = this.data.selectAddrId;
       var addressName = this.data.selectAddrDetail;
       var orderGoods = [];
       for (var i = 0; i < this.data.GoodList.length; i++){
         if (this.data.GoodList[i].goodsnum>0){
-          var orderGoodsList = { goodsId: this.data.GoodList[i].id, money: this.data.GoodList[i].price, sum: this.data.GoodList[i].goodsnum * this.data.GoodList[i].price, goodsname: this.data.GoodList[i].name, goodsnum: this.data.GoodList[i].goodsnum}
+          var orderGoodsList = { goodsId: this.data.GoodList[i].id, sum: this.data.GoodList[i].goodsnum, money: this.data.GoodList[i].price, total: this.data.GoodList[i].goodsnum * this.data.GoodList[i].price, goodsname: this.data.GoodList[i].name}
           orderGoods.push(orderGoodsList)
         }
       }
+      var goodsInfo = { jielongId, goodsUserid, addressId, orderGoods, addressName };
+      var jsonStr = JSON.stringify(goodsInfo);
+      console.log(goodsInfo)
+      if (!addressId){
+        wx.showModal({
+          title: '提示',
+          content: '请选择自提点',
+          showCancel: false,
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            }
+          }
+        })
+      }else{
+        wx.navigateTo({
+          url: './confirmOrder/confirmOrder?jsonStr=' + jsonStr
+        })
+      }
     }
-    var goodsInfo = { jielongId, userId, addressId, orderGoods, addressName };
-    var jsonStr = JSON.stringify(goodsInfo);
-    console.log(goodsInfo)
-    wx.navigateTo({
-      url: './confirmOrder/confirmOrder?jsonStr=' + jsonStr
-    })
     console.log(count)
   },
   //二维码

@@ -1,25 +1,25 @@
 <!--pages/detail/confirmOrder/confirmOrder.wxml-->
 <view class='body'>
-  <block wx:for="{{goodsList}}" wx:for-index="index" wx:key="">
+  <block wx:for="{{orderGoods}}" wx:for-index="index" wx:key="">
     <view class='goodslist'>
       <text class='goodsname'>{{item.goodsname}}</text>
-      <text class='goodsnum'>+{{item.goodsnum}}</text>
+      <text class='goodsnum'>+{{item.sum}}</text>
       <text class='goodsprice'>￥{{item.money}}</text>
     </view>
   </block> 
-  <view class='goodssum'>合计：<text class='redfont'>￥{{sum}}</text></view>
+  <view class='goodssum'>合计：<text class='redfont'>￥{{total}}</text></view>
   <view class='userinfo'>
     姓名
-    <input type='text' value='{{userName}}'></input>
+    <input type='text' value='{{userName}}' bindinput='inputUserName'></input>
   </view>
   <view class='userinfo marbottom'>
     手机
-    <input type='number' value='{{userPhone}}'></input>
+    <input type='number' bindblur="telCheck" bindinput='inputUserPhone' value='{{userPhone}}'></input>
   </view>
   <view class='address'>自提地址：{{addressName}}</view>
   <view class='memobox'>
     备注：
-    <textarea class='memo' maxlength='200' value=''></textarea>
+    <textarea class='memo' maxlength='100' value='{{remark}}' bindinput="inputMemoChange"></textarea>
   </view>
-  <button type='primary' formType="submit">确认下单</button>
+  <button type='primary' bindtap="submitOrder">确认下单</button>
 </view>
