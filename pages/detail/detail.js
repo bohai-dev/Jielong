@@ -145,7 +145,7 @@ Page({
           var SetGroup = res.data.data.goodsList[0].isSetGroup;
           var goodsUserid = res.data.data.userId;
           if (goodsUserid == userid){
-            //_this.data.isMe = false
+            _this.data.isMe = false
           }
           for (var i = 0; i < (_this.data.GoodList.length); i++){
             _this.data.GoodList[i].serverPaths = _this.data.GoodList[i].serverPaths.split(",");
@@ -409,6 +409,18 @@ Page({
     wx.previewImage({
       current: _this.data.QR_CodeSrc,
       urls: _this.data.QR_CodeSrc.split(),
+    })
+  },
+  //跳转接龙统计
+  solitaireStatistics:function(e){
+    wx.navigateTo({
+      url: './solitaireStatistics/solitaireStatistics',
+    })
+  },
+  //跳转到自提标记
+  addrRemake:function(e){
+    wx.navigateTo({
+      url: './addrRemake/addrRemake',
     })
   }
 

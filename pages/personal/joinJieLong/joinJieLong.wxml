@@ -3,10 +3,10 @@
   <view class='content' wx:for="{{data}}"  wx:key="id" wx:for-index="index" wx:for-item="item" data-id="{{item.id}}" bindtap='navToDetail'>
     <view class='midCont'>
       <view class='left' >
-         参与时间：<text>{{item.time}}</text>
+         参与时间：<text>{{item.createdAt}}</text>
       </view>
       <view class='right'>
-        <text>{{item.work}}</text>
+        <text class='{{item.state == 0 ? "blue" : item.state == 1 ? "green" : "red"}}'>{{item.state == 0 ? "活动结束" : item.state == 1 ? "正在进行中" : "平台终止"}}</text>
       </view>
     </view>
     <view class='midCont'>

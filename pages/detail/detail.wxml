@@ -87,7 +87,7 @@
     </block>
   </view>
   <view class="foot_nav">
-    <view class="foot_left">
+    <view class="foot_left" wx:if="{{isMe}}">
       <block wx:for="{{footnav}}" wx:key="">
         <navigator url='{{item.navUrl}}' open-type="switchTab" class='footNavTo {{item.navborder}}'>
           <image class='navimg' src='{{item.navIcon}}'></image>
@@ -95,7 +95,10 @@
         </navigator>
       </block>
     </view>
-    <view class="{{count > 0 ? 'foot_right_green' : 'foot_right'}}" bindtap="buyGoods">{{buy}}</view>
+    <view class="{{count > 0 ? 'foot_right_green' : 'foot_right'}}" bindtap="buyGoods" wx:if="{{isMe}}">{{buy}}</view>
+    <view class="foot_btn" wx:if="{{!isMe}}" bindtap='addrRemake'>自提标记</view>     
+    <view class="foot_btn" wx:if="{{!isMe}}" bindtap='solitaireStatistics'>接龙统计</view> 
+    <view class="foot_btn" wx:if="{{!isMe}}">结束接龙</view> 
   </view>
 </view>
 

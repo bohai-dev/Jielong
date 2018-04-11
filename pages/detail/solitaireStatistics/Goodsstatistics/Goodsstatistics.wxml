@@ -1,0 +1,33 @@
+<!--pages/detail/solitaireStatistics/Goodsstatixtics/Goodsstatistics.wxml-->
+<view class='page'>
+  <view class='content'>
+    <view class='headContTop'>
+      <view>
+          统计时间：<text class='green'>2018-04-09 至 2018-04-11</text>
+      </view> 
+      <view>
+          商品名字：<text class='green'>橙子</text>
+      </view> 
+    </view>
+  </view>
+
+  <view class='midContent'>
+    <view class='allPirce' bindtap='showDetail'>
+      NO.<text class='allPe'>1</text>
+      <image class='headImg' src='../../../../images/mine/Category.png'></image>
+      <text class='allPi'>分都分了是</text>
+    </view>
+    <view class='goodsCont' wx:for="{{goodsList}}" wx:key="index" bindtap='navToGoods' wx:if="{{isShow}}">
+      <view class='goodsCont_left'>
+        <text>陈工  {{item.phone}}</text>
+        <text>自提点：{{item.num}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class='footAll'>
+    合计：<text class='red'>1个</text>
+  </view>
+
+</view>
+

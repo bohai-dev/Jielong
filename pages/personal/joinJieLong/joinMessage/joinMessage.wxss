@@ -56,6 +56,9 @@ page{
 .red{
   color: red;
 }
+.green{
+  color: green;
+}
 .inlineBlock{
   display: inline-block;
 }

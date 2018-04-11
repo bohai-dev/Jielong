@@ -1,0 +1,43 @@
+/* pages/detail/solitaireStatistics/solitaireStatistics.wxss */
+@import "../../personal/joinJieLong/joinMessage/joinMessage";
+
+.headContTop{
+  justify-content: space-between;
+}
+.showStartDate,.showEndDate{
+  display: inline-block;
+  width: 250rpx;
+  height: 50rpx;
+  border: 1rpx solid #999;
+  border-radius: 10rpx;
+  line-height: 50rpx;
+  padding-left: 10rpx;
+}
+.ts_text{
+  line-height: 50rpx;
+  vertical-align: top;
+}
+.ts_search{
+  color: #2ABB6D;
+}
+.goodsCont{
+  align-items: center;
+}
+.goodsCont_left text{
+  display: block;
+}
+.goodsCl_title{
+  font-size: 34rpx;
+  color: #333;
+}
+.rightShotImg{
+  width:12rpx;
+  height:24rpx;
+}
+.allPirce{
+  justify-content: flex-start;
+}
+.allPe{
+  margin-right: 30rpx;
+  line-height: 40rpx;
+}

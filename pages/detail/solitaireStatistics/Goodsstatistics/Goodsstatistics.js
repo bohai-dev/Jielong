@@ -1,35 +1,24 @@
-// pages/personal/joinJieLong/joinJieLong.js
-var app = getApp();
-
+// pages/detail/solitaireStatistics/Goodsstatixtics/Goodsstatistics.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isShow:false,
-    data:[{
-      time:"2018",
-      work:"已发货",
-      topic:"蛋黄酥"
-    }, {
-      time: "2018",
-      work: "已发货",
-      topic: "蛋黄酥"
-      }, {
-        time: "2018",
-        work: "已发货",
-        topic: "蛋黄酥"
-      }]
-  
+    goodsList: [{
+      title: "手机1",
+      people: "1",
+      num: "1",
+      pirce: "1.00"
+    }],
+    isShow:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //加载数据
-    this.initData();
+  
   },
 
   /**
@@ -80,26 +69,12 @@ Page({
   onShareAppMessage: function () {
   
   },
-  
-  // 自定义事件
-  initData:function(e){
+
+  //显示详细
+  showDetail:function(e){
     var _this = this;
-    wx.request({
-      url: app.globalData.domain +'/order/selectByCustomerId',
-      data:{
-        customerId:wx.getStorageSync("userId")
-      },
-      success:function(res){
-        console.log(res)
-        if(res.statusCode == 200){
-          _this.setData({
-            data:res.data.data,
-            isShow:true
-          })
-        }
-      }
+    this.setData({
+      isShow:!_this.data.isShow
     })
-
-
   }
 })

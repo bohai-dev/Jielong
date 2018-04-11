@@ -328,6 +328,12 @@
 .foot_right_green{
   background: #1AAD19;
 }
+.foot_btn{
+  width: calc(100%/3);
+  font: 35rpx/100rpx "微软雅黑";
+  color: #2ABB6D;
+  text-align: center;
+}
 /*
   二维码
   */

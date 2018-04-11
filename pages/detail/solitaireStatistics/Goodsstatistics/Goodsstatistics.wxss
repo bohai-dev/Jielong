@@ -1,0 +1,38 @@
+/* pages/detail/solitaireStatistics/Goodsstatixtics/Goodsstatistics.wxss */
+@import "../../../personal/joinJieLong/joinMessage/joinMessage";
+
+.headContTop{
+  display: inline-block;
+}
+.goodsCont{
+  align-items: center;
+}
+.goodsCont_left text{
+  display: block;
+}
+.goodsCl_title{
+  font-size: 34rpx;
+  color: #333;
+}
+.allPirce{
+  justify-content: flex-start;
+  border-bottom:1rpx solid #ECECEC;
+}
+.allPe{
+  margin-right: 20rpx;
+  line-height: 40rpx;
+}
+.headImg{
+  width:40rpx;
+  height:40rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+.footAll{
+  margin-top:30rpx;
+  background-color: #fff;
+  padding:20rpx 30rpx;
+  display: flex;
+  justify-content: flex-end;
+  color: #666;
+}

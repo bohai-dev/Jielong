@@ -16,12 +16,14 @@
     "pages/personal/joinJieLong/joinJieLong",
     "pages/personal/mineJieLong/mineJieLong",
     "pages/comments/systemNotice/systemNotice",
-    "pages/personal/helpCenter/helpCenter",   
+    "pages/personal/helpCenter/helpCenter",
     "pages/detail/confirmOrder/confirmOrder",
     "pages/personal/helpCenter/answerPage/answerPage",
     "pages/comments/systemNotice/noticeContent/noticeContent",
-    "pages/personal/joinJieLong/joinMessage/joinMessage"
-
+    "pages/personal/joinJieLong/joinMessage/joinMessage",
+    "pages/detail/solitaireStatistics/solitaireStatistics",
+    "pages/detail/solitaireStatistics/Goodsstatistics/Goodsstatistics",
+    "pages/detail/addrRemake/addrRemake"
   ],
   "window": {
     "backgroundTextStyle": "light",
