@@ -32,7 +32,8 @@ Page({
       addressName: data.addressName,
       addressId: Number(data.addressId),
       userId: userId,
-      jielongId: data.jielongId
+      jielongId: data.jielongId,
+      isSetGroup: data.isSetGroup
     })
     var userid = wx.getStorageSync("userId");
     var app = getApp();
@@ -228,7 +229,7 @@ Page({
                             }
                           })
                         }, 1000)
-                      }     
+                      }
                     }
                   })
                 }

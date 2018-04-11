@@ -361,15 +361,16 @@ Page({
       var addressId = this.data.selectAddrId;
       var addressName = this.data.selectAddrDetail;
       var orderGoods = [];
+      var isSetGroup = this.data.SetGroup ? 1 : 0;
       for (var i = 0; i < this.data.GoodList.length; i++){
         if (this.data.GoodList[i].goodsnum>0){
           var orderGoodsList = { goodsId: this.data.GoodList[i].id, sum: this.data.GoodList[i].goodsnum, money: this.data.GoodList[i].price, total: this.data.GoodList[i].goodsnum * this.data.GoodList[i].price, goodsname: this.data.GoodList[i].name}
           orderGoods.push(orderGoodsList)
         }
       }
-      var goodsInfo = { jielongId, goodsUserid, addressId, orderGoods, addressName };
+      var goodsInfo = { jielongId, goodsUserid, addressId, orderGoods, addressName, isSetGroup};
       var jsonStr = JSON.stringify(goodsInfo);
-      console.log(goodsInfo)
+      //console.log(goodsInfo)
       if (!addressId){
         wx.showModal({
           title: '提示',
@@ -387,7 +388,6 @@ Page({
         })
       }
     }
-    console.log(count)
   },
   //二维码
   qrTap:function(e){

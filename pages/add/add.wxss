@@ -37,5 +37,5 @@
   background: white;
   text-align:center;
   line-height:50rpx;
-  border-radius:20rpx;
+  border-radius:25rpx;
 }

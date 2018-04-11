@@ -42,7 +42,11 @@ Page({
             phone: phone,
             email: email,
             detail: detail,
-            id: id
+            id: id,
+            oldname: name,
+            oldphone: phone,
+            oldemail: email,
+            olddetail: detail
           })
         }
         //console.log(info+"222"+"id:"+id)
@@ -125,8 +129,13 @@ Page({
     var email = e.detail.value.email;
     var detail = e.detail.value.detail;
     var userId = wx.getStorageSync('userId');
+    var oldname = this.data.oldname;
+    var oldphone = this.data.oldphone;
+    var oldemail = this.data.oldemail;
+    var olddetail = this.data.olddetail;
     var id = page.data.id;
     console.log('用户信息为：', name + phone + email + detail + userId)
+    console.log('旧信息为：', oldname + oldphone + oldemail + olddetail)
     if (!e.detail.value.name) {
       wx.showModal({
         title: '提示',
@@ -150,27 +159,61 @@ Page({
         }
       })
     } else {
-      wx.request({
-        url: app.globalData.domain + '/userInfo/update',
-        method: 'POST',
-        data: {
-          name: name,
-          phoneNumber: phone,
-          email: email,
-          deliveryAddress: detail,
-          userId: userId,
-          id: id
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          wx.navigateBack({
-            url: '../personal/personalt'
-          })
-          console.log("新建或更新成功")
-        }
-      })
+      if (name == oldname && phone == oldphone && email == oldemail && detail == olddetail){
+        wx.navigateBack({
+          delta: 1
+        })
+      }else{
+        wx.request({
+          url: app.globalData.domain + '/userInfo/update',
+          method: 'POST',
+          data: {
+            name: name,
+            phoneNumber: phone,
+            email: email,
+            deliveryAddress: detail,
+            userId: userId,
+            id: id
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            console.log(res)
+            if (res.statusCode == 200 && res.data.data == 1) {
+              wx.showToast({
+                title: '保存成功！',
+                icon: 'success',
+                duration: 2000
+              })
+              setTimeout(function () {
+                wx.hideToast()
+                page.onLoad()
+                // wx.navigateBack({
+                //   delta: 1
+                // })
+              }, 1500)
+            } else {
+              wx.showLoading({
+                title: 'loading',
+              })
+              setTimeout(function () {
+                wx.hideLoading();   //关闭模态框
+                wx.showModal({
+                  title: '提示',
+                  content: '保存失败！',
+                  showCancel: false,
+                  success: function (res) {
+                    if (res.confirm) {
+                      console.log('用户点击确定')
+                    }
+                  }
+                })
+              }, 1500)
+            }
+          }
+        })
+      }
     }
   }
 })
