@@ -13,9 +13,9 @@ page{
   flex-direction: column;
   padding:10rpx 30rpx;
 }
-.line{
+/* .line{
   border-bottom: 1rpx solid gainsboro;
-}
+} */
 .ques-style{ 
   min-height: 60rpx;
   font-size: 40rpx;

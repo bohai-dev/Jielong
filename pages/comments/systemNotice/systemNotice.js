@@ -9,12 +9,14 @@ Page({
       time: "2018/03/08 09:07",
       title: "恭候女王驾到",
       description: "女王更优惠",
-      imgUrl:"../../../images/addnum.png"
+      imgUrl:"../../../images/addnum.png",
+      boolean:true
     }, {
       time: "2018/02/17 19:33",
       title: "迪欧大魔王",
       description: "天下第一帅",
-      imgUrl: "../../../images/minusnum.png"
+      imgUrl: "../../../images/minusnum.png",
+      boolean:true
     }, {
       time: "2018/02/05 13:42",
       title: "白堤",
@@ -22,12 +24,17 @@ Page({
       imgUrl: "../../../images/addnum.png"
     }]
   },
+  searchAddress: function () {
+    wx.navigateTo({
+      url: './noticeContent/noticeContent',
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
   },
 
   /**
