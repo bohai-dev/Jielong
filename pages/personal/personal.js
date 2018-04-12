@@ -75,21 +75,8 @@ Page({
   onShow() {
     // 执行coolsite360交互组件展示
     app.coolsite360.onShow(this);
-    var _this = this;
-    wx.request({
-      url: app.globalData.domain + '/jielong/selectByUserId',
-      method: "GET",
-      data: { userId: wx.getStorageSync("userId") },
-      success: function (res) {
-        console.log(res)
-        if (res.statusCode == 200 && res.data.data.length) {
-          _this.data.userDetialList[0].rlCont = res.data.data.length + "个";
-          _this.setData({
-            userDetialList: _this.data.userDetialList
-          })
-        }
-      }
-    })
+    //初始化接龙数据
+    this.initData();
   },
 
   /**
@@ -115,7 +102,39 @@ Page({
 
 
   //以下为自定义点击事件
+  // 自定义事件
+  //获取发起/参与接龙数
+  initData: function (e) {
+    var _this = this;
+    wx.request({
+      url: app.globalData.domain + '/jielong/selectByUserId',
+      method: "GET",
+      data: { userId: wx.getStorageSync("userId") },
+      success: function (res) {
+        if (res.statusCode == 200 && res.data.data.length) {
+          _this.data.userDetialList[0].rlCont = res.data.data.length + "个";
+          _this.setData({
+            userDetialList: _this.data.userDetialList
+          })
+        }
+      }
+    });
 
+    wx.request({
+      url: app.globalData.domain + '/order/selectByCustomerId',
+      data: {
+        customerId: wx.getStorageSync("userId")
+      },
+      success: function (res) {
+        if (res.statusCode == 200 && res.data.data.length) {
+          _this.data.userDetialList[1].rlCont = res.data.data.length + "个";
+          _this.setData({
+            userDetialList: _this.data.userDetialList
+          })
+        }
+      }
+    })
+  }
 
 
 })

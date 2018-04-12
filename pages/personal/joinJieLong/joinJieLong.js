@@ -8,19 +8,7 @@ Page({
    */
   data: {
     isShow:false,
-    data:[{
-      time:"2018",
-      work:"已发货",
-      topic:"蛋黄酥"
-    }, {
-      time: "2018",
-      work: "已发货",
-      topic: "蛋黄酥"
-      }, {
-        time: "2018",
-        work: "已发货",
-        topic: "蛋黄酥"
-      }]
+    data:[]
   
   },
 
@@ -99,7 +87,14 @@ Page({
         }
       }
     })
-
-
+  },
+  //跳转到参与接龙明细
+  navToDetail:function(e){
+    var _this = this;
+    var jsonStr = _this.data.data[e.currentTarget.dataset.index];
+    jsonStr = JSON.stringify(jsonStr);
+    wx.navigateTo({
+      url: './joinMessage/joinMessage?jsonStr='+jsonStr,
+    })
   }
 })

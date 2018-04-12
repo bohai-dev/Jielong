@@ -3,7 +3,7 @@
     <view class='headCont'>{{item.topic}}</view>
     <view class='midCont'>
       <view class='left' >
-         接龙状态：<text class='{{item.status == 0 ? "blue" : item.status == 1 ? "green" : "red"}}'>{{item.status == 0 ? "活动结束" : item.status == 1 ? "正在进行中" : "平台终止"}}</text> 
+                  <text class='{{item.status == 0 ? "blue" : item.status == 1 ? "green" : item.status == 2 ? "red" : item.status == 3 ? "yellow" : ""}}'>{{item.status == 0 ? "已下单等待拼团成功" : item.status == 1 ? "待支付" : item.status == 2 ? "待提货" : item.status == 3 ? "提货成功" : "其他"}}</text>
       </view>
       <view class='right'>
         接龙类型：<text>自发接龙</text>

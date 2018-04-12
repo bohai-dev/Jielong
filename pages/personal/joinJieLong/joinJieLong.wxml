@@ -1,21 +1,22 @@
 <!--pages/personal/joinJieLong/joinJieLong.wxml-->
 <view class="JLPage" wx:if="{{isShow}}">
-  <view class='content' wx:for="{{data}}"  wx:key="id" wx:for-index="index" wx:for-item="item" data-id="{{item.id}}" bindtap='navToDetail'>
+  <view class='content' wx:for="{{data}}"  wx:key="id" wx:for-index="index" wx:for-item="item" data-id="{{item.id}}" data-index="{{index}}" bindtap='navToDetail'>
     <view class='midCont'>
       <view class='left' >
          参与时间：<text>{{item.createdAt}}</text>
       </view>
       <view class='right'>
-        <text class='{{item.state == 0 ? "blue" : item.state == 1 ? "green" : "red"}}'>{{item.state == 0 ? "活动结束" : item.state == 1 ? "正在进行中" : "平台终止"}}</text>
-      </view>
+         <text class='{{item.state == 0 ? "blue" : item.state == 1 ? "green" : item.state == 2 ? "red" : item.state == 3 ? "yellow" : ""}}'>{{item.state == 0 ? "已下单等待拼团成功" : item.state == 1 ? "待支付" : item.state == 2 ? "待提货" : item.state == 3 ? "提货成功" : "其他"}}</text>
+      </view> 
     </view>
     <view class='midCont'>
       <view class='left'>
-         <text>{{item.topic}}</text>
+         <text>{{item.jielongTopic}}</text>
       </view>
       <view class='right'>
+          <text class='{{item.orderGoods[0].groupFlg == 0 ? "green" : item.orderGoods[0].groupFlg == 1 ? "red" : "blue" }}'>{{item.orderGoods[0].groupFlg == 0 ? "待成团" : item.orderGoods[0].groupFlg == 1 ? "拼团成功" : "非成团接龙" }}</text> 
       </view>
-    </view>
+      </view>
   </view>
 </view>
 
@@ -26,5 +27,4 @@
     <image class='recordimg' src='../../../images/norecord.png'></image>
     <text class='news'>你还没有参与过任何接龙活动</text>
   </view>
-  <navigator url='./joinMessage/joinMessage'>toMessage</navigator>
 </view>

@@ -1,2 +1,42 @@
 /* pages/detail/addrRemake/addrRemake.wxss */
 @import "../../personal/joinJieLong/joinMessage/joinMessage";
+.page{
+  margin-bottom: 90rpx;
+}
+.allHead{
+  justify-content: flex-start;
+  border-bottom:1rpx solid #ECECEC;
+}
+.fStart{
+  justify-content: flex-end;
+}
+.marginTop{
+  margin-top: 30rpx;
+  
+}
+.avatarUrl{
+  height: 40rpx;
+  width: 40rpx;
+  margin-left: 30rpx;
+}
+.ib{
+  display: inline-block;
+}
+.navTGCont{
+  display: flex;
+  align-items: center;
+  width: 540rpx;
+}
+
+
+.pos_bot{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.pos_bot button{
+  height: 90rpx;
+  background-color: rgb(44, 187, 107);
+  color: white;
+  border-radius: 0;
+}

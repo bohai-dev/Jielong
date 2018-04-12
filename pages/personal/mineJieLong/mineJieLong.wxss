@@ -38,6 +38,9 @@ page{
 .green{
   color: green;
 }
+.yellow{
+  color: yellow;
+}
 
 .body{
   width: 100%;

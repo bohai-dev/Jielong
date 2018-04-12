@@ -21,6 +21,14 @@ page{
   width: 60rpx;
   height: 60rpx;
 }
+.avatarUrl{
+  border-radius: 50%;
+}
+.GoodsUrl{
+  display: inline-block;
+  max-width: 40rpx;
+  max-height: 40rpx;
+}
 .headContTop text{
   margin-left: 10rpx;
   font-size: 32rpx;
@@ -65,9 +73,13 @@ page{
 .midTop{
   justify-content: space-between;
 }
-
 .pirceCont{
-  justify-content: flex-start;
-  align-items: center;
+  display: block;
+}
+.pirceCont text{
+  display: block;
+}
+.ib{
+  display: inline-block;
 }
 

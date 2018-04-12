@@ -2,39 +2,45 @@
 <view class='page'>
   <view class='content'>
     <view class='headContTop'>
-      <image src='../../../../images/notice.png'></image>
-      <text class='headName'>笑</text>
+      <image src='{{data.userInfo.avatarUrl}}' class='avatarUrl'></image>
+      <text class='headName'>{{data.userInfo.nickName}}</text>
     </view>
-    <text class='headTitle'>中国苹果</text>
+    <text class='headTitle'>{{data.jielongTopic}}</text>
     
   </view>
 
   <view class='midContent'>
     <view class='headContTop'>
-      <image src='../../../../images/mine/Category.png'></image>
+      <image src='../../../../images/mine/Category.png' class='GoodsUrl'></image>
       <text>商品信息</text>
     </view>
+    <block wx:for="{{data.orderGoods}}" wx:for-item="goodsItem" wx:for-index="goodsIndex" wx:key="goodsIndex">
     <view class='goodsCont'>
-      <text>上海评估破</text>
-      <text>5斤</text>
-      <text class='red'>￥28.00</text>
+      <text>{{goodsItem.goods.name}}</text>
+      <text>{{goodsItem.goods.specification}}</text>
+      <text class='red'>￥{{goodsItem.goods.price}}</text>
     </view>
+    </block>
     <view class='allPirce'>
-      合计：<text class='red'>￥28.00</text>
+      合计：<text class='red'>￥{{data.sumMoney}}</text>
     </view>
-  </view>
 
+  </view>
 
     <view class='midContent'>
     <view class='headContTop midTop'>
       <view class='flexCenter'>
-          <image src='../../../../images/mine/Category.png'></image>
+          <image src='../../../../images/mine/Category.png' class='GoodsUrl'></image>
           <text>订单信息</text>
       </view>
-          <text>付款时间：2018-01-02</text>
     </view>
     <view class='goodsCont pirceCont'>
-      是否自提：<text>1</text>
+      <text>订单状态：{{data.state == 0 ? "已下单等待拼团成功" : data.state == 1 ? "待支付" : data.state == 2 ? "待提货" : data.state == 3 ? "提货成功" : "其他"}}</text>
+      <text>参团状态：{{data.orderGoods[0].groupFlg == 0 ? "待成团" : data.orderGoods[0].groupFlg == 1 ? "拼团成功" : "非成团接龙" }}<text wx:if="{{data.orderGoods[0].groupFlg == 0 ? true : false}}" class='red ib'>(还差{{data.orderGoods[0].joinGroupNum}}人成团)</text>
+      </text>
+      
+      <text>自提地址：{{data.userAddress.name}}</text>
+      <text>自提详细地址：{{data.userAddress.detail}}</text>
     </view>
   </view>
 
