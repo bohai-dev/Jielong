@@ -154,7 +154,7 @@ Page({
           _this.setData({
             userImg: res.data.data.userInfo.avatarUrl,
             goodstopic: res.data.data.topic,
-            goodsdata: res.data.data.createdAt,
+            goodsdata: res.data.data.createTimeStr,
             person: res.data.data.browseSum,
             goodsdescribe: res.data.data.description,
             goodsImg: res.data.data.imageList,

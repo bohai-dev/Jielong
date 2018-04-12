@@ -32,7 +32,7 @@
 <view class="container">
   <block wx:for="{{GoodList}}" wx:for-index="goodsIndex" wx:key="">
     <view class='goodsbuy {{isMe ? "" : "marbottom"}} '>
-      <image class="goodsbugimg" mode="aspectFill" src="{{appGlobalUrl + item.serverPaths[0]}}" bindtap='preViewImg' data-index="{{goodsIndex}}" data-imgSrc="{{appGlobalUrl + item.serverPaths[0]}}" data-viewList='goods' >
+      <image class="goodsbuyimg" mode="aspectFill" src="{{appGlobalUrl + item.serverPaths[0]}}" bindtap='preViewImg' data-index="{{goodsIndex}}" data-imgSrc="{{appGlobalUrl + item.serverPaths[0]}}" data-viewList='goods' >
       <view class='imgNum'>{{item.serverPaths.length}}张</view>
       </image>
       <view class='goodsinfo'>
@@ -54,7 +54,7 @@
   <view class="joinperson" wx:if='{{SetGroup}}'>
     <view class='jointitle'>{{joinperson}}人正在参团<block wx:if='{{isMe}}'>，可直接参与</block></view>
     <view class='joincontainer'>
-      <view class='joinimg'>
+      <view class='joinimg'>                                            
         <block wx:for="{{joinUserImg}}" wx:key="">
           <image class='joinuserimg' src='{{item}}'></image>
         </block>
@@ -73,10 +73,9 @@
     </block>
   </view>
   <view class="partake">
-    <view class="joinfont">参与记录</view> 
     <block wx:for="{{partakeRecord}}" wx:key="">
       <view class="joinfont">
-        <text>NO.{{index+1}}</text>
+        <text class='joinNO'>NO.{{index+1}}</text>
         <view class='userinfo'>
           <image class='userinfoimg' src='{{item.userimg}}'></image>
           <view class='userinfoname'>{{item.username}}</view>
@@ -85,6 +84,7 @@
         <text class='partakedate'>{{item.partakedate}}</text>
       </view>
     </block>
+    <view class="joinfont">参与记录</view> 
   </view>
   <view class="foot_nav">
     <view class="foot_left" wx:if="{{isMe}}">

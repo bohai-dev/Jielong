@@ -41,14 +41,14 @@
 .goodsimgbox{
   display:flex;
   flex-flow:row wrap;
-  justify-content:space-around;
-  padding:3% 1.5% 0;
+  justify-content:flex-start;
+  padding:3% 0 0 3%;
   border-bottom: 2rpx solid #F0EFF5;
 }
 .goodsimg{
   width:220rpx;
   height:220rpx;
-  margin-bottom: 3%;
+  margin:0 3% 3% 0;
 }
 .section{
   width: 100%;
@@ -95,7 +95,7 @@
 .marbottom{
   margin-bottom:20rpx;
 }
-.goodsbugimg{
+.goodsbuyimg{
   width: 180rpx;
   height: 180rpx;
   border-radius: 20rpx;
@@ -168,6 +168,8 @@
 .partake{
   background:white;
   margin-bottom:20rpx;
+  display:flex;
+  flex-direction:column-reverse;
 }
 .joinfont{
   width: 100%;
@@ -253,12 +255,15 @@
   color: #ABABAB;
   font-size: 25rpx;
 }
+.joinNO{
+  flex:1;
+}
 .userinfo{
   width: 200rpx;
   height: 100%;
+  flex:2;
   display:flex;
   align-items:center;
-  margin-left:50rpx;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -276,10 +281,10 @@
   text-overflow:ellipsis;
 }
 .joinnumber{
-  margin-left:80rpx;
+  flex:1;
 }
 .partakedate{
-  margin-left:50rpx;
+  flex:2
 }
 .foot_nav{
   width:100%;
