@@ -4,6 +4,8 @@
   min-height: 100%;
   background:#F0EFF5;
   padding: 0 30rpx 20rpx;
+  display:flex;
+  flex-direction:column-reverse;
 }
 .noticelist{
   width:100%;

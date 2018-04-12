@@ -2,7 +2,7 @@
 
 <view class='body'>
   <block wx:for="{{noticeList}}" wx:key="">
-    <view class='noticelist' hover-class='none'  bindtap='{{ item.boolean ? "searchAddress" : ""}}'>
+    <view class='noticelist' hover-class='none'  bindtap='{{ item.jumpBoolean ? "searchAddress" : ""}}'>
       <view class='time'>{{item.createTimeStr}}</view>
       <view class='container'>
         <text class='title'>{{item.title}}</text>

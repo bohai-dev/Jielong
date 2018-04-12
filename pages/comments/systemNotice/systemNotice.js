@@ -30,6 +30,7 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+        console.log(res.data.data)
         _this.setData({
           noticeList: res.data.data
         })
@@ -65,11 +66,29 @@ Page({
     console.log(this.data.noticeList)
     //用户已读消息
     var  _this = this;
+    var app = getApp();
     for (var i = 0; i < this.data.noticeList.length; i++) {
       if (this.data.noticeList[i].isRead == 0) {
-        //res.data.data[i].isRead == 1
-        console.log("未读"+i)
+        var id = this.data.noticeList[i].id;
+        wx.request({
+          url: app.globalData.domain + '/userMessage/updateReadStatus',
+          data: {
+            id: id
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            console.log(res.data.data)
+            // _this.setData({
+            //   noticeList: res.data.data
+            // })
+          }
+        })
       }
+      wx.hideTabBarRedDot({
+        index: 2
+      })
     }
   },
 
