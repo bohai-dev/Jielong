@@ -53,8 +53,34 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    // 执行coolsite360交互组件展示
-    app.coolsite360.onShow(this);
+    //消息接口
+    var app = getApp();
+    var _this = this;
+    var userId = wx.getStorageSync("userId");
+    wx.request({
+      url: app.globalData.domain + '/userMessage/selectByUserId',
+      data: {
+        userId: userId
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        for(var i=0;i<res.data.data.length;i++){
+          if (res.data.data[i].isRead == 0){
+            wx.showTabBarRedDot({
+              index: 2
+            })
+            break;
+          }else{
+            wx.hideTabBarRedDot({
+              index: 2
+            })
+          }
+        }
+      }
+    })
+    
   },
 
   /**

@@ -5,24 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    noticeList:[{
-      time: "2018/03/08 09:07",
-      title: "恭候女王驾到",
-      description: "女王更优惠",
-      imgUrl:"../../../images/addnum.png",
-      boolean:true
-    }, {
-      time: "2018/02/17 19:33",
-      title: "迪欧大魔王",
-      description: "天下第一帅",
-      imgUrl: "../../../images/minusnum.png",
-      boolean:true
-    }, {
-      time: "2018/02/05 13:42",
-      title: "白堤",
-      description: "西湖美景，三月天内",
-      imgUrl: "../../../images/addnum.png"
-    }]
+    noticeList:[]
   },
   searchAddress: function () {
     wx.navigateTo({
@@ -34,7 +17,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    //显示系统通知
+    var app = getApp();
+    var _this = this;
+    var userId = wx.getStorageSync("userId");
+    wx.request({
+      url: app.globalData.domain + '/userMessage/selectByUserId',
+      data: {
+        userId: userId
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        _this.setData({
+          noticeList: res.data.data
+        })
+      }
+    })
   },
 
   /**
@@ -62,7 +62,15 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    console.log(this.data.noticeList)
+    //用户已读消息
+    var  _this = this;
+    for (var i = 0; i < this.data.noticeList.length; i++) {
+      if (this.data.noticeList[i].isRead == 0) {
+        //res.data.data[i].isRead == 1
+        console.log("未读"+i)
+      }
+    }
   },
 
   /**

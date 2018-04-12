@@ -3,11 +3,11 @@
 <view class='body'>
   <block wx:for="{{noticeList}}" wx:key="">
     <view class='noticelist' hover-class='none'  bindtap='{{ item.boolean ? "searchAddress" : ""}}'>
-      <view class='time'>{{item.time}}</view>
+      <view class='time'>{{item.createTimeStr}}</view>
       <view class='container'>
         <text class='title'>{{item.title}}</text>
-        <text class='description'>{{item.description}}</text>
-        <image src='{{item.imgUrl}}' mode='scaleToFill' class='img'></image>
+        <text class='description'>{{item.message}}</text>
+        <image wx:if="{{item.imgUrl}}" src='{{item.imgUrl}}' mode='scaleToFill' class='img'></image>
       </view>
     </view>
   </block>

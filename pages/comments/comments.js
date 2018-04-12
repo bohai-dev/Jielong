@@ -27,8 +27,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    // 注册coolsite360交互模块
-    app.coolsite360.register(this);
+    // wx.showTabBarRedDot({
+    //   index:2
+    // })
   },
 
   /**
