@@ -18,7 +18,7 @@ Page({
     goodsImg: [],                               //接龙图片
     joinnum:0,                                  //参与数量
     SetGroup:true,                              //是否设置最小成员团
-    joinperson:5,                               //参与人数
+    joinperson:0,                               //参与人数
     joinUserImg: ['../../images/navIcon/personal1.png', '../../images/navIcon/personal1.png', '../../images/navIcon/personal1.png', '../../images/navIcon/personal1.png'],
     Group:5,                                    //最小开团人数
     buy: "请选择商品",                           //购买商品
@@ -164,7 +164,8 @@ Page({
             SetGroup: SetGroup,
             record: _this.data.record,
             isMe: _this.data.isMe,
-            goodsUserid: goodsUserid
+            goodsUserid: goodsUserid,
+            joinperson: res.data.data.joinSum
           })
         }
       }

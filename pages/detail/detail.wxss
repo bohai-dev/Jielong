@@ -326,7 +326,7 @@
   background: #ccc;
 }
 .foot_right_green{
-  background: #1AAD19;
+  background: rgb(44, 187, 107);
 }
 .foot_btn{
   width: calc(100%/3);

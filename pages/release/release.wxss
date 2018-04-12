@@ -159,7 +159,7 @@ picker{
   width:100%;
   text-align: center;
   color:#fff;
-  background:#1AAD19;
+  background:rgb(44, 187, 107);
   font:40rpx/100rpx "微软雅黑";
   border-radius: 0;
 }

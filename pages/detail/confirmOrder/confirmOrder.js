@@ -197,7 +197,7 @@ Page({
                       'content-type': 'application/json'
                     },
                     success: function (res) {
-                      // console.log(res)
+                      console.log(res)
                       if (res.statusCode == 200 && res.data.data == 1){
                         console.log("下单成功")
                         wx.showToast({
