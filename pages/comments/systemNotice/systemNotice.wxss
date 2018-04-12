@@ -35,6 +35,13 @@
   flex-direction:column;
   justify-content:space-between;
 }
+.isShow{
+  margin-left:599rpx;
+  position:absolute;
+  margin-top:-18rpx;
+  color:red;
+  font-size:24rpx
+}
 .title{
   color:#666;
   font-size:30rpx;

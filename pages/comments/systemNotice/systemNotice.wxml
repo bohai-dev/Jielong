@@ -5,6 +5,7 @@
     <view class='noticelist' hover-class='none'  bindtap='{{ item.jumpBoolean ? "searchAddress" : ""}}'>
       <view class='time'>{{item.createTimeStr}}</view>
       <view class='container'>
+        <text class="isShow" wx:if="{{!item.isRead}}">new</text>
         <text class='title'>{{item.title}}</text>
         <text class='description'>{{item.message}}</text>
         <image wx:if="{{item.imgUrl}}" src='{{item.imgUrl}}' mode='scaleToFill' class='img'></image>
