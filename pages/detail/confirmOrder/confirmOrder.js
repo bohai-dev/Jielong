@@ -173,69 +173,75 @@ Page({
           'content-type': 'application/json'
         },
         success: function (res) {
+          var repertorychange = true;
           for (var i = 0; i < res.data.data.goodsList.length; i++) {
             for (var j = 0; j < orderGoods.length; j++) {
               if (res.data.data.goodsList[i].id == orderGoods[j].goodsId) {
                 if (orderGoods[j].sum > res.data.data.goodsList[i].repertory) {
-                  wx.showModal({
-                    title: '提示',
-                    content: '商品库存发生变化，请刷新后重新选择商品！',
-                    showCancel: false,
-                    success: function (res) {
-                      if (res.confirm) {
-                        console.log('用户点击确定')
-                      }
-                    }
-                  })
-                } else {
-                  var data = _this.data;
-                  wx.request({
-                    url: app.globalData.domain + '/order/insert',
-                    method: 'POST',
-                    data: data,
-                    header: {
-                      'content-type': 'application/json'
-                    },
-                    success: function (res) {
-                      console.log(res)
-                      if (res.statusCode == 200 && res.data.data == 1){
-                        console.log("下单成功")
-                        wx.showToast({
-                          title: '成功',
-                          icon: 'success',
-                          duration: 2000
-                        })
-                        setTimeout(function () {
-                          wx.hideToast()
-                          wx.navigateBack({
-                            delta: 2
-                          })
-                        }, 1500)
-                      }else{
-                        console.log("下单失败")
-                        wx.showLoading({
-                          title: 'loading',
-                        })
-                        setTimeout(function () {
-                          wx.hideLoading();   //关闭模态框
-                          wx.showModal({
-                            title: '提示',
-                            content: '下单失败！',
-                            showCancel: false,
-                            success: function (res) {
-                              if (res.confirm) {
-                                console.log('用户点击确定')
-                              }
-                            }
-                          })
-                        }, 1000)
-                      }
-                    }
-                  })
+                  repertorychange = false;
+                  break;
                 }
               }
             }
           }
+          if (repertorychange == true){
+            var data = _this.data;
+            wx.request({
+              url: app.globalData.domain + '/order/insert',
+              method: 'POST',
+              data: data,
+              header: {
+                'content-type': 'application/json'
+              },
+              success: function (res) {
+                console.log(res)
+                if (res.statusCode == 200 && res.data.data == 1) {
+                  console.log("下单成功")
+                  wx.showToast({
+                    title: '成功',
+                    icon: 'success',
+                    duration: 2000
+                  })
+                  setTimeout(function () {
+                    wx.hideToast()
+                    wx.navigateBack({
+                      delta: 2
+                    })
+                  }, 1500)
+                } else {
+                  console.log("下单失败")
+                  wx.showLoading({
+                    title: 'loading',
+                  })
+                  setTimeout(function () {
+                    wx.hideLoading();   //关闭模态框
+                    wx.showModal({
+                      title: '提示',
+                      content: '下单失败！',
+                      showCancel: false,
+                      success: function (res) {
+                        if (res.confirm) {
+                          console.log('用户点击确定')
+                        }
+                      }
+                    })
+                  }, 1000)
+                }
+              }
+            })
+          }else{
+            wx.showModal({
+              title: '提示',
+              content: '商品库存发生变化，请刷新后重新选择商品！',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                }
+              }
+            })
+          }
+          
         }
       })
     }

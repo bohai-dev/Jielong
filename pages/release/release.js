@@ -250,11 +250,12 @@ Page({
     console.log(e.detail.value)
     if (e.detail.value) {
       var nowDate = new Date();
+      var NowTimeHours = nowDate.getHours();
+      //设置天数
       var NowDayarr = [];
       var enddayarr = [];
-      //设置天数
       for (var i = 0; i < 8; i++) {
-        if (i == 0) {
+        if (i == 0 && NowTimeHours + 1 < 23) {
           NowDayarr[i] = new Date(nowDate.setDate(nowDate.getDate()));
         } else {
           NowDayarr[i] = new Date(nowDate.setDate(nowDate.getDate() + 1));
@@ -263,23 +264,29 @@ Page({
       }
       console.log(enddayarr);
       //设置时间
-      var NowTime = nowDate.getHours();
       var todaytime = [];
       var othertime = [];
-      if (NowTime + 1 < 23) {
-        var num = 23 - (NowTime + 1);
-        for (var j = 0; j < num; j++) {
-          todaytime[j] = NowTime + (j + 2) + ":00";
-        }
-      }
       for (var n = 0; n < 24; n++) {
         othertime[n] = twonumber(n) + ":00"
-        function twonumber(num) {
-          if (num < 10) {
-            return "0" + num;
-          }
-          return num;
+      }
+      if (NowTimeHours < 22) {
+        var num = 22 - NowTimeHours;
+        for (var j = 0; j < num; j++) {
+          todaytime[j] = twonumber(NowTimeHours + (j + 2)) + ":00";
         }
+      } else if (NowTimeHours == 22) {
+        todaytime = othertime
+      } else {
+        var num = 23;
+        for (var j = 0; j < num; j++) {
+          todaytime[j] = twonumber(j+1) + ":00";
+        }
+      }
+      function twonumber(num) {
+        if (num < 10) {
+          return "0" + num;
+        }
+        return num;
       }
       console.log(todaytime);
       console.log(othertime);
@@ -538,6 +545,7 @@ Page({
     }
 
   },
+  //截至时间
   bindMultiPickerChange: function (e) {
     this.setData({
       multiIndex: e.detail.value
