@@ -29,6 +29,7 @@ Page({
    */
   onLoad: function (options) {
     //初始化时间
+    console.log(options)
     this.initTime();
   
   },

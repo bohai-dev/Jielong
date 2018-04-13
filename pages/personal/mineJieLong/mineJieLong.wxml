@@ -14,7 +14,7 @@
         是否自提：<text>是</text>
       </view>
       <view class='right'>
-        创建时间：<text>{{item.createdAt}}</text>
+        创建时间：<text>{{item.createTimeStr}}</text>
       </view>
     </view>
   </view>

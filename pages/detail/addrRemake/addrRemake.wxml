@@ -1,6 +1,6 @@
 <!--pages/detail/addrRemake/addrRemake.wxml-->
 <view class='page'>
-  <view class='midContent'>
+  <view class='midContent' wx:if="{{pickNum}}">
 
     <view class='allHead allPirce'>
       <checkbox wx:if="{{!isShow}}" data-show="{{isShow}}" bindtap='checkAll'></checkbox>
@@ -9,34 +9,41 @@
     </view>
     <checkbox-group bindchange="checkboxChange">
     <block wx:for="{{items}}" wx:key="id">
-    <view class='goodsCont marginTop' >
+    <view class='goodsCont oneGoods_hr' >
       <view class='goodsCont_left'>
         <checkbox value='{{item.id}}' checked='{{item.checked}}'></checkbox>
         <view class='ib'>
-        <view bindtap='navToGoods' class='navTGCont'>
+        <view class='navTGCont'>
         <text>NO.{{index + 1}}</text>
-        <image class='avatarUrl' src='../../../images/mine/Category.png'></image>
-        <text>入账金额</text>
+        <image class='avatarUrl' src='{{item.userInfo.avatarUrl}}'></image>
+        <text>{{item.userInfo.nickName}}</text>
         </view>
         </view>
       </view>
       <view>
       </view> 
     </view>
-
-    <view  class='goodsCont'>
-        <text>名字</text>
-        <text>12345678980</text>
+    <view  class='goodsCont fStart oneGoods_hr'>
+        <text class='m_right'>{{item.userInfo.name}}</text>
+        <text>{{item.userInfo.phoneNumber}}</text>
+    </view> 
+    <view wx:for="{{item.orderGoods}}" wx:for-item="goodsItem" wx:for-index="goodsIndex" wx:key="id"  class='goodsCont oneGoods_hr'>
+        <text>{{goodsItem.goods.name}}</text>
+        <text>+{{goodsItem.sum}}</text>
+        <text>￥{{goodsItem.money}}</text>
     </view>   
-    
-     <view class='goodsCont  fStart'>
-      合计：<text class='red'>￥1</text>
+    <view class='goodsCont  fEnd'>
+      合计：<text class='red'>￥{{item.sumMoney}}</text>
     </view>
     </block>
     </checkbox-group>
 
   </view>
+  <view class='textCen'>
+    没有更多了
+  </view>
 </view>
+
 
   <view  class='pos_bot'>
     <button bindtap='saveRemake'>确认</button>

@@ -179,7 +179,7 @@ Page({
     })
     
     // 注册coolsite360交互模块
-    app.coolsite360.register(this);
+    // app.coolsite360.register(this);
     
   },
 
@@ -195,7 +195,7 @@ Page({
    */
   onShow(e) {
     // 执行coolsite360交互组件展示
-    app.coolsite360.onShow(this);
+    // app.coolsite360.onShow(this);
   },
 
   /**
@@ -421,14 +421,16 @@ Page({
   },
   //跳转接龙统计
   solitaireStatistics:function(e){
+    var _this = this;
     wx.navigateTo({
-      url: './solitaireStatistics/solitaireStatistics',
+      url: './solitaireStatistics/solitaireStatistics?jieLongId=' + _this.data.jieLongId,
     })
   },
   //跳转到自提标记
   addrRemake:function(e){
+    var _this = this;    
     wx.navigateTo({
-      url: './addrRemake/addrRemake',
+      url: './addrRemake/addrRemake?jieLongId=' + _this.data.jieLongId,
     })
   },
   //结束接龙
@@ -440,13 +442,13 @@ Page({
       success:function(res){
         if(res.confirm){
           wx.request({
-            url: app.globalData.domain + '/jielong/update',
-            method: "POST",
+            url: app.globalData.domain + '/jielong/closeJielong',
+            method: "GET",
             data: {
               id: _this.data.jieLongId,
-              status: 2
             },
             success: function (res) {
+              console.log(res)
               if(res.statusCode == 200){
                 wx.showToast({
                   title: '结束接龙成功!',

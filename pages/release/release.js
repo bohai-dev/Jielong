@@ -799,7 +799,9 @@ Page({
       remindDataObj = { pushForm: 0, remData: "请设置自提点！" };
     } else if (this.data.setFinishTime && !data.finishTime) {
       remindDataObj = { pushForm: 0, remData: "请设置截止时间！" };
-    } else {
+    } else if (data.goodsList[0].isSetGroup && !data.finishTime) {
+      remindDataObj = { pushForm: 0, remData: "成团必须设置设置截止时间！" };
+    }else {
       for (var i = 0; i < data.goodsList.length; i++) {
         if (!data.goodsList[i].name) {
           remindDataObj = { pushForm: 0, remData: "请设置商品名称！" };
@@ -814,7 +816,9 @@ Page({
         } else if (!data.goodsList[i].repertory) {
           remindDataObj = { pushForm: 0, remData: "请设置商品库存！" };
         } else if (data.goodsList[i].isSetGroup && !data.goodsList[i].groupSum) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品的最小成团数据！" };
+          remindDataObj = { pushForm: 0, remData: "请设置商品的最小成团数量！" };
+        } else if (data.goodsList[i].isSetGroup && data.goodsList[i].repertory < data.goodsList[i].groupSum) {
+          remindDataObj = { pushForm: 0, remData: "商品库存不能小于最小成团数量" };
         } else {
           remindDataObj = { pushForm: 1, remData: "" };
         }

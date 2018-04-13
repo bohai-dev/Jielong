@@ -1,22 +1,16 @@
 // pages/detail/addrRemake/addrRemake.js
+var app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    items:[{
-        id: 1,
-      }, {
-        id: 2,
-      }, {
-        id: 3,
-      }, {
-        id: 4,
-      }, {
-        id: 5,
-      },],
-    isShow:false
+    items:[],
+    isShow:false,
+    jieLongId:"",
+    pickNum:false
   
   },
 
@@ -24,7 +18,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    //初始化页面数据
+    this.initData(options.jieLongId);
+
   },
 
   /**
@@ -78,11 +74,33 @@ Page({
 
   //公共事件
   //多选框按钮
+  initData: function (jieLongId){
+    var _this = this;
+    wx.request({
+      url: app.globalData.domain + '/order/selectPickOrder',
+      method: "GET",
+      data: {
+        jielongId: jieLongId
+      },
+      success: function (res) {
+        console.log(res)
+        if (res.statusCode == 200) {
+          _this.setData({
+            items: res.data.data,
+            jieLongId: jieLongId,
+            pickNum: res.data.data.length
+          })
+        }
+
+      }
+    })
+  },
+
   checkboxChange:function(e){
     var _this = this;
-    console.log(e.detail.value)
-    console.log(e.detail.value.length)
-    console.log(_this.data.items.length)
+    // console.log(e.detail.value)
+    // console.log(e.detail.value.length)
+    // console.log(_this.data.items.length)
     if (e.detail.value.length == _this.data.items.length) {
       _this.setData({
         isShow: true
@@ -99,19 +117,20 @@ Page({
     })
     if (e.detail.value.length){
       e.detail.value.forEach(function(res,index){
-        var indexNum = Number(res) - 1;
-        if (_this.data.items[indexNum].id == res){
-          _this.data.items[indexNum].checked = "true";
-        }
+        _this.data.items =  _this.data.items.map(function (resItem) {
+          if (resItem.id == res) {
+            resItem.checked = "true";
+          }
+          return resItem;
+        })
       })
+      // console.log(_this.data.items)
     }
   },
   //全选
   checkAll:function(e){
-    console.log(e.currentTarget.dataset.show)
     var _this = this;
     _this.data.isShow = !_this.data.isShow;
-    console.log(_this.data.isShow)
     if (_this.data.isShow) {
       _this.data.items.forEach(function (e) {
         if (!e.checked) {
@@ -137,16 +156,37 @@ Page({
     }
   },
 
-
-  //展开用户信息
-  navToGoods:function(e){
-    console.log(this)
-  },
-
   //确认提货
   saveRemake:function(e){
     console.log(this)
+    var _this = this;
+    var jsonStr = [];
+    console.log(JSON.stringify(jsonStr));
+    _this.data.items.forEach(function(item){
+      if(item.checked){
+        jsonStr.push(item.orderNum);
+      }
+    })
+    console.log(jsonStr)
+    wx.request({
+      url: app.globalData.domain + '/order/signPick',
+      method:"POST",
+      data:jsonStr,
+      success:function(res){
+        // console.log(res)
+        if(res.statusCode){
+          wx.showToast({
+            title: '确认提货成功!'
+          })
+          _this.initData(_this.data.jieLongId);
+        }else{
+          wx.showToast({
+            title: res.data.errorMessage || '确认提货失败!'
+          })
+        }
 
+      }
+    })
   }
 
 

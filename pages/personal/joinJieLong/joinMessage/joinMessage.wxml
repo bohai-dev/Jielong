@@ -17,7 +17,7 @@
     <block wx:for="{{data.orderGoods}}" wx:for-item="goodsItem" wx:for-index="goodsIndex" wx:key="goodsIndex">
     <view class='goodsCont'>
       <text>{{goodsItem.goods.name}}</text>
-      <text>{{goodsItem.goods.specification}}</text>
+      <text>{{goodsItem.sum + goodsItem.goods.specification}}</text>
       <text class='red'>￥{{goodsItem.goods.price}}</text>
     </view>
     </block>

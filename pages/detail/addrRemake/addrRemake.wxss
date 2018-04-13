@@ -1,18 +1,14 @@
 /* pages/detail/addrRemake/addrRemake.wxss */
 @import "../../personal/joinJieLong/joinMessage/joinMessage";
-.page{
-  margin-bottom: 90rpx;
-}
 .allHead{
   justify-content: flex-start;
   border-bottom:1rpx solid #ECECEC;
 }
 .fStart{
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
-.marginTop{
-  margin-top: 30rpx;
-  
+.fEnd{
+  justify-content: flex-end;
 }
 .avatarUrl{
   height: 40rpx;
@@ -27,8 +23,20 @@
   align-items: center;
   width: 540rpx;
 }
-
-
+.oneGoods_hr{
+  padding: 20rpx 0;
+  margin: 0 30rpx;
+}
+.m_right{
+  margin-right: 30rpx;
+}
+.textCen{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 90rpx;
+  margin-top: 40rpx;
+  color: #333;
+}
 .pos_bot{
   position: fixed;
   bottom: 0;
