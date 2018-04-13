@@ -37,11 +37,11 @@ page{
 .pos_bot{
   position: fixed;
   bottom: 0;
+  height: 90rpx;
   width: 100%;
 }
 .pos_bot button{
   display: inline-block;
-  height: 90rpx;
   background-color: rgb(44, 187, 107);
   color: white;
   border-radius: 0;

@@ -381,7 +381,6 @@ Page({
       //console.log(goodsInfo)
       if (!addressId){
         wx.showModal({
-          title: '提示',
           content: '请选择自提点',
           showCancel: false,
           success: function (res) {

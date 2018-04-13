@@ -161,32 +161,41 @@ Page({
     console.log(this)
     var _this = this;
     var jsonStr = [];
-    console.log(JSON.stringify(jsonStr));
-    _this.data.items.forEach(function(item){
-      if(item.checked){
+    _this.data.items.forEach(function (item) {
+      if (item.checked) {
         jsonStr.push(item.orderNum);
       }
     })
+    if(jsonStr.length){
+    JSON.stringify(jsonStr);
     console.log(jsonStr)
     wx.request({
       url: app.globalData.domain + '/order/signPick',
       method:"POST",
       data:jsonStr,
       success:function(res){
-        // console.log(res)
-        if(res.statusCode){
+        console.log(res)
+        if(res.statusCode == 200){
           wx.showToast({
             title: '确认提货成功!'
           })
           _this.initData(_this.data.jieLongId);
         }else{
           wx.showToast({
-            title: res.data.errorMessage || '确认提货失败!'
+            title: res.data.errorMessage || '确认提货失败!',
+            icon:"none"
           })
         }
 
       }
     })
+    }else{
+      wx.showToast({
+        title: '请选择订单！',
+        icon: "none"
+      })
+
+    }
   }
 
 
