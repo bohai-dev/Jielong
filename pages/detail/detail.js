@@ -80,18 +80,18 @@ Page({
     //   username: "MonsterDO",
     //   joinnumber: 2,
     //   partakedate: "2018-04-01 15:35"
-    // }],
-    // footnav: [{
-    //   navIcon: "../../images/home.png",
-    //   navText: "首页",
-    //   navUrl: "../index/index",
-    //   navborder: "footNavrightborder"
-    // }, {
-    //   navIcon: "../../images/add.png",
-    //   navText: "发布接龙",
-    //   navUrl: "../add/add"
     // }
     ],
+    footnav: [{
+      navIcon: "../../images/home.png",
+      navText: "首页",
+      navUrl: "../index/index",
+      navborder: "footNavrightborder"
+    }, {
+      navIcon: "../../images/add.png",
+      navText: "发布接龙",
+      navUrl: "../add/add"
+    }],
     
   },
 

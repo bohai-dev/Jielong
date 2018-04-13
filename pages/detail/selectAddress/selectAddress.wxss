@@ -3,12 +3,12 @@
 
 .pos_bottom{
   position: fixed;
+  height: 90rpx;
   bottom: 0;
   width: 100%;
 }
 .pos_bottom button{
   display: inline-block;
-  height: 90rpx;
   background-color: rgb(44, 187, 107);
   color: white;
   border-radius: 0;

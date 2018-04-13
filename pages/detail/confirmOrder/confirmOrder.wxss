@@ -52,8 +52,12 @@ input{
   align-items:flex-start;
   padding:30rpx;
 }
+.memotitle{
+  flex:1
+}
 .memo{
   height: 100%;
+  flex: 7
 }
 button{
   width:95%;

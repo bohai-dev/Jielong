@@ -18,7 +18,7 @@
   </view>
   <view class='address'>自提地址：{{addressName}}</view>
   <view class='memobox'>
-    备注：
+    <text class='memotitle'>备注：</text>
     <textarea class='memo' maxlength='100' value='{{remark}}' bindinput="inputMemoChange"></textarea>
   </view>
   <button type='primary' bindtap="submitOrder">确认下单</button>
