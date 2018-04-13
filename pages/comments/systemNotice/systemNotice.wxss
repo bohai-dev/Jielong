@@ -1,8 +1,9 @@
 /* pages/comments/systemNotice/systemNotice.wxss */
+page{
+  background:#F0EFF5;
+}
 .body{
   width: 100%;
-  min-height: 100%;
-  background:#F0EFF5;
   padding: 0 30rpx 20rpx;
   display:flex;
   flex-direction:column-reverse;
