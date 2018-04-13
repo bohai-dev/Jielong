@@ -83,6 +83,9 @@
   background: #F0EFF5;
   padding:20rpx 0 80rpx;
 }
+.overSoCont{
+   padding-bottom: 0;
+ }
 .goodsbuy{
   height: 210rpx;
   display: flex;
@@ -332,6 +335,13 @@
   color: #2ABB6D;
   text-align: center;
 }
+.overSoCont{
+   width: 100%;
+ }
+ .foot_nav .foot_btn:nth-of-type(2){
+ border-left:2rpx solid #F0EFF5; 
+ border-right:2rpx solid #F0EFF5; 
+ }
 /*
   二维码
   */

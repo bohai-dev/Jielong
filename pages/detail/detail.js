@@ -69,27 +69,29 @@ Page({
       recordNumber: 0.00,
       recordText: "接龙金额(元)"
     }],
-    partakeRecord: [{                            //参与记录
-      userimg: '../../images/deleteImg.png',     //用户头像
-      username:"迪欧大魔王",                      //用户名称
-      joinnumber:1,                              //购买数量
-      partakedate: "2018-03-28 22:03"            //参与日期
-    }, {
-      userimg: '../../images/navIcon/personal1.png',
-      username: "MonsterDO",
-      joinnumber: 2,
-      partakedate: "2018-04-01 15:35"
-    }],
-    footnav: [{
-      navIcon: "../../images/home.png",
-      navText: "首页",
-      navUrl: "../index/index",
-      navborder: "footNavrightborder"
-    }, {
-      navIcon: "../../images/add.png",
-      navText: "发布接龙",
-      navUrl: "../add/add"
-    }],
+    partakeRecord: [
+    //   {                            //参与记录
+    //   userimg: '../../images/deleteImg.png',     //用户头像
+    //   username:"迪欧大魔王",                      //用户名称
+    //   joinnumber:1,                              //购买数量
+    //   partakedate: "2018-03-28 22:03"            //参与日期
+    // }, {
+    //   userimg: '../../images/navIcon/personal1.png',
+    //   username: "MonsterDO",
+    //   joinnumber: 2,
+    //   partakedate: "2018-04-01 15:35"
+    // }],
+    // footnav: [{
+    //   navIcon: "../../images/home.png",
+    //   navText: "首页",
+    //   navUrl: "../index/index",
+    //   navborder: "footNavrightborder"
+    // }, {
+    //   navIcon: "../../images/add.png",
+    //   navText: "发布接龙",
+    //   navUrl: "../add/add"
+    // }
+    ],
     
   },
 

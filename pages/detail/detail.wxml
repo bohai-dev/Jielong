@@ -55,7 +55,7 @@
     <!-- <view class='jointitle'>已有{{joingoodsnum}}件商品参团<block wx:if='{{isMe}}'>，可直接参与</block></view> -->
     <view class='joincontainer'>
       <view class='joinnum' wx:if='{{Group-joingoodsnum > 0 ? true : false}}'>还差<text class='greenfont'>{{Group-joingoodsnum}}件</text>商品拼成</view>
-      <view class='joinnum' wx:if='{{Group-joingoodsnum > 0 ? false : true}}'><text class='greenfont'>拼团成功</text>(已有{{joingoodsnum}}件商品参团)，可直接下单</view>
+      <view class='joinnum' wx:if='{{Group-joingoodsnum > 0 ? false : true}}'><text class='greenfont'>拼团成功</text>(已有{{joingoodsnum}}件商品参团)<block wx:if='{{isMe}}'>，可直接下单</block></view>
       <view class='jointext'>最小成团数量:<text class='greenfont'>{{Group}}</text></view>
     </view>
   </view>
