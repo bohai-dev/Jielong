@@ -36,7 +36,7 @@
     </view>
     <view class='goodsCont pirceCont'>
       <text>订单状态：{{data.state == 0 ? "已下单等待拼团成功" : data.state == 1 ? "待支付" : data.state == 2 ? "待提货" : data.state == 3 ? "提货成功" : "其他"}}</text>
-      <text>参团状态：{{data.orderGoods[0].groupFlg == 0 ? "待成团" : data.orderGoods[0].groupFlg == 1 ? "拼团成功" : "非成团接龙" }}<text wx:if="{{data.orderGoods[0].groupFlg == 0 ? true : false}}" class='red ib'>(还差{{data.orderGoods[0].joinGroupNum}}人成团)</text>
+      <text>参团状态：{{data.orderGoods[0].groupFlg == 0 ? "待成团" : data.orderGoods[0].groupFlg == 1 ? "拼团成功" : "非成团接龙" }}<text wx:if="{{data.orderGoods[0].groupFlg == 0 ? true : false}}" class='red ib'>(还差{{data.orderGoods[0].joinGroupNum}}件成团)</text>
       </text>
       
       <text>自提地址：{{data.userAddress.name}}</text>
