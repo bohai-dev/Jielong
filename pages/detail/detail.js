@@ -30,6 +30,7 @@ Page({
     QR_CodeSrc:"",                              //二维码地址
     hiddenModal:false,                           
     isMe:true,                                 //是否本人
+    overSolitaire:false,                        //接龙数据状态
     GoodsDetialList: [{                         //接龙信息
       mineIcon: "../../images/bigposition.png",
       mineName: "",
@@ -151,6 +152,7 @@ Page({
             _this.data.GoodList[i].serverPaths = _this.data.GoodList[i].serverPaths.split(",");
             _this.data.GoodList[i]["goodsnum"] = 0;
           }
+          // var jieLongStatus = res.data.data.status == 2 ? true : false;
           _this.setData({
             userImg: res.data.data.userInfo.avatarUrl,
             goodstopic: res.data.data.topic,
@@ -165,7 +167,8 @@ Page({
             record: _this.data.record,
             isMe: _this.data.isMe,
             goodsUserid: goodsUserid,
-            joinperson: res.data.data.joinSum
+            joinperson: res.data.data.joinSum,
+            overSolitaire: res.data.data.status == 2 ? true : false
           })
         }
       }
@@ -423,6 +426,49 @@ Page({
     wx.navigateTo({
       url: './addrRemake/addrRemake',
     })
+  },
+  //结束接龙
+  overSolitaire:function(e){
+    var _this = this;
+    console.log(_this)
+    wx.showModal({
+      title: '确定结束接龙？',
+      success:function(res){
+        if(res.confirm){
+          wx.request({
+            url: app.globalData.domain + '/jielong/update',
+            method: "POST",
+            data: {
+              id: _this.data.jieLongId,
+              status: 2
+            },
+            success: function (res) {
+              if(res.statusCode == 200){
+                wx.showToast({
+                  title: '结束接龙成功!',
+                  duration: 4000,
+                  success: function (ee) {
+                    _this.setData({
+                      overSolitaire: true,
+                      isMe: false
+                    })
+                  }
+                })
+              }else{
+                wx.showToast({
+                  title: '结束接龙失败!',
+                  duration: 4000,
+                  icon: "none",
+                })
+              }
+            }
+          })
+        }
+      }
+
+    })
+
+
   }
 
 

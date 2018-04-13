@@ -34,7 +34,7 @@ page{
   font-size: 32rpx;
 }
 .headName{
-  color: #61D090;
+  color: #2ABB6D;
 }
 .headTitle{
   font-size: 34rpx;
@@ -76,7 +76,7 @@ page{
 .pirceCont{
   display: block;
 }
-.pirceCont text{
+.pirceCont>text{
   display: block;
 }
 .ib{

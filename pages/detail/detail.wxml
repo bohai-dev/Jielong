@@ -96,9 +96,10 @@
       </block>
     </view>
     <view class="{{count > 0 ? 'foot_right_green' : 'foot_right'}}" bindtap="buyGoods" wx:if="{{isMe}}">{{buy}}</view>
-    <view class="foot_btn" wx:if="{{!isMe}}" bindtap='addrRemake'>自提标记</view>     
-    <view class="foot_btn" wx:if="{{!isMe}}" bindtap='solitaireStatistics'>接龙统计</view> 
-    <view class="foot_btn" wx:if="{{!isMe}}">结束接龙</view> 
+    <view class="foot_btn" wx:if="{{!isMe}}" wx:if="{{!overSolitaire}}" bindtap='addrRemake'>自提标记</view>     
+    <view class="foot_btn" wx:if="{{!isMe}}" wx:if="{{!overSolitaire}}" bindtap='solitaireStatistics'>接龙统计</view> 
+    <view class="foot_btn" wx:if="{{!isMe}}" wx:if="{{!overSolitaire}}" bindtap='overSolitaire'>结束接龙</view> 
+    <view class="foot_btn {{overSolitaire ? 'overSoCont' : ''}}"  wx:if="{{overSolitaire}}">此接龙已经结束</view> 
   </view>
 </view>
 
