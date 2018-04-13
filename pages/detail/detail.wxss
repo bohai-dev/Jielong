@@ -83,9 +83,6 @@
   background: #F0EFF5;
   padding:20rpx 0 80rpx;
 }
-.overSoCont{
-  padding-bottom: 0;
-}
 .goodsbuy{
   height: 210rpx;
   display: flex;
@@ -186,10 +183,8 @@
   border-bottom: 2rpx solid #F0EFF5;
 }
 .joinperson{
-  height:170rpx;
+  height:120rpx;
   background: white;
-  display:flex;
-  flex-direction:column;
   margin-bottom: 20rpx;
 }
 .jointitle{
@@ -204,28 +199,23 @@
 }
 .joincontainer{
   width:100%;
-  height:120rpx;
-  padding:0 30rpx;
+  height:100%;
+  padding:20rpx 30rpx;
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  flex-direction: column;
 }
-.joinimg{
-  width:500rpx;
-  height:80rpx;
+.joinnum{
   display:flex;
-  flex-flow:row wrap;
   align-items:center;
-  overflow:hidden;
-}
-.joinuserimg{
-  width: 80rpx;
-  height: 80rpx;
+  font: 25rpx "微软雅黑";
+  color: #333;
+  margin-top: 20rpx;
 }
 .jointext{
   color:#333;
   font:25rpx "微软雅黑";
-  margin-top:40rpx;
+  align-self: flex-end;
 }
 .greenfont{
   color:#08CF40;
@@ -341,13 +331,6 @@
   font: 35rpx/100rpx "微软雅黑";
   color: #2ABB6D;
   text-align: center;
-}
-.overSoCont{
-  width: 100%;
-}
-.foot_nav .foot_btn:nth-of-type(2){
-border-left:2rpx solid #F0EFF5; 
-border-right:2rpx solid #F0EFF5; 
 }
 /*
   二维码

@@ -18,9 +18,8 @@ Page({
     goodsImg: [],                               //接龙图片
     joinnum:0,                                  //参与数量
     SetGroup:true,                              //是否设置最小成员团
-    joinperson:0,                               //参与人数
-    joinUserImg: ['../../images/navIcon/personal1.png', '../../images/navIcon/personal1.png', '../../images/navIcon/personal1.png', '../../images/navIcon/personal1.png'],
-    Group:5,                                    //最小开团人数
+    Group:0,                                    //最小开团数量
+    joingoodsnum:0,                             //参团商品数量
     buy: "请选择商品",                           //购买商品
     count: 0,                                   //商品总数
     total: 0,                                   //商品总价
@@ -144,6 +143,8 @@ Page({
           _this.data.record[1].recordNumber = res.data.data.joinSum;
           _this.data.record[2].recordNumber = res.data.data.joinMoney;
           var SetGroup = res.data.data.goodsList[0].isSetGroup;
+          var Group = res.data.data.goodsList[0].groupSum;
+          var joingoodsnum = res.data.data.goodsList[0].remainSum;
           var goodsUserid = res.data.data.userId;
           if (goodsUserid == userid){
             _this.data.isMe = false
@@ -167,8 +168,9 @@ Page({
             record: _this.data.record,
             isMe: _this.data.isMe,
             goodsUserid: goodsUserid,
-            joinperson: res.data.data.joinSum,
-            overSolitaire: res.data.data.status == 2 ? true : false
+            overSolitaire: res.data.data.status == 2 ? true : false,
+            Group: Group,
+            joingoodsnum: joingoodsnum
           })
         }
       }

@@ -14,7 +14,7 @@
   flex-direction:column;
 }
 .time{
-  width:220rpx;
+  width:240rpx;
   height:50rpx;
   background:#ddd;
   font-size:22rpx;
