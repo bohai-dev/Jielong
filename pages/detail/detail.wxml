@@ -47,7 +47,7 @@
       </view>
     </view>
     <view class="partake" wx:if='{{isMe}}'>
-      <view class="joinfont">您已参与{{joinnum}}份</view>
+      <view class="joinfont">您已参与{{item.sum}}份</view>
     </view>
   </block>
   <!-- 参团人数 -->

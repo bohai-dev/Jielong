@@ -16,7 +16,6 @@ Page({
     person:0,                                   //浏览人数
     goodsdescribe:"",                           //接龙描述
     goodsImg: [],                               //接龙图片
-    joinnum:0,                                  //参与数量
     SetGroup:true,                              //是否设置最小成员团
     Group:0,                                    //最小开团数量
     joingoodsnum:0,                             //参团商品数量
@@ -28,7 +27,7 @@ Page({
     jieLongId:"",                               //接龙id
     QR_CodeSrc:"",                              //二维码地址
     hiddenModal:false,                           
-    isMe:true,                                 //是否本人
+    isMe:true,                                  //是否本人
     overSolitaire:false,                        //接龙数据状态
     GoodsDetialList: [{                         //接龙信息
       mineIcon: "../../images/bigposition.png",
@@ -69,19 +68,7 @@ Page({
       recordNumber: 0.00,
       recordText: "接龙金额(元)"
     }],
-    partakeRecord: [
-    //   {                            //参与记录
-    //   userimg: '../../images/deleteImg.png',     //用户头像
-    //   username:"迪欧大魔王",                      //用户名称
-    //   joinnumber:1,                              //购买数量
-    //   partakedate: "2018-03-28 22:03"            //参与日期
-    // }, {
-    //   userimg: '../../images/navIcon/personal1.png',
-    //   username: "MonsterDO",
-    //   joinnumber: 2,
-    //   partakedate: "2018-04-01 15:35"
-    // }
-    ],
+  partakeRecord: [],                             //参与记录
     footnav: [{
       navIcon: "../../images/home.png",
       navText: "首页",
@@ -164,7 +151,6 @@ Page({
             goodsdescribe: res.data.data.description,
             goodsImg: res.data.data.imageList,
             GoodsDetialList: _this.data.GoodsDetialList,
-            GoodList: _this.data.GoodList,
             takeGoodsAddressList: res.data.data.takeGoodsAddressList,
             SetGroup: SetGroup,
             record: _this.data.record,
@@ -174,13 +160,63 @@ Page({
             Group: Group,
             joingoodsnum: joingoodsnum
           })
-        }
+        }      
+        //获取参与记录
+        wx.request({
+          url: _this.data.appGlobalUrl + '/jielong/selectJoin',
+          data: {
+            id: id
+          },
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success: function (res) {
+            //参与记录列表
+            var partakeRecord = new Array();
+            for (var i = 0; i < res.data.data.length; i++){
+              var userimg = res.data.data[i].userInfo.avatarUrl;
+              var username = res.data.data[i].userInfo.nickName;
+              var joinnumber = 0;
+              for (var j = 0; j < res.data.data[i].orderGoods.length;j++){
+                joinnumber += res.data.data[i].orderGoods[j].sum;
+              }
+              var partakedate = res.data.data[i].createdAt;
+              partakeRecord[i] = { userimg, username, joinnumber, partakedate}
+            }
+            partakeRecord.reverse();
+            //参与份数
+            var goodsSum = [];
+            for (var i = 0; i < _this.data.GoodList.length; i++) {
+              var goodsid = _this.data.GoodList[i].id;
+              var joinsum = 0;
+              goodsSum[i] = { goodsid, joinsum}
+              for (var j = 0; j < res.data.data.length; j++) {
+                if (res.data.data[j].userId == userid) {
+                  for (var n = 0; n < res.data.data[j].orderGoods.length; n++){
+                    if (goodsSum[i].goodsid == res.data.data[j].orderGoods[n].goodsId) {
+                      goodsSum[i].joinsum += res.data.data[j].orderGoods[n].sum;
+                    }
+                  }
+                }
+              }
+            }
+            //console.log(goodsSum)
+            for (var k = 0; k < _this.data.GoodList.length; k++) {
+              for (var l = 0; l < goodsSum.length; l++) {
+                if (goodsSum[l].goodsid == _this.data.GoodList[k].id) {
+                  _this.data.GoodList[k]["sum"] = goodsSum[l].joinsum
+                }
+              }
+            }
+            //console.log(_this.data.GoodList)
+            _this.setData({
+              partakeRecord: partakeRecord,
+              GoodList: _this.data.GoodList
+            })
+          }
+        })
       }
-    })
-    
-    // 注册coolsite360交互模块
-    // app.coolsite360.register(this);
-    
+    })    
   },
 
   /**
