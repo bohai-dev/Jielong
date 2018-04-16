@@ -30,7 +30,7 @@ Page({
     isMe:true,                                  //是否本人
     overSolitaire:false,                        //接龙数据状态
     GoodsDetialList: [{                         //接龙信息
-      mineIcon: "../../images/bigposition.png",
+      mineIcon: "../../images/position.png",
       mineName: "",
       show: true,
       bindTap:"showMap",

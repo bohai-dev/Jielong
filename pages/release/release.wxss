@@ -110,7 +110,7 @@ picker{
 .goodsMark{
   width: 10rpx;
   height: 40rpx;
-  background-color: #0dad1a;   /*绿色*/
+  background-color: #2CBB6B;   /*绿色*/
 }
 .imageIntroView{
   display: flex;

@@ -1,5 +1,5 @@
 <!--轮播图-->
-     <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="500" circular="true" indicator-color="#fff" indicator-active-color="#0f0">
+     <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="500" circular="true" indicator-color="#fff" indicator-active-color="#2CBB6B">
 	        <block wx:for="{{swiperList}}" wx:key="index" wx:for-index="index">    
 	            <swiper-item>    
 	               <image src="{{appGlobalUrl + item.carouseladdress}}" class="slideImage" mode="scaleToFill"/>     
