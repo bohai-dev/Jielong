@@ -10,8 +10,8 @@
 </view>
 
 <view class='pos_bot'>
-  <button bindtap="addAddr">新增自提点</button>
-  <button bindtap="sureAddr">确认</button>
+  <text bindtap="addAddr">新增自提点</text>
+  <text bindtap="sureAddr">确认</text>
 </view>
 
 <!--模态框  -->

@@ -36,18 +36,24 @@ page{
 
 .pos_bot{
   position: fixed;
+  display: flex;
+  justify-content: space-around;
   bottom: 0;
   height: 90rpx;
-  width: 100%;
+  width: 750rpx;
 }
-.pos_bot button{
-  display: inline-block;
+.pos_bot text{
+  display: block;
   background-color: rgb(44, 187, 107);
   color: white;
-  border-radius: 0;
   width: 50%;
+  font-size:18px;
+  text-align:center;
+  text-decoration:none;
+  line-height:90rpx;
+
 }
-.pos_bot button:nth-of-type(1){
+.pos_bot text:nth-of-type(1){
   color: rgb(44, 187, 107);
   background-color: white;
 }

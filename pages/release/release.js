@@ -56,9 +56,14 @@ Page({
         groupSum: null        //最低成团数量
 
       }
-
-
-    ]
+    ],
+    ossData:{
+      host:"",
+      accessKeyId:"",
+      policy:"",
+      signature:"",
+      dir:"",
+    }
 
 
 
@@ -87,6 +92,7 @@ Page({
     this.getAddress();
     this.getClassify();    //获取分类数据
     this.getPhoneNumber();
+    this.getOssPolicy();
   },
 
   /**
@@ -125,8 +131,10 @@ Page({
         var imgNumber = 9 - imgs.length;
         //console.log("imgnumber= " + imgNumber)
         wx.chooseImage({   //可选择多个图片
+          sizeType: ['compressed'],
           count: imgNumber,
           success: function (res) {
+            console.log(res)
             var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
             //console.log(tempFilePaths + '----1');
             var length = self.data.imageLocalPaths.length;
@@ -139,6 +147,7 @@ Page({
             self.setData({
               imageLocalPaths: imgs
             })
+            console.log(imgs)
             self.changeImgStyle(imgs, "common");//每次上传图片获取本地地址
           }
         })
@@ -163,6 +172,7 @@ Page({
         var imgNumber = 9 - imgs.length;
         //console.log("goodsimgnumber= " + imgNumber)
         wx.chooseImage({   //可选择多个图片
+          sizeType: ['compressed'],
           count: imgNumber,
           success: function (res) {
             var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
@@ -662,18 +672,34 @@ Page({
   changeImgStyle: function (e, types, goodsIndex) {
     var localImages = e
     var _this = this;
-    console.log(localImages);
     if (types == "common") {
       //先循环上传接龙介绍图片，得到url
       for (var i = 0; i < localImages.length; i++) {
+        // console.log(localImages[i].path);
+        var imageSrc = localImages[i].path;
+        var imageStyle = imageSrc.substring(11);
+        var imgType = imageStyle.substring(imageStyle.lastIndexOf(".") + 1, )
+        var imageName = Date.parse(new Date());
+        console.log(_this.data.ossData.dir + imageName + '.' + imgType)
         _this.data.introImages = [];
         wx.uploadFile({
-          url: app.globalData.domain + '/uploadImage',        //服务器上传地址
-          filePath: localImages[i].path,
-          name: 'image',
+          url: app.globalData.domainUpload,        //服务器上传地址
+          filePath: imageSrc,
+          name: 'file',
+          formData:{
+            name: imageSrc,
+            key: _this.data.ossData.dir + imageName + '.' + imgType,
+            OSSAccessKeyId: _this.data.ossData.accessKeyId,
+            success_action_status: "200",
+            policy: _this.data.ossData.policy,
+            signature: _this.data.ossData.signature
+          },
           success: function (res) {
-            var data = JSON.parse(res.data)  //会返回图片服务器存储路径
-            _this.data.introImages.push(data.data);
+            console.log(res)
+            if(res.statusCode == 200){
+              _this.data.introImages.push(_this.data.ossData.dir + imageName + '.' + imgType);
+            }
+            
           }
         })
       }
@@ -681,13 +707,28 @@ Page({
       _this.data.goodsList[goodsIndex].serverPaths = [];
       //先循环上传接龙介绍图片，得到url
       for (var i = 0; i < localImages.length; i++) {
+        var imageSrc = localImages[i].path;
+        var imageStyle = imageSrc.substring(11);
+        var imgType = imageStyle.substring(imageStyle.lastIndexOf(".") + 1, )
+        var imageName = Date.parse(new Date());
+        _this.data.goodsList[goodsIndex].serverPaths = [];
         wx.uploadFile({
-          url: app.globalData.domain + '/uploadImage',        //服务器上传地址
-          filePath: localImages[i].path,
-          name: 'image',
+          url: app.globalData.domainUpload,        //服务器上传地址
+          filePath: imageSrc,
+          name: 'file',
+          formData: {
+            name: imageSrc,
+            key: _this.data.ossData.dir + imageName + '.' + imgType,
+            OSSAccessKeyId: _this.data.ossData.accessKeyId,
+            success_action_status: "200",
+            policy: _this.data.ossData.policy,
+            signature: _this.data.ossData.signature
+          },
           success: function (res) {
-            var data = JSON.parse(res.data)  //会返回图片服务器存储路径
-            _this.data.goodsList[goodsIndex].serverPaths.push(data.data);
+            console.log(res)
+            if (res.statusCode == 200) {
+              _this.data.goodsList[goodsIndex].serverPaths.push(_this.data.ossData.dir + imageName + '.' + imgType);
+            }
           }
         })
       }
@@ -827,6 +868,30 @@ Page({
 
     }
     return remindDataObj;
+  },
+  //获取oss配置
+  getOssPolicy:function(e){
+    var _this = this;
+    wx.request({
+      url: app.globalData.domain + '/oss/policy',
+      success: function (res) {
+        console.log(res)
+        if(res.statusCode == 200){
+          _this.setData({
+              ossData: {
+                host: res.data.host,
+                accessKeyId: res.data.accessKeyId,
+                policy: res.data.policy,
+                signature: res.data.signature,
+                dir: res.data.dir,
+              }
+          })
+        }
+      }
+    })
+    console.log(_this)
+    
+
   }
 
 

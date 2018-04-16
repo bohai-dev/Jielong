@@ -11,14 +11,17 @@ Page({
       num: "1",
       pirce: "1.00"
     }],
-    isShow:false
+    isShow:false,
+    startTime:'',
+    endTime:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log(JSON.parse(options.item))
+    this.initData(JSON.parse(options.item));
   },
 
   /**
@@ -68,6 +71,21 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  //初始化数据
+  initData:function(datas){
+    var _this = this;
+    // _this.data.data.pickBeans.forEach(function(res){
+    //   console.log(res)
+
+
+    // })
+
+    _this.setData({
+      data:datas
+    })
+
   },
 
   //显示详细

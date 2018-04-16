@@ -19,6 +19,7 @@ Page({
 
   data: {
     appGlobalUrl: app.globalData.domain,
+    appGlobalHost: app.globalData.domainUpload,
     swiperList: [],                //轮播图片数据
     containerList: [],             //首页内容数据
     showLoading: false,
@@ -186,6 +187,7 @@ Page({
         })
       }
     })
+    console.log(this)
   },
   //查找所有的数据
   selectAllCount:function(){

@@ -10,6 +10,7 @@ Page({
   name: "detail",
   data: {
     appGlobalUrl: app.globalData.domain,
+    appGlobalHost: app.globalData.domainUpload,
     userImg: "",                                //发布用户头像
     goodstopic: "",                             //接龙主题
     goodsdata:"",                               //接龙日期
@@ -262,7 +263,7 @@ Page({
     var _this = this;
     return {
       title: _this.data.goodsdescribe,
-      imageUrl: _this.data.appGlobalUrl + _this.data.goodsImg[0],
+      imageUrl: _this.data.onShareAppMessage + _this.data.goodsImg[0],
       success: function (res) {
         // console.log(res)
         // 转发成功
@@ -379,13 +380,13 @@ Page({
     var _this = this;
     if(e.currentTarget.dataset.viewlist == "head"){
       _this.data.goodsImg.forEach(function (e) {
-        imgUrl.push(_this.data.appGlobalUrl + e);
+        imgUrl.push(_this.data.appGlobalHost + e);
       })
       
     }else{
       console.log(_this.data.GoodList)
       _this.data.GoodList[e.currentTarget.dataset.index].serverPaths.forEach(function (e) {
-        imgUrl.push(_this.data.appGlobalUrl + e);
+        imgUrl.push(_this.data.appGlobalHost + e);
       })
     }
     wx.previewImage({

@@ -1,4 +1,6 @@
 // pages/detail/solitaireStatistics/solitaireStatistics.js
+var app = getApp();
+
 Page({
 
   /**
@@ -11,17 +13,11 @@ Page({
         e_startDate: "",
         e_endDate:"",
       },
-      goodsList:[{
-        title:"手机1",
-        phone:"18333333333",
-        num:"1",
-        pirce:"1.00"
-      }, {
-        title: "手机2",
-        people: "1",
-        num: "1",
-        pirce: "1.00"
-      }]
+      goodsList:[],
+      jieLongId:"",
+      allPeople:null,
+      allPrice:null
+
   },
 
   /**
@@ -30,7 +26,10 @@ Page({
   onLoad: function (options) {
     //初始化时间
     console.log(options)
+    this.data.jieLongId = options.jieLongId;
     this.initTime();
+    //初始化数据
+    this.initData();
   
   },
 
@@ -85,6 +84,42 @@ Page({
 
   //自定义事件
   //初始化时间
+  initData: function (){
+    var _this = this;
+    wx.showLoading({
+      title: '数据搜索中...',
+    })
+    wx.request({
+      url: app.globalData.domain + '/order/pickCount',
+      method:"get",
+      data:{
+        jielongId: _this.data.jieLongId,
+        startTime: _this.data.showStartDate,
+        endTime:_this.data.showEndDate
+      },
+      success:function(res){
+        console.log(res)
+        if(res.statusCode == 200 && res.data.data.length){
+          _this.data.allPeople = null;
+          _this.data.allPrice = null;
+          res.data.data.forEach(function(ref){
+            _this.data.allPeople += ref.joinPeopleSum;
+            _this.data.allPrice += ref.moneySum;
+          })
+          _this.setData({
+            goodsList:res.data.data,
+            allPeople: _this.data.allPeople,
+            allPrice: _this.data.allPrice
+          })
+        }
+      },
+      complete:function(){
+        wx.hideLoading();
+      }
+    })
+
+  },
+
   initTime:function(){
     var oneYearTime = new Date(new Date().getTime() - 365*24*60*60*1000).toLocaleDateString();
     var todayTime = new Date().toLocaleDateString();
@@ -121,11 +156,32 @@ Page({
   //搜索
   searchByTime:function(e){
     console.log(this)
+    var _this = this;
+    if(!_this.data.showStartDate){
+      wx.showToast({
+        title: '请输入开始时间！',
+        duration: 2000,
+        icon: "none"
+      })
+    } else if(!_this.data.showEndDate) {
+      wx.showToast({
+        title: '请输入结束时间！',
+        duration: 2000,
+        icon: "none"
+      })
+    }else{
+      _this.initData();
+    }
+
   },
   //查看具体的某个商品
   navToGoods:function(e){
+    console.log(e.currentTarget.dataset.item)
+    var item = e.currentTarget.dataset.item;
+    item.startTime = this.data.showStartDate;
+    item.endTime = this.data.showEndDate;
     wx.navigateTo({
-      url: './Goodsstatistics/Goodsstatistics',
+      url: './Goodsstatistics/Goodsstatistics?item='+ JSON.stringify(e.currentTarget.dataset.item),
     })
   }
 

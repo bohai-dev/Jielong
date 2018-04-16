@@ -41,3 +41,11 @@
   margin-right: 30rpx;
   line-height: 40rpx;
 }
+.textCen{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 90rpx;
+  margin-top: 40rpx;
+  color: #333;
+  background-color: #eee;
+}

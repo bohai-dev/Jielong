@@ -177,12 +177,14 @@ Page({
         console.log(res)
         if(res.statusCode == 200){
           wx.showToast({
-            title: '确认提货成功!'
+            title: '确认提货成功!',
+            duration: 4000
           })
           _this.initData(_this.data.jieLongId);
         }else{
           wx.showToast({
             title: res.data.errorMessage || '确认提货失败!',
+            duration: 4000,
             icon:"none"
           })
         }
@@ -192,6 +194,7 @@ Page({
     }else{
       wx.showToast({
         title: '请选择订单！',
+        duration: 4000,
         icon: "none"
       })
 

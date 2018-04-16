@@ -185,6 +185,7 @@ App({
   globalData: {
     userInfo: null,
     domain: "https://www.95cfun.com",
+    domainUpload: "https://upload.95cfun.com/",    
   //  domain: "http://47.100.12.188:8081",
     // domain: "http://192.168.1.108:8081",
     classifyData:[],
