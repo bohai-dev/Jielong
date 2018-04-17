@@ -41,7 +41,9 @@ page{
 .yellow{
   color: #FCA81C;
 }
-
+.Sienna{
+  color: #008080;
+}
 .body{
   width: 100%;
   height: 100%;

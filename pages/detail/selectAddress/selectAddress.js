@@ -94,11 +94,6 @@ Page({
         }
       })
 
-    }else{
-      wx.showModal({
-        title: '请选择自提点',
-        showCancel: false
-      })
     }
   },
 
