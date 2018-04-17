@@ -16,30 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var _this = this;
-    wx.request({
-      url: app.globalData.domain + '/jielong/selectByUserId',
-      method: "GET",
-      data: { userId: wx.getStorageSync("userId")},
-      success:function(res){
-        console.log(res)
-        if(res.statusCode == 200 && res.data.data.length){
-          _this.setData({
-            data:res.data.data,
-            isShow:true
-          })
-        }else{
-          _this.setData({
-            isShow: false
-          })
-        }
-      },
-      fail:function(err){
-        _this.setData({
-          isShow: false
-        })
-      }
-    })
+    
   },
 
   /**
@@ -53,7 +30,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.initData();
   },
 
   /**
@@ -92,6 +69,33 @@ Page({
   },
 
   //自定义方法
+  initData:function(){
+    var _this = this;
+    wx.request({
+      url: app.globalData.domain + '/jielong/selectByUserId',
+      method: "GET",
+      data: { userId: wx.getStorageSync("userId") },
+      success: function (res) {
+        console.log(res)
+        if (res.statusCode == 200 && res.data.data.length) {
+          _this.setData({
+            data: res.data.data,
+            isShow: true
+          })
+        } else {
+          _this.setData({
+            isShow: false
+          })
+        }
+      },
+      fail: function (err) {
+        _this.setData({
+          isShow: false
+        })
+      }
+    })
+  },
+  //
   navToDetail:function(e){
     console.log(e);
     wx.navigateTo({

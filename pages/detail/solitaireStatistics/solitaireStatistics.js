@@ -16,7 +16,9 @@ Page({
       goodsList:[],
       jieLongId:"",
       allPeople:null,
-      allPrice:null
+      allPrice:null,
+      startGsTime:null,
+      endGsTime:null
 
   },
 
@@ -29,7 +31,7 @@ Page({
     this.data.jieLongId = options.jieLongId;
     this.initTime();
     //初始化数据
-    this.initData();
+    this.initData({ jielongId: this.data.jieLongId});
   
   },
 
@@ -84,19 +86,16 @@ Page({
 
   //自定义事件
   //初始化时间
-  initData: function (){
+  initData: function (e){
     var _this = this;
     wx.showLoading({
       title: '数据搜索中...',
     })
+    console.log(e)
     wx.request({
       url: app.globalData.domain + '/order/pickCount',
       method:"get",
-      data:{
-        jielongId: _this.data.jieLongId,
-        startTime: _this.data.showStartDate,
-        endTime:_this.data.showEndDate
-      },
+      data:e,
       success:function(res){
         console.log(res)
         if(res.statusCode == 200 && res.data.data.length){
@@ -170,16 +169,22 @@ Page({
         icon: "none"
       })
     }else{
-      _this.initData();
+      _this.data.startGsTime = _this.data.showStartDate;
+      _this.data.endGsTime = _this.data.showEndDate;
+      var data = {
+        jielongId: _this.data.jieLongId,
+        startTime: _this.data.showStartDate,
+        endTime: _this.data.showEndDate
+      }
+      _this.initData(data);
     }
 
   },
   //查看具体的某个商品
   navToGoods:function(e){
-    console.log(e.currentTarget.dataset.item)
     var item = e.currentTarget.dataset.item;
-    item.startTime = this.data.showStartDate;
-    item.endTime = this.data.showEndDate;
+    item.startTime = this.data.startGsTime;
+    item.endTime = this.data.endGsTime;
     wx.navigateTo({
       url: './Goodsstatistics/Goodsstatistics?item='+ JSON.stringify(e.currentTarget.dataset.item),
     })

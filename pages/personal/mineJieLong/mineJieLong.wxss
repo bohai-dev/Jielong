@@ -30,16 +30,16 @@ page{
    float: right; 
 }
 .blue{
-  color: blue;
+  color: #6495ED;
 }
 .red{
   color: red;
 }
 .green{
-  color: green;
+  color: #2CBB6B;
 }
 .yellow{
-  color: yellow;
+  color: #FCA81C;
 }
 
 .body{

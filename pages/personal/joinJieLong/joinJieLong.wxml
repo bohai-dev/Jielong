@@ -6,7 +6,7 @@
          参与时间：<text>{{item.createdAt}}</text>
       </view>
       <view class='right'>
-         <text class='{{item.state == 0 ? "blue" : item.state == 1 ? "green" : item.state == 2 ? "red" : item.state == 3 ? "yellow" : ""}}'>{{item.state == 0 ? "已下单等待拼团成功" : item.state == 1 ? "待支付" : item.state == 2 ? "待提货" : item.state == 3 ? "提货成功" : "其他"}}</text>
+         <text class='{{item.state == 0 ? "blue" : item.state == 1 ? "yellow" : item.state == 2 ? "red" : item.state == 3 ? "green" : "red"}}'>{{item.state == 0 ? "待拼团成功" : item.state == 0 && item.orderGoods[0].goods.isSetGroup == 1 ? "拼团成功" : item.state == 1 ? "待支付" : item.state == 2 ? "待提货" : item.state == 3 ? "提货成功" : "其他"}}</text>
       </view> 
     </view>
     <view class='midCont'>
@@ -14,7 +14,7 @@
          <text>{{item.jielongTopic}}</text>
       </view>
       <view class='right'>
-          <text class='{{item.orderGoods[0].groupFlg == 0 ? "green" : item.orderGoods[0].groupFlg == 1 ? "red" : "blue" }}'>{{item.orderGoods[0].groupFlg == 0 ? "待成团" : item.orderGoods[0].groupFlg == 1 ? "拼团成功" : "非成团接龙" }}</text> 
+          <text class='{{item.orderGoods[0].groupFlg == 0 ? "red" : item.orderGoods[0].groupFlg == 1 ? "green" : "blue" }}'>{{item.orderGoods[0].groupFlg == 0 ? "待成团" : item.orderGoods[0].groupFlg == 1 ? "拼团成功" : "非成团接龙" }}</text> 
       </view>
       </view>
   </view>
