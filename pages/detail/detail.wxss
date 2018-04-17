@@ -295,7 +295,7 @@
   background: white;
 }
 .foot_left{
-  width: 50%;
+  flex: 1;
   display: flex;
   flex-direction: row;
 }
@@ -319,10 +319,13 @@
   color: #707070;
 }
 .foot_right,.foot_right_green{
-  width: 50%;
+  flex: 1;
   font: 35rpx/100rpx "微软雅黑";
   color: white;
   text-align: center;
+}
+.foot_right_minfont{
+  font: 20rpx/100rpx "微软雅黑";
 }
 .foot_right{
   background: #ccc;
@@ -332,9 +335,12 @@
 }
 .foot_btn{
   flex:1;
-  font: 35rpx/100rpx "微软雅黑";
+  font: 30rpx/100rpx "微软雅黑";
   color: #2ABB6D;
   text-align: center;
+}
+.foot_btn_maxfont{
+  font: 35rpx/100rpx "微软雅黑"; 
 }
 .overSoCont{
    width: 100%;

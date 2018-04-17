@@ -270,8 +270,8 @@ Page({
   onShareAppMessage(options){
     var _this = this;
     return {
-      title: _this.data.goodsdescribe,
-      imageUrl: _this.data.onShareAppMessage + _this.data.goodsImg[0],
+      title: _this.data.goodstopic + "，已有" + _this.data.record[1].recordNumber + "人参与",
+      imageUrl: _this.data.appGlobalHost + _this.data.goodsImg[0],
       success: function (res) {
         // console.log(res)
         // 转发成功
