@@ -29,6 +29,7 @@ Page({
     QR_CodeSrc:"",                              //二维码地址
     hiddenModal:false,                           
     isMe:true,                                  //是否本人
+    isRecord: true,                             //是否有记录
     overSolitaire:false,                        //接龙数据状态
     GoodsDetialList: [{                         //接龙信息
       mineIcon: "../../images/position.png",
@@ -127,7 +128,7 @@ Page({
           _this.data.GoodsDetialList[1].phone = res.data.data.phoneNumber;
           _this.data.GoodsDetialList[2].goodsAddresses = res.data.data.goodsAddresses;
           _this.data.GoodsDetialList[3].show = (res.data.data.setFinishTime==1)?true:false;
-          _this.data.GoodsDetialList[3].mineName = "接龙截至时间: " + res.data.data.finishTime;
+          _this.data.GoodsDetialList[3].mineName = "接龙截止时间: " + res.data.data.finishTime;
           _this.data.GoodList = res.data.data.goodsList;
           _this.data.record[0].recordNumber = res.data.data.browseSum;
           _this.data.record[1].recordNumber = res.data.data.joinSum;
@@ -172,6 +173,12 @@ Page({
             'content-type': 'application/json' // 默认值
           },
           success: function (res) {
+            //console.log(res)
+            //判断有无记录
+            var isRecord = true;
+            if (res.data.data.length == 0){
+              isRecord = false
+            }
             //参与记录列表
             var partakeRecord = new Array();
             for (var i = 0; i < res.data.data.length; i++){
@@ -212,7 +219,8 @@ Page({
             //console.log(_this.data.GoodList)
             _this.setData({
               partakeRecord: partakeRecord,
-              GoodList: _this.data.GoodList
+              GoodList: _this.data.GoodList,
+              isRecord: isRecord
             })
           }
         })
@@ -274,7 +282,6 @@ Page({
       }
     }
   },
-
 
   //以下为自定义点击事件
   //查看地图
@@ -353,7 +360,7 @@ Page({
         content: '抱歉，该商品库存不足!',
         showCancel: false,
         confirmText: "确定",
-        confirmColor: "#08CF40",
+        confirmColor: "#2CBB6B",
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')
@@ -419,6 +426,7 @@ Page({
       if (!addressId){
         wx.showModal({
           content: '请选择自提点',
+          confirmColor: "#2CBB6B",
           showCancel: false,
           success: function (res) {
             if (res.confirm) {
@@ -475,6 +483,7 @@ Page({
     console.log(_this)
     wx.showModal({
       title: '确定结束接龙？',
+      confirmColor: "#2CBB6B",
       success:function(res){
         if(res.confirm){
           wx.request({

@@ -109,10 +109,11 @@ Page({
   telCheck: function (e) {
     console.log(e.detail.value)
     var phone = e.detail.value;
-    if (!(/^1(3|4|5|6|7|8)\d{9}$/.test(phone))) {
+    if (!(/^\d+$/.test(phone))) {
       wx.showModal({
         title: '提示',
         content: '请输入正确号码',
+        confirmColor: "#2CBB6B",
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')
@@ -143,6 +144,7 @@ Page({
       wx.showModal({
         title: '提示',
         content: '请输入姓名',
+        confirmColor: "#2CBB6B",
         showCancel: false,
         success: function (res) {
           if (res.confirm) {
@@ -150,10 +152,11 @@ Page({
           }
         }
       })
-    } else if (!(/^1(3|4|5|6|7|8)\d{9}$/.test(this.data.userPhone))) {
+    } else if (!(/^\d+$/.test(this.data.userPhone))) {
       wx.showModal({
         title: '提示',
         content: '请输入正确手机号码',
+        confirmColor: "#2CBB6B",
         showCancel: false,
         success: function (res) {
           if (res.confirm) {
@@ -185,54 +188,70 @@ Page({
             }
           }
           if (repertorychange == true){
-            var data = _this.data;
-            wx.request({
-              url: app.globalData.domain + '/order/insert',
-              method: 'POST',
-              data: data,
-              header: {
-                'content-type': 'application/json'
-              },
-              success: function (res) {
-                console.log(res)
-                if (res.statusCode == 200 && res.data.data == 1) {
-                  console.log("下单成功")
-                  wx.showToast({
-                    title: '成功',
-                    icon: 'success',
-                    duration: 2000
-                  })
-                  setTimeout(function () {
-                    wx.hideToast()
-                    wx.navigateBack({
-                      delta: 2
+            if (res.data.data.status == 1){
+              var data = _this.data;
+              wx.request({
+                url: app.globalData.domain + '/order/insert',
+                method: 'POST',
+                data: data,
+                header: {
+                  'content-type': 'application/json'
+                },
+                success: function (res) {
+                  console.log(res)
+                  if (res.statusCode == 200 && res.data.data == 1) {
+                    console.log("下单成功")
+                    wx.showToast({
+                      title: '成功',
+                      icon: 'success',
+                      duration: 2000
                     })
-                  }, 1500)
-                } else {
-                  console.log("下单失败")
-                  wx.showLoading({
-                    title: 'loading',
-                  })
-                  setTimeout(function () {
-                    wx.hideLoading();   //关闭模态框
-                    wx.showModal({
-                      title: '提示',
-                      content: '下单失败！',
-                      showCancel: false,
-                      success: function (res) {
-                        if (res.confirm) {
-                          console.log('用户点击确定')
+                    setTimeout(function () {
+                      wx.hideToast()
+                      wx.navigateBack({
+                        delta: 2
+                      })
+                    }, 1500)
+                  } else {
+                    console.log("下单失败")
+                    wx.showLoading({
+                      title: 'loading',
+                    })
+                    setTimeout(function () {
+                      wx.hideLoading();   //关闭模态框
+                      wx.showModal({
+                        title: '提示',
+                        content: '下单失败！',
+                        confirmColor: "#2CBB6B",
+                        showCancel: false,
+                        success: function (res) {
+                          if (res.confirm) {
+                            console.log('用户点击确定')
+                          }
                         }
-                      }
-                    })
-                  }, 1000)
+                      })
+                    }, 1000)
+                  }
                 }
-              }
-            })
+              })
+            }else{
+              wx.showModal({
+                title: '提示',
+                content: '该接龙已结束！',
+                confirmColor: "#2CBB6B",
+                showCancel: false,
+                success: function (res) {
+                  if (res.confirm) {
+                    console.log('用户点击确定')
+                  }
+                }
+              })
+            }
           }else{
             wx.showModal({
               title: '提示',
               content: '商品库存发生变化，请刷新后重新选择商品！',
+              confirmColor: "#2CBB6B",
               showCancel: false,
               success: function (res) {
                 if (res.confirm) {
@@ -240,8 +259,7 @@ Page({
                 }
               }
             })
-          }
-          
+          }         
         }
       })
     }

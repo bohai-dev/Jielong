@@ -21,5 +21,5 @@
     <text class='memotitle'>备注：</text>
     <textarea class='memo' maxlength='100' value='{{remark}}' bindinput="inputMemoChange"></textarea>
   </view>
-  <button type='primary' bindtap="submitOrder">确认下单</button>
+  <button type='primary' hover-class="opacity" bindtap="submitOrder">确认下单</button>
 </view>

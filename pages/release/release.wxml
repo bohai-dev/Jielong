@@ -53,14 +53,14 @@
     <view>
       <view class="containerView rowIconView">
         <text class='center'>设置截止时间</text>
-        <switch type="switch" bindchange="timeChange" />
+        <switch type="switch" color='#2CBB6B' bindchange="timeChange" />
       </view>
     </view>
     <!--截止时间-->
     <view class="containerView rowIconView" wx:if='{{setFinishTime==1}}'>
       <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
         <view class="elasticbox">
-          <text>截至时间：</text>
+          <text>截止时间：</text>
           <input name="finishTime" disabled="true" class='rightgreen' value='{{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}}'></input>
         </view>
       </picker>
@@ -70,8 +70,8 @@
     <view>
       <view class="containerView rowIconView">
         <text class='center'>添加多个商品</text>
-        <switch type="switch" bindchange="goodsChange" wx:if="{{!judeToMost}}" />
-        <switch type="switch" bindchange="goodsChange" wx:if="{{judeToMost}}" checked='true' />
+        <switch type="switch" color='#2CBB6B' bindchange="goodsChange" wx:if="{{!judeToMost}}" />
+        <switch type="switch" color='#2CBB6B' bindchange="goodsChange" wx:if="{{judeToMost}}" checked='true' />
       </view>
     </view>
   </view>
@@ -138,7 +138,7 @@
         <!--设置最小成团数量-->
         <view class='containerView rowIconView' wx:if="{{!judeToMost}}">
           <text class='center'>设置最小成团数量</text>
-          <switch type="switch" bindchange='chenTuanNum'  data-setgroupnum="{{goodsindex}}" checked="{{item.isSetGroup}}" />
+          <switch type="switch" color='#2CBB6B' bindchange='chenTuanNum'  data-setgroupnum="{{goodsindex}}" checked="{{item.isSetGroup}}" />
         </view>
         <!--最小成团数量-->
       <view wx:if="{{!judeToMost}}">
@@ -151,7 +151,7 @@
     </view>
     <!--新增商品-->
     <view class="containerView addGood"  wx:if="{{judeToMost}}">
-      <text style='color:#1afa29;' bindtap='addGoods'>新增商品</text>
+      <text style='color:#2CBB6B;' bindtap='addGoods'>新增商品</text>
     </view>
   </view>
 

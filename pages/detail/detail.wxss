@@ -331,7 +331,7 @@
   background: rgb(44, 187, 107);
 }
 .foot_btn{
-  width: calc(100%/3);
+  flex:1;
   font: 35rpx/100rpx "微软雅黑";
   color: #2ABB6D;
   text-align: center;

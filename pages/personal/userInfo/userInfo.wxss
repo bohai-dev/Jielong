@@ -42,9 +42,11 @@ textarea{
   height: 100rpx;
   padding-left:10rpx;
 }
-
 button{
   font-size: 35rpx;
   width: 90%;
   margin-top: 50rpx;
+}
+.opacity{
+  opacity: 0.8;
 }
