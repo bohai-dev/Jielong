@@ -1,7 +1,4 @@
 
-// 引入coolsite360交互配置设定
-require('coolsite.config.js');
-
 // 获取全局应用程序实例对象
 var app = getApp();
 
@@ -28,8 +25,7 @@ Page({
     jieLongId:"",                               //接龙id
     QR_CodeSrc:"",                              //二维码地址
     hiddenModal:false,                           
-    isMe:true,                                  //是否本人
-    isRecord: true,                             //是否有记录
+    fromMine: 0,                                //是否从发起接龙进入
     overSolitaire:false,                        //接龙数据状态
     GoodsDetialList: [{                         //接龙信息
       mineIcon: "../../images/position.png",
@@ -58,7 +54,7 @@ Page({
       rightArrow:"dn"
     }],
     GoodList: [],
-    record: [{                                   //接龙记录
+    record: [{                                   //接龙记录数据
       recordNumber: 0,
       recordText: "浏览(人)",
       rightBorder: "rightborder"
@@ -89,7 +85,9 @@ Page({
    */
   onLoad(e) {
     var _this = this;
+    //console.log(e)
     var id = e.id;
+    var fromMine = Number(e.fromMine);
     _this.data.jieLongId = id;
     var app = getApp();
     var userid = wx.getStorageSync("userId");
@@ -104,7 +102,8 @@ Page({
       },
       success: function (res) {
         _this.setData({
-          id: id
+          id: id,
+          fromMine: fromMine
         })
       }
     })
@@ -137,9 +136,6 @@ Page({
           var Group = res.data.data.goodsList[0].groupSum;
           var joingoodsnum = res.data.data.goodsList[0].remainSum;
           var goodsUserid = res.data.data.userId;
-          if (goodsUserid == userid){
-            _this.data.isMe = false
-          }
           for (var i = 0; i < (_this.data.GoodList.length); i++){
             _this.data.GoodList[i].serverPaths = _this.data.GoodList[i].serverPaths.split(",");
             _this.data.GoodList[i]["goodsnum"] = 0;
@@ -156,7 +152,6 @@ Page({
             takeGoodsAddressList: res.data.data.takeGoodsAddressList,
             SetGroup: SetGroup,
             record: _this.data.record,
-            isMe: _this.data.isMe,
             goodsUserid: goodsUserid,
             overSolitaire: res.data.data.status == 2 ? true : false,
             Group: Group,
@@ -174,11 +169,6 @@ Page({
           },
           success: function (res) {
             //console.log(res)
-            //判断有无记录
-            var isRecord = true;
-            if (res.data.data.length == 0){
-              isRecord = false
-            }
             //参与记录列表
             var partakeRecord = new Array();
             for (var i = 0; i < res.data.data.length; i++){
@@ -219,8 +209,7 @@ Page({
             //console.log(_this.data.GoodList)
             _this.setData({
               partakeRecord: partakeRecord,
-              GoodList: _this.data.GoodList,
-              isRecord: isRecord
+              GoodList: _this.data.GoodList
             })
           }
         })
@@ -239,8 +228,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow(e) {
-    // 执行coolsite360交互组件展示
-    // app.coolsite360.onShow(this);
+
   },
 
   /**
@@ -500,10 +488,9 @@ Page({
                 wx.showToast({
                   title: '结束接龙成功!',
                   duration: 4000,
-                  success: function (ee) {
+                  success: function (e) {
                     _this.setData({
-                      overSolitaire: true,
-                      isMe: false
+                      overSolitaire: true
                     })
                   }
                 })

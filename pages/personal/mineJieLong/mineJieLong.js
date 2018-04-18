@@ -99,7 +99,7 @@ Page({
   navToDetail:function(e){
     console.log(e);
     wx.navigateTo({
-      url: '../../detail/detail?id='+e.currentTarget.dataset.id +"&fromMine=true",
+      url: '../../detail/detail?id='+e.currentTarget.dataset.id +"&fromMine=1",
     })
 
 

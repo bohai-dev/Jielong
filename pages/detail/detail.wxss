@@ -83,9 +83,9 @@
   background: #F0EFF5;
   padding:20rpx 0 80rpx;
 }
-.overSoCont{
+/* .overSoCont{
    padding-bottom: 0;
- }
+ } */
 .goodsbuy{
   height: 210rpx;
   display: flex;
@@ -324,9 +324,6 @@
   color: white;
   text-align: center;
 }
-.foot_right_minfont{
-  font: 20rpx/100rpx "微软雅黑";
-}
 .foot_right{
   background: #ccc;
 }
@@ -335,16 +332,13 @@
 }
 .foot_btn{
   flex:1;
-  font: 30rpx/100rpx "微软雅黑";
+  font: 35rpx/100rpx "微软雅黑"; 
   color: #2ABB6D;
   text-align: center;
 }
-.foot_btn_maxfont{
-  font: 35rpx/100rpx "微软雅黑"; 
-}
-.overSoCont{
+/* .overSoCont{
    width: 100%;
- }
+ } */
  .foot_nav .foot_btn:nth-of-type(2){
  border-left:2rpx solid #F0EFF5; 
  border-right:2rpx solid #F0EFF5; 
