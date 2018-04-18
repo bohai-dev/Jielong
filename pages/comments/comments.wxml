@@ -1,7 +1,7 @@
 <view class="listWrap">
     <view class="listitem01">
         <navigator class="listitem-navigator" hover-class="navigator-hover" url='./systemNotice/systemNotice'>
-          <image class="list-image" mode="aspectFill" src="../../images/notice.png" />
+          <image class="list-image" mode="aspectFill" src="{{photo}}" />
           <text class="text_note">系统通知</text>
         </navigator>
     </view>

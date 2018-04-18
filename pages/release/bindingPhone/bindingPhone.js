@@ -17,6 +17,12 @@ Page({
     var that = this;
     var userid = wx.getStorageSync("userId")
     var app = getApp();
+    wx.showLoading({
+      title: 'loading',
+    })
+    setTimeout(function () {
+      wx.hideLoading();   //关闭模态框
+    }, 60000)
     wx.request({
       url: app.globalData.domain + '/userInfo/selectByUserId',
       data: {
@@ -27,6 +33,7 @@ Page({
       },
       success: function (res) {
         if (res.data.data) {
+          wx.hideLoading();   //关闭模态框
           console.log("success")
           var id = res.data.data.id;
           that.setData({
@@ -94,6 +101,7 @@ Page({
         title: '提示',
         content: '请输入正确号码',
         confirmColor: "#2CBB6B",
+        showCancel: false,
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')
@@ -107,16 +115,24 @@ Page({
   formSubmit: function (e) {
     var page = this;
     var app = getApp();
+    wx.showLoading({
+      title: 'loading',
+    })
+    setTimeout(function () {
+      wx.hideLoading();   //关闭模态框
+    }, 60000)
     var name = e.detail.value.name;
     var phone = e.detail.value.phone;
     var userId = wx.getStorageSync('userId');
     var id = page.data.id;
     console.log('用户信息为：', name + phone + id + userId)
     if (!e.detail.value.name) {
+      wx.hideLoading();   //关闭模态框
       wx.showModal({
         title: '提示',
         content: '请输入姓名',
         confirmColor: "#2CBB6B",
+        showCancel: false,
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')
@@ -124,6 +140,7 @@ Page({
         }
       })
     } else if (!(/^\d+$/.test(phone))) {
+      wx.hideLoading();   //关闭模态框
       wx.showModal({
         title: '提示',
         content: '请输入正确手机号码',
@@ -151,6 +168,7 @@ Page({
         },
         success: function (res) {
           if (res.statusCode == 200 && res.data.data == 1) {
+            wx.hideLoading();   //关闭模态框
             wx.showToast({
               title: '保存成功！',
               icon: 'success',
@@ -164,23 +182,18 @@ Page({
               })
             }, 1500)
           } else {
-            wx.showLoading({
-              title: 'loading',
-            })
-            setTimeout(function () {
-              wx.hideLoading();   //关闭模态框
-              wx.showModal({
-                title: '提示',
-                content: '保存失败！',
-                confirmColor: "#2CBB6B",
-                showCancel: false,
-                success: function (res) {
-                  if (res.confirm) {
-                    console.log('用户点击确定')
-                  }
+            wx.hideLoading();   //关闭模态框
+            wx.showModal({
+              title: '提示',
+              content: '保存失败！请重试',
+              confirmColor: "#2CBB6B",
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
                 }
-              })
-            }, 1500)
+              }
+            })
           }
           console.log("绑定手机成功")
         }

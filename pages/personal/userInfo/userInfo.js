@@ -19,6 +19,12 @@ Page({
     var page = this;
     var userid = wx.getStorageSync("userId")
     var app = getApp();
+    wx.showLoading({
+      title: 'loading',
+    })
+    setTimeout(function () {
+      wx.hideLoading();   //关闭模态框
+    }, 60000)
     wx.request({
       url: app.globalData.domain + '/userInfo/selectByUserId',
       data: {
@@ -31,6 +37,7 @@ Page({
         console.log(res.data)
         console.log(res.data.data)
         if (res.data.data) {
+          wx.hideLoading();   //关闭模态框
           console.log("success")
           var name = res.data.data.name;
           var phone = res.data.data.phoneNumber;
@@ -111,6 +118,7 @@ Page({
         title: '提示',
         content: '请输入正确号码',
         confirmColor: "#2CBB6B",
+        showCancel: false,
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')
@@ -124,6 +132,12 @@ Page({
   formSubmit: function (e) {
     var page = this;
     var app = getApp();
+    wx.showLoading({
+      title: 'loading',
+    })
+    setTimeout(function () {
+      wx.hideLoading();   //关闭模态框
+    }, 60000)
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     var name = e.detail.value.name;
     var phone = e.detail.value.phone;
@@ -138,10 +152,12 @@ Page({
     console.log('用户信息为：', name + phone + email + detail + userId)
     console.log('旧信息为：', oldname + oldphone + oldemail + olddetail)
     if (!e.detail.value.name) {
+      wx.hideLoading();   //关闭模态框
       wx.showModal({
         title: '提示',
         content: '请输入姓名',
         confirmColor: "#2CBB6B",
+        showCancel: false,
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')
@@ -149,6 +165,7 @@ Page({
         }
       })
     } else if (!(/^\d+$/.test(phone))) {
+      wx.hideLoading();   //关闭模态框
       wx.showModal({
         title: '提示',
         content: '请输入正确手机号码',
@@ -163,6 +180,7 @@ Page({
       })
     } else {
       if (name == oldname && phone == oldphone && email == oldemail && detail == olddetail){
+        wx.hideLoading();   //关闭模态框
         wx.navigateBack({
           delta: 1
         })
@@ -184,6 +202,7 @@ Page({
           success: function (res) {
             console.log(res)
             if (res.statusCode == 200 && res.data.data == 1) {
+              wx.hideLoading();   //关闭模态框
               wx.showToast({
                 title: '保存成功！',
                 icon: 'success',
@@ -197,23 +216,18 @@ Page({
                 // })
               }, 1500)
             } else {
-              wx.showLoading({
-                title: 'loading',
-              })
-              setTimeout(function () {
-                wx.hideLoading();   //关闭模态框
-                wx.showModal({
-                  title: '提示',
-                  content: '保存失败！',
-                  confirmColor: "#2CBB6B",
-                  showCancel: false,
-                  success: function (res) {
-                    if (res.confirm) {
-                      console.log('用户点击确定')
-                    }
+              wx.hideLoading();   //关闭模态框
+              wx.showModal({
+                title: '提示',
+                content: '保存失败！请重试',
+                confirmColor: "#2CBB6B",
+                showCancel: false,
+                success: function (res) {
+                  if (res.confirm) {
+                    console.log('用户点击确定')
                   }
-                })
-              }, 1500)
+                }
+              })
             }
           }
         })
