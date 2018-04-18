@@ -9,7 +9,7 @@ page{
   width: 100%;
   background-color: white;
   border-top:1rpx solid gainsboro;
-  height: 80rpx;
+  height: 90rpx;
 }
 .mineNavTo{
   height: 100%;

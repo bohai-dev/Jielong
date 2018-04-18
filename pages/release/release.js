@@ -272,7 +272,8 @@ Page({
         } else {
           NowDayarr[i] = new Date(nowDate.setDate(nowDate.getDate() + 1));
         }
-        enddayarr[i] = NowDayarr[i].toLocaleDateString();
+        //enddayarr[i] = NowDayarr[i].toLocaleDateString();
+        enddayarr[i] = NowDayarr[i].getFullYear() + "/" + (NowDayarr[i].getMonth() + 1) + "/" + NowDayarr[i].getDate();
       }
       console.log(enddayarr);
       //设置时间
