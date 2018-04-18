@@ -31,7 +31,8 @@
 <!-- 购买商品 -->
 <view class="container">
   <block wx:for="{{GoodList}}" wx:for-index="goodsIndex" wx:key="">
-    <view class='goodsbuy {{isMe ? "" : "marbottom"}} '>
+    <!-- <view class='goodsbuy {{isMe ? "" : "marbottom"}} '> -->
+    <view class='goodsbuy'>
       <image class="goodsbuyimg" mode="aspectFill" src="{{appGlobalHost + item.serverPaths[0]}}" bindtap='preViewImg' data-index="{{goodsIndex}}" data-imgSrc="{{appGlobalHost + item.serverPaths[0]}}" data-viewList='goods' >
       <view class='imgNum'>{{item.serverPaths.length}}张</view>
       </image>
@@ -40,22 +41,25 @@
         <text class='goodsprice'>￥<text class='blod'>{{item.price}}</text>/{{item.specification}}</text>
         <text class='goodsrepertory'>库存{{item.repertory}}</text>
       </view>
-      <view class='goodsnumber' wx:if='{{isMe}}'>
+      <!-- 商品数量 -->
+      <!-- <view class='goodsnumber' wx:if='{{isMe}}'> -->
+      <view class='goodsnumber' wx:if="{{!overSolitaire}}">
         <view class='btnnum' data-index="{{goodsIndex}}" bindtap='minusNumber' hover-class="minusbtnnum"><image class='numimg' src='../../images/minusnum.png'></image></view>
         <view class='goodsnum'>{{item.goodsnum}}</view>
         <view class='btnnum' data-index="{{goodsIndex}}" bindtap='addNumber' hover-class="addbtnnum"><image class='numimg' src='../../images/addnum.png'></image></view>
       </view>
     </view>
-    <view class="partake" wx:if='{{isMe}}'>
+    <!-- <view class="partake" wx:if='{{isMe}}'> -->
+    <view class="partake">
       <view class="joinfont">您已参与{{item.sum}}份</view>
     </view>
   </block>
   <!-- 参团人数 -->
   <view class="joinperson" wx:if='{{SetGroup}}'>
-    <!-- <view class='jointitle'>已有{{joingoodsnum}}件商品参团<block wx:if='{{isMe}}'>，可直接参与</block></view> -->
     <view class='joincontainer'>
       <view class='joinnum' wx:if='{{Group-joingoodsnum > 0 ? true : false}}'>还差<text class='greenfont'>{{Group-joingoodsnum}}件</text>商品拼成</view>
-      <view class='joinnum' wx:if='{{Group-joingoodsnum > 0 ? false : true}}'><text class='greenfont'>拼团成功</text>(已有{{joingoodsnum}}件商品参团)<block wx:if='{{isMe}}'>，可直接下单</block></view>
+      <view class='joinnum' wx:if='{{Group-joingoodsnum > 0 ? false : true}}'><text class='greenfont'>拼团成功</text>(已有{{joingoodsnum}}件商品参团)，可直接下单</view>
+      <!-- <view class='joinnum' wx:if='{{Group-joingoodsnum > 0 ? false : true}}'><text class='greenfont'>拼团成功</text>(已有{{joingoodsnum}}件商品参团)<block wx:if='{{isMe}}'>，可直接下单</block></view> -->
       <view class='jointext'>最小成团数量:<text class='greenfont'>{{Group}}</text></view>
     </view>
   </view>
@@ -63,8 +67,8 @@
   <view class="record">
     <block wx:for="{{record}}" wx:key="">
       <view class="joinRecord {{item.rightBorder}}">
-          <text class="recordnum">{{item.recordNumber}}</text>
-          <text class="recordtext">{{item.recordText}}</text>
+        <text class="recordnum">{{item.recordNumber}}</text>
+        <text class="recordtext">{{item.recordText}}</text>
       </view>
     </block>
   </view>
@@ -91,11 +95,16 @@
         </navigator>
       </block>
     </view>
-    <view class="{{count > 0 ? 'foot_right_green' : 'foot_right'}}" bindtap="buyGoods" wx:if="{{isMe}}">{{buy}}</view>
-    <view class="foot_btn" wx:if="{{!isMe && !overSolitaire}}" bindtap='addrRemake'>自提标记</view>     
-    <view class="foot_btn" wx:if="{{!isMe && !overSolitaire}}" bindtap='solitaireStatistics'>接龙统计</view> 
+    <!-- <view class="{{count > 0 ? 'foot_right_green' : 'foot_right'}}" bindtap="buyGoods" wx:if="{{isMe}}">{{buy}}</view>
+    <view class="foot_btn" wx:if="{{!isMe && !overSolitaire && isRecord}}" bindtap='addrRemake'>自提标记</view>     
+    <view class="foot_btn" wx:if="{{!isMe && !overSolitaire && isRecord}}" bindtap='solitaireStatistics'>接龙统计</view> 
     <view class="foot_btn" wx:if="{{!isMe && !overSolitaire}}" bindtap='overSolitaire'>结束接龙</view> 
+    <view class="foot_btn {{overSolitaire ? 'overSoCont' : ''}}"  wx:if="{{overSolitaire}}">此接龙已经结束</view>  -->
+    <view class="foot_btn" wx:if="{{!isMe && !overSolitaire && isRecord}}" bindtap='addrRemake'>自提标记</view>     
+    <view class="foot_btn" wx:if="{{!isMe && !overSolitaire && isRecord}}" bindtap='solitaireStatistics'>接龙统计</view> 
+    <view class="foot_btn {{!isMe && !isRecord ? 'foot_btn_maxfont' : ''}}" wx:if="{{!isMe && !overSolitaire}}" bindtap='overSolitaire'>结束接龙</view> 
     <view class="foot_btn {{overSolitaire ? 'overSoCont' : ''}}"  wx:if="{{overSolitaire}}">此接龙已经结束</view> 
+    <view class="{{count > 0 ? 'foot_right_green' : 'foot_right'}} {{!isMe && isRecord ? 'foot_right_minfont' : ''}}" bindtap="buyGoods" wx:if="{{!overSolitaire}}">{{buy}}</view>
   </view>
 </view>
 

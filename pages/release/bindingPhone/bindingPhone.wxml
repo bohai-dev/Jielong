@@ -15,6 +15,6 @@
       <label>手机</label>
       <input name="phone" type='number' bindblur="telCheck" value='{{phone}}' maxlength="11"></input>
     </view>
-    <button type='primary' formType="submit">绑定手机</button>
+    <button type='primary' hover-class="opacity" formType="submit">绑定手机</button>
   </view>
 </form>

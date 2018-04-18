@@ -62,5 +62,9 @@ input{
 button{
   width:95%;
   margin-top:20rpx;
-  font-size:32rpx;
+  font-size:35rpx;
+  border: none;
+}
+.opacity{
+  opacity: 0.8;
 }

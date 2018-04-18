@@ -32,7 +32,7 @@
   text-align:right;
 }
 .greenfont{
-  color: #1AAD19;
+  color: #2CBB6B;
 }
 .phcolor{
   color: #ddd;
@@ -95,7 +95,7 @@ picker{
 }
 .rightgreen{
   font-size:25rpx;
-  color:#0dad1a;
+  color:#2CBB6B;
   margin-right:15rpx;
   text-align:right;
 }

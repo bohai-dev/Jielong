@@ -41,3 +41,6 @@ button{
   width: 95%;
   margin-top: 50rpx;
 }
+.opacity{
+  opacity: 0.8;
+}

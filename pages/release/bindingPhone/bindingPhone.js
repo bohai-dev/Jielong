@@ -89,10 +89,11 @@ Page({
   telCheck: function (e) {
     console.log(e.detail.value)
     var phone = e.detail.value;
-    if (!(/^1(3|4|5|6|7|8)\d{9}$/.test(phone))) {
+    if (!(/^\d+$/.test(phone))) {
       wx.showModal({
         title: '提示',
         content: '请输入正确号码',
+        confirmColor: "#2CBB6B",
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')
@@ -106,7 +107,6 @@ Page({
   formSubmit: function (e) {
     var page = this;
     var app = getApp();
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
     var name = e.detail.value.name;
     var phone = e.detail.value.phone;
     var userId = wx.getStorageSync('userId');
@@ -116,16 +116,18 @@ Page({
       wx.showModal({
         title: '提示',
         content: '请输入姓名',
+        confirmColor: "#2CBB6B",
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')
           }
         }
       })
-    } else if (!(/^1(3|4|5|6|7|8)\d{9}$/.test(phone))) {
+    } else if (!(/^\d+$/.test(phone))) {
       wx.showModal({
         title: '提示',
         content: '请输入正确手机号码',
+        confirmColor: "#2CBB6B",
         showCancel: false,
         success: function (res) {
           console.log(res)
@@ -148,9 +150,38 @@ Page({
           'content-type': 'application/json'
         },
         success: function (res) {
-          wx.navigateBack({
-            delta: "1"
-          })
+          if (res.statusCode == 200 && res.data.data == 1) {
+            wx.showToast({
+              title: '保存成功！',
+              icon: 'success',
+              duration: 2000
+            })
+            setTimeout(function () {
+              wx.hideToast()
+              page.onLoad()
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1500)
+          } else {
+            wx.showLoading({
+              title: 'loading',
+            })
+            setTimeout(function () {
+              wx.hideLoading();   //关闭模态框
+              wx.showModal({
+                title: '提示',
+                content: '保存失败！',
+                confirmColor: "#2CBB6B",
+                showCancel: false,
+                success: function (res) {
+                  if (res.confirm) {
+                    console.log('用户点击确定')
+                  }
+                }
+              })
+            }, 1500)
+          }
           console.log("绑定手机成功")
         }
       })

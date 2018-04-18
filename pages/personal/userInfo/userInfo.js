@@ -106,10 +106,11 @@ Page({
   telCheck: function (e) {
     console.log(e.detail.value)
     var phone = e.detail.value;
-    if (!(/^1(3|4|5|6|7|8)\d{9}$/.test(phone))) {
+    if (!(/^\d+$/.test(phone))) {
       wx.showModal({
         title: '提示',
         content: '请输入正确号码',
+        confirmColor: "#2CBB6B",
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')
@@ -140,16 +141,18 @@ Page({
       wx.showModal({
         title: '提示',
         content: '请输入姓名',
+        confirmColor: "#2CBB6B",
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')
           }
         }
       })
-    } else if (!(/^1(3|4|5|6|7|8)\d{9}$/.test(phone))) {
+    } else if (!(/^\d+$/.test(phone))) {
       wx.showModal({
         title: '提示',
         content: '请输入正确手机号码',
+        confirmColor: "#2CBB6B",
         showCancel: false,
         success: function (res) {
           console.log(res)
@@ -202,6 +205,7 @@ Page({
                 wx.showModal({
                   title: '提示',
                   content: '保存失败！',
+                  confirmColor: "#2CBB6B",
                   showCancel: false,
                   success: function (res) {
                     if (res.confirm) {

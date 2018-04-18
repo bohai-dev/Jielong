@@ -119,6 +119,7 @@ Page({
         wx.showModal({
           title: '提示',
           content: '最多上传9张图片',
+          confirmColor: "#2CBB6B",
           success: function (res) {
             if (res.confirm) {
               console.log('用户点击确定')
@@ -160,6 +161,7 @@ Page({
         wx.showModal({
           title: '提示',
           content: '最多上传9张图片',
+          confirmColor: "#2CBB6B",
           success: function (res) {
             if (res.confirm) {
               console.log('用户点击确定')
@@ -324,12 +326,12 @@ Page({
           title: '提示',
           content: '多个商品，无法设置成团数量！',
           confirmText: '不再提示',
+          confirmColor: "#2CBB6B",
           cancelText: "确定",
           success: function (res) {
             if (res.confirm) {
               wx.setStorageSync('toMostModal', "1")
             }
-            // _this.data.
           }
         })
       }
@@ -341,6 +343,7 @@ Page({
           title: '提示',
           content: '点击确定将保留第一个商品信息，其他将清除',
           confirmText: '确定',
+          confirmColor: "#2CBB6B",
           cancelText: "取消",
           success: function (res) {
             if (res.confirm) {
@@ -524,6 +527,7 @@ Page({
             wx.hideLoading();   //关闭模态框
             wx.showModal({
               title: '发布接龙成功！',
+              confirmColor: "#2CBB6B",
               showCancel: false,
               success: function (res) {
                 if (res.confirm) {
@@ -539,6 +543,7 @@ Page({
               wx.hideLoading();   //关闭模态框
               wx.showModal({
                 title: errMessage,
+                confirmColor: "#2CBB6B",
                 showCancel: false
               })
             }
@@ -550,6 +555,7 @@ Page({
       wx.hideLoading();   //关闭模态框
       wx.showModal({
         title: veriData.remData || "请填写正确的发布接龙信息！",
+        confirmColor: "#2CBB6B",
         showCancel: false
       })
     }
