@@ -9,7 +9,7 @@
 
 <!-- 首页内容 -->
 <view class='container' wx:for="{{containerList}}" wx:for-index="index" wx:key="index" bindtap='navToDetail' data-data='{{item}}' >
-<navigator url='../detail/detail?id={{item.id}}'>
+<navigator url='../detail/detail?id={{item.id}}&fromMine=false'>
   <view class='listContent'>
   <!--接龙名称，主页  -->
     <view class='listHead'>

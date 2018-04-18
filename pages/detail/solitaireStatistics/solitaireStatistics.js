@@ -120,8 +120,10 @@ Page({
   },
 
   initTime:function(){
-    var oneYearTime = new Date(new Date().getTime() - 365*24*60*60*1000).toLocaleDateString();
-    var todayTime = new Date().toLocaleDateString();
+    var oneYearTime = new Date(new Date().getTime() - 365*24*60*60*1000);
+    oneYearTime = oneYearTime.getFullYear() + "-" +(oneYearTime.getMonth()+1)+"-"+oneYearTime.getDate();
+    var todayTime = new Date();
+    todayTime = todayTime.getFullYear() + "-" + (todayTime.getMonth() + 1) + "-" + todayTime.getDate();
     this.setData({
       pickerData:{
         s_startDate: oneYearTime,
