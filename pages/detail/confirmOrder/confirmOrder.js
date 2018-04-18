@@ -114,6 +114,7 @@ Page({
         title: '提示',
         content: '请输入正确号码',
         confirmColor: "#2CBB6B",
+        showCancel: false,
         success: function (res) {
           if (res.confirm) {
             console.log('用户点击确定')
@@ -139,8 +140,14 @@ Page({
   submitOrder:function(e){
     var _this = this;
     var app = getApp();
-    
+    wx.showLoading({
+      title: 'loading',
+    })
+    setTimeout(function () {
+      wx.hideLoading();   //关闭模态框
+    }, 60000)
     if (!this.data.userName) {
+      wx.hideLoading();   //关闭模态框
       wx.showModal({
         title: '提示',
         content: '请输入姓名',
@@ -153,6 +160,7 @@ Page({
         }
       })
     } else if (!(/^\d+$/.test(this.data.userPhone))) {
+      wx.hideLoading();   //关闭模态框
       wx.showModal({
         title: '提示',
         content: '请输入正确手机号码',
@@ -201,6 +209,7 @@ Page({
                   console.log(res)
                   if (res.statusCode == 200 && res.data.data == 1) {
                     console.log("下单成功")
+                    wx.hideLoading();   //关闭模态框
                     wx.showToast({
                       title: '成功',
                       icon: 'success',
@@ -214,27 +223,23 @@ Page({
                     }, 1500)
                   } else {
                     console.log("下单失败")
-                    wx.showLoading({
-                      title: 'loading',
-                    })
-                    setTimeout(function () {
-                      wx.hideLoading();   //关闭模态框
-                      wx.showModal({
-                        title: '提示',
-                        content: '下单失败！',
-                        confirmColor: "#2CBB6B",
-                        showCancel: false,
-                        success: function (res) {
-                          if (res.confirm) {
-                            console.log('用户点击确定')
-                          }
+                    wx.hideLoading();   //关闭模态框
+                    wx.showModal({
+                      title: '提示',
+                      content: '下单失败！请重试',
+                      confirmColor: "#2CBB6B",
+                      showCancel: false,
+                      success: function (res) {
+                        if (res.confirm) {
+                          console.log('用户点击确定')
                         }
-                      })
-                    }, 1000)
+                      }
+                    })
                   }
                 }
               })
             }else{
+              wx.hideLoading();   //关闭模态框
               wx.showModal({
                 title: '提示',
                 content: '该接龙已结束！',
@@ -248,6 +253,7 @@ Page({
               })
             }
           }else{
+            wx.hideLoading();   //关闭模态框
             wx.showModal({
               title: '提示',
               content: '商品库存发生变化，请刷新后重新选择商品！',

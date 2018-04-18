@@ -367,7 +367,9 @@ Page({
           }
         }
       })
-      var buy = "已选：￥" + this.data.total;
+      if (repertory>0){
+        var buy = "已选：￥" + this.data.total;
+      }
     } else {
       this.data.GoodList[index].goodsnum++;
       this.data.count++;
