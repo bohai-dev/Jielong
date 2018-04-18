@@ -16,11 +16,7 @@ Page({
    */
 
   data: {
-
-
-
-
-
+    photo: '../../images/notice.png'
   },
 
   /**
@@ -41,8 +37,31 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    // 执行coolsite360交互组件展示
-    app.coolsite360.onShow(this);
+    var app = getApp();
+    var _this=this;
+    var userId = wx.getStorageSync("userId");
+    wx.request({
+      url: app.globalData.domain + '/userMessage/selectByUserId',
+      data: {
+        userId: userId
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        for (var i = 0; i < res.data.data.length; i++) {
+          if (res.data.data[i].isRead == 0) {
+            var photo = '../../images/w-notice.png';
+            break;
+          } else {
+            var photo = '../../images/notice.png';
+          }
+        }
+        _this.setData({
+          photo: photo
+        })
+      }
+    })
   },
 
   /**
