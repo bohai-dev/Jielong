@@ -33,7 +33,7 @@
 .textCen{
   width: 100%;
   text-align: center;
-  margin-bottom: 90rpx;
+  margin-bottom: 130rpx;
   margin-top: 40rpx;
   color: #333;
 }

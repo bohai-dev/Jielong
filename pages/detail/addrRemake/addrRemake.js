@@ -85,15 +85,35 @@ Page({
       success: function (res) {
         console.log(res)
         if (res.statusCode == 200) {
-          _this.setData({
-            items: res.data.data,
-            jieLongId: jieLongId,
-            pickNum: res.data.data.length
-          })
+          //初始化自提
+          _this.initAddr(res.data.data,jieLongId);
         }
-
       }
     })
+  },
+
+  //初始化自提
+  initAddr: function (data, jieLongId){
+      console.log(data);
+      var _this = this;
+      var checkLength = 0;
+      if(data.length){
+        data.forEach(function(item,index,datas){
+          if(item.state == 3){
+            item.checked = true;
+            checkLength++;
+          }
+        })
+        if (checkLength == data.length){
+          _this.data.isShow = true;
+        }
+      }
+      _this.setData({
+        items: data,
+        jieLongId: jieLongId,
+        pickNum: data.length,
+        isShow: _this.data.isShow
+      })
   },
 
   checkboxChange:function(e){
@@ -158,33 +178,39 @@ Page({
 
   //确认提货
   saveRemake:function(e){
-    console.log(this)
     var _this = this;
     var jsonStr = [];
     _this.data.items.forEach(function (item) {
+      var obj = {};
       if (item.checked) {
-        jsonStr.push(item.orderNum);
+        obj.orderNum = item.orderNum;
+        obj.state = 3;
+      }else{
+        obj.orderNum = item.orderNum;
+        obj.state = 2;
       }
+      jsonStr.push(obj);
     })
     if(jsonStr.length){
-    JSON.stringify(jsonStr);
     console.log(jsonStr)
+    var orderNumList = jsonStr
     wx.request({
       url: app.globalData.domain + '/order/signPick',
       method:"POST",
-      data:jsonStr,
+      data:{
+        orderNumList
+      },
       success:function(res){
-        console.log(res)
         if(res.statusCode == 200){
           wx.showToast({
             title: '确认提货成功!',
-            duration: 4000
+            duration: 2000
           })
-          _this.initData(_this.data.jieLongId);
+          // _this.initData(_this.data.jieLongId);
         }else{
           wx.showToast({
             title: res.data.errorMessage || '确认提货失败!',
-            duration: 4000,
+            duration: 2000,
             icon:"none"
           })
         }
@@ -194,7 +220,7 @@ Page({
     }else{
       wx.showToast({
         title: '请选择订单！',
-        duration: 4000,
+        duration: 2000,
         icon: "none"
       })
 
