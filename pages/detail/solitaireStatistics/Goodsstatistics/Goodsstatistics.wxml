@@ -12,12 +12,12 @@
   </view>
 
   <view class='midContent' wx:for="{{data.pickBeans}}" wx:key="index">
-    <view class='allPirce' bindtap='showDetail' data-isShow="{{'isShow' + index}}">
+    <view class='allPirce' bindtap='showDetail' data-index="{{index}}">
       NO.<text class='allPe'>{{index + 1}}</text>
       <image class='headImg' src='{{item.userInfo.avatarUrl}}'></image>
       <text class='allPi'>{{item.userInfo.nickName}}</text>
     </view>
-    <view class='goodsCont' wx:if="{{'isShow' + index}}">
+    <view class='goodsCont' id="{{item.isShow}}" wx:if="{{item.isShow}}">
       <view class='goodsCont_left'>
         <text>{{item.userInfo.name  +" "+ item.userInfo.phoneNumber}}</text>
         <text>自提点：{{item.userAddress.detail}}</text>

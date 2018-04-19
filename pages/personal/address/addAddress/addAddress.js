@@ -19,6 +19,9 @@ Page({
    */
   onLoad: function (options) {
     if(options.id){
+      wx.setNavigationBarTitle({
+        title: '编辑自提点',
+      })
       this.setData({
         addrDetail:options.detail,
         addrName:options.name,

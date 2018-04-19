@@ -203,13 +203,13 @@ Page({
       success:function(res){
         if(res.statusCode == 200){
           wx.showToast({
-            title: '确认提货成功!',
+            title: '操作成功!',
             duration: 2000
           })
           // _this.initData(_this.data.jieLongId);
         }else{
           wx.showToast({
-            title: res.data.errorMessage || '确认提货失败!',
+            title: res.data.errorMessage || '操作失败!',
             duration: 2000,
             icon:"none"
           })

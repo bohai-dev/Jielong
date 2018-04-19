@@ -57,12 +57,12 @@ Page({
 
       }
     ],
-    ossData:{
-      host:"",
-      accessKeyId:"",
-      policy:"",
-      signature:"",
-      dir:"",
+    ossData: {
+      host: "",
+      accessKeyId: "",
+      policy: "",
+      signature: "",
+      dir: "",
     }
 
 
@@ -292,7 +292,7 @@ Page({
       } else {
         var num = 23;
         for (var j = 0; j < num; j++) {
-          todaytime[j] = twonumber(j+1) + ":00";
+          todaytime[j] = twonumber(j + 1) + ":00";
         }
       }
       function twonumber(num) {
@@ -456,9 +456,9 @@ Page({
     wx.showLoading({
       title: 'loading',
     })
-    setTimeout(function(){
+    setTimeout(function () {
       wx.hideLoading();   //关闭模态框
-    },60000)
+    }, 60000)
     // var veriData;
     //封装发布数据
     var pushData = {};
@@ -481,18 +481,18 @@ Page({
       pushData.goodsList[i].name = _detailValue["name" + i];
       pushData.goodsList[i].serverPaths = _thisData.goodsList[i].serverPaths.join(",");
       pushData.goodsList[i].parentClassId = app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].id;
-      if (!app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].goodsSubClasses.length){
+      if (!app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].goodsSubClasses.length) {
         pushData.goodsList[i].subClassId = 0;
-      }else{
+      } else {
         pushData.goodsList[i].subClassId = app.globalData.classifyData[_thisData.goodsList[i].classIndex[0]].goodsSubClasses[_thisData.goodsList[i].classIndex[1]].id;
       }
       pushData.goodsList[i].specification = _detailValue["specification" + i];
       pushData.goodsList[i].price = Math.round(Number(_detailValue["price" + i]) * 100) / 100;
       pushData.goodsList[i].repertory = Number(_detailValue["repertory" + i]);
-      if (!_this.data.judeToMost){
+      if (!_this.data.judeToMost) {
         pushData.goodsList[i].isSetGroup = _thisData.goodsList[i].isSetGroup;
         pushData.goodsList[i].groupSum = Number(_detailValue["groupSum" + i]);
-      }else{
+      } else {
         pushData.goodsList[i].isSetGroup = 0;
         pushData.goodsList[i].groupSum = null;
       }
@@ -682,20 +682,20 @@ Page({
     if (types == "common") {
       //先循环上传接龙介绍图片，得到url
       for (var i = 0; i < localImages.length; i++) {
-        // console.log(localImages[i].path);
+        (function(i){
+        console.log(localImages[i].path);
         var imageSrc = localImages[i].path;
         var imageStyle = imageSrc.substring(11);
         var imgType = imageStyle.substring(imageStyle.lastIndexOf(".") + 1, )
         var imageName = Date.parse(new Date());
-        console.log(_this.data.ossData.dir + imageName + '.' + imgType)
         _this.data.introImages = [];
         wx.uploadFile({
           url: app.globalData.domainUpload,        //服务器上传地址
           filePath: imageSrc,
           name: 'file',
-          formData:{
+          formData: {
             name: imageSrc,
-            key: _this.data.ossData.dir + imageName + '.' + imgType,
+            key: _this.data.ossData.dir + imageName + i + '.' + imgType,
             OSSAccessKeyId: _this.data.ossData.accessKeyId,
             success_action_status: "200",
             policy: _this.data.ossData.policy,
@@ -703,17 +703,18 @@ Page({
           },
           success: function (res) {
             console.log(res)
-            if(res.statusCode == 200){
-              _this.data.introImages.push(_this.data.ossData.dir + imageName + '.' + imgType);
+            if (res.statusCode == 200) {
+              _this.data.introImages.push(_this.data.ossData.dir + imageName + i + '.' + imgType);
             }
-            
           }
         })
+        })(i)
       }
     } else {
       _this.data.goodsList[goodsIndex].serverPaths = [];
       //先循环上传接龙介绍图片，得到url
       for (var i = 0; i < localImages.length; i++) {
+        (function (i) {
         var imageSrc = localImages[i].path;
         var imageStyle = imageSrc.substring(11);
         var imgType = imageStyle.substring(imageStyle.lastIndexOf(".") + 1, )
@@ -725,7 +726,7 @@ Page({
           name: 'file',
           formData: {
             name: imageSrc,
-            key: _this.data.ossData.dir + imageName + '.' + imgType,
+            key: _this.data.ossData.dir + imageName + i + '.' + imgType,
             OSSAccessKeyId: _this.data.ossData.accessKeyId,
             success_action_status: "200",
             policy: _this.data.ossData.policy,
@@ -734,10 +735,11 @@ Page({
           success: function (res) {
             console.log(res)
             if (res.statusCode == 200) {
-              _this.data.goodsList[goodsIndex].serverPaths.push(_this.data.ossData.dir + imageName + '.' + imgType);
+              _this.data.goodsList[goodsIndex].serverPaths.push(_this.data.ossData.dir + imageName + i + '.' + imgType);
             }
           }
         })
+        })(i)
       }
     }
   },
@@ -833,7 +835,7 @@ Page({
   verifPushData: function (data) {
     console.log(data);
     var remindDataObj = {};
-    if (!data.userId){
+    if (!data.userId) {
       remindDataObj = { pushForm: 0, remData: "用户id已经过期!" };
     } else if (!data.topic) {
       remindDataObj = { pushForm: 0, remData: "请填写接龙主题！" };
@@ -849,7 +851,7 @@ Page({
       remindDataObj = { pushForm: 0, remData: "请设置截止时间！" };
     } else if (data.goodsList[0].isSetGroup && !data.finishTime) {
       remindDataObj = { pushForm: 0, remData: "成团必须设置设置截止时间！" };
-    }else {
+    } else {
       for (var i = 0; i < data.goodsList.length; i++) {
         if (!data.goodsList[i].name) {
           remindDataObj = { pushForm: 0, remData: "请设置商品名称！" };
@@ -877,27 +879,27 @@ Page({
     return remindDataObj;
   },
   //获取oss配置
-  getOssPolicy:function(e){
+  getOssPolicy: function (e) {
     var _this = this;
     wx.request({
       url: app.globalData.domain + '/oss/policy',
       success: function (res) {
         console.log(res)
-        if(res.statusCode == 200){
+        if (res.statusCode == 200) {
           _this.setData({
-              ossData: {
-                host: res.data.host,
-                accessKeyId: res.data.accessKeyId,
-                policy: res.data.policy,
-                signature: res.data.signature,
-                dir: res.data.dir,
-              }
+            ossData: {
+              host: res.data.host,
+              accessKeyId: res.data.accessKeyId,
+              policy: res.data.policy,
+              signature: res.data.signature,
+              dir: res.data.dir,
+            }
           })
         }
       }
     })
     console.log(_this)
-    
+
 
   }
 

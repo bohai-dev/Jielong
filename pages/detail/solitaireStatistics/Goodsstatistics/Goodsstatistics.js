@@ -5,12 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    goodsList: [{
-      title: "手机1",
-      people: "1",
-      num: "1",
-      pirce: "1.00"
-    }],
+    data:{
+      pickBeans:[]
+    },
     isShow:false,
     startTime:'',
     endTime:'',
@@ -76,12 +73,10 @@ Page({
   //初始化数据
   initData:function(datas){
     var _this = this;
-    // _this.data.data.pickBeans.forEach(function(res){
-    //   console.log(res)
-
-
-    // })
-
+    datas.pickBeans.map(function(res,index){
+      res.isShow = false;
+      return res;
+    })
     _this.setData({
       data:datas
     })
@@ -91,8 +86,18 @@ Page({
   //显示详细
   showDetail:function(e){
     var _this = this;
+    var index = e.currentTarget.dataset.index;
+    _this.data.data.pickBeans.map(function(res,resIndex){
+      console.log(resIndex)
+      if (index == resIndex){
+        res.isShow = !res.isShow;
+      }
+      return res;
+    })
+    
     this.setData({
-      isShow:!_this.data.isShow
+      data: _this.data.data
+      
     })
   }
 })
