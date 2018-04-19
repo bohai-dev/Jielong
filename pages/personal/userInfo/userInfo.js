@@ -113,7 +113,7 @@ Page({
   telCheck: function (e) {
     console.log(e.detail.value)
     var phone = e.detail.value;
-    if (!(/^\d+$/.test(phone))) {
+    if (!(/^604\d+$/.test(phone))) {
       wx.showModal({
         title: '提示',
         content: '请输入正确号码',
@@ -164,7 +164,7 @@ Page({
           }
         }
       })
-    } else if (!(/^\d+$/.test(phone))) {
+    } else if (!(/^604\d+$/.test(phone))) {
       wx.hideLoading();   //关闭模态框
       wx.showModal({
         title: '提示',

@@ -88,7 +88,6 @@ Page({
     var _this = this;
     var index = e.currentTarget.dataset.index;
     _this.data.data.pickBeans.map(function(res,resIndex){
-      console.log(resIndex)
       if (index == resIndex){
         res.isShow = !res.isShow;
       }
