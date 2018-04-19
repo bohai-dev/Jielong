@@ -16,19 +16,16 @@ page{
 /* .line{
   border-bottom: 1rpx solid gainsboro;
 } */
-
 .ques-style{ 
   min-height: 60rpx;
   font-size: 35rpx;
   font-weight: bold;
-  padding:10rpx 0;
+  padding:20rpx 0;
   border-bottom: 1rpx solid gainsboro;
   color:#666;
 } 
 .answer-style{
-  /* padding-top: 13rpx;
-  padding-bottom: 10rpx; */
-  padding:10rpx;
+  padding:20rpx 0;
   font-size:30rpx;
   color:#999;
 }

@@ -1,8 +1,3 @@
-
-
-// 引入coolsite360交互配置设定
-require('coolsite.config.js');
-
 // 获取全局应用程序实例对象
 var app = getApp();
 var pageNum = 1;             //页数
@@ -33,8 +28,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    // 注册coolsite360交互模块
-    app.coolsite360.register(this);
     // 接龙首页所有的数据量
     this.selectAllCount();
     // 加载首页轮播图片

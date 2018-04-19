@@ -19,6 +19,9 @@ page{
   justify-content:space-between;
   padding:0 30rpx;
 }
+.mineNavTohover{
+  background: rgba(238 , 238, 238, 0.4);
+}
 .font-style{
   display: flex; 
   font-size: 30rpx;

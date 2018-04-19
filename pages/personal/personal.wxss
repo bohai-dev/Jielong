@@ -45,6 +45,9 @@ page{
   display: flex;
   align-items: center;
 }
+.mineNavTohover{
+  background: rgba(238 , 238, 238, 0.4);
+}
 .tempIcon{
   height: 32rpx;
   width: 32rpx;

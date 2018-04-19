@@ -87,8 +87,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    // 执行coolsite360交互组件展示
-    // app.coolsite360.onShow(this);
     this.getAddress();
     this.getClassify();    //获取分类数据
     this.getPhoneNumber();

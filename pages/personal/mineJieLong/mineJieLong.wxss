@@ -10,7 +10,7 @@ page{
 }
 .content{
   height: 180rpx;
-  border-bottom: 1px solid #ECECEC;
+  border-top: 1px solid #ECECEC;
   padding: 20rpx 30rpx;
 }
 .headCont{
