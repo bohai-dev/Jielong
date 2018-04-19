@@ -4,7 +4,7 @@ page{
 }
 .body{
   width: 100%;
-  padding: 0 30rpx 20rpx;
+  padding: 0 20rpx 20rpx;
   display:flex;
   flex-direction:column-reverse;
 }
@@ -13,18 +13,14 @@ page{
   display:flex;
   align-items:center;
   flex-direction:column;
+  margin-top: 15rpx;
 }
 .time{
-  width:240rpx;
-  height:50rpx;
-  background:#ddd;
+  color:#ddd;
   font-size:22rpx;
-  color:white;
   display:flex;
-  justify-content:center;
+  justify-content:flex-end;
   align-items:center;
-  border-radius: 7rpx;
-  margin:20rpx 0;
 }
 .container{
   width:100%;
@@ -35,11 +31,12 @@ page{
   display:flex;
   flex-direction:column;
   justify-content:space-between;
+  position:relative;
 }
 .isShow{
-  margin-left:599rpx;
   position:absolute;
-  margin-top:-18rpx;
+  top: 0;
+  right: 8rpx;
   color:red;
   font-size:24rpx
 }

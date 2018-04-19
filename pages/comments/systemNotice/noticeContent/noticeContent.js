@@ -5,27 +5,35 @@ Page({
    * 页面的初始数据
    */
   data: {
-    contentList:[
-      {
-        noticeName: '恭候女王驾到',
-        noticeContent: '我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅',//通知的主体内容
-        // noImage: 'noImage',
-        imgUrl: '../../../../../../images/queen.jpg',  //图片地址
-        time: '2018/02/17 19:33'
-      },
-      {
-        noticeContent: '我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅我好帅',
-        imgUrl: '../../../../../../images/queen1.jpg'
-      }
-    ],
-    
+    contentList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var data = JSON.parse(options.jsonStr)
+    var _this = this;
+    var app = getApp();
+    var id = data.id;
+    if (data.isRead != 1){
+      wx.request({
+        url: app.globalData.domain + '/userMessage/updateReadStatus',
+        data: {
+          id: id
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          console.log(res.data.data)
+        }
+      })
+    }   
+    this.setData({
+      contentList: data
+    })
+    console.log(this.data.contentList)
   },
 
   /**

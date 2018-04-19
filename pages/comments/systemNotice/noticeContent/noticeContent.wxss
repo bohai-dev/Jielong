@@ -1,16 +1,17 @@
 /* pages/comments/systemNotice/noticeContent/noticeContent.wxss */
 page{
-  background-color: #EEEEEE;
+  /* background-color: #EEEEEE; */
+  background-color: white;
   font:33rpx "微软雅黑";
 }
 .content{
   border-top: 1rpx solid gainsboro;
-  background-color: white;
-  padding:15rpx;
+  padding:20rpx 30rpx;
 }
 .header-style{
   font-size: 40rpx;
-  color: #666;
+  color: #333;
+  font-weight: bold;
 }
 .content-header{
   display: flex;
@@ -19,6 +20,8 @@ page{
 .time-style{
   color:#999;
   margin:10rpx 0;
+  font:30rpx "微软雅黑";
+  text-align: right;
 }
 .concrete{
   display: flex;
@@ -28,6 +31,7 @@ page{
 .concrete-style{
   color: #666;
   padding-bottom: 1rpx;
+  margin: 20rpx 0;
 }
 contentBold{
   font: 600;

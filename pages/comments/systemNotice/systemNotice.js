@@ -7,16 +7,25 @@ Page({
   data: {
     noticeList:[]
   },
-  searchAddress: function () {
-    wx.navigateTo({
-      url: './noticeContent/noticeContent',
-    })
-  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     //显示系统通知
     var app = getApp();
     var _this = this;
@@ -39,20 +48,6 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
@@ -66,26 +61,16 @@ Page({
     console.log(this.data.noticeList)
     //用户已读消息
     var  _this = this;
-    var app = getApp();
+    var show = false;
     for (var i = 0; i < this.data.noticeList.length; i++) {
       if (this.data.noticeList[i].isRead == 0) {
-        var id = this.data.noticeList[i].id;
-        wx.request({
-          url: app.globalData.domain + '/userMessage/updateReadStatus',
-          data: {
-            id: id
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          success: function (res) {
-            console.log(res.data.data)
-            // _this.setData({
-            //   noticeList: res.data.data
-            // })
-          }
-        })
+        show = false;
+        break;
+      }else{
+        show = true;
       }
+    }
+    if (show) {
       wx.hideTabBarRedDot({
         index: 2
       })
@@ -111,5 +96,15 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+  //自定义函数
+  searchAddress: function (e) {
+    var _this = this;
+    var index = e.currentTarget.dataset.index;
+    console.log(this.data.noticeList[index]);
+    var jsonStr = JSON.stringify(this.data.noticeList[index]);
+    wx.navigateTo({
+      url: './noticeContent/noticeContent?jsonStr=' + jsonStr,
+    })
+  },
 })
