@@ -1,7 +1,7 @@
 <!--pages/personal/helpCenter/helpCenter.wxml-->
 <block wx:for="{{questionList}}" wx:key="">
   <view class='content'>
-    <navigator url='./answerPage/answerPage?index={{index}}' class='mineNavTo'>
+    <navigator url='./answerPage/answerPage?index={{index}}' class='mineNavTo' hover-class='mineNavTohover'>
       <text class="font-style" bindtap='answerQues'>{{item.title}}</text>
       <image src='../../../images/rightShot.png' class='rightShotImg'></image>
     </navigator>
