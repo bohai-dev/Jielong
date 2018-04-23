@@ -22,7 +22,7 @@
     </view>  
   <!--接龙时间  -->
     <view class='conTime'>
-      <text>{{item.createdAt}}</text>
+      <text>{{item.createTimeStr}}</text>
       <text></text>
       <text>{{item.browseSum}}人浏览</text>
     </view>  

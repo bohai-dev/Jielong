@@ -30,10 +30,10 @@
     <view wx:for="{{item.orderGoods}}" wx:for-item="goodsItem" wx:for-index="goodsIndex" wx:key="id"  class='goodsCont oneGoods_hr'>
         <text>{{goodsItem.goods.name}}</text>
         <text>+{{goodsItem.sum}}</text>
-        <text>￥{{goodsItem.money}}</text>
+        <text>${{goodsItem.money}}</text>
     </view>   
     <view class='goodsCont  fEnd'>
-      合计：<text class='red'>￥{{item.sumMoney}}</text>
+      合计：<text class='red'>${{item.sumMoney}}</text>
     </view>
     </block>
     </checkbox-group>

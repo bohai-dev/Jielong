@@ -4,10 +4,10 @@
     <view class='goodslist'>
       <text class='goodsname'>{{item.goodsname}}</text>
       <text class='goodsnum'>+{{item.sum}}</text>
-      <text class='goodsprice'>￥{{item.money}}</text>
+      <text class='goodsprice'>${{item.money}}</text>
     </view>
   </block> 
-  <view class='goodssum'>合计：<text class='redfont'>￥{{total}}</text></view>
+  <view class='goodssum'>合计：<text class='redfont'>${{total}}</text></view>
   <view class='userinfo'>
     姓名
     <input type='text' value='{{userName}}' bindinput='inputUserName'></input>

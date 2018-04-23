@@ -336,6 +336,10 @@
   color: #2ABB6D;
   text-align: center;
 }
+.copyBtn{
+  display: block;
+  font: 28rpx/50rpx "微软雅黑";
+}
 /* .overSoCont{
    width: 100%;
  } */

@@ -11,7 +11,7 @@ view,scroll-view,swiper,swiper-item,icon,text,progress,button,checkbox-group,che
 }
 page {
   height: 100%;
-  font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+  font-family: "微软雅黑",-apple-system-font,Helvetica Neue,Helvetica,sans-serif;
 }
 checkbox-group,radio-group{
   display:block;

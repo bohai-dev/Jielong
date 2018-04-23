@@ -20,7 +20,7 @@
         <text class='goodsCl_title'>{{index +1}}.{{item.goods.name}}</text>
         <text>接龙人数：{{item.joinPeopleSum}}人</text>
         <text>已售商品：{{item.sellSum}}件</text>
-        <text>入账金额：￥{{item.moneySum}}</text>
+        <text>入账金额：${{item.moneySum}}</text>
       </view>
       <view>
         <image class='rightShotImg' src='../../../images/rightShot.png'></image>
@@ -28,7 +28,7 @@
     </view>
     <view class='allPirce' wx:if="{{goodsList.length}}">
       总人数：<text class='allPe'>{{allPeople}}</text>
-      总金额：<text class='allPi'>￥{{allPrice}}</text>
+      总金额：<text class='allPi'>${{allPrice}}</text>
     </view>
 
     <view class='textCen' wx:if="{{!goodsList.length}}">

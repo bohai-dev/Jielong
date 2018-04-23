@@ -119,6 +119,7 @@ Page({
       success: function (res) {
         console.log(res.data.data)
         if (res.data.data) {
+          _this.data.allData = res.data.data;
           _this.data.GoodsDetialList[0].mineName = res.data.data.addressName;
           _this.data.GoodsDetialList[0].addressDetail = res.data.data.addressDetail;
           _this.data.GoodsDetialList[0].addressLatitude = res.data.data.addressLatitude;
@@ -322,13 +323,13 @@ Page({
       if (this.data.total == 0) {
         var buy = "请选择商品";
       } else {
-        var buy = "已选：￥" + this.data.total;
+        var buy = "已选：$" + this.data.total;
       }
     } else {
       if (this.data.total <= 0) {
         var buy = "请选择商品";
       } else {
-        var buy = "已选：￥" + this.data.total;
+        var buy = "已选：$" + this.data.total;
       }
     }
     console.log(this.data.count)
@@ -356,13 +357,13 @@ Page({
         }
       })
       if (repertory>0){
-        var buy = "已选：￥" + this.data.total;
+        var buy = "已选：$" + this.data.total;
       }
     } else {
       this.data.GoodList[index].goodsnum++;
       this.data.count++;
       this.data.total += this.data.GoodList[index].price;
-      var buy = "已选：￥" + this.data.total;
+      var buy = "已选：$" + this.data.total;
     }
     console.log(this.data.total)
     this.setData({
@@ -507,6 +508,20 @@ Page({
       }
 
     })
+  },
+  //复制接龙
+  copySolitaire:function(){
+    var _this = this;
+    console.log(_this.data.allData);
+    wx.removeStorage({
+      key: 'seleAddrKey'
+    })
+    wx.navigateTo({
+      url: '../release/release?jsonStr=' + JSON.stringify(_this.data.allData),
+    })
+
+
+
 
 
   }

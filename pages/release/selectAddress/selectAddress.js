@@ -16,14 +16,18 @@ Page({
     longitude: "",
     latitude: "",
     id: "",
+    selectIdArr:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-
+    if(options.jsonStr){
+      this.setData({
+        selectIdArr: options.jsonStr.split("-")
+      })
+    }
   },
 
   /**
@@ -54,12 +58,21 @@ Page({
             userId: wx.getStorageSync("userId")
           },
           success: function (res) {
+            console.log(_this.data.selectIdArr);
             if (res.data.errorCode == 0) {
+              for (var i = 0; i < res.data.data.length; i++) {
+                res.data.data[i].value = false;
+                if (_this.data.selectIdArr.length) {
+                  for (var j = 0; j < _this.data.selectIdArr.length; j++) {
+                    if (res.data.data[i].id == _this.data.selectIdArr[j]){
+                      res.data.data[i].value = true;
+                    }
+                  }
+                }
+              }
               _this.setData({ addressList: res.data.data })
             }
-            for (var i = 0; i < _this.data.addressList.length; i++) {
-              _this.data.addressList[i].value = false;
-            }
+            console.log(_this.data.addressList)
             var addrJson = JSON.stringify(_this.data.addressList);
             wx.setStorage({
               key: 'seleAddrKey',

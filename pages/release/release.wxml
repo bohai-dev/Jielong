@@ -5,7 +5,7 @@
     <view>
     <!--接龙主题 -->
     <view class='containerView'>
-      <input name="topic" placeholder-class="phcolor" placeholder="接龙主题" type="text" />
+      <input name="topic" placeholder-class="phcolor" placeholder="接龙主题" type="text" value="{{topic}}" />
     </view>
     <!--接龙介绍 -->
     <view class='containerView'>
@@ -123,12 +123,12 @@
         <!--商品规格-->
         <view class='containerView rowIconView'>
           <text class='center'>规格</text>
-          <input name="specification{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsSpecification' placeholder-class="phcolor" placeholder="请输入商品规格" type="text" value='{{item.specification}}' />
+          <input name="specification{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsSpecification' placeholder-class="phcolor" placeholder="请填写单份商品的规格，如个、只等" type="text" value='{{item.specification}}' />
         </view>
         <!--商品价格-->
         <view class='containerView rowIconView'>
           <text class='center'>价格</text>
-          <input name="price{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsPrice' placeholder-class="phcolor" placeholder="请输入商品价格" type="digit" value='{{item.price}}' />
+          <input name="price{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsPrice' placeholder-class="phcolor" placeholder="范围1.00~99999.99，单位$" type="digit" value='{{item.price}}' />
         </view>
         <!--商品库存-->
         <view class='containerView rowIconView'>
@@ -143,7 +143,7 @@
         <!--最小成团数量-->
       <view wx:if="{{!judeToMost}}">
         <view class='containerView rowIconView' wx:if="{{item.isSetGroup}}">
-          <input name="groupSum{{goodsindex}}" placeholder-class="phcolor" placeholder="请输入最小成团数量" type="number"/>
+          <input name="groupSum{{goodsindex}}" placeholder-class="phcolor" placeholder="请输入最小成团数量" type="number"  value='{{item.groupSum}}'/>
         </view>
       </view>
       </view>

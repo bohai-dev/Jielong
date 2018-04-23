@@ -17,6 +17,7 @@ Page({
    */
 
   data: {
+    appGlobalHost: app.globalData.domainUpload,
     userId: wx.getStorageSync("userId"),
     topic: "",          //主题
     description: "",    //活动描述  
@@ -28,7 +29,7 @@ Page({
     addressLatitude: "",                  //活动地址纬度
     imageLocalPaths: [],                //本地介绍图片数组 { id:1, unique: 'unique_1',path:''}
     introImages: [],              //服务器图片介绍数组 用逗号隔开"001.png,002.png"
-    goodsAddresses: [],            //用户自提地址id数组，用逗号隔开"1,2"
+    goodsAddresses: "",            //用户自提地址id数组，用逗号隔开"1,2"
     phoneNumber: 0,                    //用户手机号
     setFinishTime: 0,               //是否设置截止时间
     multiArray: [],                 //截至时间日期
@@ -72,8 +73,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
-    //加载分类数据  ' /getAllGoodsClass '
+  onLoad(options) {
+    console.log(options)
+
+    if(options.jsonStr){
+      this.copyData(JSON.parse(options.jsonStr));
+    }
+
   },
 
   /**
@@ -85,8 +91,8 @@ Page({
 
   /**
    * 生命周期函数--监听页面显示
-   */
-  onShow() {
+   */ 
+  onShow(options) {
     this.getAddress();
     this.getClassify();    //获取分类数据
     this.getPhoneNumber();
@@ -134,9 +140,11 @@ Page({
           count: imgNumber,
           success: function (res) {
             console.log(res)
+            console.log(self.data.imageLocalPaths.length)
             var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
             //console.log(tempFilePaths + '----1');
             var length = self.data.imageLocalPaths.length;
+            var lastLength = self.data.imageLocalPaths.length;
             for (var i = 0; i < tempFilePaths.length; i++) {
               var loalImg = { id: length, unique: 'unique_' + length, path: tempFilePaths[i] };
               length++;
@@ -146,8 +154,7 @@ Page({
             self.setData({
               imageLocalPaths: imgs
             })
-            console.log(imgs)
-            self.changeImgStyle(imgs, "common");//每次上传图片获取本地地址
+            self.changeImgStyle(imgs.slice(lastLength), "common");//每次上传图片获取本地地址
           }
         })
       }
@@ -178,6 +185,7 @@ Page({
             var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
             //console.log(tempFilePaths + '----2');
             var length = imgs.length;
+            var lastLength = self.data.goodsList[e.currentTarget.dataset.goodsindex].serverPaths.length;
             for (var i = 0; i < tempFilePaths.length; i++) {
               var loalImg = { id: length, unique: 'unique_' + length, path: tempFilePaths[i] };
               length++;
@@ -187,7 +195,7 @@ Page({
             self.setData({
               goodsList: self.data.goodsList
             })
-            self.changeImgStyle(imgs, "no-common", e.currentTarget.dataset.goodsindex); //每次上传图片获取本地地址
+            self.changeImgStyle(imgs.slice(lastLength), "no-common", e.currentTarget.dataset.goodsindex); //每次上传图片获取本地地址
           }
         })
       }
@@ -250,8 +258,9 @@ Page({
   },
   //设置自提点
   selectAddress: function (e) {
+    var _this = this;
     wx.navigateTo({
-      url: './selectAddress/selectAddress',
+      url: './selectAddress/selectAddress?jsonStr=' + _this.data.goodsAddresses.replace(/,/g, "-")
     })
 
   },
@@ -324,11 +333,12 @@ Page({
         wx.showModal({
           title: '提示',
           content: '多个商品，无法设置成团数量！',
-          confirmText: '不再提示',
-          confirmColor: "#2CBB6B",
-          cancelText: "确定",
+          confirmText: '确定',
+          confirmColor: "#333",
+          cancelColor: "#2CBB6B",
+          cancelText: "不再提示",
           success: function (res) {
-            if (res.confirm) {
+            if (res.cancel) {
               wx.setStorageSync('toMostModal', "1")
             }
           }
@@ -452,12 +462,13 @@ Page({
     var _thisData = _this.data;
     var _detailValue = e.detail.value;
     wx.showLoading({
-      title: 'loading',
+      title: '发布中...',
+      mask: true
     })
     setTimeout(function () {
       wx.hideLoading();   //关闭模态框
     }, 60000)
-    // var veriData;
+
     //封装发布数据
     var pushData = {};
     pushData.userId = _thisData.userId;
@@ -635,6 +646,7 @@ Page({
         })
       },
       fail: function (err) {
+        console.log(err)
         return addrNum;
       }
     })
@@ -686,7 +698,6 @@ Page({
         var imageStyle = imageSrc.substring(11);
         var imgType = imageStyle.substring(imageStyle.lastIndexOf(".") + 1, )
         var imageName = Date.parse(new Date());
-        _this.data.introImages = [];
         wx.uploadFile({
           url: app.globalData.domainUpload,        //服务器上传地址
           filePath: imageSrc,
@@ -709,7 +720,6 @@ Page({
         })(i)
       }
     } else {
-      _this.data.goodsList[goodsIndex].serverPaths = [];
       //先循环上传接龙介绍图片，得到url
       for (var i = 0; i < localImages.length; i++) {
         (function (i) {
@@ -717,7 +727,6 @@ Page({
         var imageStyle = imageSrc.substring(11);
         var imgType = imageStyle.substring(imageStyle.lastIndexOf(".") + 1, )
         var imageName = Date.parse(new Date());
-        _this.data.goodsList[goodsIndex].serverPaths = [];
         wx.uploadFile({
           url: app.globalData.domainUpload,        //服务器上传地址
           filePath: imageSrc,
@@ -795,6 +804,9 @@ Page({
             app.globalData.secondClassify.push(arr);  //赋值二级数组数据
           }
           app.globalData.initClassify.push(app.globalData.firstClassify, app.globalData.secondClassify[0]);
+          console.log(app.globalData.initClassify)
+          console.log(_this.data)
+          console.log(_this.data.goodsList[0].parentClass)
           _this.data.goodsList[0].parentClass.push(app.globalData.firstClassify, app.globalData.secondClassify[0]);
           _this.data.goodsList[0].Allsubclass.push(app.globalData.secondClassify);
           _this.setData({
@@ -818,7 +830,6 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res)
         if (res.data.data) {
           _this.setData({
             phoneNumber: res.data.data.phoneNumber
@@ -831,7 +842,6 @@ Page({
   },
   //发布数据验证
   verifPushData: function (data) {
-    console.log(data);
     var remindDataObj = {};
     if (!data.userId) {
       remindDataObj = { pushForm: 0, remData: "用户id已经过期!" };
@@ -882,7 +892,6 @@ Page({
     wx.request({
       url: app.globalData.domain + '/oss/policy',
       success: function (res) {
-        console.log(res)
         if (res.statusCode == 200) {
           _this.setData({
             ossData: {
@@ -896,11 +905,94 @@ Page({
         }
       }
     })
-    console.log(_this)
+  },
+  //复制接龙
+  copyData:function(copyData){
+    console.log(copyData);
+    var _this = this;
 
+    //获取分类数据
+    wx.request({
+      url: app.globalData.domain + '/getAllGoodsClass',
+      method: 'POST',
+      header: {
+        "content-type": "application/json"
+      },
+      success: function (res) {
+        copyData.goodsList.map(function(item,index){
+          item.unique = "unique_"+index;
+          item.localPaths = _this.formatCopyImg(item.serverPaths);
+          item.serverPaths = item.serverPaths;
+          item.parentClass = app.globalData.initClassify;       //分类初始化数据
+          item.Allsubclass = app.globalData.firstClassify;       //分类子类数据
+          item.classIndex = _this.formatClassifyIdToIndex(item.parentClassId, item.subClassId,res.data.data);
+          return item;
+        })
 
+       console.log(copyData.goodsList)
+
+      _this.setData({
+        topic: copyData.topic,          //主题
+        description: copyData.description,    //活动描述  
+        noteMaxLen: 300,             //描述最多字数
+        noteNowLen: 0,               //描述当前字数
+        addressName: copyData.addressName,           //活动地址名称
+        addressDetail: copyData.addressDetail,                   //活动详细地址
+        addressLongitude: copyData.addressLongitude,                 //活动地址经度
+        addressLatitude: copyData.addressLatitude,                  //活动地址纬度
+        imageLocalPaths: _this.formatCopyImg(copyData.imageList),                //本地介绍图片数组 { id:1, unique: 'unique_1',path:''} 
+        introImages: copyData.introImages.split(","),              //服务器图片介绍数组 用逗号隔开"001.png,002.png"
+        goodsAddresses: copyData.goodsAddresses,            //用户自提地址id数组，用逗号隔开"1,2"
+        phoneNumber: copyData.phoneNumber,                    //用户手机号
+        setFinishTime: 0,               //是否设置截止时间
+        multiArray: [],                 //截至时间日期
+        finishTime: [],                 //截至时间
+        multiIndex: [0, 0],
+        seleAddrNum: copyData.goodsAddresses.split(",").length,                  //已设置地址数量  
+        judeToMost: copyData.goodsList.length > 1,                //是否为多个商品
+        toMostModal: false,                 //多个商品提示信息
+        showdelete: true,                 //显示删除图标  
+        goodsList: copyData.goodsList,
+      })
+
+      //初始化字数
+      _this.bindTextAreaChange({ detail: { value: copyData.description}});
+
+      }
+    })
+
+  },
+
+  //格式化复制的图片
+  formatCopyImg:function(ImgList){
+    var _this = this;
+    var arr = [];
+    ImgList.forEach(function(item,index){
+       arr[index] = {};
+       arr[index].id = index;
+       arr[index].unique = 'unique_' + index;
+       arr[index].path = _this.data.appGlobalHost + item;
+    })
+    return arr;
+
+  },
+
+  //根据分类id转换成索引
+  formatClassifyIdToIndex:function(pId,sId,classifyData){
+      var arr = [];
+      classifyData.forEach(function(item,index){
+        if(item.id == pId){
+          arr[0] = index;
+          item.goodsSubClasses.forEach(function(sItem,sIndex){
+            if(sItem.id == sId){
+              arr[1] = sIndex;
+            }
+          })
+        }
+      })
+      console.log(arr)
+      return arr;
   }
-
 
 
 

@@ -105,7 +105,7 @@ picker{
   align-items:center;
 }
 .goodsclass{
-  margin-left:3rem;
+  margin-left:120rpx;
 }
 .goodsMark{
   width: 10rpx;

@@ -18,11 +18,11 @@
     <view class='goodsCont'>
       <text>{{goodsItem.goods.name}}</text>
       <text>{{goodsItem.sum + goodsItem.goods.specification}}</text>
-      <text class='red'>￥{{goodsItem.goods.price}}</text>
+      <text class='red'>${{goodsItem.goods.price}}</text>
     </view>
     </block>
     <view class='allPirce'>
-      合计：<text class='red'>￥{{data.sumMoney}}</text>
+      合计：<text class='red'>${{data.sumMoney}}</text>
     </view>
 
   </view>
@@ -36,7 +36,7 @@
     </view>
     <view class='goodsCont pirceCont'>
      <text>成团状态：{{data.orderGoods[0].goods.isSetGroup == 1 ? "成团接龙" : "非成团接龙" }}</text> 
-     <text>订单状态：{{data.state == 0 && data.orderGoods[0].groupFlg == 1  ? "拼团成功" : data.state == 0  ? "待拼团成功" : data.state == 1 ? "待支付" : data.state == 2 ? "待提货" : data.state == 3 ? "提货成功" : "其他"}}<text wx:if="{{data.state == 0 && data.orderGoods[0].groupFlg == 0 ? true : false}}" class='red ib'>(还差{{data.orderGoods[0].joinGroupNum}}件成团)</text>
+     <text>订单状态：{{data.state == 0 && data.orderGoods[0].groupFlg == 1  ? "拼团成功" : data.state == 0 && data.orderGoods[0].groupFlg == 2  ? "拼团失败" : data.state == 0  ? "待拼团成功" : data.state == 1 ? "待支付" : data.state == 2 ? "待提货" : data.state == 3 ? "提货成功" : "其他"}}<text wx:if="{{data.state == 0 && data.orderGoods[0].groupFlg == 0 || data.orderGoods[0].groupFlg == 2 ? true : false}}" class='red ib'><text wx:if="{{data.orderGoods[0].joinGroupNum == null && data.orderGoods[0].groupFlg == 2}}">(该接龙已结束)</text><text wx:else>(还差{{data.orderGoods[0].joinGroupNum}}件成团)</text></text>
      </text>     
       <text>自提地址：{{data.userAddress.name}}</text>
       <text>自提详细地址：{{data.userAddress.detail}}</text>
