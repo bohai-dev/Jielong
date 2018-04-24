@@ -34,6 +34,7 @@ Page({
     this.loadSwiperImg();
     //加载内容
     this.loadContainer(pageNum);
+
   },
 
   /**
@@ -164,9 +165,9 @@ Page({
         if (res.data.errorCode == 0 && res.data.data) {
           _this.data.containerList = _this.data.containerList.concat(res.data.data)
           for (var i = 0; i < _this.data.containerList.length ; i++){
-            var todayTime = new Date(_this.data.containerList[i].createTimeStr);
-            todayTime = todayTime.getFullYear() + "-" + (todayTime.getMonth() + 1) + "-" + todayTime.getDate();
-            _this.data.containerList[i].createTimeStr = todayTime;
+            // var todayTime = new Date(_this.data.containerList[i].createTimeStr);
+            // todayTime = todayTime.getFullYear() + "-" + (todayTime.getMonth() + 1) + "-" + todayTime.getDate();
+            _this.data.containerList[i].createTimeStr = _this.data.containerList[i].createTimeStr.slice(0,10);
           }
           _this.setData({
             containerList: _this.data.containerList,

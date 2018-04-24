@@ -9,7 +9,7 @@ page{
     color:#506070;
 }
 .content{
-  height: 180rpx;
+  min-height: 180rpx;
   border-top: 1px solid #ECECEC;
   padding: 20rpx 30rpx;
 }
