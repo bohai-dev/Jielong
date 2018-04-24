@@ -19,7 +19,7 @@
 
     <!--收货地址-->
     <view class='address'>
-      <label>收货地址</label>
+      <label>地址</label>
       <textarea name="detail" placeholder='请输入你的详细地址' value='{{detail}}'></textarea>
     </view>
     <button type='primary' hover-class="opacity" formType="submit">保存</button>

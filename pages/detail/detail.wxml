@@ -118,7 +118,7 @@
   <view class='qt_cont' bindtap='qrTap'>
       <image src='../../images/home/qr_code.png'></image>
   </view>
-  <button class='qt_cont'  open-type='share'>
+  <button class='qt_cont'  open-type='share' wx:if="{{!fromMine}}">
       <image src='../../images/home/transpond.png'></image>      
   </button>
 </view>
