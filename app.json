@@ -23,7 +23,8 @@
     "pages/personal/joinJieLong/joinMessage/joinMessage",
     "pages/detail/solitaireStatistics/solitaireStatistics",
     "pages/detail/solitaireStatistics/Goodsstatistics/Goodsstatistics",
-    "pages/detail/addrRemake/addrRemake"
+    "pages/detail/addrRemake/addrRemake",
+    "pages/release/copySolitaire/copySolitaire"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -34,8 +35,8 @@
   "tabBar": {
     "backgroundColor": "#fff",
     "borderStyle": "black",
-    "color":"#c8c8c8",
-    "selectedColor": "#2CBB6B",
+    "color": "#c8c8c8",
+    "selectedColor": "#518e30",
     "list": [
       {
         "pagePath": "pages/index/index",

@@ -1,0 +1,143 @@
+/* pages/release/copySolitaire/copySolitaire.wxss */
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.swiper{
+  height: 320rpx;
+}
+.slideImage{
+  width: 100%;
+  height: 100%;
+}
+.listContent{
+  border-top: 1px solid gainsboro;
+  padding: 30rpx 20rpx;
+  background-color: #fff;
+  font-family: "微软雅黑",-apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+.listContent>view{
+  margin:0 0 10rpx 10rpx;  
+}
+.descText{
+  font-size: 34rpx;
+}
+.conTime{
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: grey;
+  padding-left: 60rpx;
+}
+.conTime text{
+  padding:0 20rpx;
+}
+.conTime text:nth-of-type(1){
+  padding-left: 0;
+}
+.conTime text:nth-of-type(2){
+  width: 1rpx;
+  height: 26rpx;
+  padding: 0;
+  background-color: grey;
+  border-right: 1rpx solid grey;
+}
+.conImg{
+  padding-left: 60rpx;
+}
+.conImgDetail{
+  height: 190rpx;
+  width:190rpx;
+  margin-right: 20rpx;
+  
+}
+.conAddr{
+  display: flex;
+  align-items: center;
+  padding-left: 60rpx;
+}
+.conAddrText{
+  font-size: 26rpx;
+  color: grey;
+}
+
+.loadCon{
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100rpx;
+}
+.loadGif{
+  width: 60rpx;
+  height:60rpx;
+}
+.loadCon text{
+  font-size: 30rpx;
+}
+.allLine{
+  width: 28%;
+  border-top: 1rpx solid gainsboro;
+}
+.allText{
+  padding: 0 24rpx;
+  color: grey;
+}
+
+.no-record{
+  height:40%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+.recordimg{
+  width:120rpx;
+  height:120rpx;
+}
+.news{
+  color:#bfbfbf;
+  font:25rpx "微软雅黑";
+  margin-top:15rpx;
+}
+
+.foot_nav{
+  width:100%;
+  height:100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom:0%;
+  left:0%;
+  box-shadow: 1rpx -2rpx 5rpx #e6e6e6;
+  z-index:10;
+}
+.foot_btn{
+  width:100%;
+  text-align: center;
+  color:#fff;
+  background:#ccc;
+  font:40rpx/100rpx "微软雅黑";
+  border-radius: 0;
+}
+.grayColor{
+  background-color: rgb(44, 187, 107);
+}

@@ -18,6 +18,17 @@
   font-size:30rpx;
   font-family: "微软雅黑";
 }
+.topicInp{
+  width: 80%;
+  display: inline-block;
+}
+.copySolitaire{
+  vertical-align: middle;
+  padding-top: 2rpx;
+  color:#2CBB6B;
+  font-size: 28rpx;
+  float: right;
+}
 .multiCont{
   padding-left: 2.5%;
 }

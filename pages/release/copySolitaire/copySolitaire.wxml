@@ -1,0 +1,44 @@
+<!--pages/release/copySolitaire/copySolitaire.wxml-->
+<page>
+<radio-group bindchange="selectCpy">
+<view class='container' wx:for="{{data}}" wx:for-index="index" wx:key="index">
+  <view class='listContent'>
+  <!--接龙描述  -->
+    <view>
+      <radio value="{{item.jsonItem}}"></radio>
+      <text class='descText'>{{item.topic}}</text>
+    </view>  
+  <!--接龙时间  -->
+    <view class='conTime'>
+      <text>{{item.createTimeStr}}</text>
+      <text></text>
+      <text>{{item.browseSum}}人浏览</text>
+    </view>  
+  <!--接龙图片 -->
+    <view class='conImg'>
+      <block wx:for="{{item.imageList}}" wx:key="index" wx:for-item="imgIndex">
+        <image class='conImgDetail' src='{{appGlobalHost + imgIndex}}'></image>
+      </block>
+    </view>  
+  <!--接龙地址 -->
+    <view class='conAddr'>
+      <text class='conAddrText'>{{item.addressDetail}}</text>
+    </view>  
+  </view>
+</view>
+  <!--数据已经全部加载完成  -->
+  <view class='loadCon' wx:if="{{isShow}}">
+    <text class='allLine'></text>
+    <text class='allText'>已无更多了...</text>
+    <text class='allLine'></text>  
+  </view>
+</radio-group>
+
+
+
+  <!--确认接龙-->
+  <view class="foot_nav">
+    <button class="foot_btn {{copyData ? 'grayColor' : ''}}" bindtap='sureCopy' data-loadtap="{{copyData}}"><text wx:if="{{!copyData}}">请选择接龙复制</text><text wx:else>确认</text></button>
+  </view>
+  
+</page>

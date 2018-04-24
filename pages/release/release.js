@@ -64,7 +64,8 @@ Page({
       policy: "",
       signature: "",
       dir: "",
-    }
+    },
+    copySolitaireData:false
 
 
 
@@ -75,7 +76,6 @@ Page({
    */
   onLoad(options) {
     console.log(options)
-
     if(options.jsonStr){
       this.copyData(JSON.parse(options.jsonStr));
     }
@@ -93,6 +93,11 @@ Page({
    * 生命周期函数--监听页面显示
    */ 
   onShow(options) {
+    console.log(this.data.copySolitaireData)
+    if (this.data.copySolitaireData) {
+      this.copyData(JSON.parse(this.data.copySolitaireData));
+      this.data.copySolitaireData = false;
+    }
     this.getAddress();
     this.getClassify();    //获取分类数据
     this.getPhoneNumber();
@@ -906,7 +911,17 @@ Page({
       }
     })
   },
+
   //复制接龙
+  //跳转到复制接龙列表
+  copySolitaire:function(){
+    wx.navigateTo({
+      url: './copySolitaire/copySolitaire',
+    })
+
+  },
+
+  //复制接龙初始化数据
   copyData:function(copyData){
     console.log(copyData);
     var _this = this;
@@ -921,6 +936,9 @@ Page({
       success: function (res) {
         copyData.goodsList.map(function(item,index){
           item.unique = "unique_"+index;
+          if (!(item.serverPaths instanceof Array)) {
+            item.serverPaths = item.serverPaths.split(",");
+          }
           item.localPaths = _this.formatCopyImg(item.serverPaths);
           item.serverPaths = item.serverPaths;
           item.parentClass = app.globalData.initClassify;       //分类初始化数据
@@ -967,6 +985,7 @@ Page({
   formatCopyImg:function(ImgList){
     var _this = this;
     var arr = [];
+    console.log(ImgList)
     ImgList.forEach(function(item,index){
        arr[index] = {};
        arr[index].id = index;
@@ -993,7 +1012,7 @@ Page({
       console.log(arr)
       return arr;
   }
-
+  //复制接龙end
 
 
 

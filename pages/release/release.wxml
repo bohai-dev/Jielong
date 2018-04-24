@@ -5,7 +5,8 @@
     <view>
     <!--接龙主题 -->
     <view class='containerView'>
-      <input name="topic" placeholder-class="phcolor" placeholder="接龙主题" type="text" value="{{topic}}" />
+      <input name="topic" placeholder-class="phcolor" placeholder="接龙主题" type="text" value="{{topic}}" class='topicInp' />
+      <text class='copySolitaire' bindtap='copySolitaire'>复制接龙</text>
     </view>
     <!--接龙介绍 -->
     <view class='containerView'>
