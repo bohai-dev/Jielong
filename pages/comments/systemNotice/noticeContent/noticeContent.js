@@ -12,8 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var data = JSON.parse(options.jsonStr)
-    var _this = this;
+    var data = JSON.parse(options.jsonStr);
     var app = getApp();
     var id = data.id;
     if (data.isRead != 1){

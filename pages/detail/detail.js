@@ -13,6 +13,9 @@ Page({
     goodsdata:"",                               //接龙日期
     person:0,                                   //浏览人数
     goodsdescribe:"",                           //接龙描述
+    showMask: true,                             //是否显示遮罩层
+    showMaskbar: false,                         //遮罩层
+    arrow: "../../images/arrowdown.png",       //箭头
     goodsImg: [],                               //接龙图片
     SetGroup:true,                              //是否设置最小成员团
     Group:0,                                    //最小开团数量
@@ -157,6 +160,8 @@ Page({
             overSolitaire: res.data.data.status == 2 ? true : false,
             Group: Group,
             joingoodsnum: joingoodsnum
+          },function(){
+             _this.getheight();
           })
         }      
         //获取参与记录
@@ -215,7 +220,7 @@ Page({
           }
         })
       }
-    })    
+    })
   },
 
   /**
@@ -524,8 +529,47 @@ Page({
 
 
 
+  },
+  //获取高度
+  getheight:function(){
+    var _this = this;
+    var query = wx.createSelectorQuery();
+    query.select('#mjltest').boundingClientRect()
+    query.exec(function (res) {
+      //res就是 所有标签为mjltest的元素的信息 的数组
+      console.log(res);
+      //取高度
+      console.log(res[0].height);
+      if (res[0].height>150){
+        var showMask = false;
+        _this.setData({
+          initialHeight: res[0].height,
+          showMask: showMask,
+          showMaskbar:true
+        })
+      }
+    })
+  },
+  //显示描述全部内容
+  showMaskFun:function(){
+    var showMask = this.data.showMask;
+    if (showMask){
+      showMask = false;
+      this.setData({
+        showMask: showMask,
+        arrow: "../../images/arrowdown.png"
+      })
+      console.log(111)
+    }else{
+      showMask = true;
+      console.log(this.data.initialHeight)
+      this.setData({
+        showMask: showMask,
+        arrow: "../../images/arrowup.png"
+      })
+      console.log(222)
+    }
   }
-
 
 })
 

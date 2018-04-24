@@ -9,7 +9,12 @@
     <view class='goodsdatabox'>
       <text class="goodsdata">{{goodsdata}}  <text class='gray'>|</text>  {{person}}人浏览</text>
     </view>
-      <text class='goodsdescribe'>{{goodsdescribe}}</text>
+    <view class='{{showMask ? "goodsdescribe":"goodsdescribemini"}}' id='mjltest'>
+      {{goodsdescribe}}
+      <view wx:if="{{showMaskbar}}" class='{{showMask ? "describemaskbottom":"describemask"}}' catchtap='showMaskFun'>
+        <image class='maskarrow' src='{{arrow}}'></image>
+      </view>
+    </view>
   </view>
   <!-- 商品图品 -->
   <view class="goodsimgbox">

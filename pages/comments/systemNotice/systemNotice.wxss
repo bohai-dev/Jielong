@@ -11,9 +11,16 @@ page{
 .noticelist{
   width:100%;
   display:flex;
-  align-items:center;
   flex-direction:column;
   margin-top: 15rpx;
+  background:white;
+  border:1px solid #ddd;
+  border-radius:10rpx;
+  padding:20rpx;
+  position:relative;
+}
+.mineNavTohover{
+  background: rgba(238 , 238, 238, 0.1);
 }
 .time{
   color:#ddd;
@@ -21,17 +28,6 @@ page{
   display:flex;
   justify-content:flex-end;
   align-items:center;
-}
-.container{
-  width:100%;
-  background:white;
-  border:1px solid #ddd;
-  border-radius:10rpx;
-  padding:20rpx;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  position:relative;
 }
 .isShow{
   position:absolute;

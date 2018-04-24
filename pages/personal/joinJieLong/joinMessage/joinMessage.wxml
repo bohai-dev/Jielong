@@ -6,7 +6,7 @@
       <text class='headName'>{{data.userInfo.nickName}}</text>
     </view>
     <text class='headTitle'>{{data.jielongTopic}}</text>
-    
+
   </view>
 
   <view class='midContent'>
@@ -27,11 +27,11 @@
 
   </view>
 
-    <view class='midContent'>
+  <view class='midContent'>
     <view class='headContTop midTop'>
       <view class='flexCenter'>
-          <image src='../../../../images/mine/Category.png' class='GoodsUrl'></image>
-          <text>订单信息</text>
+        <image src='../../../../images/mine/Category.png' class='GoodsUrl'></image>
+        <text>订单信息</text>
       </view>
     </view>
     <view class='goodsCont pirceCont'>
@@ -42,5 +42,9 @@
       <text>自提详细地址：{{data.userAddress.detail}}</text>
     </view>
   </view>
-
+  <!-- 修改取消按钮 -->
+  <view class='foot_nav' wx:if="{{show}}">
+    <!-- <view class='foot_btn' hover-class='mineNavTohover' bindtap='modifyOrder'>修改订单</view> -->
+    <view class='foot_btn' hover-class='mineNavTohover' bindtap='cancelOrder'>取消订单</view>
+  </view>
 </view>

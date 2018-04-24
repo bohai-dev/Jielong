@@ -5,7 +5,7 @@
   border-top: 2rpx solid #F0EFF5;
 }
 .goodsdes{
-  padding:0 30rpx 40rpx;
+  padding:0 30rpx 50rpx;
   border-bottom: 2rpx solid #F0EFF5;
 }
 .userimgbox{
@@ -34,9 +34,33 @@
 .gray{
   color: #ccc;
 }
-.goodsdescribe{
+.goodsdescribe,.goodsdescribemini{
   font: 30rpx "微软雅黑";
   color: #666;
+  position: relative;
+  padding-top: 20rpx; 
+}
+.goodsdescribemini{
+  height: 300rpx ;
+  overflow: hidden;
+}
+.describemask,.describemaskbottom{
+  width: 100%;
+  height: 50rpx;
+  background: linear-gradient(rgba(255, 255, 255, 0.5), white);
+  position:absolute;
+  bottom:0rpx;
+  left:0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.describemaskbottom{
+  bottom:-50rpx;
+}
+.maskarrow{
+  height:45rpx;
+  width:56rpx;
 }
 .goodsimgbox{
   display:flex;
@@ -122,11 +146,19 @@
 .goodsname{
   font: 37rpx "微软雅黑";
   color: #333;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  width:480rpx;
+  overflow:hidden;
 }
 .goodsprice{
   font-size: 30rpx;
   color: rgb(245, 10, 24);
-  margin-top:20rpx; 
+  margin-top:20rpx;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  width:480rpx;
+  overflow:hidden; 
 }
 .blod{
   font-weight: bold;
@@ -136,6 +168,10 @@
   font-size: 30rpx;
   color: #ababab;
   margin-top: 15rpx;
+  width:300rpx;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
 }
 .goodsnumber{
   display: flex;

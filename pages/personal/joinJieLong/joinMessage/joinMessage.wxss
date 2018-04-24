@@ -1,4 +1,5 @@
 /* pages/personal/joinJieLong/joinMessage/joinMessage.wxss */
+@import "../../../detail/detail.wxss";
 page{
   background-color: #eee;
   font-size: 30rpx;
@@ -82,4 +83,6 @@ page{
 .ib{
   display: inline-block;
 }
-
+.mineNavTohover{
+  background: rgba(238 , 238, 238, 0.4);
+}

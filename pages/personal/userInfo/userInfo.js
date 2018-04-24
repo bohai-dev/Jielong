@@ -21,6 +21,7 @@ Page({
     var app = getApp();
     wx.showLoading({
       title: 'loading',
+      mask: true
     })
     setTimeout(function () {
       wx.hideLoading();   //关闭模态框
@@ -134,6 +135,7 @@ Page({
     var app = getApp();
     wx.showLoading({
       title: 'loading',
+      mask: true
     })
     setTimeout(function () {
       wx.hideLoading();   //关闭模态框
@@ -206,6 +208,7 @@ Page({
               wx.showToast({
                 title: '保存成功！',
                 icon: 'success',
+                mask: true,
                 duration: 2000
               })
               setTimeout(function () {

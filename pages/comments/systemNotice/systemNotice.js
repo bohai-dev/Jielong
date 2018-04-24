@@ -58,7 +58,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    console.log(this.data.noticeList)
+    //console.log(this.data.noticeList)
     //用户已读消息
     var  _this = this;
     var show = false;
@@ -99,9 +99,8 @@ Page({
   },
   //自定义函数
   searchAddress: function (e) {
-    var _this = this;
     var index = e.currentTarget.dataset.index;
-    console.log(this.data.noticeList[index]);
+    //console.log(this.data.noticeList[index]);
     var jsonStr = JSON.stringify(this.data.noticeList[index]);
     wx.navigateTo({
       url: './noticeContent/noticeContent?jsonStr=' + jsonStr,
