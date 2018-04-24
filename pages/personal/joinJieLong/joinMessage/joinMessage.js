@@ -8,7 +8,6 @@ Page({
     data:{
 
     },
-    show:false
   },
 
   /**
@@ -16,14 +15,8 @@ Page({
    */
   onLoad: function (options) {
     console.log(JSON.parse(options.jsonStr))
-    if (JSON.parse(options.jsonStr).orderGoods[0].goods.isSetGroup == 1 && JSON.parse(options.jsonStr).state == 0){
-      var show = true;
-    } else {
-      var show = false;
-    }
     this.setData({
-      data: JSON.parse(options.jsonStr),
-      show: show
+      data: JSON.parse(options.jsonStr)
     })
   },
 
@@ -87,6 +80,7 @@ Page({
   //取消订单
   cancelOrder:function(){
     var _this = this;
+    var app = getApp();
     wx.showModal({
       title: '提示',
       content: '确定取消订单？',
@@ -100,18 +94,24 @@ Page({
           setTimeout(function () {
             wx.hideLoading();   //关闭模态框
           }, 60000)
-          var orderNum = _this.data.data.orderNum;
-          console.log(orderNum);
+          var order = _this.data.data;
+          delete order.createdAt;
+          delete order.updatedAt;
+          delete order.orderGoods[0].createdAt;
+          delete order.orderGoods[0].updatedAt;
+          delete order.orderGoods[0].goods.createdAt;
+          delete order.orderGoods[0].goods.updatedAt;
+          console.log(order);
           //取消订单接口
-          /*wx.request({
-            url: this.data.appGlobalUrl + '',
-            data: {
-              orderNum: orderNum
-            },
+          wx.request({
+            url: app.globalData.domain + '/order/cancelJoinGroup',
+            data: order,
+            method: 'POST',
             header: {
               'content-type': 'application/json' // 默认值
             },
             success: function (res) {
+              console.log(res)
               wx.hideLoading();   //关闭模态框
               var show = false;
               wx.showModal({
@@ -122,16 +122,17 @@ Page({
                 success: function (res) {
                   if (res.confirm) {
                     wx.navigateBack({
-                      delta: 2
+                      delta: 1
                     })
+                    console.log("取消成功")
                   }
                 }
               })
-              _this.setData({
-                show: show
-              })
+              // _this.setData({
+              //   show: show
+              // })
             }
-          })*/
+          })
         }
       }
     })

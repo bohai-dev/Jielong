@@ -86,3 +86,11 @@ page{
 .mineNavTohover{
   background: rgba(238 , 238, 238, 0.4);
 }
+.foot_nav{
+  box-shadow: none;
+  background: none;
+}
+.foot_btn{
+  box-shadow:1rpx -2rpx 5rpx #e6e6e6;
+  background:white;
+}

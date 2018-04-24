@@ -15,7 +15,7 @@ Page({
     goodsdescribe:"",                           //接龙描述
     showMask: true,                             //是否显示遮罩层
     showMaskbar: false,                         //遮罩层
-    arrow: "../../images/arrowdown.png",       //箭头
+    arrow: "../../images/arrowdown.png",        //箭头
     goodsImg: [],                               //接龙图片
     SetGroup:true,                              //是否设置最小成员团
     Group:0,                                    //最小开团数量
