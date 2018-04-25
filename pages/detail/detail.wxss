@@ -79,10 +79,13 @@
   height: 100rpx;
   padding:0 30rpx;
   border-bottom: 2rpx solid #F0EFF5;
-  /* background: #eee; */
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.selectadd{
+  background: white; 
+  margin-bottom:20rpx;
 }
 .columnCenter{
   display: flex;
@@ -118,6 +121,7 @@
   padding:15rpx 30rpx;
   background: white;
   border-bottom: 2rpx solid #F0EFF5;
+  position: relative;
 }
 .marbottom{
   margin-bottom:20rpx;
@@ -179,6 +183,7 @@
   align-self:flex-end;
   position:absolute;
   right:30rpx;
+  bottom: 15rpx;
 }
 .goodsnum{
   width: 70rpx;

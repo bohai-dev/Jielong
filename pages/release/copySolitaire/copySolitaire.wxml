@@ -22,7 +22,7 @@
     </view>  
   <!--接龙地址 -->
     <view class='conAddr'>
-      <text class='conAddrText'>{{item.addressDetail}}</text>
+      <text class='conAddrText'>{{item.addressName}}</text>
     </view>  
   </view>
 </view>

@@ -30,26 +30,29 @@ Page({
     hiddenModal:false,                           
     fromMine: 0,                                //是否从发起接龙进入
     overSolitaire:false,                        //接龙数据状态
+    goodsAddresses:"",
+    selectAddresses:"查看并选择自提点",
     GoodsDetialList: [{                         //接龙信息
       mineIcon: "../../images/position.png",
       mineName: "",
       show: true,
-      bindTap:"showMap",
-      addressDetail:"",
-      addressLatitude:"",
-      addressLongitude:""
+      rightArrow:"dn"
+      // bindTap:"showMap",
+      // addressDetail:"",
+      // addressLatitude:"",
+      // addressLongitude:""
     }, {
       mineIcon: "../../images/phone.png",
       mineName: "",
       phone:"",
       show: true,
       bindTap: "callPhone"
-    }, {
-      mineIcon: "../../images/location.png",
-      mineName: "查看并选择自提点",
-      goodsAddresses:"",
-      show: true,
-      bindTap: "showLocation"
+    // }, {
+    //   mineIcon: "../../images/location.png",
+    //   mineName: "查看并选择自提点",
+    //   goodsAddresses:"",
+    //   show: true,
+    //   bindTap: "showLocation"
     }, {
       mineIcon: "../../images/time.png",
       mineName: "",
@@ -132,14 +135,14 @@ Page({
         if (res.data.data) {
           _this.data.allData = res.data.data;
           _this.data.GoodsDetialList[0].mineName = res.data.data.addressName;
-          _this.data.GoodsDetialList[0].addressDetail = res.data.data.addressDetail;
-          _this.data.GoodsDetialList[0].addressLatitude = res.data.data.addressLatitude;
-          _this.data.GoodsDetialList[0].addressLongitude = res.data.data.addressLongitude;
+          // _this.data.GoodsDetialList[0].addressDetail = res.data.data.addressDetail;
+          // _this.data.GoodsDetialList[0].addressLatitude = res.data.data.addressLatitude;
+          // _this.data.GoodsDetialList[0].addressLongitude = res.data.data.addressLongitude;
           _this.data.GoodsDetialList[1].mineName = res.data.data.phoneNumber + "(" + res.data.data.userInfo.name + ")";
           _this.data.GoodsDetialList[1].phone = res.data.data.phoneNumber;
-          _this.data.GoodsDetialList[2].goodsAddresses = res.data.data.goodsAddresses;
-          _this.data.GoodsDetialList[3].show = (res.data.data.setFinishTime==1)?true:false;
-          _this.data.GoodsDetialList[3].mineName = "接龙截止时间: " + res.data.data.finishTime;
+          //_this.data.GoodsDetialList[2].goodsAddresses = res.data.data.goodsAddresses;
+          _this.data.GoodsDetialList[2].show = (res.data.data.setFinishTime==1)?true:false;
+          _this.data.GoodsDetialList[2].mineName = "接龙截止时间: " + res.data.data.finishTime;
           _this.data.GoodList = res.data.data.goodsList;
           _this.data.record[0].recordNumber = res.data.data.browseSum;
           _this.data.record[1].recordNumber = res.data.data.joinSum;
@@ -161,6 +164,7 @@ Page({
             goodsdescribe: res.data.data.description,
             goodsImg: res.data.data.imageList,
             GoodsDetialList: _this.data.GoodsDetialList,
+            goodsAddresses: res.data.data.goodsAddresses,
             takeGoodsAddressList: res.data.data.takeGoodsAddressList,
             SetGroup: SetGroup,
             record: _this.data.record,

@@ -82,10 +82,10 @@ Page({
         if (e.id == _this.data.selectId){
           var page = getCurrentPages();
           var prePage = page[page.length - 2];
-          prePage.data.GoodsDetialList[2].mineName = "自提点：" + e.detail;
+          prePage.data.selectAddresses = "自提点：" + e.detail;
           prePage.setData({
             selectAddrId: _this.data.selectId,
-            GoodsDetialList: prePage.data.GoodsDetialList,
+            selectAddresses: prePage.data.selectAddresses,
             selectAddrDetail:e.detail
           })
           wx.navigateBack({

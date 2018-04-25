@@ -9,8 +9,7 @@
     <view class='goodsdatabox'>
       <text class="goodsdata">{{goodsdata}}  <text class='gray'>|</text>  {{person}}人浏览</text>
     </view>
-    <view class='{{showMask ? "goodsdescribe":"goodsdescribemini"}}' id='mjltest'>
-      {{goodsdescribe}}
+    <view class='{{showMask ? "goodsdescribe":"goodsdescribemini"}}' id='mjltest'>{{goodsdescribe}}
       <view wx:if="{{showMaskbar}}" class='{{showMask ? "describemaskbottom":"describemask"}}' catchtap='showMaskFun'>
         <image class='maskarrow' src='{{arrow}}'></image>
       </view>
@@ -27,7 +26,7 @@
     <view class='section' wx:if="{{item.show}}" bindtap='{{item.bindTap}}'>
       <view class='columnCenter'>
         <image class='tempIcon' src='{{item.mineIcon}}'></image>
-        <text class='tempName' bindtap='findAddress'>{{item.mineName}}</text>
+        <text class='tempName'>{{item.mineName}}</text>
       </view>
       <image src='../../images/rightShot.png' class='rightShotImg {{item.rightArrow}}'></image>
     </view>
@@ -56,6 +55,14 @@
       <view class="joinfont">您已参与{{item.sum}}份</view>
     </view>
   </block>
+  <!-- 选择自提点 -->
+  <view class='section selectadd' bindtap='showLocation'>
+    <view class='columnCenter'>
+      <image class='tempIcon' src='../../images/location.png'></image>
+      <text class='tempName'>{{selectAddresses}}</text>
+    </view>
+    <image src='../../images/rightShot.png' class='rightShotImg {{item.rightArrow}}'></image>
+  </view>
   <!-- 参团人数 -->
   <view class="joinperson" wx:if='{{SetGroup}}'>
     <view class='joincontainer'>
@@ -132,7 +139,9 @@
         <view>点击小程序码保存</view>
         <view>可转发到朋友圈</view>
         <view>或</view>
-        <view>点击转发按钮,转发给好友</view>
+        <view>点击转发按钮,转发给好友</view> 
+        <!-- <view>点击小程序码-长按图片</view>
+        <view>可转发到朋友圈</view> -->
     </view>
   </view>
 </modal>

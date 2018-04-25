@@ -9,6 +9,8 @@ Page({
     total:0,
     userName:"",
     userPhone:"",
+    userEmail:"",
+    userDetail:"",
     addressName: "",
     addressId:0,
     remark:"",
@@ -46,10 +48,16 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+        console.log(res.data.data)
         if (res.data.data) {
           _this.setData({
+            userInfoId: res.data.data.id,
             userName: res.data.data.name,
-            userPhone: res.data.data.phoneNumber
+            userPhone: res.data.data.phoneNumber,
+            userEmail: res.data.data.email,
+            userDetail: res.data.data.deliveryAddress,
+            olduserName: res.data.data.name,
+            olduserPhone: res.data.data.phoneNumber
           })
         }
       }
@@ -176,6 +184,25 @@ Page({
     } else {
       var id = _this.data.jielongId;
       var orderGoods = _this.data.orderGoods;
+      if (this.data.userName != this.data.olduserName || this.data.userPhone != this.data.olduserPhone){
+        wx.request({
+          url: app.globalData.domain + '/userInfo/update',
+          method: 'POST',
+          data: {
+            name: this.data.userName,
+            phoneNumber: this.data.userPhone,
+            email: this.data.userEmail,
+            deliveryAddress: this.data.userDetail,
+            id: _this.data.userInfoId
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            console.log(res)
+          }
+        })
+      }
       wx.request({
         url: app.globalData.domain + '/jielong/selectById',
         data: {

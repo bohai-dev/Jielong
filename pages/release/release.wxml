@@ -5,12 +5,12 @@
     <view>
     <!--接龙主题 -->
     <view class='containerView'>
-      <input name="topic" placeholder-class="phcolor" placeholder="接龙主题" type="text" value="{{topic}}" class='topicInp {{topicFail}}' />
+      <input name="topic" placeholder-class="phcolor" placeholder="团购主题" type="text" value="{{topic}}" class='topicInp' />
       <text class='copySolitaire' bindtap='copySolitaire'>复制接龙</text>
     </view>
     <!--接龙介绍 -->
     <view class='containerView'>
-       <textarea name="description" class='describe' placeholder-class="phcolor" placeholder="介绍您的接龙活动，方便大家了解和参与。" bindinput="bindTextAreaChange" maxlength="{{noteMaxLen}}" value="{{description}}"/>
+       <textarea name="description" class='describe' placeholder-class="phcolor" placeholder="描述一下你的好宝贝吧，让大家了解多多，才能团多多哦" bindinput="bindTextAreaChange" maxlength="{{noteMaxLen}}" value="{{description}}"/>
       <view class="number-limit">
         <text class="greenfont">{{noteNowLen}}</text>/{{noteMaxLen}}
       </view>
@@ -30,21 +30,27 @@
         <text>点击</text>
         <text>上传</text>
       </view>
+      <view class='imgtip'>最多上传9张，图片将会展示在首页</view>
     </view>
     <!--定位活动地址-->
-    <view class='containerView rowIconView' bindtap='chooseAddress'>
+    <!-- <view class='containerView rowIconView' bindtap='chooseAddress'>
       <view class='center'>
-        <image class='icon' mode="scaleToFill" src="../../images/position.png"></image>
+        <image class='icon' mode="scaleToFill" src="../../images/position.png"></image> -->
         <!--定位图标-->
-        <text>{{addressName}}</text>
+        <!-- <text>{{addressName}}</text>
       </view>
       <image src='../../images/rightShot.png' class='rightShotImg'></image>
+    </view> -->
+    <!--手动输入活动地址-->
+    <view class='containerView rowIconView'>
+      <text class='center'>团购城市</text>
+      <input name="addressName" class='input' placeholder-class="phcolor" placeholder="城市名将会显示在首页" type="text" value='{{addressName}}' />
     </view>
 
     <!--设置自提点-->
     <view class='containerView rowIconView' bindtap='selectAddress'>
       <view class="elasticbox">
-        <text>设置自提点</text>
+        <text>设置取货点及时间</text>
         <text class='rightgreen'>已设置{{seleAddrNum}}个</text>
       </view>
       <image src='../../images/rightShot.png' class='rightShotImg'></image>
@@ -54,7 +60,7 @@
     <view>
       <view class="containerView rowIconView">
         <text class='center'>设置截止时间</text>
-        <switch type="switch" color='#2CBB6B' bindchange="timeChange" />
+        <switch type="switch" checked color='#2CBB6B' bindchange="timeChange" />
       </view>
     </view>
     <!--截止时间-->

@@ -36,7 +36,7 @@
 .describe{
   height: 300rpx;
   position:relative;
-  width:720rpx;
+  width:100%;
 }
 .number-limit{
   width:100%;
@@ -69,6 +69,7 @@
 .img-show{
   position: relative;
   margin-right: 10rpx;
+  z-index: 5;
 }
 .introImage{
   height: 100rpx;
@@ -129,6 +130,7 @@ picker{
   flex-direction: row;
   flex-wrap: wrap;  
   height: auto;
+  position:relative;
 }
 .uploadView{
   height: 100rpx;
@@ -142,8 +144,20 @@ picker{
   justify-content:center;
   align-items: center;
   color:#666;
+  z-index: 5;
 }
-
+.imgtip{
+  color:#ddd;
+  position:absolute;
+  width:70%;
+  height:100rpx;
+  right:4%;
+  top:30rpx;
+  z-index:1;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+}
 .goodsListView{
   display: flex;
   flex-direction: column;

@@ -45,6 +45,6 @@
   <!-- 修改取消按钮 -->
   <view class='foot_nav'>
     <!-- <view class='foot_btn' hover-class='mineNavTohover' bindtap='modifyOrder'>修改订单</view> -->
-    <view wx:if="{{data.orderGoods[0].goods.isSetGroup == 1 && data.state == 0 && (data.orderGoods[0].groupFlg == 0 || data.orderGoods[0].groupFlg == 1)}}" class='foot_btn' hover-class='mineNavTohover' bindtap='cancelOrder'>取消订单</view>
+    <view wx:if="{{data.orderGoods[0].goods.isSetGroup == 1 && data.state == 0 && (data.orderGoods[0].groupFlg == 0 || data.orderGoods[0].groupFlg == 1)}}" class='foot_btn' hover-class='mineNavTohover' bindtap='cancelOrder'>取消参团</view>
   </view>
 </view>

@@ -195,7 +195,7 @@ Page({
             phoneNumber: phone,
             email: email,
             deliveryAddress: detail,
-            userId: userId,
+            //userId: userId,
             id: id
           },
           header: {

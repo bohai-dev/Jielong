@@ -23,7 +23,7 @@ Page({
     description: "",    //活动描述  
     noteMaxLen: 300,             //描述最多字数
     noteNowLen: 0,               //描述当前字数
-    addressName: "定位活动地址",           //活动地址名称
+    addressName: "",           //活动地址名称
     addressDetail: "",                   //活动详细地址
     addressLongitude: "",                 //活动地址经度
     addressLatitude: "",                  //活动地址纬度
@@ -31,7 +31,7 @@ Page({
     introImages: [],              //服务器图片介绍数组 用逗号隔开"001.png,002.png"
     goodsAddresses: "",            //用户自提地址id数组，用逗号隔开"1,2"
     phoneNumber: 0,                    //用户手机号
-    setFinishTime: 0,               //是否设置截止时间
+    setFinishTime: 1,               //是否设置截止时间
     multiArray: [],                 //截至时间日期
     finishTime: [],                 //截至时间
     multiIndex: [0, 0],
@@ -79,7 +79,7 @@ Page({
     if(options.jsonStr){
       this.copyData(JSON.parse(options.jsonStr));
     }
-
+    this.setFinishTime()
   },
 
   /**
@@ -269,10 +269,8 @@ Page({
     })
 
   },
-  //设置截止时间  
-  timeChange: function (e) {
-    console.log(e.detail.value)
-    if (e.detail.value) {
+  //设置截止时间
+  setFinishTime:function(){
       var nowDate = new Date();
       var NowTimeHours = nowDate.getHours();
       //设置天数
@@ -321,7 +319,10 @@ Page({
         multiArray: multiArray,
         finishTime: finishTime
       })
-    }
+  },
+  //是否设置截止时间
+  timeChange: function (e) {
+    console.log(e.detail.value)
     this.setData({
       setFinishTime: e.detail.value ? 1 : 0
 
@@ -337,10 +338,10 @@ Page({
       if (!toMostModal) {
         wx.showModal({
           title: '提示',
-          content: '多个商品，无法设置成团数量！',
+          content: '多个商品，无法设置最小成团数量！',
           confirmText: '确定',
-          confirmColor: "#333",
-          cancelColor: "#2CBB6B",
+          confirmColor: "#2CBB6B",
+          cancelColor: "#333",
           cancelText: "不再提示",
           success: function (res) {
             if (res.cancel) {
@@ -500,10 +501,11 @@ Page({
     pushData.topic = _detailValue.topic;
     pushData.description = _detailValue.description;
     pushData.introImages = _thisData.introImages.join(",");
-    pushData.addressName = _thisData.addressName;
-    pushData.addressDetail = _thisData.addressDetail;
-    pushData.addressLongitude = _thisData.addressLongitude;
-    pushData.addressLatitude = _thisData.addressLatitude;
+    pushData.addressName = _detailValue.addressName;
+    // pushData.addressName = _thisData.addressName;
+    // pushData.addressDetail = _thisData.addressDetail;
+    // pushData.addressLongitude = _thisData.addressLongitude;
+    // pushData.addressLatitude = _thisData.addressLatitude;
     pushData.goodsAddresses = _thisData.goodsAddresses;
     pushData.phoneNumber = _thisData.phoneNumber;
     pushData.setFinishTime = _thisData.setFinishTime;
@@ -781,7 +783,7 @@ Page({
     var value = e.detail.value, len = parseInt(value.length);
     if (len > that.data.noteMaxLen) return;
     that.setData({
-      description: value,
+      //description: value,
       noteNowLen: len
     })
   },
@@ -871,15 +873,16 @@ Page({
     if (!data.userId) {
       remindDataObj = { pushForm: 0, remData: "用户id已经过期!请重新登陆!" };
     } else if (!data.topic) {
-      remindDataObj = { pushForm: 0, remData: "请填写接龙主题！" };
+      remindDataObj = { pushForm: 0, remData: "请填写团购主题！" };
     } else if (!data.description) {
-      remindDataObj = { pushForm: 0, remData: "请填写接龙描述！" };
+      remindDataObj = { pushForm: 0, remData: "请填写团购描述！" };
     } else if (!data.introImages) {
-      remindDataObj = { pushForm: 0, remData: "请上传接龙图片！" };
-    } else if (!data.addressDetail || !data.addressName || !data.addressLongitude || !data.addressLatitude) {
-      remindDataObj = { pushForm: 0, remData: "请选择接龙地址！" };
+      remindDataObj = { pushForm: 0, remData: "请上传团购图片！" };
+    // } else if (!data.addressDetail || !data.addressName || !data.addressLongitude || !data.addressLatitude) {
+    } else if (!data.addressName) {
+      remindDataObj = { pushForm: 0, remData: "请填写团购城市！" };
     } else if (!this.data.seleAddrNum) {
-      remindDataObj = { pushForm: 0, remData: "请设置自提点！" };
+      remindDataObj = { pushForm: 0, remData: "请设置取货点及时间！" };
     } else if (this.data.setFinishTime && !data.finishTime) {
       remindDataObj = { pushForm: 0, remData: "请设置截止时间！" };
     } else if (data.goodsList[0].isSetGroup && !data.finishTime) {
