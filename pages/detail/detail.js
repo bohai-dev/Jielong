@@ -94,6 +94,14 @@ Page({
     _this.data.jieLongId = id;
     var app = getApp();
     var userid = wx.getStorageSync("userId");
+
+    // wx.request({
+    //   url: app.globalData.domain +'/jielong/selectByUserId',
+    //   data:{
+
+    //   }
+    // })
+
     //增加页面浏览人数
     wx.request({
       url: this.data.appGlobalUrl + '/jielong/updateBrowse',

@@ -14,12 +14,12 @@ Page({
   data: {
     userDetialList:[{
       mineIcon:"../../images/mine/training.png",
-      mineName:"我发起的接龙",
+      mineName:"我发起的团购",
       rlCont: "0个",
       navUrl: "./mineJieLong/mineJieLong"
     }, {
       mineIcon: "../../images/mine/supplier-features.png",
-      mineName: "我参与的接龙",
+      mineName: "我参与的团购",
       mineMarginTop:"mineMarginTop",
       rlCont: "0次",
       navUrl: "./joinJieLong/joinJieLong"
@@ -29,7 +29,7 @@ Page({
       navUrl: "./userInfo/userInfo"
     }, {
       mineIcon: "../../images/mine/map.png",
-      mineName: "自提点管理",
+      mineName: "取货点及时间管理",
       navUrl:  "./address/address",
       mineMarginTop: "mineMarginTop"
     }, {
