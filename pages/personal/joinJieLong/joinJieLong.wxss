@@ -5,3 +5,7 @@
 .midCont{
   margin: 25rpx 0;
 }
+.left text{
+  max-width: 550rpx;
+  display: inline-block;
+}

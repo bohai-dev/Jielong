@@ -8,13 +8,14 @@
 .from-jl{
   background:linear-gradient(to bottom right, #80DFFF, #33CCFF , #66D8FF , #33CCFF);
   width:90%;
-  height:252rpx;
+  height:220rpx;
   margin:100rpx auto 0;
   border-radius:20rpx;
   display:flex;
   flex-direction:column;
   justify-content: center;
   align-items: center;
+  padding-top: 20rpx;
 }
 .title{
   color: white;
@@ -24,18 +25,18 @@
 }
 .describe{
   color: white;
-  font-size: 22rpx;
+  font-size: 28rpx;
   display: block;
   margin:20rpx 0;
 }
 .btn{
   color: #33CCFF;
   display: block;
-  font-size: 22rpx;
-  width: 300rpx;
-  height: 50rpx;
+  font-size: 30rpx;
+  width: 400rpx;
+  height: 80rpx;
   background: white;
   text-align:center;
-  line-height:50rpx;
+  line-height:80rpx;
   border-radius:25rpx;
 }

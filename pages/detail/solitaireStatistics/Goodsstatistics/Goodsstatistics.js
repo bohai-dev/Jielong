@@ -72,7 +72,9 @@ Page({
 
   //初始化数据
   initData:function(datas){
+    console.log(datas)
     var _this = this;
+    if(datas.pickBeans){
     datas.pickBeans.map(function(res,index){
       res.isShow = false;
       return res;
@@ -80,6 +82,7 @@ Page({
     _this.setData({
       data:datas
     })
+    }
 
   },
 

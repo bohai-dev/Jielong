@@ -94,3 +94,7 @@ page{
   box-shadow:1rpx -2rpx 5rpx #e6e6e6;
   background:white;
 }
+.goodsName{
+    max-width: 520rpx;
+    display: inline-block
+}

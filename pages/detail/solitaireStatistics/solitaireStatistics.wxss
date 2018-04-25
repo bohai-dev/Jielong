@@ -31,8 +31,8 @@
   color: #333;
 }
 .rightShotImg{
-  width:12rpx;
-  height:24rpx;
+  width:24rpx;
+  height:48rpx;
 }
 .allPirce{
   justify-content: flex-start;

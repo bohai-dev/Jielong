@@ -3,10 +3,10 @@
     <view class='headCont'>{{item.topic}}</view>
     <view class='midCont'>
       <view class='left' >
-       接龙状态： <text class='{{item.status ==1 ? "green" : "red"}}'>{{item.status == 1 ? "进行中" : item.status == 2 ? "接龙结束" : item.status == 3 ? "活动提前终止" : "其它情况"}}</text>
+       团购状态： <text class='{{item.status ==1 ? "green" : "red"}}'>{{item.status == 1 ? "进行中" : item.status == 2 ? "团购结束" : item.status == 3 ? "活动提前终止" : "其它情况"}}</text>
       </view>
       <view class='right'>
-        接龙类型：<text>自发接龙</text>
+        团购类型：<text>自发团购</text>
       </view>
     </view>
     <view class='midCont'>
@@ -24,7 +24,7 @@
 <view class='body' wx:if="{{!isShow}}">
   <view class='no-record'>
     <image class='recordimg' src='../../../images/norecord.png'></image>
-    <text class='news'>你还没有发起过任何接龙活动</text>
+    <text class='news'>你还没有发起过任何团购活动</text>
   </view>
 </view>
 

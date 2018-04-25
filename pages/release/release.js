@@ -382,6 +382,7 @@ Page({
     _this.setData({
       judeToMost: e.detail.value
     })
+    console.log(this)
   },
   //上传商品图片
   uploadGoodsImage: function (index) {
@@ -422,10 +423,16 @@ Page({
   chenTuanNum: function (res) {
     console.log(app.globalData.classifyData);
     console.log(this)
-    console.log(res.target.dataset.setgroupnum)  //找到渲染数组的索引位置
-    console.log(this.data.goodsList[res.target.dataset.setgroupnum].isSetGroup) //找到遍历列表成团字段
+    // console.log(res.target.dataset.setgroupnum)  //找到渲染数组的索引位置
+    // console.log(this.data.goodsList[res.target.dataset.setgroupnum].isSetGroup) //找到遍历列表成团字段
+    // res.detail.value = Number(res.detail.value) ? 1 : 0;
+    // this.data.goodsList[res.target.dataset.setgroupnum].isSetGroup = res.detail.value;
+    // this.setData({
+    //   goodsList: this.data.goodsList
+    // })
+    console.log(this.data.goodsList[0].isSetGroup) //找到遍历列表成团字段
     res.detail.value = Number(res.detail.value) ? 1 : 0;
-    this.data.goodsList[res.target.dataset.setgroupnum].isSetGroup = res.detail.value;
+    this.data.goodsList[0].isSetGroup = res.detail.value;
     this.setData({
       goodsList: this.data.goodsList
     })
@@ -456,6 +463,19 @@ Page({
       goodsList: this.data.goodsList,
       showdelete: showdelete
     })
+
+    //滑动到底部
+    setTimeout(function(){
+      var query = wx.createSelectorQuery();
+      query.select("#container").boundingClientRect();
+      query.exec(function (res) {
+        wx.pageScrollTo({
+          scrollTop: Math.abs(res[0].top) + 500,
+          duration: 300
+        })
+      })
+    },300)
+
 
   },
   //发布接龙
@@ -504,8 +524,8 @@ Page({
       pushData.goodsList[i].price = Math.round(Number(_detailValue["price" + i]) * 100) / 100;
       pushData.goodsList[i].repertory = Number(_detailValue["repertory" + i]);
       if (!_this.data.judeToMost) {
-        pushData.goodsList[i].isSetGroup = _thisData.goodsList[i].isSetGroup;
-        pushData.goodsList[i].groupSum = Number(_detailValue["groupSum" + i]);
+        pushData.goodsList[i].isSetGroup = _thisData.goodsList[0].isSetGroup;
+        pushData.goodsList[i].groupSum = _detailValue.groupSum;
       } else {
         pushData.goodsList[i].isSetGroup = 0;
         pushData.goodsList[i].groupSum = null;
@@ -849,7 +869,7 @@ Page({
   verifPushData: function (data) {
     var remindDataObj = {};
     if (!data.userId) {
-      remindDataObj = { pushForm: 0, remData: "用户id已经过期!" };
+      remindDataObj = { pushForm: 0, remData: "用户id已经过期!请重新登陆!" };
     } else if (!data.topic) {
       remindDataObj = { pushForm: 0, remData: "请填写接龙主题！" };
     } else if (!data.description) {

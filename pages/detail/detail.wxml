@@ -102,14 +102,12 @@
     </block>
     <!-- 从我的进 -->
     <block wx:if="{{fromMine}}">
-      <block  wx:for="{{GoodList}}" wx:for-index="goodsIndex" wx:key="">
-        <view class="foot_btn" bindtap='addrRemake' wx:if="{{item.repertory == 0 || overSolitaire}}">自提标记</view> 
-      </block>    
-      <view class="foot_btn" bindtap='solitaireStatistics'>接龙统计</view> 
-      <view class="foot_btn" wx:if="{{!overSolitaire}}" bindtap='overSolitaire'>结束接龙</view> 
+      <view class="foot_btn" bindtap='addrRemake' wx:if="{{SetGroup == 1 && overSolitaire || GoodList[0].repertory == 0 || SetGroup == 0}}">自提团购</view>    
+      <view class="foot_btn" bindtap='solitaireStatistics'>团购统计</view> 
+      <view class="foot_btn" wx:if="{{!overSolitaire}}" bindtap='overSolitaire'>结束团购</view> 
       <view class="foot_btn" wx:if="{{overSolitaire}}" bindtap='copySolitaire'>
-          <text class="copyBtn">复制本条接龙</text>
-          <text class="copyBtn">开启新的接龙</text>
+          <text class="copyBtn">复制本条团购</text>
+          <text class="copyBtn">开启新的团购</text>
       </view>
     </block>
   </view>

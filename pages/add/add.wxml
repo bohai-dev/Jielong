@@ -1,9 +1,9 @@
 <view class="release">
   <navigator url="../release/release" hover-class="none" bindtap='initData'>
     <view class="from-jl">
-      <text class='title'>自发接龙</text>
+      <!-- <text class='title'>发布接龙</text> -->
+      <text class='btn'>发布团购</text>
       <text class='describe'>发布团购接龙卖货</text>
-      <text class='btn'>发布自发接龙</text>
     </view>
   </navigator>
 </view>

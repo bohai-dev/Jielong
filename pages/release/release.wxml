@@ -1,11 +1,11 @@
 
-<view class='container'>
+<view class='container' id='container'>
 <form bindsubmit='formSubmit'>
   <view class='body'>
     <view>
     <!--接龙主题 -->
     <view class='containerView'>
-      <input name="topic" placeholder-class="phcolor" placeholder="接龙主题" type="text" value="{{topic}}" class='topicInp' />
+      <input name="topic" placeholder-class="phcolor" placeholder="接龙主题" type="text" value="{{topic}}" class='topicInp {{topicFail}}' />
       <text class='copySolitaire' bindtap='copySolitaire'>复制接龙</text>
     </view>
     <!--接龙介绍 -->
@@ -74,10 +74,23 @@
         <switch type="switch" color='#2CBB6B' bindchange="goodsChange" wx:if="{{!judeToMost}}" />
         <switch type="switch" color='#2CBB6B' bindchange="goodsChange" wx:if="{{judeToMost}}" checked='true' />
       </view>
+
+    <!--设置最小成团数量-->
+        <view class='containerView rowIconView' wx:if="{{!judeToMost}}">
+          <text class='center'>设置最小成团数量</text>
+          <switch type="switch" color='#2CBB6B' bindchange='chenTuanNum'  data-setgroupnum="{{goodsindex}}" checked="{{goodsList[0].isSetGroup}}" />
+        </view>
+        <!--最小成团数量-->
+      <view wx:if="{{!judeToMost}}">
+        <view class='containerView rowIconView' wx:if="{{goodsList[0].isSetGroup}}">
+          <input name="groupSum{{goodsindex}}" placeholder-class="phcolor" placeholder="请输入最小成团数量" type="number"  value='{{goodsList[0].groupSum}}'/>
+        </view>
+        </view>
+    
     </view>
   </view>
     <!--商品列表-->
-    <view class=" goodsListView" style="margin-top:8rpx" wx:for="{{goodsList}}" wx:key="unique"  wx:for-index="goodsindex">
+    <view class=" goodsListView" id="goodsListView" style="margin-top:8rpx" wx:for="{{goodsList}}" wx:key="unique"  wx:for-index="goodsindex">
       <!--商品-->
       <view>
         <!--商品标签-->
@@ -133,20 +146,9 @@
         </view>
         <!--商品库存-->
         <view class='containerView rowIconView'>
-          <text class='center'>库存</text>
+          <text class='center red'>库存</text>
           <input name="repertory{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsRepertory' placeholder-class="phcolor" placeholder="请输入商品库存" type="number" value='{{item.repertory}}' />
         </view>
-        <!--设置最小成团数量-->
-        <view class='containerView rowIconView' wx:if="{{!judeToMost}}">
-          <text class='center'>设置最小成团数量</text>
-          <switch type="switch" color='#2CBB6B' bindchange='chenTuanNum'  data-setgroupnum="{{goodsindex}}" checked="{{item.isSetGroup}}" />
-        </view>
-        <!--最小成团数量-->
-      <view wx:if="{{!judeToMost}}">
-        <view class='containerView rowIconView' wx:if="{{item.isSetGroup}}">
-          <input name="groupSum{{goodsindex}}" placeholder-class="phcolor" placeholder="请输入最小成团数量" type="number"  value='{{item.groupSum}}'/>
-        </view>
-      </view>
       </view>
 
     </view>
@@ -158,7 +160,7 @@
 
   <!--发布接龙-->
   <view class="foot_nav">
-    <button class="foot_btn" form-type='submit'  >发布接龙</button>
+    <button class="foot_btn" form-type='submit'  >发布团购</button>
   </view>
   </form>
 </view>

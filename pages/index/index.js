@@ -199,6 +199,12 @@ Page({
       }
     })
   },
+  test:function(){
+    wx.pageScrollTo({
+      scrollTop: 1000,
+      duration: 300
+    })
+  }
   //跳转到每个接龙详细信息
   // navToDetail:function(e){
   //   var jsonStr = JSON.stringify(e.currentTarget.dataset.data);
