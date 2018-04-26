@@ -39,6 +39,9 @@ Page({
     judeToMost: false,                //是否为多个商品
     toMostModal: true,                 //多个商品提示信息
     showdelete: true,                 //显示删除图标
+    isShow:true,                    //提示图片长度
+    isHighlight: 0,                 //是否高亮
+    topId:"",                         //滑动元素id
     goodsList: [                     //商品数组 
       {
         unique: 'unique_0',            // 该item在数组中的唯一标识符
@@ -157,7 +160,9 @@ Page({
             }
             //console.log(imgs);
             self.setData({
-              imageLocalPaths: imgs
+              imageLocalPaths: imgs,
+              isHighlight: 0,
+              isShow: false
             })
             self.changeImgStyle(imgs.slice(lastLength), "common");//每次上传图片获取本地地址
           }
@@ -196,7 +201,7 @@ Page({
               length++;
               imgs.push(loalImg);
             }
-            //console.log(imgs);
+            console.log(self.data.isHighlight);
             self.setData({
               goodsList: self.data.goodsList
             })
@@ -219,8 +224,12 @@ Page({
         imgs[i].id = i;
         imgs[i].unique = "unique_" + i;
       }
+      if (imgs.length == 0){
+        var isShow = true;
+      }
       _this.setData({
-        imageLocalPaths: imgs
+        imageLocalPaths: imgs,
+        isShow: isShow
       })
       //console.log(_this.data.imageLocalPaths) 
     } else {
@@ -283,7 +292,7 @@ Page({
           NowDayarr[i] = new Date(nowDate.setDate(nowDate.getDate() + 1));
         }
         //enddayarr[i] = NowDayarr[i].toLocaleDateString();
-        enddayarr[i] = NowDayarr[i].getFullYear() + "/" + (NowDayarr[i].getMonth() + 1) + "/" + NowDayarr[i].getDate();
+        enddayarr[i] = NowDayarr[i].getFullYear() + "/" + twonumber(NowDayarr[i].getMonth() + 1) + "/" + twonumber(NowDayarr[i].getDate());
       }
       console.log(enddayarr);
       //设置时间
@@ -470,6 +479,7 @@ Page({
       var query = wx.createSelectorQuery();
       query.select("#container").boundingClientRect();
       query.exec(function (res) {
+        console.log(res)
         wx.pageScrollTo({
           scrollTop: Math.abs(res[0].top) + 500,
           duration: 300
@@ -593,7 +603,26 @@ Page({
       wx.showModal({
         title: veriData.remData || "请填写正确的发布接龙信息！",
         confirmColor: "#2CBB6B",
-        showCancel: false
+        showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+            _this.setData({
+              isHighlight: veriData.isHighlight,
+              //topId: veriData.topId
+            })
+          }
+          // var query = wx.createSelectorQuery()
+          // query.select('#' + _this.data.topId).boundingClientRect()
+          // query.selectViewport().scrollOffset()
+          // query.exec(function (res) {
+          //   console.log(res)
+          //   wx.pageScrollTo({
+          //     scrollTop: res[0].top,
+          //     duration: 300
+          //   })
+          // })
+        }
       })
     }
 
@@ -670,6 +699,12 @@ Page({
         _this.setData({
           seleAddrNum: addrNum,
           goodsAddresses: arr.join(",")
+        },function(){
+          if (_this.data.seleAddrNum>0){
+            _this.setData({
+              isHighlight:0
+            })
+          }
         })
       },
       fail: function (err) {
@@ -871,40 +906,40 @@ Page({
   verifPushData: function (data) {
     var remindDataObj = {};
     if (!data.userId) {
-      remindDataObj = { pushForm: 0, remData: "用户id已经过期!请重新登陆!" };
+      remindDataObj = { pushForm: 0, remData: "用户id已经过期!请重新登陆!", isHighlight: 888 };
     } else if (!data.topic) {
-      remindDataObj = { pushForm: 0, remData: "请填写团购主题！" };
+      remindDataObj = { pushForm: 0, remData: "请填写团购主题！", isHighlight: 1};
     } else if (!data.description) {
-      remindDataObj = { pushForm: 0, remData: "请填写团购描述！" };
+      remindDataObj = { pushForm: 0, remData: "请填写团购描述！", isHighlight: 2};
     } else if (!data.introImages) {
-      remindDataObj = { pushForm: 0, remData: "请上传团购图片！" };
+      remindDataObj = { pushForm: 0, remData: "请上传团购图片！", isHighlight: 3 };
     // } else if (!data.addressDetail || !data.addressName || !data.addressLongitude || !data.addressLatitude) {
     } else if (!data.addressName) {
-      remindDataObj = { pushForm: 0, remData: "请填写团购城市！" };
+      remindDataObj = { pushForm: 0, remData: "请填写团购城市！", isHighlight: 4 };
     } else if (!this.data.seleAddrNum) {
-      remindDataObj = { pushForm: 0, remData: "请设置取货点及时间！" };
+      remindDataObj = { pushForm: 0, remData: "请设置取货点及时间！", isHighlight: 5 };
     } else if (this.data.setFinishTime && !data.finishTime) {
-      remindDataObj = { pushForm: 0, remData: "请设置截止时间！" };
+      remindDataObj = { pushForm: 0, remData: "请设置截止时间！", isHighlight: 888 };
     } else if (data.goodsList[0].isSetGroup && !data.finishTime) {
-      remindDataObj = { pushForm: 0, remData: "成团必须设置设置截止时间！" };
+      remindDataObj = { pushForm: 0, remData: "成团必须设置设置截止时间！", isHighlight: 888 };
     } else {
       for (var i = 0; i < data.goodsList.length; i++) {
         if (!data.goodsList[i].name) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品名称！" };
+          remindDataObj = { pushForm: 0, remData: "请设置商品名称！", isHighlight: 6 };
         } else if (!data.goodsList[i].serverPaths) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品图片！" };
+          remindDataObj = { pushForm: 0, remData: "请设置商品图片！", isHighlight: 7 };
         } else if (!data.goodsList[i].parentClassId && !data.goodsList[i].subClassId) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品分类！" };
+          remindDataObj = { pushForm: 0, remData: "请设置商品分类！", isHighlight: 8 };
         } else if (!data.goodsList[i].specification) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品规格！" };
+          remindDataObj = { pushForm: 0, remData: "请设置商品规格！", isHighlight: 9 };
         } else if (!data.goodsList[i].price) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品价格！" };
+          remindDataObj = { pushForm: 0, remData: "请设置商品价格！", isHighlight: 10 };
         } else if (!data.goodsList[i].repertory) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品库存！" };
+          remindDataObj = { pushForm: 0, remData: "请设置商品库存！", isHighlight: 11 };
         } else if (data.goodsList[i].isSetGroup && !data.goodsList[i].groupSum) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品的最小成团数量！" };
+          remindDataObj = { pushForm: 0, remData: "请设置商品的最小成团数量！", isHighlight: 12 };
         } else if (data.goodsList[i].isSetGroup && data.goodsList[i].repertory < data.goodsList[i].groupSum) {
-          remindDataObj = { pushForm: 0, remData: "商品库存不能小于最小成团数量" };
+          remindDataObj = { pushForm: 0, remData: "商品库存不能小于最小成团数量", isHighlight: 888  };
         } else {
           remindDataObj = { pushForm: 1, remData: "" };
         }
@@ -948,7 +983,7 @@ Page({
   copyData:function(copyData){
     console.log(copyData);
     var _this = this;
-
+    this.setFinishTime()
     //获取分类数据
     wx.request({
       url: app.globalData.domain + '/getAllGoodsClass',
@@ -986,6 +1021,8 @@ Page({
         goodsAddresses: copyData.goodsAddresses,            //用户自提地址id数组，用逗号隔开"1,2"
         phoneNumber: copyData.phoneNumber,                    //用户手机号
         setFinishTime: 1,               //是否设置截止时间
+        // multiArray: [],                 //截至时间日期
+        // finishTime: [],                 //截至时间
         multiIndex: [0, 0],
         seleAddrNum: copyData.goodsAddresses.split(",").length,                  //已设置地址数量  
         judeToMost: copyData.goodsList.length > 1,                //是否为多个商品

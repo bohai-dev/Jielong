@@ -4,13 +4,13 @@
   <view class='body'>
     <view>
     <!--接龙主题 -->
-    <view class='containerView'>
-      <input name="topic" placeholder-class="phcolor" placeholder="团购主题" type="text" value="{{topic}}" class='topicInp' />
+    <view class='containerView' id='topic'>
+      <input name="topic" placeholder-class='{{isHighlight == 1 ? "phcolorhighlight": "phcolor"}}' placeholder="团购主题" type="text" value="{{topic}}" class='topicInp'/>
       <text class='copySolitaire' bindtap='copySolitaire'>复制接龙</text>
     </view>
     <!--接龙介绍 -->
-    <view class='containerView'>
-       <textarea name="description" class='describe' placeholder-class="phcolor" placeholder="描述一下你的好宝贝吧，让大家了解多多，才能团多多哦" bindinput="bindTextAreaChange" maxlength="{{noteMaxLen}}" value="{{description}}"/>
+    <view class='containerView' id='description'>
+       <textarea name="description" class='describe' placeholder-class='{{isHighlight == 2 ? "phcolorhighlight": "phcolor"}}' placeholder="描述一下你的好宝贝吧，让大家了解多多，才能团多多哦" bindinput="bindTextAreaChange" maxlength="{{noteMaxLen}}" value="{{description}}"/>
       <view class="number-limit">
         <text class="greenfont">{{noteNowLen}}</text>/{{noteMaxLen}}
       </view>
@@ -26,11 +26,11 @@
         </view>
       </view >
       <!--点击上传区域-->
-      <view class="uploadView" bindtap='uploadImage' data-isCommon="1">
+      <view class='{{isHighlight == 3 ? "uploadViewHighlight": "uploadView"}}' bindtap='uploadImage' data-isCommon="1">
         <text>点击</text>
         <text>上传</text>
       </view>
-      <view class='imgtip'>最多上传9张，图片将会展示在首页</view>
+      <view class='imgtip' wx:if="{{isShow}}">最多上传9张，图片将会展示在首页</view>
     </view>
     <!--定位活动地址-->
     <!-- <view class='containerView rowIconView' bindtap='chooseAddress'>
@@ -44,14 +44,14 @@
     <!--手动输入活动地址-->
     <view class='containerView rowIconView'>
       <text class='center'>团购城市</text>
-      <input name="addressName" class='input' placeholder-class="phcolor" placeholder="城市名将会显示在首页" type="text" value='{{addressName}}' />
+      <input name="addressName" class='input' placeholder-class='{{isHighlight == 4 ? "phcolorhighlight": "phcolor"}}' placeholder="城市名将会显示在首页" type="text" value='{{addressName}}' />
     </view>
 
     <!--设置自提点-->
     <view class='containerView rowIconView' bindtap='selectAddress'>
       <view class="elasticbox">
         <text>设置取货点及时间</text>
-        <text class='rightgreen'>已设置{{seleAddrNum}}个</text>
+        <text class='{{isHighlight == 5 ? "rightred": "rightgreen"}}'>已设置{{seleAddrNum}}个</text>
       </view>
       <image src='../../images/rightShot.png' class='rightShotImg'></image>
     </view>
@@ -89,9 +89,9 @@
         <!--最小成团数量-->
       <view wx:if="{{!judeToMost}}">
         <view class='containerView rowIconView' wx:if="{{goodsList[0].isSetGroup}}">
-          <input name="groupSum{{goodsindex}}" placeholder-class="phcolor" placeholder="请输入最小成团数量" type="number"  value='{{goodsList[0].groupSum}}' bindinput='inputGoodsGroupSum' />
+          <input name="groupSum{{goodsindex}}" placeholder-class='{{isHighlight == 12 ? "phcolorhighlight": "phcolor"}}' placeholder="请输入最小成团数量" type="number"  value='{{goodsList[0].groupSum}}' bindinput='inputGoodsGroupSum' />
         </view>
-        </view>
+      </view>
     
     </view>
   </view>
@@ -112,7 +112,7 @@
         <!--商品名称-->
         <view class='containerView rowIconView'>
           <text class='center'>商品名称</text>
-          <input name="name{{goodsindex}}" class='input' placeholder-class="phcolor" data-goodsindex='{{goodsindex}}'  placeholder=" 请输入商品名称，最多20字" type="text" bindinput='inputGoodsName' value='{{item.name}}' maxlength='20' />
+          <input name="name{{goodsindex}}" class='input' placeholder-class='{{isHighlight == 6 ? "phcolorhighlight": "phcolor"}}' data-goodsindex='{{goodsindex}}'  placeholder="请输入商品名称，最多20字" type="text" bindinput='inputGoodsName' value='{{item.name}}' maxlength='20' />
         </view>
         <!--商品图片介绍-->
         <view class='containerView imageIntroView'>
@@ -124,7 +124,7 @@
             </view>
           </view>
           <!--点击上传区域-->
-          <view class="uploadView" bindtap='uploadImage' data-goodsindex="{{goodsindex}}" data-isCommon="0">
+          <view class='{{isHighlight == 7 ? "uploadViewHighlight": "uploadView"}}' bindtap='uploadImage' data-goodsindex="{{goodsindex}}" data-isCommon="0">
             <text>点击</text>
             <text>上传</text>
           </view>
@@ -143,17 +143,17 @@
         <!--商品规格-->
         <view class='containerView rowIconView'>
           <text class='center'>规格</text>
-          <input name="specification{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsSpecification' placeholder-class="phcolor" placeholder="请填写单份商品的规格，如个、只等" type="text" value='{{item.specification}}' />
+          <input name="specification{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsSpecification' placeholder-class='{{isHighlight == 9 ? "phcolorhighlight": "phcolor"}}' placeholder="请填写单份商品的规格，如个、只等" type="text" value='{{item.specification}}' />
         </view>
         <!--商品价格-->
         <view class='containerView rowIconView'>
           <text class='center'>价格</text>
-          <input name="price{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsPrice' placeholder-class="phcolor" placeholder="范围1.00~99999.99，单位$" type="digit" value='{{item.price}}' />
+          <input name="price{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsPrice' placeholder-class='{{isHighlight == 10 ? "phcolorhighlight": "phcolor"}}' placeholder="范围1.00~99999.99，单位$" type="digit" value='{{item.price}}' />
         </view>
         <!--商品库存-->
         <view class='containerView rowIconView'>
           <text class='center red'>库存</text>
-          <input name="repertory{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsRepertory' placeholder-class="phcolor" placeholder="请输入商品库存" type="number" value='{{item.repertory}}' />
+          <input name="repertory{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsRepertory' placeholder-class='{{isHighlight == 11 ? "phcolorhighlight": "phcolor"}}' placeholder="请输入商品库存" type="number" value='{{item.repertory}}' />
         </view>
       </view>
 

@@ -95,12 +95,16 @@ Page({
             wx.hideLoading();   //关闭模态框
           }, 60000)
           var order = _this.data.data;
-          delete order.createdAt;
-          delete order.updatedAt;
-          delete order.orderGoods[0].createdAt;
-          delete order.orderGoods[0].updatedAt;
-          delete order.orderGoods[0].goods.createdAt;
-          delete order.orderGoods[0].goods.updatedAt;
+          clear(order)
+          //删除不用属性
+          function clear(order) {
+            delete order.createdAt;
+            delete order.updatedAt;
+            if (order.orderGoods){
+              clear(order.orderGoods[0])
+              clear(order.orderGoods[0].goods)
+            }
+          }
           console.log(order);
           //取消订单接口
           wx.request({
@@ -112,25 +116,37 @@ Page({
             },
             success: function (res) {
               console.log(res)
-              wx.hideLoading();   //关闭模态框
-              var show = false;
-              wx.showModal({
-                title: '提示',
-                content: '取消订单成功！',
-                confirmColor: "#2CBB6B",
-                showCancel: false,
-                success: function (res) {
-                  if (res.confirm) {
-                    wx.navigateBack({
-                      delta: 1
-                    })
-                    console.log("取消成功")
+              if (res.statusCode == 200 && res.data.data == 1) {
+                wx.hideLoading();   //关闭模态框
+                wx.showModal({
+                  title: '提示',
+                  content: '取消订单成功！',
+                  confirmColor: "#2CBB6B",
+                  showCancel: false,
+                  success: function (res) {
+                    if (res.confirm) {
+                      wx.navigateBack({
+                        delta: 1
+                      })
+                      console.log("取消成功")
+                    }
                   }
-                }
-              })
-              // _this.setData({
-              //   show: show
-              // })
+                })
+              } else {
+                console.log("取消失败")
+                wx.hideLoading();   //关闭模态框
+                wx.showModal({
+                  title: '提示',
+                  content: '取消失败！请重试',
+                  confirmColor: "#2CBB6B",
+                  showCancel: false,
+                  success: function (res) {
+                    if (res.confirm) {
+                      console.log('用户点击确定')
+                    }
+                  }
+                })
+              }
             }
           })
         }

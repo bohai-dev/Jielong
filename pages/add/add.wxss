@@ -8,9 +8,9 @@
 .from-jl{
   background:linear-gradient(to bottom right, #80DFFF, #33CCFF , #66D8FF , #33CCFF);
   width:90%;
-  height:220rpx;
+  height:260rpx;
   margin:100rpx auto 0;
-  border-radius:20rpx;
+  border-radius:10rpx;
   display:flex;
   flex-direction:column;
   justify-content: center;
@@ -27,7 +27,7 @@
   color: white;
   font-size: 28rpx;
   display: block;
-  margin:20rpx 0;
+  margin:35rpx 0 0;
 }
 .btn{
   color: #33CCFF;
@@ -38,5 +38,5 @@
   background: white;
   text-align:center;
   line-height:80rpx;
-  border-radius:25rpx;
+  border-radius:40rpx;
 }

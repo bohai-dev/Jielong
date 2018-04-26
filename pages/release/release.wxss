@@ -46,11 +46,14 @@
 .greenfont{
   color: #2CBB6B;
 }
-.phcolor{
+.phcolor,.phcolorhighlight{
   color: #ddd;
   font-size: 30rpx;
   letter-spacing: 2rpx;
   font-family: "微软雅黑";
+}
+.phcolorhighlight{
+  color: #ff6969;
 }
 .rowIconView{
   display: flex;
@@ -63,8 +66,7 @@
   height: 24rpx;
 }
 .input{
-  width: 75%;
-  padding-left: 3rpx;
+  flex: 4;
 }
 .img-show{
   position: relative;
@@ -88,9 +90,7 @@
   height:100%;
 }
 .center{
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  flex: 1;
 }
 .icon{
   width: 40rpx;
@@ -106,11 +106,14 @@ picker{
   align-items:center;
   width: 100%;
 }
-.rightgreen{
+.rightgreen,.rightred{
   font-size:25rpx;
   color:#2CBB6B;
   margin-right:15rpx;
   text-align:right;
+}
+.rightred{
+  color:#ff6969;
 }
 .goodspicker{
   display:flex;
@@ -132,7 +135,7 @@ picker{
   height: auto;
   position:relative;
 }
-.uploadView{
+.uploadView,.uploadViewHighlight{
   height: 100rpx;
   width: 100rpx;
   border-radius:  10rpx;
@@ -146,16 +149,19 @@ picker{
   color:#666;
   z-index: 5;
 }
+.uploadViewHighlight{
+  box-shadow:0 0 5px #ff6969;
+  border:1px solid #ff6969;
+}
 .imgtip{
   color:#ddd;
   position:absolute;
-  width:70%;
+  width:73%;
   height:100rpx;
   right:4%;
   top:30rpx;
   z-index:1;
   display:flex;
-  justify-content:flex-end;
   align-items:center;
 }
 .goodsListView{
