@@ -20,6 +20,8 @@ Page({
         e.selectVal = false;
       }
     })
+    console.log(data)
+    this.formatData(data);
     this.setData({
       addressList:data
     })
@@ -82,7 +84,7 @@ Page({
         if (e.id == _this.data.selectId){
           var page = getCurrentPages();
           var prePage = page[page.length - 2];
-          prePage.data.selectAddresses = "自提点：" + e.detail;
+          prePage.data.selectAddresses = "取货点：" + e.detail;
           prePage.setData({
             selectAddrId: _this.data.selectId,
             selectAddresses: prePage.data.selectAddresses,
@@ -100,6 +102,23 @@ Page({
   //切换自提点
   radioChange:function(e){
     this.data.selectId = e.detail.value;
+  },
+
+  //格式化数据
+  formatData: function (res) {
+    console.log(res)
+    res.map(function (item, index) {
+      var detailTime = item.detail.split("***");
+      if (detailTime.length == 2) {
+        item.detail = detailTime[0];
+        item.claimTime = detailTime[1];
+      } else {
+        item.detail = detailTime[0];
+        item.claimTime = "";
+      }
+      return item;
+    })
+    return res;
   }
 
 })

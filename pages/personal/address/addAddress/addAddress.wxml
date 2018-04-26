@@ -1,14 +1,28 @@
 <!--pages/personal/address/addAddress/addAddress.wxml-->
 <form bindsubmit="formSubmit" bindreset='formReset'>
 <view class="section">
-  <textarea name="detail" placeholder="请填写自提点的详细地址" value="{{addrDetail}}" />
+  <textarea name="detail" placeholder="请填写详细的取货地址" value="{{addrDetail}}" />
 </view>
-<view class='section getAddress'>
+<view class="section timeCon">
+  <label for='claimTimeOne'>取货起始时间：</label>
+    <picker mode="date" start="{{startDateOne}}" end="{{endDateOne}}" bindchange='pickerOne'>
+        <input name="claimTimeOne" type='text' id="claimTimeOne" class='claimTime' placeholder='请填写起始时间' value="{{claimTimeOne}}" disabled='true'></input>
+    </picker>
+  
+</view>
+<view class="section timeCon">
+  <label for='claimTimeTwo'>取货截止时间：</label>
+    <picker mode="date" start="{{startDateTwo}}" end="{{endDateTwo}}" bindchange='pickerTwo'>
+        <input name="claimTimeTwo" type='text' id="claimTimeTwo" class='claimTime' placeholder='请填写截止时间' value="{{claimTimeTwo}}" disabled='true'></input>
+    </picker>
+  
+</view>
+<!-- <view class='section getAddress'>
   <image class='addrIcon' src='../../../../images/position.png'></image>
   <text class='addrName' bindtap='findAddress'>{{addrName}}</text> 
   <image src='../../../../images/rightShot.png' class='rightShotImg'></image>
-</view>
-<view>
+</view> -->
+<view class='btnCont'>
   <button formType="submit" class='subBtn'>保存</button>
   <button wx:if="{{id}}" class='botBtn' bindtap='deleAddress'>删除</button>
 </view>

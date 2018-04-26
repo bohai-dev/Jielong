@@ -72,6 +72,9 @@ Page({
   // 自定义事件
   initData:function(e){
     var _this = this;
+    wx.showLoading({
+      title: '数据搜索中...',
+    })
     wx.request({
       url: app.globalData.domain +'/order/selectByCustomerId',
       data:{
@@ -85,6 +88,9 @@ Page({
             isShow:true
           })
         }
+      },
+       complete: function () {
+        wx.hideLoading();
       }
     })
   },

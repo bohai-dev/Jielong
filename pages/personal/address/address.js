@@ -35,7 +35,20 @@ Page({
         userId: wx.getStorageSync("userId")
       },
       success: function (res) {
+        console.log(res.data.data)
         if (res.data.errorCode == 0) {
+          res.data.data.map(function(item,index){
+            var detailTime = item.detail.split("***");
+            if(detailTime.length == 2){
+              item.detail = detailTime[0];
+              item.claimTime = detailTime[1];
+            }else{
+              item.detail = detailTime[0];
+              item.claimTime = "";
+            }
+            return item;
+          })
+          console.log(res.data.data)
           _this.setData({ addressList: res.data.data })
         }
       }
@@ -69,11 +82,11 @@ Page({
   onReachBottom: function () {
   
   },
-  // 删除自提点
+  // 到删除自提点
   deleteAddr:function(e){
     if(e.currentTarget.dataset.selfid){
       wx.navigateTo({
-        url: './addAddress/addAddress?id=' + e.currentTarget.dataset.selfid + "&detail=" + e.currentTarget.dataset.selfdetail + "&name=" + e.currentTarget.dataset.selfname,
+        url: './addAddress/addAddress?id=' + e.currentTarget.dataset.selfid + "&detail=" + e.currentTarget.dataset.selfdetail + "&claimTime=" + e.currentTarget.dataset.selftime + "&name=" + e.currentTarget.dataset.selfname,
 
       })
     }

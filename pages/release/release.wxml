@@ -89,7 +89,7 @@
         <!--最小成团数量-->
       <view wx:if="{{!judeToMost}}">
         <view class='containerView rowIconView' wx:if="{{goodsList[0].isSetGroup}}">
-          <input name="groupSum{{goodsindex}}" placeholder-class="phcolor" placeholder="请输入最小成团数量" type="number"  value='{{goodsList[0].groupSum}}'/>
+          <input name="groupSum{{goodsindex}}" placeholder-class="phcolor" placeholder="请输入最小成团数量" type="number"  value='{{goodsList[0].groupSum}}' bindinput='inputGoodsGroupSum' />
         </view>
         </view>
     

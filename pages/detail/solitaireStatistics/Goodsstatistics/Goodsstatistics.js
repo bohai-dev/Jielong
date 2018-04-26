@@ -79,6 +79,7 @@ Page({
       res.isShow = false;
       return res;
     })
+    _this.formatData(datas.pickBeans);
     _this.setData({
       data:datas
     })
@@ -101,5 +102,22 @@ Page({
       data: _this.data.data
       
     })
+  },
+
+  //格式化数据
+  formatData: function (res) {
+    console.log(res)
+    res.map(function (item, index) {
+      var detailTime = item.userAddress.detail.split("***");
+      if (detailTime.length == 2) {
+        item.userAddress.detail = detailTime[0];
+        item.userAddress.claimTime = detailTime[1];
+      } else {
+        item.userAddress.detail = detailTime[0];
+        item.userAddress.claimTime = "";
+      }
+      return item;
+    })
+    return res;
   }
 })

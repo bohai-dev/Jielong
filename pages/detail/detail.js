@@ -31,7 +31,7 @@ Page({
     fromMine: 0,                                //是否从发起接龙进入
     overSolitaire:false,                        //接龙数据状态
     goodsAddresses:"",
-    selectAddresses:"查看并选择自提点",
+    selectAddresses:"查看并选择取货点",
     GoodsDetialList: [{                         //接龙信息
       mineIcon: "../../images/position.png",
       mineName: "",
@@ -323,6 +323,7 @@ Page({
         }
     })
     var jsonStr = JSON.stringify(_this.data.takeGoodsAddressList);
+    console.log(jsonStr)
     wx.navigateTo({
       url: './selectAddress/selectAddress?jsonStr=' + jsonStr
     })
@@ -433,7 +434,7 @@ Page({
       //console.log(goodsInfo)
       if (!addressId){
         wx.showModal({
-          content: '请选择自提点',
+          content: '请选择取货点',
           confirmColor: "#2CBB6B",
           showCancel: false,
           success: function (res) {

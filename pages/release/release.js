@@ -93,10 +93,10 @@ Page({
    * 生命周期函数--监听页面显示
    */ 
   onShow(options) {
-    console.log(this.data.copySolitaireData)
     if (this.data.copySolitaireData) {
       this.copyData(JSON.parse(this.data.copySolitaireData));
       this.data.copySolitaireData = false;
+      this.setFinishTime();
     }
     this.getAddress();
     this.getClassify();    //获取分类数据
@@ -418,7 +418,7 @@ Page({
   //修改商品成团数量
   inputGoodsGroupSum: function (e) {
     var goodsindex = e.currentTarget.dataset.goodsindex;
-    this.data.goodsList[goodsindex].groupSum = e.detail.value;
+    this.data.goodsList[0].groupSum = e.detail.value;
   },
   //最小成团数量控制
   chenTuanNum: function (res) {
@@ -985,9 +985,7 @@ Page({
         introImages: copyData.introImages.split(","),              //服务器图片介绍数组 用逗号隔开"001.png,002.png"
         goodsAddresses: copyData.goodsAddresses,            //用户自提地址id数组，用逗号隔开"1,2"
         phoneNumber: copyData.phoneNumber,                    //用户手机号
-        setFinishTime: 0,               //是否设置截止时间
-        multiArray: [],                 //截至时间日期
-        finishTime: [],                 //截至时间
+        setFinishTime: 1,               //是否设置截止时间
         multiIndex: [0, 0],
         seleAddrNum: copyData.goodsAddresses.split(",").length,                  //已设置地址数量  
         judeToMost: copyData.goodsList.length > 1,                //是否为多个商品

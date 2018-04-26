@@ -16,7 +16,7 @@ Page({
   onLoad: function (options) {
     console.log(JSON.parse(options.jsonStr))
     this.setData({
-      data: JSON.parse(options.jsonStr)
+      data: this.formatData(JSON.parse(options.jsonStr))
     })
   },
 
@@ -136,5 +136,18 @@ Page({
         }
       }
     })
-  }  
+  },
+  //格式化数据
+  formatData: function (res) {
+    console.log(res)
+      var detailTime = res.userAddress.detail.split("***");
+      if (detailTime.length == 2) {
+        res.userAddress.detail = detailTime[0];
+        res.userAddress.claimTime = detailTime[1];
+      } else {
+        res.userAddress.detail = detailTime[0];
+        res.userAddress.claimTime = "";
+      }
+    return res;
+  },  
 })

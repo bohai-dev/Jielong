@@ -71,6 +71,9 @@ Page({
   //自定义方法
   initData:function(){
     var _this = this;
+    wx.showLoading({
+      title: '数据搜索中...',
+    })
     wx.request({
       url: app.globalData.domain + '/jielong/selectByUserId',
       method: "GET",
@@ -92,6 +95,9 @@ Page({
         _this.setData({
           isShow: false
         })
+      },
+      complete: function () {
+        wx.hideLoading();
       }
     })
   },

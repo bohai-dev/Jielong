@@ -78,7 +78,7 @@ page{
   width: 96%;
   height: 240rpx;
   margin-top: 10rpx;
-  background-color: rgb(245, 245, 245);
+  background-color: #fff;
 }
 .addrIcon{
   height: 32rpx;
@@ -91,5 +91,18 @@ page{
 .rightShotImg{
   width: 12rpx; 
   height: 24rpx;
+}
+.timeCon{
+  height: 100rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-top:1rpx solid gainsboro; 
+  border-bottom:1rpx solid gainsboro; 
+  padding-left: 30rpx;
+  margin-top: 5rpx;
+}
+.claimTime{
+  width: 300rpx;
 }
 /*模态框end  */

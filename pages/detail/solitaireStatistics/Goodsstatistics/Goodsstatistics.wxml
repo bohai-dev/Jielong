@@ -21,7 +21,8 @@
     <view class='goodsCont' id="{{item.isShow}}">
       <view class='goodsCont_left'>
         <text>{{item.userInfo.name  +" "+ item.userInfo.phoneNumber}}</text>
-        <text>自提点：{{item.userAddress.detail}}</text>
+        <text>取货点：{{item.userAddress.detail}}</text>
+        <text>取货时间：{{item.userAddress.claimTime}}</text>
         <text>购买数量：{{item.goodsSum}}</text>
       </view>
     </view>
