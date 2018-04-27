@@ -71,7 +71,19 @@
 .img-show{
   position: relative;
   margin-right: 10rpx;
+  margin-bottom:10rpx;
   z-index: 5;
+  display: flex;
+  flex-direction: column;
+}
+.upload_progress{
+  /* background:#eee; */
+  height:30rpx;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#2cbb6b;
+  font-size:20rpx;
 }
 .introImage{
   height: 100rpx;
@@ -84,6 +96,7 @@
   position: absolute;
   top:-5rpx;
   left:-5rpx;
+  z-index: 10;
 }
 .del-icon{
   width:100%;

@@ -21,6 +21,9 @@
       <!--接龙图片列表-->
       <view  class="img-show" wx:for="{{imageLocalPaths}}" wx:key="unique" >
         <image class="introImage" data-index="{{index}}" mode="scaleToFill" src="{{item.path}}" />
+        <view class="upload_progress" wx:if="{{item.upload_percent>=0}}" >
+          {{item.upload_percent}}%
+        </view> 
         <view class="delete-btn" data-index="{{index}}" catchtap="deleteImg" data-isCommon="1">
           <image class='del-icon' mode="scaleToFill" src="../../images/deleteImg.png"></image>
         </view>
@@ -89,7 +92,7 @@
         <!--最小成团数量-->
       <view wx:if="{{!judeToMost}}">
         <view class='containerView rowIconView' wx:if="{{goodsList[0].isSetGroup}}">
-          <input name="groupSum{{goodsindex}}" placeholder-class='{{isHighlight == 12 ? "phcolorhighlight": "phcolor"}}' placeholder="请输入最小成团数量" type="number"  value='{{goodsList[0].groupSum}}' bindinput='inputGoodsGroupSum' />
+          <input name="groupSum{{goodsindex}}" placeholder-class='{{isHighlight == 6 ? "phcolorhighlight": "phcolor"}}' placeholder="请输入最小成团数量" type="number"  value='{{goodsList[0].groupSum}}' bindinput='inputGoodsGroupSum' />
         </view>
       </view>
     
@@ -112,19 +115,22 @@
         <!--商品名称-->
         <view class='containerView rowIconView'>
           <text class='center'>商品名称</text>
-          <input name="name{{goodsindex}}" class='input' placeholder-class='{{isHighlight == 6 ? "phcolorhighlight": "phcolor"}}' data-goodsindex='{{goodsindex}}'  placeholder="请输入商品名称，最多20字" type="text" bindinput='inputGoodsName' value='{{item.name}}' maxlength='20' />
+          <input name="name{{goodsindex}}" class='input' placeholder-class='{{isHighlight == goodsindex+10 ? "phcolorhighlight": "phcolor"}}' data-goodsindex='{{goodsindex}}'  placeholder="请输入商品名称，最多20字" type="text" bindinput='inputGoodsName' value='{{item.name}}' maxlength='20' />
         </view>
         <!--商品图片介绍-->
         <view class='containerView imageIntroView'>
           <!--商品图片列表-->
           <view class='img-show' wx:for="{{item.localPaths}}" wx:key="unique" wx:for-item="image">
             <image class="introImage" mode="scaleToFill" src="{{image.path}}" />
+            <view class="upload_progress" wx:if="{{image.upload_percent>=0}}" >
+              {{image.upload_percent}}%
+            </view> 
             <view class="delete-btn" data-index="{{index}}" data-fatheridx="{{goodsindex}}" catchtap="deleteImg" data-isCommon="0">
               <image class='del-icon' mode="scaleToFill" src="../../images/deleteImg.png"></image>
             </view>
           </view>
           <!--点击上传区域-->
-          <view class='{{isHighlight == 7 ? "uploadViewHighlight": "uploadView"}}' bindtap='uploadImage' data-goodsindex="{{goodsindex}}" data-isCommon="0">
+          <view class='{{isHighlight == goodsindex+20 ? "uploadViewHighlight": "uploadView"}}' bindtap='uploadImage' data-goodsindex="{{goodsindex}}" data-isCommon="0">
             <text>点击</text>
             <text>上传</text>
           </view>
@@ -143,17 +149,17 @@
         <!--商品规格-->
         <view class='containerView rowIconView'>
           <text class='center'>规格</text>
-          <input name="specification{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsSpecification' placeholder-class='{{isHighlight == 9 ? "phcolorhighlight": "phcolor"}}' placeholder="请填写单份商品的规格，如个、只等" type="text" value='{{item.specification}}' />
+          <input name="specification{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsSpecification' placeholder-class='{{isHighlight == goodsindex+40 ? "phcolorhighlight": "phcolor"}}' placeholder="请填写单份商品的规格，如个、只等" type="text" value='{{item.specification}}' maxlength='12'/>
         </view>
         <!--商品价格-->
         <view class='containerView rowIconView'>
           <text class='center'>价格</text>
-          <input name="price{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsPrice' placeholder-class='{{isHighlight == 10 ? "phcolorhighlight": "phcolor"}}' placeholder="范围1.00~99999.99，单位$" type="digit" value='{{item.price}}' />
+          <input name="price{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsPrice' placeholder-class='{{isHighlight == goodsindex+50 ? "phcolorhighlight": "phcolor"}}' placeholder="范围1.00~99999.99，单位$" type="digit" value='{{item.price}}' />
         </view>
         <!--商品库存-->
         <view class='containerView rowIconView'>
           <text class='center red'>库存</text>
-          <input name="repertory{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsRepertory' placeholder-class='{{isHighlight == 11 ? "phcolorhighlight": "phcolor"}}' placeholder="请输入商品库存" type="number" value='{{item.repertory}}' />
+          <input name="repertory{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsRepertory' placeholder-class='{{isHighlight == goodsindex+60 ? "phcolorhighlight": "phcolor"}}' placeholder="请输入商品库存" type="number" value='{{item.repertory}}' />
         </view>
       </view>
 

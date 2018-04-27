@@ -136,12 +136,12 @@
   <view>
     <view class='modalContent' bindtap='findAddress'>
         <image src='{{QR_CodeSrc}}' bindtap='saveQr_code'></image>
-        <view>点击小程序码保存</view>
+        <!-- <view>点击小程序码保存</view>
         <view>可转发到朋友圈</view>
         <view>或</view>
-        <view>点击转发按钮,转发给好友</view> 
-        <!-- <view>点击小程序码-长按图片</view>
-        <view>可转发到朋友圈</view> -->
+        <view>点击转发按钮,转发给好友</view>  -->
+        <view>点击小程序码-长按图片</view>
+        <view>可转发到朋友圈</view> 
     </view>
   </view>
 </modal>

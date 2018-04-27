@@ -204,8 +204,9 @@ Page({
             console.log(self.data.isHighlight);
             self.setData({
               goodsList: self.data.goodsList
+            },function(){
+              self.changeImgStyle(imgs.slice(lastLength), "no-common", e.currentTarget.dataset.goodsindex); //每次上传图片获取本地地址
             })
-            self.changeImgStyle(imgs.slice(lastLength), "no-common", e.currentTarget.dataset.goodsindex); //每次上传图片获取本地地址
           }
         })
       }
@@ -752,15 +753,17 @@ Page({
     var localImages = e
     var _this = this;
     if (types == "common") {
+      var imageLocalPaths = this.data.imageLocalPaths;
+      var continuenum = imageLocalPaths.length - localImages.length;
       //先循环上传接龙介绍图片，得到url
-      for (var i = 0; i < localImages.length; i++) {
+      for (var i = continuenum; i < imageLocalPaths.length; i++) {
         (function(i){
-        console.log(localImages[i].path);
-        var imageSrc = localImages[i].path;
+        console.log(imageLocalPaths[i].path);
+        var imageSrc = imageLocalPaths[i].path;
         var imageStyle = imageSrc.substring(11);
         var imgType = imageStyle.substring(imageStyle.lastIndexOf(".") + 1, )
         var imageName = Date.parse(new Date());
-        wx.uploadFile({
+        var uploadTask = wx.uploadFile({
           url: app.globalData.domainUpload,        //服务器上传地址
           filePath: imageSrc,
           name: 'file',
@@ -779,17 +782,28 @@ Page({
             }
           }
         })
+        uploadTask.onProgressUpdate((res) => {
+          imageLocalPaths[i]['upload_percent'] = res.progress
+          _this.setData({
+            imageLocalPaths: imageLocalPaths
+          }) 
+        })
         })(i)
       }
     } else {
+      var goodsList = this.data.goodsList;
+      var continuenum = goodsList[goodsIndex].localPaths.length - localImages.length;
+      console.log("===")
+      console.log(continuenum)
+      console.log("===")
       //先循环上传接龙介绍图片，得到url
-      for (var i = 0; i < localImages.length; i++) {
+      for (var i = continuenum; i < goodsList[goodsIndex].localPaths.length; i++) {
         (function (i) {
-        var imageSrc = localImages[i].path;
+        var imageSrc = goodsList[goodsIndex].localPaths[i].path;
         var imageStyle = imageSrc.substring(11);
         var imgType = imageStyle.substring(imageStyle.lastIndexOf(".") + 1, )
         var imageName = Date.parse(new Date());
-        wx.uploadFile({
+        var uploadTask = wx.uploadFile({
           url: app.globalData.domainUpload,        //服务器上传地址
           filePath: imageSrc,
           name: 'file',
@@ -807,6 +821,12 @@ Page({
               _this.data.goodsList[goodsIndex].serverPaths.push(_this.data.ossData.dir + imageName + i + '.' + imgType);
             }
           }
+        })
+        uploadTask.onProgressUpdate((res) => {
+          goodsList[goodsIndex].localPaths[i]['upload_percent'] = res.progress
+          _this.setData({
+            goodsList: goodsList
+          })
         })
         })(i)
       }
@@ -925,21 +945,29 @@ Page({
     } else {
       for (var i = 0; i < data.goodsList.length; i++) {
         if (!data.goodsList[i].name) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品名称！", isHighlight: 6 };
+          remindDataObj = { pushForm: 0, remData: "请设置商品名称！", isHighlight: 10 + i };
+          break;
         } else if (!data.goodsList[i].serverPaths) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品图片！", isHighlight: 7 };
+          remindDataObj = { pushForm: 0, remData: "请设置商品图片！", isHighlight: 20 + i };
+          break;
         } else if (!data.goodsList[i].parentClassId && !data.goodsList[i].subClassId) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品分类！", isHighlight: 8 };
+          remindDataObj = { pushForm: 0, remData: "请设置商品分类！", isHighlight: 30 + i };
+          break;
         } else if (!data.goodsList[i].specification) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品规格！", isHighlight: 9 };
+          remindDataObj = { pushForm: 0, remData: "请设置商品规格！", isHighlight: 40 + i };
+          break;
         } else if (!data.goodsList[i].price) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品价格！", isHighlight: 10 };
+          remindDataObj = { pushForm: 0, remData: "请设置商品价格！", isHighlight: 50 + i };
+          break;
         } else if (!data.goodsList[i].repertory) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品库存！", isHighlight: 11 };
+          remindDataObj = { pushForm: 0, remData: "请设置商品库存！", isHighlight: 60 + i };
+          break;
         } else if (data.goodsList[i].isSetGroup && !data.goodsList[i].groupSum) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品的最小成团数量！", isHighlight: 12 };
+          remindDataObj = { pushForm: 0, remData: "请设置商品的最小成团数量！", isHighlight: 6 };
+          break;
         } else if (data.goodsList[i].isSetGroup && data.goodsList[i].repertory < data.goodsList[i].groupSum) {
           remindDataObj = { pushForm: 0, remData: "商品库存不能小于最小成团数量", isHighlight: 888  };
+          break;
         } else {
           remindDataObj = { pushForm: 1, remData: "" };
         }

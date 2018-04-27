@@ -7,7 +7,7 @@
 .goodslist,.goodssum,.userinfo,.address,.memobox{
   background:white;
   border-top:1px solid #F0EFF5;
-  height:80rpx;
+  min-height: 80rpx;
   display:flex;
   align-items:center;
   padding:0 30rpx;
@@ -36,9 +36,16 @@
   color: red;
 }
 .userinfo,.address,.memobox{
-  height: 100rpx;
+  min-height: 100rpx;
   font:28rpx "微软雅黑";
   color:#333;
+}
+.addtitle{
+  flex: 2.5;
+}
+.addtext{
+  flex: 6;
+  padding:10rpx 0;
 }
 input{
   margin-left: 30rpx;

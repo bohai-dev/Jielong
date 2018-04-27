@@ -76,7 +76,7 @@
 }
 .section{
   width: 100%;
-  height: 100rpx;
+  min-height: 100rpx;
   padding:0 30rpx;
   border-bottom: 2rpx solid #F0EFF5;
   display: flex;
@@ -86,6 +86,7 @@
 .selectadd{
   background: white; 
   margin-bottom:20rpx;
+  padding: 10rpx 30rpx;
 }
 .columnCenter{
   display: flex;
@@ -97,7 +98,8 @@
 }
 .tempName{
   font: 25rpx "微软雅黑";
-  margin-left: 10rpx
+  margin-left: 10rpx;
+  width: 620rpx;
 }
 .rightShotImg{
   width: 12rpx; 
@@ -114,7 +116,7 @@
    padding-bottom: 0;
  } */
 .goodsbuy{
-  height: 210rpx;
+  /* height: 210rpx; */
   display: flex;
   flex-flow: row nowrap;
   align-items:center;
@@ -150,10 +152,10 @@
 .goodsname{
   font: 37rpx "微软雅黑";
   color: #333;
-  white-space:nowrap;
-  text-overflow:ellipsis;
+  /* white-space:nowrap; */
+  /* text-overflow:ellipsis; */
   width:480rpx;
-  overflow:hidden;
+  /* overflow:hidden; */
 }
 .goodsprice{
   font-size: 30rpx;

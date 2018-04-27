@@ -9,7 +9,7 @@
     <!--手机-->
     <view class='block'>
       <label>手机</label>
-      <input name="phone" type='number' placeholder='请输入你的手机号' bindblur="telCheck" value='{{phone}}'></input>
+      <input name="phone" type='number' placeholder='请输入你的手机号，例如6041254876' bindblur="telCheck" value='{{phone}}'></input>
     </view>
     <!--姓名-->
     <view class='block'>

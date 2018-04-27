@@ -16,7 +16,10 @@
     手机
     <input type='number' bindblur="telCheck" bindinput='inputUserPhone' value='{{userPhone}}'></input>
   </view>
-  <view class='address'>取货地址：{{addressName}}</view>
+  <view class='address'>
+    <text class='addtitle'>取货点及时间:</text>
+    <text class='addtext'>{{addressName}}</text>
+  </view>
   <view class='memobox'>
     <text class='memotitle'>备注：</text>
     <textarea class='memo' maxlength='100' value='{{remark}}' bindinput="inputMemoChange"></textarea>
