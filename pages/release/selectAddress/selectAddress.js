@@ -1,4 +1,5 @@
 // pages/release/selectAddress/selectAddress.js
+var dateTimePicker = require('../../../utils/dateTimePicker.js');
 var app = getApp();
 
 Page({
@@ -17,7 +18,11 @@ Page({
     latitude: "",
     id: "",
     claimTime:"",
-    selectIdArr:[]
+    selectIdArr:[],
+    dateTimeArray1: null,
+    dateTime1: null,
+    startYear: 2018,
+    endYear: 3500
   },
 
   /**
@@ -30,6 +35,17 @@ Page({
         selectIdArr: options.jsonStr.split("-")
       })
     }
+    // 获取完整的年月日 时分秒，以及默认显示的数组
+    var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
+    obj1.dateTimeArray.pop();
+    obj1.dateTime.pop();
+    console.log(obj1)
+    this.setData({
+      dateTimeArray1: obj1.dateTimeArray,
+      dateTime1: obj1.dateTime,
+      dateTimeArray2: obj1.dateTimeArray,
+      dateTime2: obj1.dateTime,
+    });
   },
 
   /**
@@ -43,7 +59,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.initTime();
     var _this = this;
     wx.getStorage({
       key: 'seleAddrKey',
@@ -163,7 +178,9 @@ Page({
       latitude: "",
       id: "",
       hiddenModal: true,
-      claimTime:""
+      claimTime:"",
+      claimTimeTwo:"",
+      claimTimeOne:""
     })
   },
   //修改自提点
@@ -199,15 +216,22 @@ Page({
   listenerConfirm: function (e) {
     var _this = this;
     var self = e;
+    console.log(this)
     if (!this.data.claimTimeOne) {
       wx.showModal({
         title: '请填写取货起始时间',
         showCancel: false
       })
       return;
-    } else if (!this.data.claimTimeTwo) {
+    } else if (!this.data.claimTimeOne) {
       wx.showModal({
         title: '请填写取货截止时间',
+        showCancel: false
+      })
+      return;
+    } else if (Date.parse(this.data.claimTimeOne) > Date.parse(this.data.claimTimeTwo)) {
+      wx.showModal({
+        title: '取货截止时间不能小于取货起始时间',
         showCancel: false
       })
       return;
@@ -378,34 +402,41 @@ Page({
     })
   },
   //初始化时间
-  initTime: function (res) {
-    var todayTime = new Date();
-    todayTime = todayTime.getFullYear() + "-" + (todayTime.getMonth() + 1) + "-" + todayTime.getDate();
-    var endTime = new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000);
-    endTime = endTime.getFullYear() + "-" + (endTime.getMonth() + 1) + "-" + endTime.getDate();
+  changeDateTime1(e) {
+    var arr = this.data.dateTime1, dateArr = this.data.dateTimeArray1;
     this.setData({
-      startDateOne: todayTime,
-      endDateOne: endTime,
-    })
+      dateTime1: e.detail.value,
+      claimTimeOne: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]]
+    });
   },
-  pickerOne: function (res) {
-    if (this.data.claimTimeTwo) {
-      var getClaimTimeOne = new Date(res.detail.value).getTime();
-      var getClaimTimeTwo = new Date(this.data.claimTimeTwo).getTime();
-      if (getClaimTimeTwo <= getClaimTimeOne) {
-        this.data.claimTimeTwo = "";
-      }
-    }
+  changeDateTimeColumn1(e) {
+    var arr = this.data.dateTime1, dateArr = this.data.dateTimeArray1;
+    arr[e.detail.column] = e.detail.value;
+    dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
     this.setData({
-      claimTimeOne: res.detail.value,
-      startDateTwo: res.detail.value,
-      claimTimeTwo: this.data.claimTimeTwo
-    })
+      dateTimeArray1: dateArr,
+      dateTime1: arr,
+      claimTimeOne: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]]
+
+    });
   },
-  pickerTwo: function (res) {
+  changeDateTime2(e) {
+    var arr = this.data.dateTime2, dateArr = this.data.dateTimeArray2;
     this.setData({
-      claimTimeTwo: res.detail.value
-    })
+      dateTime1: e.detail.value,
+      claimTimeTwo: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]]
+    });
+    this.setData({ dateTime2: e.detail.value });
   },
+  changeDateTimeColumn2(e) {
+    var arr = this.data.dateTime2, dateArr = this.data.dateTimeArray2;
+    arr[e.detail.column] = e.detail.value;
+    dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
+    this.setData({
+      dateTimeArray2: dateArr,
+      dateTime2: arr,
+      claimTimeTwo: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]]
+    });
+  }   
 
 })

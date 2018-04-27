@@ -138,7 +138,7 @@ Page({
     if (e.detail.value.length){
       e.detail.value.forEach(function(res,index){
         _this.data.items =  _this.data.items.map(function (resItem) {
-          if (resItem.id == res) {
+          if (resItem.orderNum == res) {
             resItem.checked = "true";
           }
           return resItem;

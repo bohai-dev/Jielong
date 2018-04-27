@@ -11,7 +11,7 @@
     <block wx:for="{{items}}" wx:key="id">
     <view class='goodsCont oneGoods_hr' >
       <view class='goodsCont_left'>
-        <checkbox value='{{item.id}}' checked='{{item.checked}}'></checkbox>
+        <checkbox value='{{item.orderNum}}' checked='{{item.checked}}'></checkbox>
         <view class='ib'>
         <view class='navTGCont'>
         <text>NO.{{index + 1}}</text>

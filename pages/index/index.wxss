@@ -47,7 +47,7 @@
 }
 .conHeadTitle{
   font-size: 32rpx;
-  color: green;
+  color: #2db9ca;
   margin-left:10rpx;
 }
 .descText{

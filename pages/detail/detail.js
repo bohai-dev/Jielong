@@ -31,7 +31,7 @@ Page({
     fromMine: 0,                                //是否从发起接龙进入
     overSolitaire:false,                        //接龙数据状态
     goodsAddresses:"",
-    selectAddresses:"查看并选择取货点",
+    selectAddresses:"查看并选择取货点及时间",
     GoodsDetialList: [{                         //接龙信息
       mineIcon: "../../images/position.png",
       mineName: "",

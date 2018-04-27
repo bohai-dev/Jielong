@@ -24,7 +24,7 @@
 <view class='body' wx:if="{{!isShow}}">
   <view class='no-record'>
     <image class='recordimg' src='../../../images/norecord.png'></image>
-    <text class='news'>你还没有发起过任何团购活动</text>
+    <text class='news'>加载中，请稍后...</text>
   </view>
 </view>
 

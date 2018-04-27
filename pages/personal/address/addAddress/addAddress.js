@@ -1,4 +1,5 @@
 // pages/personal/address/addAddress/addAddress.js
+var dateTimePicker = require('../../../../utils/dateTimePicker.js');
 var app = getApp();
 
 Page({
@@ -11,7 +12,9 @@ Page({
     addrName:"地图定位",
     longitude:"",
     latitude:"",
-    id:""
+    id:"",
+    startYear:2018,
+    endYear:3500
   },
 
   /**
@@ -31,6 +34,17 @@ Page({
         claimTime:options.claimTime
       })
     }
+    // 获取完整的年月日 时分秒，以及默认显示的数组
+    var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
+    obj1.dateTimeArray.pop();
+    obj1.dateTime.pop();
+    console.log(obj1)
+    this.setData({
+      dateTimeArray1: obj1.dateTimeArray,
+      dateTime1: obj1.dateTime,
+      dateTimeArray2: obj1.dateTimeArray,
+      dateTime2: obj1.dateTime,
+    });
   },
 
   /**
@@ -44,7 +58,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      this.initTime();
+
   },
 
   /**
@@ -82,16 +96,6 @@ Page({
   
   },
   //初始化时间
-  initTime:function(res){
-    var todayTime = new Date();
-    todayTime = todayTime.getFullYear() + "-" + (todayTime.getMonth() + 1) + "-" + todayTime.getDate();
-    var endTime = new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000);
-    endTime = endTime.getFullYear() + "-" + (endTime.getMonth() + 1) + "-" + endTime.getDate();
-    this.setData({
-      startDateOne: todayTime,
-      endDateOne: endTime,
-    })
-  },
   formatData:function(res){
     var detailTime = res.claimTime.split("至");
     if (detailTime.length == 2) {
@@ -106,41 +110,27 @@ Page({
       claimTimeTwo: this.claimTimeTwo,
     })
   },
-  pickerOne:function(res){
-    console.log(this.data.claimTimeTwo)
-    console.log(res.detail.value)
-    if (this.data.claimTimeTwo){
-      var getClaimTimeOne = new Date(res.detail.value).getTime();
-      var getClaimTimeTwo = new Date(this.data.claimTimeTwo).getTime();
-      if (getClaimTimeTwo <= getClaimTimeOne){
-        this.data.claimTimeTwo = "";
-      }
-    }
-    this.setData({
-      claimTimeOne: res.detail.value,
-      startDateTwo: res.detail.value,
-      claimTimeTwo: this.data.claimTimeTwo
-    })
-  },
-  pickerTwo: function (res) {
-    this.setData({
-      claimTimeTwo: res.detail.value
-    })
-  },
   // 保存信息
   formSubmit: function (e) {
-    if (!this.data.claimTimeOne){
+    console.log(e)    
+    if (!e.detail.value.claimTimeOne){
       wx.showModal({
         title: '请填写取货起始时间',
         showCancel: false
       })
       return;
-    }else if(!this.data.claimTimeTwo){
+    }else if(!e.detail.value.claimTimeTwo){
       wx.showModal({
         title: '请填写取货截止时间',
         showCancel: false
       })
       return;      
+    } else if (Date.parse(this.data.claimTimeOne) > Date.parse(this.data.claimTimeTwo)){
+      wx.showModal({
+        title: '取货截止时间不能小于取货起始时间',
+        showCancel: false
+      })
+      return; 
     }
     var data = {
       id: this.data.id,
@@ -149,7 +139,7 @@ Page({
       detail: e.detail.value.detail,
       longitude: this.data.longitude,
       latitude: this.data.latitude,
-      claimTime: this.data.claimTimeOne + "至" + this.data.claimTimeTwo
+      claimTime: e.detail.value.claimTimeOne + "至" + e.detail.value.claimTimeTwo
     };
     console.log(data)
     //修改信息
@@ -263,5 +253,41 @@ Page({
         }
       }
     })
-  }  
+  },
+  changeDateTime1(e) {
+    var arr = this.data.dateTime1, dateArr = this.data.dateTimeArray1;
+    this.setData({ 
+      dateTime1: e.detail.value,
+      claimTimeOne: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]] 
+       });
+  },
+  changeDateTimeColumn1(e) {
+    var arr = this.data.dateTime1, dateArr = this.data.dateTimeArray1;
+    arr[e.detail.column] = e.detail.value;
+    dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
+    this.setData({
+      dateTimeArray1: dateArr,
+      dateTime1: arr,
+      claimTimeOne: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]] 
+
+    });
+  },
+  changeDateTime2(e) {
+    var arr = this.data.dateTime2, dateArr = this.data.dateTimeArray2;
+    this.setData({
+      dateTime1: e.detail.value,
+      claimTimeTwo: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]]
+    });
+    this.setData({ dateTime2: e.detail.value });
+  },
+  changeDateTimeColumn2(e) {
+    var arr = this.data.dateTime2, dateArr = this.data.dateTimeArray2;
+    arr[e.detail.column] = e.detail.value;
+    dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
+    this.setData({
+      dateTimeArray2: dateArr,
+      dateTime2: arr,
+      claimTimeTwo: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]] 
+    });
+  }   
 })

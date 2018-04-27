@@ -29,6 +29,12 @@ Page({
         }
       })
     }   
+    var detailTime = data.message.split("***");
+    if (detailTime.length == 2) {
+      data.message = detailTime[0] + "的" + detailTime[1];
+    } else {
+      data.message = detailTime[0];
+    }
     this.setData({
       contentList: data
     })

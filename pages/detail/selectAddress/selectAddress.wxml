@@ -4,7 +4,11 @@
     <label class='section' wx:for="{{addressList}}" data-index="{{index}}" wx:key="addrItems"  >
       <radio type="radio" value='{{item.id}}' checked='{{item.selectVal}}'></radio> 
       <!-- <radio type="radio" value='{{item.id}}' wx:if="{{item.selectVal}}" checked='true'></radio>       -->
-      <text>{{item.detail}}</text>
+      <text>
+       <text class='claimTime'>{{item.detail}}</text>
+      <text class='claimTime'>取货时间：{{item.claimTime}}</text>
+      </text>
+      
     </label>
   </radio-group>
 </view>

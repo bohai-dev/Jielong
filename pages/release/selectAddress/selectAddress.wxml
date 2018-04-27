@@ -23,23 +23,21 @@
     <view class='modalTitle'>
      <text >{{modalTitle}}</text>
     </view>
+    <view class="section timeCon">
+  <label for='claimTimeOne'>取货起始时间：</label>
+  <picker mode="multiSelector" value="{{dateTime1}}" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" range="{{dateTimeArray1}}">
+          <input name="claimTimeOne" type='text' id="claimTimeOne" class='claimTime' placeholder='请填写起始时间' value="{{claimTimeOne}}" disabled='true'></input>
+  </picker>
+</view>
+<view class="section timeCon">
+  <label for='claimTimeOne'>取货截止时间：</label>
+  <picker mode="multiSelector" value="{{dateTime2}}" bindchange="changeDateTime2" bindcolumnchange="changeDateTimeColumn2" range="{{dateTimeArray2}}">
+          <input name="claimTimeTwo" type='text' id="claimTimeTwo" class='claimTime' placeholder='请填写截止时间' value="{{claimTimeTwo}}" disabled='true'></input>
+  </picker>
+</view>
     <view class='modalTextarea'>
        <textarea placeholder='请填写详细取货地址' focus='true' bindblur='getTextarea' value='{{addrDetail}}'></textarea>
     </view>
-<view class="section timeCon">
-  <label for='claimTimeOne'>取货开始时间：</label>
-    <picker mode="date" start="{{startDateOne}}" end="{{endDateOne}}" bindchange='pickerOne'>
-        <input name="claimTimeOne" type='text' id="claimTimeOne" class='claimTime' placeholder='请填写起始时间' value="{{claimTimeOne}}" disabled='true'></input>
-    </picker>
-  
-</view>
-<view class="section timeCon">
-  <label for='claimTimeTwo'>取货截止时间：</label>
-    <picker mode="date" start="{{startDateTwo}}" end="{{endDateTwo}}" bindchange='pickerTwo'>
-        <input name="claimTimeTwo" type='text' id="claimTimeTwo" class='claimTime' placeholder='请填写截止时间' value="{{claimTimeTwo}}" disabled='true'></input>
-    </picker>
-  
-</view>
     <!-- <view class='modalContent' bindtap='findAddress'>
       <image class='addrIcon' src='../../../images/position.png'></image>
       <text class='addrName'>{{addrName}}</text>
