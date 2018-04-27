@@ -6,7 +6,7 @@
   position:fixed;
 }
 .from-jl{
-  background:linear-gradient(to bottom right, #80DFFF, #33CCFF , #66D8FF , #33CCFF);
+  background:linear-gradient(to right, #03F1FE, #1CDAFE , #25D2FD , #42B8FE);
   width:90%;
   height:260rpx;
   margin:100rpx auto 0;

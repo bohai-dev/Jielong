@@ -191,7 +191,8 @@ picker{
   width:100%;
   text-align: center;
   color:#fff;
-  background:rgb(44, 187, 107);
+  /* background:linear-gradient(to top right, #EF1A79, 10rpx,#F96F89,#F67B74,#F7A07F); */
+  background:linear-gradient(40deg, #EF1A79, 5%,#FA7683,#F67B74,#F7A07F);
   font:40rpx/100rpx "微软雅黑";
   border-radius: 0;
 }
