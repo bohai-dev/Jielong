@@ -1,6 +1,9 @@
 /* pages/detail/selectAddress/selectAddress.wxss */
 @import "../../release/selectAddress/selectAddress.wxss";
 
+radio-group{
+  padding-bottom: 90rpx;
+}
 .pos_bottom{
   position: fixed;
   height: 90rpx;

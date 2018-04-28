@@ -110,7 +110,7 @@ Page({
     res.map(function (item, index) {
       var detailTime = item.detail.split("***");
       if (detailTime.length == 2) {
-        item.detail = detailTime[0];
+        item.detail = detailTime[0] + "(取货时间:" + detailTime[1]+")";
         item.claimTime = detailTime[1];
       } else {
         item.detail = detailTime[0];

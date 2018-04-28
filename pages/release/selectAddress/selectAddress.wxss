@@ -4,6 +4,7 @@ page{
   height: 100%;
   background-color: #EEEEEE;  /*灰色背景*/ 
   font:30rpx "微软雅黑";
+  padding-bottom: 90rpx;
 }
 .section{
   width: 100%;

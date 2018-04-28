@@ -6,7 +6,6 @@
       <!-- <radio type="radio" value='{{item.id}}' wx:if="{{item.selectVal}}" checked='true'></radio>       -->
       <text>
        <text class='claimTime'>{{item.detail}}</text>
-      <text class='claimTime'>取货时间：{{item.claimTime}}</text>
       </text>
       
     </label>
