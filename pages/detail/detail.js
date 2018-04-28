@@ -434,7 +434,7 @@ Page({
       //console.log(goodsInfo)
       if (!addressId){
         wx.showModal({
-          content: '请选择取货点',
+          content: '请选择取货点及时间',
           confirmColor: "#2CBB6B",
           showCancel: false,
           success: function (res) {

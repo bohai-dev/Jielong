@@ -195,7 +195,7 @@ Page({
             var tempFilePaths = res.tempFilePaths  //图片临时路径,数组
             //console.log(tempFilePaths + '----2');
             var length = imgs.length;
-            var lastLength = self.data.goodsList[e.currentTarget.dataset.goodsindex].serverPaths.length;
+            var lastLength = self.data.goodsList[e.currentTarget.dataset.goodsindex].localPaths.length;
             for (var i = 0; i < tempFilePaths.length; i++) {
               var loalImg = { id: length, unique: 'unique_' + length, path: tempFilePaths[i] };
               length++;

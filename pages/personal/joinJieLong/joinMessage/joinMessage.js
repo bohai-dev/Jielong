@@ -95,60 +95,110 @@ Page({
             wx.hideLoading();   //关闭模态框
           }, 60000)
           var order = _this.data.data;
-          clear(order)
-          //删除不用属性
-          function clear(order) {
-            delete order.createdAt;
-            delete order.updatedAt;
-            if (order.orderGoods){
-              clear(order.orderGoods[0])
-              clear(order.orderGoods[0].goods)
-            }
-          }
-          console.log(order);
-          //取消订单接口
-          wx.request({
-            url: app.globalData.domain + '/order/cancelJoinGroup',
-            data: order,
-            method: 'POST',
-            header: {
-              'content-type': 'application/json' // 默认值
-            },
-            success: function (res) {
-              console.log(res)
-              if (res.statusCode == 200 && res.data.data == 1) {
-                wx.hideLoading();   //关闭模态框
-                wx.showModal({
-                  title: '提示',
-                  content: '取消订单成功！',
-                  confirmColor: "#2CBB6B",
-                  showCancel: false,
-                  success: function (res) {
-                    if (res.confirm) {
-                      wx.navigateBack({
-                        delta: 1
-                      })
-                      console.log("取消成功")
+          if (order.orderGoods[0].goods.isSetGroup == 0){
+            var orderId = order.id;
+            console.log(orderId);
+            wx.request({
+              url: app.globalData.domain + '/order/cancelOrder',
+              // data: orderId,
+              data: {
+                orderId: orderId
+              },
+              header: {
+                'content-type': 'application/json' // 默认值
+              },
+              success: function (res) {
+                console.log(res)
+                if (res.statusCode == 200 && res.data.data == 1) {
+                  wx.hideLoading();   //关闭模态框
+                  wx.showModal({
+                    title: '提示',
+                    content: '取消订单成功！',
+                    confirmColor: "#2CBB6B",
+                    showCancel: false,
+                    success: function (res) {
+                      if (res.confirm) {
+                        wx.navigateBack({
+                          delta: 1
+                        })
+                        console.log("取消成功")
+                      }
                     }
-                  }
-                })
-              } else {
-                console.log("取消失败")
-                wx.hideLoading();   //关闭模态框
-                wx.showModal({
-                  title: '提示',
-                  content: '取消失败！请重试',
-                  confirmColor: "#2CBB6B",
-                  showCancel: false,
-                  success: function (res) {
-                    if (res.confirm) {
-                      console.log('用户点击确定')
+                  })
+                } else {
+                  console.log("取消失败")
+                  wx.hideLoading();   //关闭模态框
+                  wx.showModal({
+                    title: '提示',
+                    content: '取消失败！请重试',
+                    confirmColor: "#2CBB6B",
+                    showCancel: false,
+                    success: function (res) {
+                      if (res.confirm) {
+                        console.log('用户点击确定')
+                      }
                     }
-                  }
-                })
+                  })
+                }
+              }
+            })
+            console.log("费城团团购");
+          }else{
+            clear(order)
+            //删除字段
+            function clear(order) {
+              delete order.createdAt;
+              delete order.updatedAt;
+              if (order.orderGoods){
+                clear(order.orderGoods[0])
+                clear(order.orderGoods[0].goods)
               }
             }
-          })
+            console.log("成团团购");
+            //取消订单接口
+            wx.request({
+              url: app.globalData.domain + '/order/cancelJoinGroup',
+              data: order,
+              method: 'POST',
+              header: {
+                'content-type': 'application/json' // 默认值
+              },
+              success: function (res) {
+                console.log(res)
+                if (res.statusCode == 200 && res.data.data == 1) {
+                  wx.hideLoading();   //关闭模态框
+                  wx.showModal({
+                    title: '提示',
+                    content: '取消订单成功！',
+                    confirmColor: "#2CBB6B",
+                    showCancel: false,
+                    success: function (res) {
+                      if (res.confirm) {
+                        wx.navigateBack({
+                          delta: 1
+                        })
+                        console.log("取消成功")
+                      }
+                    }
+                  })
+                } else {
+                  console.log("取消失败")
+                  wx.hideLoading();   //关闭模态框
+                  wx.showModal({
+                    title: '提示',
+                    content: '取消失败！请重试',
+                    confirmColor: "#2CBB6B",
+                    showCancel: false,
+                    success: function (res) {
+                      if (res.confirm) {
+                        console.log('用户点击确定')
+                      }
+                    }
+                  })
+                }
+              }
+            })
+          }
         }
       }
     })
