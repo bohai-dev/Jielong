@@ -8,6 +8,7 @@ Page({
   data: {
     appGlobalUrl: app.globalData.domain,
     appGlobalHost: app.globalData.domainUpload,
+    xOssProcess: app.globalData.xOssProcess,
     userImg: "",                                //发布用户头像
     goodstopic: "",                             //接龙主题
     goodsdata:"",                               //接龙日期
@@ -323,7 +324,6 @@ Page({
         }
     })
     var jsonStr = JSON.stringify(_this.data.takeGoodsAddressList);
-    console.log(jsonStr)
     wx.navigateTo({
       url: './selectAddress/selectAddress?jsonStr=' + jsonStr
     })

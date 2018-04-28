@@ -18,7 +18,7 @@
   <!-- 商品图品 -->
   <view class="goodsimgbox">
     <block wx:for="{{goodsImg}}" wx:for-index="index" wx:key="">
-      <image class="goodsimg" mode="aspectFill" src="{{appGlobalHost + item}}" bindtap='preViewImg' data-index="{{index}}" data-imgSrc="{{appGlobalHost + item}}" data-viewList='head' />
+      <image class="goodsimg" mode="aspectFill" src="{{appGlobalHost + item}}" bindtap='preViewImg' data-index="{{index}}" data-imgSrc="{{appGlobalHost + item + xOssProcess}}" data-viewList='head' />
     </block> 
   </view>
   <!-- 商品地址 -->
@@ -36,7 +36,7 @@
 <view class="container">
   <block wx:for="{{GoodList}}" wx:for-index="goodsIndex" wx:key="">
     <view class='goodsbuy'>
-      <image class="goodsbuyimg" mode="aspectFill" src="{{appGlobalHost + item.serverPaths[0]}}" bindtap='preViewImg' data-index="{{goodsIndex}}" data-imgSrc="{{appGlobalHost + item.serverPaths[0]}}" data-viewList='goods' >
+      <image class="goodsbuyimg" mode="aspectFill" src="{{appGlobalHost + item.serverPaths[0]}}" bindtap='preViewImg' data-index="{{goodsIndex}}" data-imgSrc="{{appGlobalHost + item.serverPaths[0]  + xOssProcess}}" data-viewList='goods' >
       <view class='imgNum'>{{item.serverPaths.length}}张</view>
       </image>
       <view class='goodsinfo'>
@@ -110,7 +110,7 @@
     <!-- 从我的进 -->
     <block wx:if="{{fromMine}}">
       <view class="foot_btn" bindtap='addrRemake' wx:if="{{SetGroup == 1 && overSolitaire || GoodList[0].repertory == 0 || SetGroup == 0}}">取货标记</view>    
-      <view class="foot_btn" bindtap='solitaireStatistics'>团购标记</view> 
+      <view class="foot_btn" bindtap='solitaireStatistics'>团购统计</view> 
       <view class="foot_btn" wx:if="{{!overSolitaire}}" bindtap='overSolitaire'>结束团购</view> 
       <view class="foot_btn" wx:if="{{overSolitaire}}" bindtap='copySolitaire'>
           <text class="copyBtn">复制本条团购</text>

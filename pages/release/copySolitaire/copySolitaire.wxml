@@ -17,7 +17,7 @@
   <!--接龙图片 -->
     <view class='conImg'>
       <block wx:for="{{item.imageList}}" wx:key="index" wx:for-item="imgIndex">
-        <image class='conImgDetail' src='{{appGlobalHost + imgIndex}}'></image>
+        <image class='conImgDetail' src='{{appGlobalHost + imgIndex + xOssProcess}}'></image>
       </block>
     </view>  
   <!--接龙地址 -->

@@ -1040,19 +1040,19 @@ Page({
         description: copyData.description,    //活动描述  
         noteMaxLen: 300,             //描述最多字数
         noteNowLen: 0,               //描述当前字数
-        addressName: copyData.addressName,           //活动地址名称
+        // addressName: copyData.addressName,           //活动地址名称
         addressDetail: copyData.addressDetail,                   //活动详细地址
         addressLongitude: copyData.addressLongitude,                 //活动地址经度
         addressLatitude: copyData.addressLatitude,                  //活动地址纬度
         imageLocalPaths: _this.formatCopyImg(copyData.imageList),                //本地介绍图片数组 { id:1, unique: 'unique_1',path:''} 
         introImages: copyData.introImages.split(","),              //服务器图片介绍数组 用逗号隔开"001.png,002.png"
-        goodsAddresses: copyData.goodsAddresses,            //用户自提地址id数组，用逗号隔开"1,2"
+        // goodsAddresses: copyData.goodsAddresses,            //用户自提地址id数组，用逗号隔开"1,2"
         phoneNumber: copyData.phoneNumber,                    //用户手机号
         setFinishTime: 1,               //是否设置截止时间
         // multiArray: [],                 //截至时间日期
         // finishTime: [],                 //截至时间
         multiIndex: [0, 0],
-        seleAddrNum: copyData.goodsAddresses.split(",").length,                  //已设置地址数量  
+        // seleAddrNum: copyData.goodsAddresses.split(",").length,                  //已设置地址数量  
         judeToMost: copyData.goodsList.length > 1,                //是否为多个商品
         toMostModal: false,                 //多个商品提示信息
         showdelete: true,                 //显示删除图标  

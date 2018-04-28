@@ -20,7 +20,6 @@ Page({
         e.selectVal = false;
       }
     })
-    console.log(data)
     this.formatData(data);
     this.setData({
       addressList:data
@@ -106,7 +105,6 @@ Page({
 
   //格式化数据
   formatData: function (res) {
-    console.log(res)
     res.map(function (item, index) {
       var detailTime = item.detail.split("***");
       if (detailTime.length == 2) {

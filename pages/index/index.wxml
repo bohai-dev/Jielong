@@ -2,7 +2,7 @@
      <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="500" circular="true" indicator-color="#fff" indicator-active-color="#2CBB6B" bindtap='test'>
 	        <block wx:for="{{swiperList}}" wx:key="index" wx:for-index="index">    
 	            <swiper-item>    
-	               <image src="{{item.carouseladdress}}" class="slideImage" mode="scaleToFill"/>     
+	               <image src="{{item.carouseladdress  + xOssProcess}}" class="slideImage" mode="scaleToFill"/>     
 	            </swiper-item>    
 	        </block>
 	    </swiper>
@@ -29,7 +29,7 @@
   <!--接龙图片 -->
     <view class='conImg'>
       <block wx:for="{{item.imageList}}" wx:key="index" wx:for-item="imgIndex">
-        <image class='conImgDetail' src='{{appGlobalHost + imgIndex}}' mode="aspectFill"></image>
+        <image class='conImgDetail' src='{{appGlobalHost + imgIndex + xOssProcess}}' mode="aspectFill"></image>
       </block>
     </view>  
   <!--接龙地址 -->

@@ -8,6 +8,7 @@ Page({
    */
   data: {
     appGlobalHost: app.globalData.domainUpload,
+    xOssProcess: app.globalData.xOssProcess,
     data: {},
     isShow: false,
     copyData:false

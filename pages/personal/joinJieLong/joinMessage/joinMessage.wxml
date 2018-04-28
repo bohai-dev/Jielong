@@ -40,6 +40,7 @@
      </text>     
       <text>取货详细地址：{{data.userAddress.detail}}</text>
       <text>取货时间：{{data.userAddress.claimTime}}</text>
+      <text>备注：{{data.remark}}</text>
     </view>
   </view>
   <!-- 修改取消按钮 -->

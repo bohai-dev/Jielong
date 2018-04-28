@@ -406,7 +406,8 @@ Page({
     var arr = this.data.dateTime1, dateArr = this.data.dateTimeArray1;
     this.setData({
       dateTime1: e.detail.value,
-      claimTimeOne: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]]
+      claimTimeOne: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]],
+      dateTime2: e.detail.value
     });
   },
   changeDateTimeColumn1(e) {
@@ -423,7 +424,7 @@ Page({
   changeDateTime2(e) {
     var arr = this.data.dateTime2, dateArr = this.data.dateTimeArray2;
     this.setData({
-      dateTime1: e.detail.value,
+      dateTime2: e.detail.value,
       claimTimeTwo: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]]
     });
     this.setData({ dateTime2: e.detail.value });
