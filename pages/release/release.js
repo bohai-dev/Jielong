@@ -34,7 +34,7 @@ Page({
     setFinishTime: 1,               //是否设置截止时间
     multiArray: [],                 //截至时间日期
     finishTime: [],                 //截至时间
-    multiIndex: [0, 0],
+    multiIndex: [0, 0, 0],
     seleAddrNum: 0,                  //已设置地址数量
     judeToMost: false,                //是否为多个商品
     toMostModal: true,                 //多个商品提示信息
@@ -286,7 +286,7 @@ Page({
       //设置天数
       var NowDayarr = [];
       var enddayarr = [];
-      for (var i = 0; i < 8; i++) {
+      for (var i = 0; i < 30; i++) {
         if (i == 0 && NowTimeHours + 1 < 23) {
           NowDayarr[i] = new Date(nowDate.setDate(nowDate.getDate()));
         } else {
@@ -299,20 +299,24 @@ Page({
       //设置时间
       var todaytime = [];
       var othertime = [];
+      var minute = [];
       for (var n = 0; n < 24; n++) {
-        othertime[n] = twonumber(n) + ":00"
+        othertime[n] = twonumber(n)
+      }
+      for (var k = 0; k < 60; k++){
+        minute[k] = twonumber(k)
       }
       if (NowTimeHours < 22) {
         var num = 22 - NowTimeHours;
         for (var j = 0; j < num; j++) {
-          todaytime[j] = twonumber(NowTimeHours + (j + 2)) + ":00";
+          todaytime[j] = twonumber(NowTimeHours + (j + 2));
         }
       } else if (NowTimeHours == 22) {
         todaytime = othertime
       } else {
         var num = 23;
         for (var j = 0; j < num; j++) {
-          todaytime[j] = twonumber(j + 1) + ":00";
+          todaytime[j] = twonumber(j + 1);
         }
       }
       function twonumber(num) {
@@ -324,7 +328,7 @@ Page({
       console.log(todaytime);
       console.log(othertime);
       var finishTime = [todaytime, othertime];
-      var multiArray = [enddayarr, todaytime];
+      var multiArray = [enddayarr, todaytime, minute];
       this.setData({
         multiArray: multiArray,
         finishTime: finishTime
@@ -648,25 +652,7 @@ Page({
           case 0:
             data.multiArray[1] = this.data.finishTime[0];
             break;
-          case 1:
-            data.multiArray[1] = this.data.finishTime[1];
-            break;
-          case 2:
-            data.multiArray[1] = this.data.finishTime[1];
-            break;
-          case 3:
-            data.multiArray[1] = this.data.finishTime[1];
-            break;
-          case 4:
-            data.multiArray[1] = this.data.finishTime[1];
-            break;
-          case 5:
-            data.multiArray[1] = this.data.finishTime[1];
-            break;
-          case 6:
-            data.multiArray[1] = this.data.finishTime[1];
-            break;
-          case 7:
+          default:
             data.multiArray[1] = this.data.finishTime[1];
             break;
         }
@@ -1051,11 +1037,12 @@ Page({
         setFinishTime: 1,               //是否设置截止时间
         // multiArray: [],                 //截至时间日期
         // finishTime: [],                 //截至时间
-        multiIndex: [0, 0],
         // seleAddrNum: copyData.goodsAddresses.split(",").length,                  //已设置地址数量  
+        multiIndex: [0, 0, 0],
         judeToMost: copyData.goodsList.length > 1,                //是否为多个商品
         toMostModal: false,                 //多个商品提示信息
         showdelete: true,                 //显示删除图标  
+        isShow: false,                    //提示图片长度
         goodsList: copyData.goodsList,
       })
 

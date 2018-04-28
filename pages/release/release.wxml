@@ -71,7 +71,7 @@
       <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
         <view class="elasticbox">
           <text>截止时间：</text>
-          <input name="finishTime" disabled="true" class='rightgreen' value='{{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}}'></input>
+          <input name="finishTime" disabled="true" class='rightgreen' value='{{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}}:{{multiArray[2][multiIndex[2]]}}'></input>
         </view>
       </picker>
       <image src='../../images/rightShot.png' class='rightShotImg'></image>
