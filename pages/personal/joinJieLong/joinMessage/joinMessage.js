@@ -14,9 +14,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(JSON.parse(options.jsonStr))
+    console.log(JSON.parse(decodeURIComponent(options.jsonStr)))
     this.setData({
-      data: this.formatData(JSON.parse(options.jsonStr))
+      data: this.formatData(JSON.parse(decodeURIComponent(options.jsonStr)))
     })
   },
 

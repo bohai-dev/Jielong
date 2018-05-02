@@ -575,6 +575,7 @@ Page({
         data: pushData,
         success: function (res) {
           console.log(res)
+          var pushResData = res;
           if (res.data.errorCode == 0) {
             wx.hideLoading();   //关闭模态框
             wx.showModal({
@@ -583,8 +584,11 @@ Page({
               showCancel: false,
               success: function (res) {
                 if (res.confirm) {
-                  wx.navigateBack({
-                    delta: 1,
+                  // wx.navigateBack({
+                  //   delta: 1,
+                  // })
+                  wx.redirectTo({
+                    url: '../detail/detail?id=' + pushResData.data.data+'&fromMine=0',
                   })
                 }
               }

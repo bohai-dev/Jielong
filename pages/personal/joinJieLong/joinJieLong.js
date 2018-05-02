@@ -100,7 +100,7 @@ Page({
     var jsonStr = _this.data.data[e.currentTarget.dataset.index];
     jsonStr = JSON.stringify(jsonStr);
     wx.navigateTo({
-      url: './joinMessage/joinMessage?jsonStr='+jsonStr,
+      url: './joinMessage/joinMessage?jsonStr=' + encodeURIComponent(jsonStr),
     })
   }
 })
