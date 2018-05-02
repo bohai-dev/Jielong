@@ -166,7 +166,7 @@ App({
         var self = this
         wx.getUserInfo({
           success:function(res){
-          //  console.log(123)
+          //  console.log(res)
             self.globalData.userInfo = res.userInfo   
             self.checkLogin()
           },

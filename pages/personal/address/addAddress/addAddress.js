@@ -25,7 +25,6 @@ Page({
       wx.setNavigationBarTitle({
         title: '编辑取货点及时间',
       })
-      console.log(options)
       this.formatData(options);
       this.setData({
         addrDetail:options.detail,
@@ -36,14 +35,18 @@ Page({
     }
     // 获取完整的年月日 时分秒，以及默认显示的数组
     var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
-    obj1.dateTimeArray.pop();
-    obj1.dateTime.pop();
-    console.log(obj1)
+    var arr = [];
+    var date = [0]
+    arr[0] = this.getAllYMD();
+    arr[1] = obj1.dateTimeArray[3];
+    arr[2] = obj1.dateTimeArray[4];
+    date[1] = obj1.dateTime[4];
+    date[2] = obj1.dateTime[5];
     this.setData({
-      dateTimeArray1: obj1.dateTimeArray,
-      dateTime1: obj1.dateTime,
-      dateTimeArray2: obj1.dateTimeArray,
-      dateTime2: obj1.dateTime,
+      dateTimeArray1: arr,
+      dateTime1: date,
+      dateTimeArray2: arr,
+      dateTime2: date,
     });
   },
 
@@ -115,19 +118,19 @@ Page({
     console.log(e)    
     if (!e.detail.value.claimTimeOne){
       wx.showModal({
-        title: '请填写取货起始时间',
+        content: '请填写取货起始时间',
         showCancel: false
       })
       return;
     }else if(!e.detail.value.claimTimeTwo){
       wx.showModal({
-        title: '请填写取货截止时间',
+        content: '请填写取货截止时间',
         showCancel: false
       })
       return;      
     } else if (Date.parse(this.data.claimTimeOne) > Date.parse(this.data.claimTimeTwo)){
       wx.showModal({
-        title: '取货截止时间不能小于取货起始时间',
+        content: '取货截止时间不能小于取货起始时间',
         showCancel: false
       })
       return; 
@@ -258,18 +261,17 @@ Page({
     var arr = this.data.dateTime1, dateArr = this.data.dateTimeArray1;
     this.setData({ 
       dateTime1: e.detail.value,
-      claimTimeOne: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]],
+      claimTimeOne: dateArr[0][arr[0]] + " " + dateArr[1][arr[1]] + ":" + dateArr[2][arr[2]],
       dateTime2: e.detail.value,
        });
   },
   changeDateTimeColumn1(e) {
     var arr = this.data.dateTime1, dateArr = this.data.dateTimeArray1;
     arr[e.detail.column] = e.detail.value;
-    dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
     this.setData({
       dateTimeArray1: dateArr,
       dateTime1: arr,
-      claimTimeOne: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]] 
+      claimTimeOne: dateArr[0][arr[0]] + " " + dateArr[1][arr[1]] + ":" + dateArr[2][arr[2]]
 
     });
   },
@@ -277,18 +279,32 @@ Page({
     var arr = this.data.dateTime2, dateArr = this.data.dateTimeArray2;
     this.setData({
       dateTime2: e.detail.value,
-      claimTimeTwo: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]],
+      claimTimeTwo: dateArr[0][arr[0]] + " " + dateArr[1][arr[1]] + ":" + dateArr[2][arr[2]],
     });
-    this.setData({ dateTime2: e.detail.value });
   },
   changeDateTimeColumn2(e) {
     var arr = this.data.dateTime2, dateArr = this.data.dateTimeArray2;
     arr[e.detail.column] = e.detail.value;
-    dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
     this.setData({
       dateTimeArray2: dateArr,
       dateTime2: arr,
-      claimTimeTwo: dateArr[0][arr[0]] + "-" + dateArr[1][arr[1]] + "-" + dateArr[2][arr[2]] + " " + dateArr[3][arr[3]] + ":" + dateArr[4][arr[4]] 
+      claimTimeTwo: dateArr[0][arr[0]] + " " + dateArr[1][arr[1]] + ":" + dateArr[2][arr[2]] 
     });
-  }   
+  },
+  getAllYMD:function(){
+    var nowDate = new Date();
+    var NowTimeHours = nowDate.getHours();
+    var NowDayarr = [];
+    var enddayarr = [];
+    for (var i = 0; i < 365; i++) {
+      if (i == 0 && NowTimeHours + 1 < 23) {
+        NowDayarr[i] = new Date(nowDate.setDate(nowDate.getDate()));
+      } else {
+        NowDayarr[i] = new Date(nowDate.setDate(nowDate.getDate() + 1));
+      }
+      enddayarr[i] = NowDayarr[i].getFullYear() + "/" + dateTimePicker.withData(NowDayarr[i].getMonth() + 1) + "/" + dateTimePicker.withData(NowDayarr[i].getDate());
+    }
+    console.log(enddayarr);
+    return enddayarr;
+  }  
 })

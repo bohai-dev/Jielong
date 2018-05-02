@@ -27,6 +27,9 @@
         <text class='m_right'>{{item.userInfo.name}}</text>
         <text>{{item.userInfo.phoneNumber}}</text>
     </view> 
+    <view  class='goodsCont oneGoods_hr' wx:if="{{item.remark}}">
+        <text>备注：{{item.remark}}</text>
+    </view> 
     <view wx:for="{{item.orderGoods}}" wx:for-item="goodsItem" wx:for-index="goodsIndex" wx:key="id"  class='goodsCont oneGoods_hr'>
         <text>{{goodsItem.goods.name}}</text>
         <text>+{{goodsItem.sum}}</text>

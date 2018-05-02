@@ -24,6 +24,7 @@
         <text>取货点：{{item.userAddress.detail}}</text>
         <text>取货时间：{{item.userAddress.claimTime}}</text>
         <text>购买数量：{{item.goodsSum}}</text>
+        <text>备注：{{item.remark}}</text>
       </view>
     </view>
   </view>

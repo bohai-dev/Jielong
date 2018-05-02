@@ -76,5 +76,6 @@ function dateTimePicker(startYear, endYear, date) {
 }
 module.exports = {
   dateTimePicker: dateTimePicker,
-  getMonthDay: getMonthDay
+  getMonthDay: getMonthDay,
+  withData: withData
 }

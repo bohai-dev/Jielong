@@ -396,13 +396,13 @@ Page({
     var _this = this;
     if(e.currentTarget.dataset.viewlist == "head"){
       _this.data.goodsImg.forEach(function (e) {
-        imgUrl.push(_this.data.appGlobalHost + e);
+        imgUrl.push(_this.data.appGlobalHost + e + _this.data.xOssProcess);
       })
       
     }else{
       console.log(_this.data.GoodList)
       _this.data.GoodList[e.currentTarget.dataset.index].serverPaths.forEach(function (e) {
-        imgUrl.push(_this.data.appGlobalHost + e);
+        imgUrl.push(_this.data.appGlobalHost + e + _this.data.xOssProcess);
       })
     }
     wx.previewImage({
