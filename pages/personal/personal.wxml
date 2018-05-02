@@ -15,3 +15,8 @@
   </view>
 </block>
 <!--模板end  -->
+<!-- <view style='height:100rpx' class='section getTemp mineNavTo'>
+  <image class='tempIcon' src='../../images/mine/personal-center.png'></image>
+  <button open-type="getUserInfo" bindgetuserinfo="userInfoHandler">点击登陆</button>
+  <image src='../../images/rightShot.png' class='rightShotImg'></image>
+</view> -->

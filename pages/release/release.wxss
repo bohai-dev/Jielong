@@ -76,7 +76,7 @@
   display: flex;
   flex-direction: column;
 }
-.upload_progress{
+.upload_progress,.upload_fail{
   /* background:#eee; */
   height:30rpx;
   display:flex;
@@ -84,6 +84,9 @@
   align-items:center;
   color:#2cbb6b;
   font-size:20rpx;
+}
+.upload_fail{
+  color:#ff6969;
 }
 .introImage{
   height: 100rpx;

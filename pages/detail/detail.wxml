@@ -47,7 +47,8 @@
       <!-- 商品数量 -->
       <view class='goodsnumber' wx:if="{{!fromMine}}">
         <view class='btnnum' data-index="{{goodsIndex}}" bindtap='minusNumber' hover-class="minusbtnnum"><image class='numimg' src='../../images/minusnum.png'></image></view>
-        <view class='goodsnum'>{{item.goodsnum}}</view>
+        <input class='goodsnum' data-index="{{goodsIndex}}" type='number' value='{{item.goodsnum}}' bindblur='inputGoodsNum' maxlength='4'></input>
+        <!-- <view class='goodsnum'>{{item.goodsnum}}</view> -->
         <view class='btnnum' data-index="{{goodsIndex}}" bindtap='addNumber' hover-class="addbtnnum"><image class='numimg' src='../../images/addnum.png'></image></view>
       </view>
     </view>

@@ -190,9 +190,7 @@
 .goodsnum{
   width: 70rpx;
   height: 50rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align:center;
   font: 30rpx "微软雅黑";
   color: #ababab;
 }

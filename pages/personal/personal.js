@@ -126,6 +126,9 @@ Page({
         }
       }
     })
+  },
+  userInfoHandler:function(e){
+    console.log(e)
   }
 
 

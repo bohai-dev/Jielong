@@ -142,7 +142,6 @@ Page({
                 }
               }
             })
-            console.log("费城团团购");
           }else{
             clear(order)
             //删除字段
@@ -154,7 +153,6 @@ Page({
                 clear(order.orderGoods[0].goods)
               }
             }
-            console.log("成团团购");
             //取消订单接口
             wx.request({
               url: app.globalData.domain + '/order/cancelJoinGroup',

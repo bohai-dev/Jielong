@@ -154,7 +154,7 @@ Page({
             var length = self.data.imageLocalPaths.length;
             var lastLength = self.data.imageLocalPaths.length;
             for (var i = 0; i < tempFilePaths.length; i++) {
-              var loalImg = { id: length, unique: 'unique_' + length, path: tempFilePaths[i] };
+              var loalImg = { id: length, unique: 'unique_' + length, path: tempFilePaths[i], fail: false};
               length++;
               imgs.push(loalImg);
             }
@@ -197,16 +197,15 @@ Page({
             var length = imgs.length;
             var lastLength = self.data.goodsList[e.currentTarget.dataset.goodsindex].localPaths.length;
             for (var i = 0; i < tempFilePaths.length; i++) {
-              var loalImg = { id: length, unique: 'unique_' + length, path: tempFilePaths[i] };
+              var loalImg = { id: length, unique: 'unique_' + length, path: tempFilePaths[i], fail: false};
               length++;
               imgs.push(loalImg);
             }
             console.log(self.data.isHighlight);
             self.setData({
               goodsList: self.data.goodsList
-            },function(){
-              self.changeImgStyle(imgs.slice(lastLength), "no-common", e.currentTarget.dataset.goodsindex); //每次上传图片获取本地地址
             })
+            self.changeImgStyle(imgs.slice(lastLength), "no-common", e.currentTarget.dataset.goodsindex); //每次上传图片获取本地地址
           }
         })
       }
@@ -225,9 +224,7 @@ Page({
         imgs[i].id = i;
         imgs[i].unique = "unique_" + i;
       }
-      if (imgs.length == 0){
-        var isShow = true;
-      }
+      var isShow = (imgs.length == 0) ? true:false;
       _this.setData({
         imageLocalPaths: imgs,
         isShow: isShow
@@ -743,13 +740,13 @@ Page({
     var localImages = e
     var _this = this;
     if (types == "common") {
-      var imageLocalPaths = this.data.imageLocalPaths;
-      var continuenum = imageLocalPaths.length - localImages.length;
+      // var imageLocalPaths = this.data.imageLocalPaths;
+      var continuenum = _this.data.imageLocalPaths.length - localImages.length;
       //先循环上传接龙介绍图片，得到url
-      for (var i = continuenum; i < imageLocalPaths.length; i++) {
+      for (var i = continuenum; i < _this.data.imageLocalPaths.length; i++) {
         (function(i){
-        console.log(imageLocalPaths[i].path);
-        var imageSrc = imageLocalPaths[i].path;
+        console.log(_this.data.imageLocalPaths[i].path);
+        var imageSrc = _this.data.imageLocalPaths[i].path;
         var imageStyle = imageSrc.substring(11);
         var imgType = imageStyle.substring(imageStyle.lastIndexOf(".") + 1, )
         var imageName = Date.parse(new Date());
@@ -769,27 +766,33 @@ Page({
             console.log(res)
             if (res.statusCode == 200) {
               _this.data.introImages.push(_this.data.ossData.dir + imageName + i + '.' + imgType);
+              //console.log(_this.data.introImages)
             }
+          },
+          fail: function (res) {
+            // console.log(res)
+            // console.log("--第" + i + "上传失败")
+            _this.data.imageLocalPaths[i].fail = true;
+            _this.setData({
+              imageLocalPaths: _this.data.imageLocalPaths
+            }) 
           }
         })
         uploadTask.onProgressUpdate((res) => {
-          imageLocalPaths[i]['upload_percent'] = res.progress
+          _this.data.imageLocalPaths[i]['upload_percent'] = res.progress
           _this.setData({
-            imageLocalPaths: imageLocalPaths
+            imageLocalPaths: _this.data.imageLocalPaths
           }) 
         })
         })(i)
       }
     } else {
-      var goodsList = this.data.goodsList;
-      var continuenum = goodsList[goodsIndex].localPaths.length - localImages.length;
-      console.log("===")
-      console.log(continuenum)
-      console.log("===")
+      // var goodsList = this.data.goodsList;
+      var continuenum = _this.data.goodsList[goodsIndex].localPaths.length - localImages.length;
       //先循环上传接龙介绍图片，得到url
-      for (var i = continuenum; i < goodsList[goodsIndex].localPaths.length; i++) {
+      for (var i = continuenum; i < _this.data.goodsList[goodsIndex].localPaths.length; i++) {
         (function (i) {
-        var imageSrc = goodsList[goodsIndex].localPaths[i].path;
+        var imageSrc = _this.data.goodsList[goodsIndex].localPaths[i].path;
         var imageStyle = imageSrc.substring(11);
         var imgType = imageStyle.substring(imageStyle.lastIndexOf(".") + 1, )
         var imageName = Date.parse(new Date());
@@ -809,13 +812,22 @@ Page({
             console.log(res)
             if (res.statusCode == 200) {
               _this.data.goodsList[goodsIndex].serverPaths.push(_this.data.ossData.dir + imageName + i + '.' + imgType);
+              //console.log(_this.data.goodsList[goodsIndex].serverPaths)
             }
+          },
+          fail: function (res){
+            //console.log(res)
+            //console.log("--第"+i+"上传失败")
+            _this.data.goodsList[goodsIndex].localPaths[i].fail = true;
+            _this.setData({
+              goodsList: _this.data.goodsList
+            })
           }
         })
         uploadTask.onProgressUpdate((res) => {
-          goodsList[goodsIndex].localPaths[i]['upload_percent'] = res.progress
+          _this.data.goodsList[goodsIndex].localPaths[i]['upload_percent'] = res.progress
           _this.setData({
-            goodsList: goodsList
+            goodsList: _this.data.goodsList
           })
         })
         })(i)

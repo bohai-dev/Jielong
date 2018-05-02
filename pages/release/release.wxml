@@ -21,9 +21,8 @@
       <!--接龙图片列表-->
       <view  class="img-show" wx:for="{{imageLocalPaths}}" wx:key="unique" >
         <image class="introImage" data-index="{{index}}" mode="scaleToFill" src="{{item.path}}" />
-        <view class="upload_progress" wx:if="{{item.upload_percent<100}}" >
-          {{item.upload_percent}}%
-        </view> 
+        <view class="upload_progress" wx:if="{{item.upload_percent<100&&!item.fail}}" >{{item.upload_percent}}%</view>
+        <view class="upload_fail" wx:if="{{item.fail}}" >上传失败</view>
         <view class="delete-btn" data-index="{{index}}" catchtap="deleteImg" data-isCommon="1">
           <image class='del-icon' mode="scaleToFill" src="../../images/deleteImg.png"></image>
         </view>
@@ -122,9 +121,8 @@
           <!--商品图片列表-->
           <view class='img-show' wx:for="{{item.localPaths}}" wx:key="unique" wx:for-item="image">
             <image class="introImage" mode="scaleToFill" src="{{image.path}}" />
-            <view class="upload_progress" wx:if="{{image.upload_percent<100}}" >
-              {{image.upload_percent}}%
-            </view> 
+            <view class="upload_progress" wx:if="{{image.upload_percent<100&&!image.fail}}" >{{image.upload_percent}}%</view>
+            <view class="upload_fail" wx:if="{{image.fail}}" >上传失败</view> 
             <view class="delete-btn" data-index="{{index}}" data-fatheridx="{{goodsindex}}" catchtap="deleteImg" data-isCommon="0">
               <image class='del-icon' mode="scaleToFill" src="../../images/deleteImg.png"></image>
             </view>

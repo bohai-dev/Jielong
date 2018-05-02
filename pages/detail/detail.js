@@ -582,7 +582,22 @@ Page({
       })
       console.log(222)
     }
+  },
+  //手动输入商品数量
+  inputGoodsNum:function(e){
+    var index = e.currentTarget.dataset.index;
+    const goodsnumlast = this.data.GoodList[index].goodsnum;
+    var countnum = e.detail.value - goodsnumlast;
+    var pricediff = this.data.GoodList[index].price * countnum;
+    this.data.count = this.data.count + countnum;
+    this.data.total = this.data.total + pricediff;
+    this.data.GoodList[index].goodsnum = new Number(e.detail.value);
+    var buy = this.data.count > 0 ? "已选：$" + this.data.total : "请选择商品";
+    this.setData({
+      GoodList: this.data.GoodList,
+      count: this.data.count,
+      buy: buy
+    })
   }
 
 })
-
