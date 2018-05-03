@@ -104,8 +104,8 @@ App({
       success: function (res) {
         if (res.confirm) {
           wx.openSetting({
-            success: function (res) {
             
+            success: function (res) {
               if (!res.authSetting[perssionName] ) {  //
                  console.log('授权未成功')
                  //递归获取权限,直到授权成功
