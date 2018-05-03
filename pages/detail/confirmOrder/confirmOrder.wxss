@@ -71,6 +71,8 @@ button{
   margin-top:20rpx;
   font-size:35rpx;
   border: none;
+  background-color:rgb(44, 187, 107);
+  color: white;
 }
 .opacity{
   opacity: 0.8;

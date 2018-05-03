@@ -46,6 +46,8 @@ button{
   font-size: 35rpx;
   width: 90%;
   margin-top: 50rpx;
+  background-color:rgb(44, 187, 107);
+  color: white;
 }
 .opacity{
   opacity: 0.8;
