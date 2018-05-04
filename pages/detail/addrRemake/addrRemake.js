@@ -76,6 +76,7 @@ Page({
   //多选框按钮
   initData: function (jieLongId){
     var _this = this;
+    _this.data.jieLongId = jieLongId;
     wx.request({
       url: app.globalData.domain + '/order/selectPickOrder',
       method: "GET",
@@ -225,6 +226,59 @@ Page({
       })
 
     }
+  },
+  // 导出订单
+  downloadOrder:function(){
+    var _this = this;
+    wx.showLoading({
+      title: '数据加载中...',
+      mask:true
+    })
+    console.log(_this.data.jieLongId);
+    wx.request({
+      url: app.globalData.domain + '/downloadOrder?jielongId=' + _this.data.jieLongId,
+      success:function(res){
+        console.log(res)
+        var domainUploadData = res.data;
+        console.log(app.globalData.domainUpload + "/" + domainUploadData)
+        wx.downloadFile({
+          url: app.globalData.domainUpload + "/" + domainUploadData,
+          success: function (res) {
+            console.log(res)
+            var filePath = res.tempFilePath
+            // wx.saveFile({
+            //   tempFilePath: filePath,
+            //   success: function (res) {
+            //     console.log(res)
+            // var savedFilePath = res.savedFilePath
+                wx.openDocument({
+                  filePath: filePath,
+                  success: function (res) {
+                    console.log('打开文档成功');
+                  },
+                  complete: function (res) {
+                    console.log(res)
+                    wx.hideLoading();
+                  }
+                })
+            //   }
+            // })
+          },
+          complete: function (res) {
+            console.log(res)
+            setTimeout(function () {
+              wx.hideLoading();
+            }, 10000)
+          }
+        })
+      },
+      complete:function(res){
+        console.log(res)
+        setTimeout(function(){
+          wx.hideLoading();
+        },10000)
+      }
+    })
   }
 
 

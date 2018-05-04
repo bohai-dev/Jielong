@@ -3,24 +3,24 @@
 <radio-group bindchange="selectCpy">
 <view class='container' wx:for="{{data}}" wx:for-index="index" wx:key="index">
   <view class='listContent'>
-  <!--接龙描述  -->
+  <!--mart描述  -->
     <view>
       <radio value="{{item.jsonItem}}"></radio>
       <text class='descText'>{{item.topic}}</text>
     </view>  
-  <!--接龙时间  -->
+  <!--mart时间  -->
     <view class='conTime'>
       <text>{{item.createTimeStr}}</text>
       <text></text>
       <text>{{item.browseSum}}人浏览</text>
     </view>  
-  <!--接龙图片 -->
+  <!--mart图片 -->
     <view class='conImg'>
       <block wx:for="{{item.imageList}}" wx:key="index" wx:for-item="imgIndex">
         <image class='conImgDetail' src='{{appGlobalHost + imgIndex + xOssProcess}}'></image>
       </block>
     </view>  
-  <!--接龙地址 -->
+  <!--mart地址 -->
     <view class='conAddr'>
       <text class='conAddrText'>{{item.addressName}}</text>
     </view>  
@@ -36,9 +36,9 @@
 
 
 
-  <!--确认接龙-->
+  <!--确认mart-->
   <view class="foot_nav">
-    <button class="foot_btn {{copyData ? 'grayColor' : ''}}" bindtap='sureCopy' data-loadtap="{{copyData}}"><text wx:if="{{!copyData}}">请选择接龙复制</text><text wx:else>确认</text></button>
+    <button class="foot_btn {{copyData ? 'grayColor' : ''}}" bindtap='sureCopy' data-loadtap="{{copyData}}"><text wx:if="{{!copyData}}">请选择mart复制</text><text wx:else>确认</text></button>
   </view>
   
 </page>

@@ -94,7 +94,7 @@ Page({
       }
     })
   },
-  //跳转到参与接龙明细
+  //跳转到参与mart明细
   navToDetail:function(e){
     var _this = this;
     var jsonStr = _this.data.data[e.currentTarget.dataset.index];

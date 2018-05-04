@@ -42,7 +42,7 @@
       <view class='goodsinfo'>
         <text class='goodsname'>{{item.name}}</text>
         <text class='goodsprice'>$<text class='blod'>{{item.price}}</text>/{{item.specification}}</text>
-        <text class='goodsrepertory'>库存{{item.repertory}}</text>
+        <text class='goodsrepertory'>mart剩余{{item.repertory}}</text>
       </view>
       <!-- 商品数量 -->
       <view class='goodsnumber' wx:if="{{!fromMine}}">
@@ -72,7 +72,7 @@
       <view class='jointext'>最小成团数量:<text class='greenfont'>{{Group}}</text></view>
     </view>
   </view>
-  <!-- 接龙记录 -->
+  <!-- mart记录 -->
   <view class="record">
     <block wx:for="{{record}}" wx:key="">
       <view class="joinRecord {{item.rightBorder}}">
@@ -111,11 +111,11 @@
     <!-- 从我的进 -->
     <block wx:if="{{fromMine}}">
       <view class="foot_btn" bindtap='addrRemake' wx:if="{{SetGroup == 1 && overSolitaire || GoodList[0].repertory == 0 || SetGroup == 0}}">取货标记</view>    
-      <view class="foot_btn" bindtap='solitaireStatistics'>团购统计</view> 
-      <view class="foot_btn" wx:if="{{!overSolitaire}}" bindtap='overSolitaire'>结束团购</view> 
+      <view class="foot_btn" bindtap='solitaireStatistics'>mart统计</view> 
+      <view class="foot_btn" wx:if="{{!overSolitaire}}" bindtap='overSolitaire'>结束mart</view> 
       <view class="foot_btn" wx:if="{{overSolitaire}}" bindtap='copySolitaire'>
-          <text class="copyBtn">复制本条团购</text>
-          <text class="copyBtn">开启新的团购</text>
+          <text class="copyBtn">复制本条mart</text>
+          <text class="copyBtn">开启新的mart</text>
       </view>
     </block>
   </view>

@@ -3,7 +3,7 @@
   <view class='container'>
     <!--提示-->
     <view class='promptView columnView'>
-      <text class='prompt'>*初次发布接龙活动，需要绑定手机</text>
+      <text class='prompt'>*初次发布mart活动，需要绑定手机</text>
     </view>
     <!--姓名-->
     <view class='columnView block'>

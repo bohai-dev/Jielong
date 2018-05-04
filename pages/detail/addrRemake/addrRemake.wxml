@@ -6,6 +6,10 @@
       <checkbox wx:if="{{!isShow}}" data-show="{{isShow}}" bindtap='checkAll'></checkbox>
       <checkbox wx:if="{{isShow}}" data-show="{{isShow}}" checked='true' bindtap='checkAll'></checkbox>
       <text class='allPe'>全选</text>
+      <view class="downloadOrder" bindtap='downloadOrder'>
+        <image src='../../../images/downloadOrder.png' class='downloadOrderImg'></image>
+        <text>导出订单</text>
+      </view>
     </view>
     <checkbox-group bindchange="checkboxChange">
     <block wx:for="{{items}}" wx:key="id">

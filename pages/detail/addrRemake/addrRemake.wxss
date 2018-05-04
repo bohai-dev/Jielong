@@ -48,3 +48,17 @@
   color: white;
   border-radius: 0;
 }
+
+.downloadOrder{
+  width: 570rpx;
+  display: flex;
+  justify-content: flex-end;
+  color: #0d9c19;
+}
+.downloadOrderImg{
+  width: 48rpx;
+  height: 46rpx;
+}
+.downloadOrder text{
+  line-height: 48rpx;
+}

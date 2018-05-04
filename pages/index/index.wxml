@@ -11,28 +11,28 @@
 <view class='container' wx:for="{{containerList}}" wx:for-index="index" wx:key="index"><!-- bindtap='navToDetail' -->
 <navigator url='../detail/detail?id={{item.id}}&fromMine=0'>
   <view class='listContent'>
-  <!--接龙名称，主页  -->
+  <!--mart名称，主页  -->
     <view class='listHead'>
       <image class='conHeadImg' src='{{item.userInfo.avatarUrl}}'></image>
       <text class='conHeadTitle'>{{item.userInfo.nickName}}</text>
     </view>
-  <!--接龙描述  -->
+  <!--mart描述  -->
     <view>
       <text class='descText'>{{item.topic}}</text>
     </view>  
-  <!--接龙时间  -->
+  <!--mart时间  -->
     <view class='conTime'>
       <text>{{item.createTimeStr}}</text>
       <text></text>
       <text>{{item.browseSum}}人浏览</text>
     </view>  
-  <!--接龙图片 -->
+  <!--mart图片 -->
     <view class='conImg'>
       <block wx:for="{{item.imageList}}" wx:key="index" wx:for-item="imgIndex">
         <image class='conImgDetail' src='{{appGlobalHost + imgIndex + xOssProcess}}' mode="aspectFill"></image>
       </block>
     </view>  
-  <!--接龙地址 -->
+  <!--mart地址 -->
     <view class='conAddr'>
       <text class='conAddrText'>{{item.addressName}}</text>
     </view>  
@@ -49,6 +49,6 @@
 <!--数据已经全部加载完成  -->
 <view class='loadCon' wx:if="{{showAllData}}">
   <text class='allLine'></text>
-  <text class='allText'>接龙已经全部加载</text>
+  <text class='allText'>mart已经全部加载</text>
   <text class='allLine'></text>  
 </view>

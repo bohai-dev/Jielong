@@ -6,7 +6,7 @@
          <text>{{item.jielongTopic}}</text>
       </view>
       <view class='right'>
-          <text class='green'>{{item.orderGoods[0].goods.isSetGroup == 1 ? "限制团购" : "普通团购" }}</text> 
+          <text class='green'>{{item.orderGoods[0].goods.isSetGroup == 1 ? "限制mart" : "普通mart" }}</text> 
       </view> 
     </view>
     <view class='midCont'>
@@ -14,7 +14,7 @@
          参与时间：<text>{{item.createdAt}}</text>
       </view>
       <view class='right'>
-         <text class='red'>{{item.state == 0 && item.orderGoods[0].groupFlg == 1  ? "成团成功" : item.state == 0 && item.orderGoods[0].groupFlg == 2  ? "成团失败" : item.state == 0  ? "待成团成功" : item.state == 1 ? "待支付" : item.state == 2 ? "待提货" : item.state == 3 ? "提货成功" : item.state == 4 ? "团购取消" : "其他"}}</text>
+         <text class='red'>{{item.state == 0 && item.orderGoods[0].groupFlg == 1  ? "成团成功" : item.state == 0 && item.orderGoods[0].groupFlg == 2  ? "成团失败" : item.state == 0  ? "待成团成功" : item.state == 1 ? "待支付" : item.state == 2 ? "待提货" : item.state == 3 ? "提货成功" : item.state == 4 ? "mart取消" : "其他"}}</text>
       </view>
       </view>
   </view>

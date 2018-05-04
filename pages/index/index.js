@@ -29,7 +29,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    // 接龙首页所有的数据量
+    // mart首页所有的数据量
     this.selectAllCount();
     // 加载首页轮播图片
     this.loadSwiperImg();
@@ -206,7 +206,7 @@ Page({
       duration: 300
     })
   }
-  //跳转到每个接龙详细信息
+  //跳转到每个mart详细信息
   // navToDetail:function(e){
   //   var jsonStr = JSON.stringify(e.currentTarget.dataset.data);
   //   if (e.currentTarget.dataset.data){

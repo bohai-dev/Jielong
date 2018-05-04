@@ -55,7 +55,7 @@ Page({
         classIndex: [0, 0],
         specification: "",          //商品规格
         price: null,        //商品价格 
-        repertory: null,   //商品库存
+        repertory: null,   //商品mart剩余
         isSetGroup: 0,       //是否设置最低成团数量，0否，1是
         groupSum: null        //最低成团数量
 
@@ -421,7 +421,7 @@ Page({
     this.data.goodsList[goodsindex].price = e.detail.value;
     console.log()
   },
-  //修改商品库存
+  //修改商品mart剩余
   inputGoodsRepertory: function (e) {
     var goodsindex = e.currentTarget.dataset.goodsindex;
     this.data.goodsList[goodsindex].repertory = e.detail.value;
@@ -464,7 +464,7 @@ Page({
       specification: "",
       specification: "",          //商品规格
       price: null,        //商品价格 
-      repertory: null,   //商品库存
+      repertory: null,   //商品mart剩余
       isSetGroup: 0,       //是否设置最低成团数量，0否，1是
       groupSum: null        //最低成团数量
 
@@ -491,7 +491,7 @@ Page({
 
 
   },
-  //发布接龙
+  //发布mart
   formSubmit: function (e) {
     console.log(app.globalData.classifyData)
     console.log(e);
@@ -562,7 +562,7 @@ Page({
     var veriData = _this.verifPushData(pushData);
     console.log(veriData);
     if (veriData.pushForm) {
-      //发布接龙
+      //发布mart
       wx.request({
         url: app.globalData.domain + '/jielong/insert',
         method: 'POST',
@@ -576,7 +576,7 @@ Page({
           if (res.data.errorCode == 0) {
             wx.hideLoading();   //关闭模态框
             wx.showModal({
-              title: '发布接龙成功！',
+              title: '发布mart成功！',
               confirmColor: "#2CBB6B",
               showCancel: false,
               success: function (res) {
@@ -591,7 +591,7 @@ Page({
               }
             })
           } else {
-            var errMessage = res.data.errorMessage || "请填写正确的发布接龙信息！";
+            var errMessage = res.data.errorMessage || "请填写正确的发布mart信息！";
             if (errMessage) {
               wx.hideLoading();   //关闭模态框
               wx.showModal({
@@ -607,7 +607,7 @@ Page({
     } else {
       wx.hideLoading();   //关闭模态框
       wx.showModal({
-        title: veriData.remData || "请填写正确的发布接龙信息！",
+        title: veriData.remData || "请填写正确的发布mart信息！",
         confirmColor: "#2CBB6B",
         showCancel: false,
         success: function (res) {
@@ -742,7 +742,7 @@ Page({
     if (types == "common") {
       // var imageLocalPaths = this.data.imageLocalPaths;
       var continuenum = _this.data.imageLocalPaths.length - localImages.length;
-      //先循环上传接龙介绍图片，得到url
+      //先循环上传mart介绍图片，得到url
       for (var i = continuenum; i < _this.data.imageLocalPaths.length; i++) {
         (function(i){
         console.log(_this.data.imageLocalPaths[i].path);
@@ -789,7 +789,7 @@ Page({
     } else {
       // var goodsList = this.data.goodsList;
       var continuenum = _this.data.goodsList[goodsIndex].localPaths.length - localImages.length;
-      //先循环上传接龙介绍图片，得到url
+      //先循环上传mart介绍图片，得到url
       for (var i = continuenum; i < _this.data.goodsList[goodsIndex].localPaths.length; i++) {
         (function (i) {
         var imageSrc = _this.data.goodsList[goodsIndex].localPaths[i].path;
@@ -930,14 +930,14 @@ Page({
     if (!data.userId) {
       remindDataObj = { pushForm: 0, remData: "用户id已经过期!请重新登陆!", isHighlight: 888 };
     } else if (!data.topic) {
-      remindDataObj = { pushForm: 0, remData: "请填写团购主题！", isHighlight: 1};
+      remindDataObj = { pushForm: 0, remData: "请填写mart主题！", isHighlight: 1};
     } else if (!data.description) {
-      remindDataObj = { pushForm: 0, remData: "请填写团购描述！", isHighlight: 2};
+      remindDataObj = { pushForm: 0, remData: "请填写mart描述！", isHighlight: 2};
     } else if (!data.introImages) {
-      remindDataObj = { pushForm: 0, remData: "请上传团购图片！", isHighlight: 3 };
+      remindDataObj = { pushForm: 0, remData: "请上传mart图片！", isHighlight: 3 };
     // } else if (!data.addressDetail || !data.addressName || !data.addressLongitude || !data.addressLatitude) {
     } else if (!data.addressName) {
-      remindDataObj = { pushForm: 0, remData: "请填写团购城市！", isHighlight: 4 };
+      remindDataObj = { pushForm: 0, remData: "请填写mart城市！", isHighlight: 4 };
     } else if (!this.data.seleAddrNum) {
       remindDataObj = { pushForm: 0, remData: "请设置取货点及时间！", isHighlight: 5 };
     } else if (this.data.setFinishTime && !data.finishTime) {
@@ -962,13 +962,13 @@ Page({
           remindDataObj = { pushForm: 0, remData: "请设置商品价格！", isHighlight: 50 + i };
           break;
         } else if (!data.goodsList[i].repertory) {
-          remindDataObj = { pushForm: 0, remData: "请设置商品库存！", isHighlight: 60 + i };
+          remindDataObj = { pushForm: 0, remData: "请设置商品mart剩余！", isHighlight: 60 + i };
           break;
         } else if (data.goodsList[i].isSetGroup && !data.goodsList[i].groupSum) {
           remindDataObj = { pushForm: 0, remData: "请设置商品的最小成团数量！", isHighlight: 6 };
           break;
         } else if (data.goodsList[i].isSetGroup && data.goodsList[i].repertory < data.goodsList[i].groupSum) {
-          remindDataObj = { pushForm: 0, remData: "商品库存不能小于最小成团数量", isHighlight: 888  };
+          remindDataObj = { pushForm: 0, remData: "商品mart剩余不能小于最小成团数量", isHighlight: 888  };
           break;
         } else {
           remindDataObj = { pushForm: 1, remData: "" };
@@ -1000,8 +1000,8 @@ Page({
     })
   },
 
-  //复制接龙
-  //跳转到复制接龙列表
+  //复制mart
+  //跳转到复制mart列表
   copySolitaire:function(){
     wx.navigateTo({
       url: './copySolitaire/copySolitaire',
@@ -1009,7 +1009,7 @@ Page({
 
   },
 
-  //复制接龙初始化数据
+  //复制mart初始化数据
   copyData:function(copyData){
     console.log(copyData);
     var _this = this;
@@ -1101,7 +1101,7 @@ Page({
       console.log(arr)
       return arr;
   }
-  //复制接龙end
+  //复制martend
 
 
 

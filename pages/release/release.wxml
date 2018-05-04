@@ -3,22 +3,22 @@
 <form bindsubmit='formSubmit'>
   <view class='body'>
     <view>
-    <!--接龙主题 -->
+    <!--mart主题 -->
     <view class='containerView' id='topic'>
-      <input name="topic" placeholder-class='{{isHighlight == 1 ? "phcolorhighlight": "phcolor"}}' placeholder="团购主题" type="text" value="{{topic}}" class='topicInp'/>
-      <text class='copySolitaire' bindtap='copySolitaire'>复制接龙</text>
+      <input name="topic" placeholder-class='{{isHighlight == 1 ? "phcolorhighlight": "phcolor"}}' placeholder="主题" type="text" value="{{topic}}" class='topicInp'/>
+      <text class='copySolitaire' bindtap='copySolitaire'>复制mart</text>
     </view>
-    <!--接龙介绍 -->
+    <!--mart介绍 -->
     <view class='containerView' id='description'>
-       <textarea name="description" class='describe' placeholder-class='{{isHighlight == 2 ? "phcolorhighlight": "phcolor"}}' placeholder="描述一下你的好宝贝吧，让大家了解多多，才能团多多哦" bindinput="bindTextAreaChange" maxlength="{{noteMaxLen}}" value="{{description}}"/>
+       <textarea name="description" class='describe' placeholder-class='{{isHighlight == 2 ? "phcolorhighlight": "phcolor"}}' placeholder="请详细描述一下你的好宝贝吧，让大家了解多多，才能团多多哦" bindinput="bindTextAreaChange" maxlength="{{noteMaxLen}}" value="{{description}}"/>
       <view class="number-limit">
         <text class="greenfont">{{noteNowLen}}</text>/{{noteMaxLen}}
       </view>
     </view>
 
-    <!--接龙图片介绍-->
+    <!--mart图片介绍-->
     <view class='containerView imageIntroView'>
-      <!--接龙图片列表-->
+      <!--mart图片列表-->
       <view  class="img-show" wx:for="{{imageLocalPaths}}" wx:key="unique" >
         <image class="introImage" data-index="{{index}}" mode="scaleToFill" src="{{item.path}}" />
         <view class="upload_progress" wx:if="{{item.upload_percent<100&&!item.fail}}" >{{item.upload_percent}}%</view>
@@ -45,7 +45,7 @@
     </view> -->
     <!--手动输入活动地址-->
     <view class='containerView rowIconView'>
-      <text class='center'>团购城市</text>
+      <text class='center'>mart城市</text>
       <input name="addressName" class='input' placeholder-class='{{isHighlight == 4 ? "phcolorhighlight": "phcolor"}}' placeholder="城市名将会显示在首页" type="text" value='{{addressName}}' />
     </view>
 
@@ -154,10 +154,10 @@
           <text class='center'>价格</text>
           <input name="price{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsPrice' placeholder-class='{{isHighlight == goodsindex+50 ? "phcolorhighlight": "phcolor"}}' placeholder="范围1.00~99999.99，单位$" type="digit" value='{{item.price}}' />
         </view>
-        <!--商品库存-->
+        <!--商品mart剩余-->
         <view class='containerView rowIconView'>
-          <text class='center red'>库存</text>
-          <input name="repertory{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsRepertory' placeholder-class='{{isHighlight == goodsindex+60 ? "phcolorhighlight": "phcolor"}}' placeholder="请输入商品库存" type="number" value='{{item.repertory}}' />
+          <text class='center red'>mart剩余</text>
+          <input name="repertory{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsRepertory' placeholder-class='{{isHighlight == goodsindex+60 ? "phcolorhighlight": "phcolor"}}' placeholder="请输入最大数量" type="number" value='{{item.repertory}}' />
         </view>
       </view>
 
@@ -168,9 +168,9 @@
     </view>
   </view>
 
-  <!--发布接龙-->
+  <!--发布mart-->
   <view class="foot_nav">
-    <button class="foot_btn" form-type='submit'  >发布团购</button>
+    <button class="foot_btn" form-type='submit'  >发布mart</button>
   </view>
   </form>
 </view>

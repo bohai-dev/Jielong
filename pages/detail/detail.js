@@ -10,30 +10,30 @@ Page({
     appGlobalHost: app.globalData.domainUpload,
     xOssProcess: app.globalData.xOssProcess,
     userImg: "",                                //发布用户头像
-    goodstopic: "",                             //接龙主题
-    goodsdata:"",                               //接龙日期
+    goodstopic: "",                             //mart主题
+    goodsdata:"",                               //mart日期
     person:0,                                   //浏览人数
-    goodsdescribe:"",                           //接龙描述
+    goodsdescribe:"",                           //mart描述
     showMask: true,                             //是否显示遮罩层
     showMaskbar: false,                         //遮罩层
     arrow: "../../images/arrowdown.png",        //箭头
-    goodsImg: [],                               //接龙图片
+    goodsImg: [],                               //mart图片
     SetGroup:true,                              //是否设置最小成员团
     Group:0,                                    //最小开团数量
     joingoodsnum:0,                             //参团商品数量
     buy: "请选择商品",                           //购买商品
     count: 0,                                   //商品总数
     total: 0,                                   //商品总价
-    selectAddrId: "",                           //接龙的自提点id
-    selectAddrDetail: "",                       //接龙的自提点详细地址
-    jieLongId:"",                               //接龙id
+    selectAddrId: "",                           //mart的自提点id
+    selectAddrDetail: "",                       //mart的自提点详细地址
+    jieLongId:"",                               //martid
     QR_CodeSrc:"",                              //二维码地址
     hiddenModal:false,                           
-    fromMine: 0,                                //是否从发起接龙进入
-    overSolitaire:false,                        //接龙数据状态
+    fromMine: 0,                                //是否从发起mart进入
+    overSolitaire:false,                        //mart数据状态
     goodsAddresses:"",
     selectAddresses:"查看并选择取货点及时间",
-    GoodsDetialList: [{                         //接龙信息
+    GoodsDetialList: [{                         //mart信息
       mineIcon: "../../images/position.png",
       mineName: "",
       show: true,
@@ -61,17 +61,17 @@ Page({
       rightArrow:"dn"
     }],
     GoodList: [],
-    record: [{                                   //接龙记录数据
+    record: [{                                   //mart记录数据
       recordNumber: 0,
       recordText: "浏览(人)",
       rightBorder: "rightborder"
     }, {
       recordNumber:0,
-      recordText:"参与接龙(人)",
+      recordText:"参与mart(人)",
       rightBorder: "rightborder"
     }, {
       recordNumber: 0.00,
-      recordText: "接龙金额(元)"
+      recordText: "mart金额(元)"
     }],
   partakeRecord: [],                             //参与记录
     footnav: [{
@@ -81,7 +81,7 @@ Page({
       navborder: "footNavrightborder"
     }, {
       navIcon: "../../images/add.png",
-      navText: "发布接龙",
+      navText: "发布mart",
       navUrl: "../add/add"
     }],
     
@@ -143,7 +143,7 @@ Page({
           _this.data.GoodsDetialList[1].phone = res.data.data.phoneNumber;
           //_this.data.GoodsDetialList[2].goodsAddresses = res.data.data.goodsAddresses;
           _this.data.GoodsDetialList[2].show = (res.data.data.setFinishTime==1)?true:false;
-          _this.data.GoodsDetialList[2].mineName = "接龙截止时间: " + res.data.data.finishTime;
+          _this.data.GoodsDetialList[2].mineName = "mart截止时间: " + res.data.data.finishTime;
           _this.data.GoodList = res.data.data.goodsList;
           _this.data.record[0].recordNumber = res.data.data.browseSum;
           _this.data.record[1].recordNumber = res.data.data.joinSum;
@@ -364,7 +364,7 @@ Page({
     if (this.data.GoodList[index].goodsnum >= repertory) {
       wx.showModal({
         title: '',
-        content: '抱歉，该商品库存不足!',
+        content: '抱歉，该商品mart剩余不足!',
         showCancel: false,
         confirmText: "确定",
         confirmColor: "#2CBB6B",
@@ -472,7 +472,7 @@ Page({
       urls: _this.data.QR_CodeSrc.split(),
     })
   },
-  //跳转接龙统计
+  //跳转mart统计
   solitaireStatistics:function(e){
     var _this = this;
     wx.navigateTo({
@@ -486,12 +486,12 @@ Page({
       url: './addrRemake/addrRemake?jieLongId=' + _this.data.jieLongId,
     })
   },
-  //结束接龙
+  //结束mart
   overSolitaire:function(e){
     var _this = this;
     console.log(_this)
     wx.showModal({
-      title: '确定结束接龙？',
+      title: '确定结束mart？',
       confirmColor: "#2CBB6B",
       success:function(res){
         if(res.confirm){
@@ -505,7 +505,7 @@ Page({
               console.log(res)
               if(res.statusCode == 200){
                 wx.showToast({
-                  title: '结束接龙成功!',
+                  title: '结束mart成功!',
                   duration: 4000,
                   success: function (e) {
                     _this.setData({
@@ -515,7 +515,7 @@ Page({
                 })
               }else{
                 wx.showToast({
-                  title: '结束接龙失败!',
+                  title: '结束mart失败!',
                   duration: 4000,
                   icon: "none",
                 })
@@ -527,7 +527,7 @@ Page({
 
     })
   },
-  //复制接龙
+  //复制mart
   copySolitaire:function(){
     var _this = this;
     console.log(_this.data.allData);
@@ -590,7 +590,7 @@ Page({
     if (e.detail.value > this.data.GoodList[index].repertory){
       wx.showModal({
         title: '',
-        content: '抱歉，该商品库存不足!',
+        content: '抱歉，该商品mart剩余不足!',
         showCancel: false,
         confirmText: "确定",
         confirmColor: "#2CBB6B",

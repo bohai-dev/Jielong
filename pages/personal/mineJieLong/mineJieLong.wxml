@@ -3,10 +3,10 @@
     <view class='headCont'>{{item.topic}}</view>
     <view class='midCont'>
       <view class='left' >
-       团购状态： <text class='{{item.status ==1 ? "green" : "red"}}'>{{item.status == 1 ? "进行中" : item.status == 2 ? "团购结束" : item.status == 3 ? "活动提前终止" : "其它情况"}}</text>
+       mart状态： <text class='{{item.status ==1 ? "green" : "red"}}'>{{item.status == 1 ? "进行中" : item.status == 2 ? "mart结束" : item.status == 3 ? "活动提前终止" : "其它情况"}}</text>
       </view>
       <view class='right'>
-        团购类型：<text>自发团购</text>
+        mart类型：<text>自发mart</text>
       </view>
     </view>
     <view class='midCont'>

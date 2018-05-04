@@ -14,12 +14,12 @@ Page({
   data: {
     userDetialList:[{
       mineIcon:"../../images/mine/training.png",
-      mineName:"我发起的团购",
+      mineName:"我发起的mart",
       rlCont: "0个",
       navUrl: "./mineJieLong/mineJieLong"
     }, {
       mineIcon: "../../images/mine/supplier-features.png",
-      mineName: "我参与的团购",
+      mineName: "我参与的mart",
       mineMarginTop:"mineMarginTop",
       rlCont: "0次",
       navUrl: "./joinJieLong/joinJieLong"
@@ -67,7 +67,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    //初始化接龙数据
+    //初始化mart数据
     this.initData();
   },
 
@@ -95,7 +95,7 @@ Page({
 
   //以下为自定义点击事件
   // 自定义事件
-  //获取发起/参与接龙数
+  //获取发起/参与mart数
   initData: function (e) {
     var _this = this;
     wx.request({

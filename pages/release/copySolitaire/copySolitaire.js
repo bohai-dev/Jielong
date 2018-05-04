@@ -99,7 +99,7 @@ Page({
       }
     })
   },
-  //选择接龙
+  //选择mart
   selectCpy:function (e) {
     this.setData({
       copyData:e.detail.value
