@@ -188,7 +188,7 @@
   bottom: 15rpx;
 }
 .goodsnum{
-  width: 70rpx;
+  width: 80rpx;
   height: 50rpx;
   text-align:center;
   font: 30rpx "微软雅黑";

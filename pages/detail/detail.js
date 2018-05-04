@@ -585,19 +585,46 @@ Page({
   },
   //手动输入商品数量
   inputGoodsNum:function(e){
+    var _this = this;
     var index = e.currentTarget.dataset.index;
-    const goodsnumlast = this.data.GoodList[index].goodsnum;
-    var countnum = e.detail.value - goodsnumlast;
-    var pricediff = this.data.GoodList[index].price * countnum;
-    this.data.count = this.data.count + countnum;
-    this.data.total = this.data.total + pricediff;
-    this.data.GoodList[index].goodsnum = new Number(e.detail.value);
-    var buy = this.data.count > 0 ? "已选：$" + this.data.total : "请选择商品";
-    this.setData({
-      GoodList: this.data.GoodList,
-      count: this.data.count,
-      buy: buy
-    })
+    if (e.detail.value > this.data.GoodList[index].repertory){
+      wx.showModal({
+        title: '',
+        content: '抱歉，该商品库存不足!',
+        showCancel: false,
+        confirmText: "确定",
+        confirmColor: "#2CBB6B",
+        success: function (res) {
+          if (res.confirm) {
+            const goodsnumlast = _this.data.GoodList[index].goodsnum;
+            var countnum = _this.data.GoodList[index].repertory - goodsnumlast;
+            var pricediff = _this.data.GoodList[index].price * countnum;
+            _this.data.count = _this.data.count + countnum;
+            _this.data.total = _this.data.total + pricediff;
+            _this.data.GoodList[index].goodsnum = _this.data.GoodList[index].repertory;
+            var buy = _this.data.count > 0 ? "已选：$" + _this.data.total : "请选择商品";
+            _this.setData({
+              GoodList: _this.data.GoodList,
+              count: _this.data.count,
+              buy: buy
+            })
+          }
+        }
+      })
+    }else{
+      const goodsnumlast = this.data.GoodList[index].goodsnum;
+      var countnum = e.detail.value - goodsnumlast;
+      var pricediff = this.data.GoodList[index].price * countnum;
+      this.data.count = this.data.count + countnum;
+      this.data.total = this.data.total + pricediff;
+      this.data.GoodList[index].goodsnum = new Number(e.detail.value);
+      var buy = this.data.count > 0 ? "已选：$" + this.data.total : "请选择商品";
+      this.setData({
+        GoodList: this.data.GoodList,
+        count: this.data.count,
+        buy: buy
+      })
+    }
   }
 
 })
