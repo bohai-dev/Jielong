@@ -188,7 +188,7 @@ Page({
     item.startTime = this.data.startGsTime;
     item.endTime = this.data.endGsTime;
     wx.navigateTo({
-      url: './Goodsstatistics/Goodsstatistics?item='+ JSON.stringify(e.currentTarget.dataset.item),
+      url: './Goodsstatistics/Goodsstatistics?item=' + encodeURIComponent(JSON.stringify(e.currentTarget.dataset.item)),
     })
   }
 

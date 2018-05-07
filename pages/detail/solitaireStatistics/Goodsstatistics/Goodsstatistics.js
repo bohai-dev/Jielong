@@ -17,8 +17,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(JSON.parse(options.item))
-    this.initData(JSON.parse(options.item));
+    console.log(JSON.parse(decodeURIComponent(options.item)))
+    this.initData(JSON.parse(decodeURIComponent(options.item)));
   },
 
   /**
