@@ -13,12 +13,15 @@
     </view>
     <checkbox-group bindchange="checkboxChange">
     <block wx:for="{{items}}" wx:key="id">
+    <view  class='goodsCont oneGoods_hr' wx:if="{{item.addrAndTime}}">
+        <text class='addrAndTime'>{{abcSort[item.addrAndTimeIndex]}}.{{item.addrAndTime}}</text>
+    </view>  
     <view class='goodsCont oneGoods_hr' >
       <view class='goodsCont_left'>
         <checkbox value='{{item.orderNum}}' checked='{{item.checked}}'></checkbox>
         <view class='ib'>
         <view class='navTGCont'>
-        <text>NO.{{index + 1}}</text>
+         <text>NO.{{index + 1}}</text> 
         <image class='avatarUrl' src='{{item.userInfo.avatarUrl}}'></image>
         <text>{{item.userInfo.nickName}}</text>
         </view>
@@ -31,9 +34,9 @@
         <text class='m_right'>{{item.userInfo.name}}</text>
         <text>{{item.userInfo.phoneNumber}}</text>
     </view> 
-    <view  class='goodsCont oneGoods_hr' wx:if="{{item.remark}}">
+     <view  class='goodsCont oneGoods_hr' wx:if="{{item.remark}}">
         <text>备注：{{item.remark}}</text>
-    </view> 
+    </view>  
     <view wx:for="{{item.orderGoods}}" wx:for-item="goodsItem" wx:for-index="goodsIndex" wx:key="id"  class='goodsCont oneGoods_hr'>
         <text>{{goodsItem.goods.name}}</text>
         <text>+{{goodsItem.sum}}</text>

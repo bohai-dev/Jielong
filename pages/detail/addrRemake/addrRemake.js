@@ -10,7 +10,8 @@ Page({
     items:[],
     isShow:false,
     jieLongId:"",
-    pickNum:false
+    pickNum:false,
+    abcSort: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "N", "M", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
   
   },
 
@@ -87,10 +88,25 @@ Page({
         console.log(res)
         if (res.statusCode == 200) {
           //初始化自提
-          _this.initAddr(res.data.data,jieLongId);
+          // _this.formatData(res.data.data);
+          _this.initAddr(_this.formatData(res.data.data),jieLongId);
         }
       }
     })
+  },
+
+  //格式化数据
+  formatData:function(data){
+    var arr = [];
+    if(data.length){
+      data.forEach(function(item,index){
+        item[1][0].addrAndTime = item[0];
+        item[1][0].addrAndTimeIndex = index;
+        arr = arr.concat(item[1]);
+      })
+    }
+    console.log(arr)
+    return arr;
   },
 
   //初始化自提

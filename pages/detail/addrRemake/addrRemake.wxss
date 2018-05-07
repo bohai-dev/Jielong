@@ -62,3 +62,7 @@
 .downloadOrder text{
   line-height: 48rpx;
 }
+.addrAndTime{
+  color: #111;
+  font: 32rpx;
+}
