@@ -83,6 +83,38 @@ Page({
 
 
   //以下为自定义点击事件
+  //获取登陆用户信息
+  getUserInfo: function (res) {
+    if (res.detail.rawData) {
+      wx.showLoading({
+        title: "数据加载中...",
+        mask: true
+      })
+      if (!app.globalData.userInfo) {
+        app.globalData.userInfo = JSON.parse(res.detail.rawData);
+        app.login();
+        setTimeout(function () {
+          wx.hideLoading();
+          wx.navigateTo({
+            url: './systemNotice/systemNotice',
+            complete: function () {
+              wx.hideLoading();
+            }
+          })
+        }, 2000)
+      } else {
+        wx.hideLoading();
+        wx.navigateTo({
+          url: './systemNotice/systemNotice', 
+          complete: function () {
+            wx.hideLoading();
+          }
+        })
+      }
+    } else {
 
+    }
+
+  }
 })
 

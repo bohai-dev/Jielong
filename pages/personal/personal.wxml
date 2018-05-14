@@ -1,17 +1,30 @@
 <view class="c-minheight">
-  <image class="user_image" mode="scaleToFill" src="{{userInfo.avatarUrl}}" />
-  <text class="text_username">{{userInfo.nickName}}</text>
+  <view wx:if="{{initUserInfo}}">
+    <image class="user_image" mode="scaleToFill" src="{{userInfo.avatarUrl}}" />
+    <text class="text_username">{{userInfo.nickName}}</text>
+  </view>
+  <button wx:if="{{!initUserInfo}}" class='cont_btns' open-type="getUserInfo" bindgetuserinfo="getUserInfo2" data-navUrl="0">
+    <image class="user_image" mode="scaleToFill" src="../../images/mine/unlogin.png" />
+    <text class="text_username">点击登录WeMart</text>
+  </button>  
 </view>
 
 <!--模板start  -->
 <block wx:for="{{userDetialList}}" wx:key="">
   <view class='section getTemp {{item.mineMarginTop}}'>
-    <navigator url='{{item.navUrl}}' class='mineNavTo' hover-class='mineNavTohover'>
+    <!-- <navigator url='{{item.navUrl}}' class='mineNavTo' hover-class='mineNavTohover'>
       <image class='tempIcon' src='{{item.mineIcon}}'></image>
       <text class='tempName' bindtap='findAddress'>{{item.mineName}}</text> 
       <text class='tempRlCont'>{{item.rlCont}}</text>
       <image src='../../images/rightShot.png' class='rightShotImg'></image>
-    </navigator>
+    </navigator> -->
+
+    <button class='mineNavTo cont_btn' hover-class='mineNavTohover' open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-navUrl="{{item.navUrl}}"> 
+      <image class='tempIcon' src='{{item.mineIcon}}'></image>
+      <text class='tempName' bindtap='findAddress'>{{item.mineName}}</text> 
+      <text class='tempRlCont'>{{item.rlCont}}</text>
+      <image src='../../images/rightShot.png' class='rightShotImg'></image>
+    </button>
   </view>
 </block>
 <!--模板end  -->

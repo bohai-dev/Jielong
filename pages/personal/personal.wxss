@@ -6,6 +6,19 @@ page{
   font:30rpx "微软雅黑";
 }
 /*模板start  */
+.cont_btns::after{
+  border: none;
+  border-radius:0px!important;
+}
+.cont_btns{
+  padding: 0;
+  text-align: left;
+   line-height: 1.4; 
+  height: auto;
+  border: 0;
+  background-color: #eee;
+  font:30rpx "微软雅黑";
+}
 .c-minheight {
         min-height: 80px;
 }
@@ -19,10 +32,7 @@ page{
    display:  inline-block; 
    justify-content:  center;
 }
-
 .text_username{
-  margin-left:  35%; 
-  margin-right:  35%; 
   display:  flex; 
   justify-content:  center; 
   margin-bottom: 5%; 
@@ -38,6 +48,18 @@ page{
 }
 .mineMarginTop{
   margin-top: 0;
+}
+button::after{
+  border: none;
+  border-radius:0px!important;
+}
+.cont_btn{
+  padding: 0;
+  text-align: left;
+  line-height: 1.4; 
+  height: auto;
+  border: 0;
+  font-size: 30rpx;
 }
 .mineNavTo{
   height: 100%;

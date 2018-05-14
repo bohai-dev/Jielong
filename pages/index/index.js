@@ -21,7 +21,7 @@ Page({
     showLoading: false,
     pageSize: 10,                   //每页加载的数据量
     jielongAllCount:0,              //总的页数
-    showAllData:false               //是否加载完所有的数据
+    showAllData:false,               //是否加载完所有的数据
 
   },
 
@@ -205,16 +205,38 @@ Page({
       scrollTop: 1000,
       duration: 300
     })
-  }
-  //跳转到每个mart详细信息
-  // navToDetail:function(e){
-  //   var jsonStr = JSON.stringify(e.currentTarget.dataset.data);
-  //   if (e.currentTarget.dataset.data){
-  //     wx.navigateTo({
-  //       url: '../detail/detail?jsonStr=' + jsonStr,
-  //     })
-  //   }
-  // }
+  },
+  //获取登陆用户信息
+  getUserInfo:function(res){
+    console.log(res)
+    if(res.detail.rawData){
+      wx.showLoading({
+        title: "数据加载中...",
+        mask: true
+      })
+      if(!app.globalData.userInfo){
+        app.globalData.userInfo = JSON.parse(res.detail.rawData); 
+        app.login();
+        setTimeout(function () {
+          wx.navigateTo({
+            url: '../detail/detail?id=' + res.currentTarget.dataset.id + '&fromMine=0',
+            complete:function(){
+              wx.hideLoading();
+            }
+          })
+        }, 2000)
+      }else{
+        wx.navigateTo({
+          url: '../detail/detail?id=' + res.currentTarget.dataset.id + '&fromMine=0',
+          complete:function(){
+            wx.hideLoading();
+          }
+        })
+      }
+    }else{
+
+    }
+    }
 
 })
 

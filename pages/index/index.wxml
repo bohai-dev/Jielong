@@ -9,7 +9,7 @@
 
 <!-- 首页内容 -->
 <view class='container' wx:for="{{containerList}}" wx:for-index="index" wx:key="index"><!-- bindtap='navToDetail' -->
-<navigator url='../detail/detail?id={{item.id}}&fromMine=0'>
+ <button class='cont_btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-id="{{item.id}}"> 
   <view class='listContent'>
   <!--mart名称，主页  -->
     <view class='listHead'>
@@ -37,7 +37,7 @@
       <text class='conAddrText'>{{item.addressName}}</text>
     </view>  
   </view>
-</navigator>
+ </button> 
 </view>
 
 <!--正在加载显示  -->

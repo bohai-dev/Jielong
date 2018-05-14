@@ -509,6 +509,9 @@ Page({
 
     //封装发布数据
     var pushData = {};
+    if (!_thisData.userId.length){
+      _thisData.userId = wx.getStorageSync("userId");
+    }
     pushData.userId = _thisData.userId;
     pushData.topic = _detailValue.topic;
     pushData.description = _detailValue.description;
@@ -840,7 +843,7 @@ Page({
     var value = e.detail.value, len = parseInt(value.length);
     if (len > that.data.noteMaxLen) return;
     that.setData({
-      //description: value,
+      description: value,
       noteNowLen: len
     })
   },
@@ -919,9 +922,7 @@ Page({
             phoneNumber: res.data.data.phoneNumber
           })
         }
-
       }
-
     })
   },
   //发布数据验证

@@ -16,14 +16,12 @@ Page({
 
 
 
-
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-
   },
 
   /**
@@ -37,7 +35,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    
+    this.initData();
   },
 
   /**
@@ -71,6 +69,36 @@ Page({
         console.log(res);
       },
     })
+  },
+  //获取登陆用户信息
+  getUserInfo: function (res) {
+    if (res.detail.rawData) {
+      wx.showLoading({
+        title:"数据加载中...",
+        mask: true
+      })
+      if (!app.globalData.userInfo) {
+        app.globalData.userInfo = JSON.parse(res.detail.rawData);
+        app.login();
+        setTimeout(function () {
+          wx.navigateTo({
+            url: '../release/release',
+            complete: function () {
+              wx.hideLoading();
+            }
+          })
+        }, 2000)
+      }else{
+        wx.navigateTo({
+          url: '../release/release',
+          complete: function () {
+            wx.hideLoading();
+          }
+        })
+      }
+    }else{
+
+    }
   }
 
 })

@@ -37,8 +37,8 @@ Page({
       mineName: "帮助中心",
       navUrl: "./helpCenter/helpCenter"
     }],
-    userInfo:{}
-
+    userInfo:{},
+    initUserInfo:false
 
 
   },
@@ -47,12 +47,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    console.log(app.globalData.userInfo)
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo
-      })
-    }
 
   },
 
@@ -67,6 +61,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    if (app.globalData.userInfo) {
+      this.setData({
+        initUserInfo:true,
+        userInfo: app.globalData.userInfo
+      })
+    }
     //初始化mart数据
     this.initData();
   },
@@ -103,6 +103,7 @@ Page({
       method: "GET",
       data: { userId: wx.getStorageSync("userId") },
       success: function (res) {
+        console.log(res)
         if (res.statusCode == 200 && res.data.data.length) {
           _this.data.userDetialList[0].rlCont = res.data.data.length + "个";
           _this.setData({
@@ -129,7 +130,62 @@ Page({
   },
   userInfoHandler:function(e){
     console.log(e)
-  }
+  },
+  //获取登陆用户信息
+  getUserInfo: function (res) {
+    var _this = this;
+    var navUrl = res.currentTarget.dataset.navurl;
+    if (res.detail.rawData) {
+      if (!app.globalData.userInfo) {
+        wx.showLoading({
+          title: "数据加载中...",
+          mask: true
+        })
+        app.globalData.userInfo = JSON.parse(res.detail.rawData);
+        app.login();
+        _this.initData();
+        setTimeout(function () {
+          wx.navigateTo({
+            url: navUrl,
+            complete: function () {
+              wx.hideLoading();
+            }
+          })
+        },2000)
+      } else {
+        wx.navigateTo({
+          url: res.currentTarget.dataset.navurl
+        })
+      }
+    } else {
+
+    }
+  },
+  getUserInfo2: function (res) {
+    var _this = this;
+    var navUrl = res.currentTarget.dataset.navurl;
+    if (res.detail.rawData) {
+      if (!app.globalData.userInfo) {
+        wx.showLoading({
+          title: "数据加载中...",
+          mask: true
+        })
+        app.globalData.userInfo = JSON.parse(res.detail.rawData);
+        app.login();
+        _this.initData();
+        _this.setData({
+          initUserInfo:true,
+          userInfo: app.globalData.userInfo
+        })
+        setTimeout(function () {
+          _this.initData();
+          wx.hideLoading();
+        }, 2000)
+      }
+    } else {
+
+    }
+    }
 
 
 })

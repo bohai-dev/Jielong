@@ -3,6 +3,10 @@
   background-color: rgb(255, 255, 255);
   margin-bottom: 37.5rpx;
 }
+button::after{
+  border: none;
+  border-radius:0px!important;
+}
 .listitem-navigator{
   display:  flex;
   align-items:  center;
@@ -11,6 +15,13 @@
   padding:  2% 0rpx 2% 40rpx;
   border-top:  1px solid rgb(237, 237, 237);
   border-bottom:  1px solid rgb(237, 237, 237);
+}
+.cont_btn{
+  text-align: left;
+  height: auto;
+  background-color:#fff;
+  border-radius:0px!important;
+  position: static;
 }
 .navigator-hover{
   background: #eee;

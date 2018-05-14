@@ -1,4 +1,15 @@
 /**index.wxss**/
+button::after{
+  border: none;
+  border-radius:0px!important;
+}
+.cont_btn{
+  padding: 0;
+  text-align: left;
+   line-height: 1.4; 
+  height: auto;
+    border: 0;
+}
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -107,3 +118,44 @@
   padding: 0 24rpx;
   color: grey;
 }
+
+/* 弹出层 */
+/* .modal-box{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0px;
+  background:rgba(0,0,0,0.4);
+  overflow: hidden;
+  }
+
+.modal-body{
+  position:relative;
+  }
+
+.modal-content{
+  width: 80%;
+  height:400rpx; 
+  margin:50% 10% 0 10%;
+  overflow: hidden;
+  border-radius: 10rpx;
+}
+.contView{
+  background-color: #fff;
+}
+.permissionTitle{
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding-top: 30rpx;
+}
+.modal-text{
+  display: inline-block;
+  padding: 30rpx;
+  font-size: 30rpx;
+  color: #999;
+  min-height: 220rpx;
+}
+.knowBtn{
+  color: green;
+} */

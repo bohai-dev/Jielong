@@ -105,7 +105,7 @@ Page({
         arr = arr.concat(item[1]);
       })
     }
-    console.log(arr)
+    // console.log(arr)
     return arr;
   },
 

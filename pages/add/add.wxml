@@ -1,9 +1,9 @@
 <view class="release">
-  <navigator url="../release/release" hover-class="none" bindtap='initData'>
+   <button class='cont_btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 
     <view class="from-jl">
       <!-- <text class='title'>发布mart</text> -->
       <text class='btn'>发布mart</text>
       <text class='describe'>发布mart卖货</text>
     </view>
-  </navigator>
+  </button>
 </view>

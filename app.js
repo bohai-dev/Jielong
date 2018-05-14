@@ -51,6 +51,7 @@ App({
               var response = res.data;
               if (response.errorCode == 0) {   //登录成功
                 var userId = response.data.userId;
+                console.log(userId)
                 wx.setStorageSync("session", response.data.sessionId)
                 wx.setStorageSync("userId", userId)
 
@@ -74,6 +75,7 @@ App({
   },
 
   insertUserInfo:function(){
+    var self = this;
     var data={
       userId: wx.getStorageSync("userId"),
       nickName: this.globalData.userInfo.nickName,
@@ -87,8 +89,11 @@ App({
        success:function(res){
          var response = res.data;
          if(response.errorCode==0){
-           console.log('插入信息成功')
+           console.log('插入信息成功');
+          //  this.login();
          }
+       },
+       fail:function(err){
        }
 
      })
@@ -104,12 +109,16 @@ App({
       success: function (res) {
         if (res.confirm) {
           wx.openSetting({
-            
             success: function (res) {
+              console.log(res);
               if (!res.authSetting[perssionName] ) {  //
                  console.log('授权未成功')
                  //递归获取权限,直到授权成功
-                 self.showAutoModal(perssionName)
+                 //self.showAutoModal(perssionName)
+                 if (perssionName == 'scope.userLocation') {
+                   //获取用户信息
+                   self.showAutoModal(perssionName)
+                 }
               }else{
                    if (perssionName == 'scope.userInfo'){
                        //获取用户信息
@@ -140,7 +149,7 @@ App({
             },
             fail() {  //授权失败
               console.log('授权失败')
-              self.showAutoModal('scope.userInfo')
+              // self.showAutoModal('scope.userInfo')
             }
           })
         }else{
@@ -166,9 +175,9 @@ App({
         var self = this
         wx.getUserInfo({
           success:function(res){
-          //  console.log(res)
-            self.globalData.userInfo = res.userInfo   
-            self.checkLogin()
+           console.log(res)
+            self.globalData.userInfo = res.userInfo;   
+            self.checkLogin();
           },
           fail:function(res){
             console.log(res)

@@ -1,4 +1,16 @@
 /* pages/add/add.wxss */
+button::after{
+  border: none;
+  border-radius:0px!important;
+}
+.cont_btn{
+  padding: 0;
+  text-align: left;
+   line-height: 1.4; 
+  height: auto;
+  background-color:#eee;
+  border: 0;
+}
 .release{
   width: 100%;
   height: 100%;
