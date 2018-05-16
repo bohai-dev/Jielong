@@ -6,11 +6,11 @@
     <!--mart主题 -->
     <view class='containerView' id='topic'>
       <input name="topic" placeholder-class='{{isHighlight == 1 ? "phcolorhighlight": "phcolor"}}' placeholder="主题" type="text" value="{{topic}}" class='topicInp'/>
-      <text class='copySolitaire' bindtap='copySolitaire'>复制mart</text>
+      <text class='copySolitaire' bindtap='copySolitaire'>复制Mart</text>
     </view>
     <!--mart介绍 -->
     <view class='containerView' id='description'>
-       <textarea name="description" class='describe' placeholder-class='{{isHighlight == 2 ? "phcolorhighlight": "phcolor"}}' placeholder="请详细描述一下你的好宝贝吧，让大家了解多多，才能团多多哦" bindinput="bindTextAreaChange" maxlength="{{noteMaxLen}}" value="{{description}}"/>
+       <textarea name="description" class='describe' placeholder-class='{{isHighlight == 2 ? "phcolorhighlight": "phcolor"}}' placeholder="请详细描述一下你MART吧，让大家了解多多，才能定多多哦" bindinput="bindTextAreaChange" maxlength="{{noteMaxLen}}" value="{{description}}"/>
       <view class="number-limit">
         <text class="greenfont">{{noteNowLen}}</text>/{{noteMaxLen}}
       </view>
@@ -45,7 +45,7 @@
     </view> -->
     <!--手动输入活动地址-->
     <view class='containerView rowIconView'>
-      <text class='center'>mart城市</text>
+      <text class='center'>Mart城市</text>
       <input name="addressName" class='input' placeholder-class='{{isHighlight == 4 ? "phcolorhighlight": "phcolor"}}' placeholder="城市名将会显示在首页" type="text" value='{{addressName}}' />
     </view>
 
@@ -156,7 +156,7 @@
         </view>
         <!--商品mart剩余-->
         <view class='containerView rowIconView'>
-          <text class='center red'>mart剩余</text>
+          <text class='center red'>Mart总量</text>
           <input name="repertory{{goodsindex}}" class='input' data-goodsindex="{{goodsindex}}" bindinput='inputGoodsRepertory' placeholder-class='{{isHighlight == goodsindex+60 ? "phcolorhighlight": "phcolor"}}' placeholder="请输入最大数量" type="number" value='{{item.repertory}}' />
         </view>
       </view>

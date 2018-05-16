@@ -2,8 +2,8 @@
    <button class='cont_btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 
     <view class="from-jl">
       <!-- <text class='title'>发布mart</text> -->
-      <text class='btn'>发布mart</text>
-      <text class='describe'>发布mart卖货</text>
+      <text class='btn'>发布Mart</text>
+      <text class='describe'>publish your mart</text>
     </view>
   </button>
 </view>

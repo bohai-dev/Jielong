@@ -14,12 +14,12 @@ Page({
   data: {
     userDetialList:[{
       mineIcon:"../../images/mine/training.png",
-      mineName:"我发起的mart",
+      mineName:"我发起的Mart",
       rlCont: "0个",
       navUrl: "./mineJieLong/mineJieLong"
     }, {
       mineIcon: "../../images/mine/supplier-features.png",
-      mineName: "我参与的mart",
+      mineName: "我参与的Mart",
       mineMarginTop:"mineMarginTop",
       rlCont: "0次",
       navUrl: "./joinJieLong/joinJieLong"

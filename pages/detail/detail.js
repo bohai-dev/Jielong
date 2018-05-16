@@ -67,11 +67,11 @@ Page({
       rightBorder: "rightborder"
     }, {
       recordNumber:0,
-      recordText:"参与mart(人)",
+      recordText:"参与Mart(人)",
       rightBorder: "rightborder"
     }, {
       recordNumber: 0.00,
-      recordText: "mart金额(元)"
+      recordText: "Mart金额(元)"
     }],
   partakeRecord: [],                             //参与记录
     footnav: [{
@@ -81,7 +81,7 @@ Page({
       navborder: "footNavrightborder"
     }, {
       navIcon: "../../images/add.png",
-      navText: "发布mart",
+      navText: "发布Mart",
       navUrl: "../add/add"
     }],
     
@@ -143,7 +143,7 @@ Page({
           _this.data.GoodsDetialList[1].phone = res.data.data.phoneNumber;
           //_this.data.GoodsDetialList[2].goodsAddresses = res.data.data.goodsAddresses;
           _this.data.GoodsDetialList[2].show = (res.data.data.setFinishTime==1)?true:false;
-          _this.data.GoodsDetialList[2].mineName = "mart截止时间: " + res.data.data.finishTime;
+          _this.data.GoodsDetialList[2].mineName = "Mart截止时间: " + res.data.data.finishTime;
           _this.data.GoodList = res.data.data.goodsList;
           _this.data.record[0].recordNumber = res.data.data.browseSum;
           _this.data.record[1].recordNumber = res.data.data.joinSum;
@@ -364,7 +364,7 @@ Page({
     if (this.data.GoodList[index].goodsnum >= repertory) {
       wx.showModal({
         title: '',
-        content: '抱歉，该商品mart剩余不足!',
+        content: '抱歉，该商品Mart剩余不足!',
         showCancel: false,
         confirmText: "确定",
         confirmColor: "#2CBB6B",
@@ -491,7 +491,7 @@ Page({
     var _this = this;
     console.log(_this)
     wx.showModal({
-      title: '确定结束mart？',
+      title: '确定结束Mart？',
       confirmColor: "#2CBB6B",
       success:function(res){
         if(res.confirm){
@@ -505,7 +505,7 @@ Page({
               console.log(res)
               if(res.statusCode == 200){
                 wx.showToast({
-                  title: '结束mart成功!',
+                  title: '结束Mart成功!',
                   duration: 4000,
                   success: function (e) {
                     _this.setData({
@@ -515,7 +515,7 @@ Page({
                 })
               }else{
                 wx.showToast({
-                  title: '结束mart失败!',
+                  title: '结束Mart失败!',
                   duration: 4000,
                   icon: "none",
                 })
@@ -590,7 +590,7 @@ Page({
     if (e.detail.value > this.data.GoodList[index].repertory){
       wx.showModal({
         title: '',
-        content: '抱歉，该商品mart剩余不足!',
+        content: '抱歉，该商品Mart剩余不足!',
         showCancel: false,
         confirmText: "确定",
         confirmColor: "#2CBB6B",

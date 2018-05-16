@@ -36,7 +36,7 @@
   </picker>
 </view>
     <view class='modalTextarea'>
-       <textarea placeholder='请填写详细取货地址' focus='true' bindblur='getTextarea' value='{{addrDetail}}'></textarea>
+       <textarea fixed='true' placeholder='请填写详细取货地址' focus='true' bindblur='getTextarea' value='{{addrDetail}}'></textarea>
     </view>
     <!-- <view class='modalContent' bindtap='findAddress'>
       <image class='addrIcon' src='../../../images/position.png'></image>

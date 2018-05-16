@@ -3,10 +3,10 @@
     <view class='headCont'>{{item.topic}}</view>
     <view class='midCont'>
       <view class='left' >
-       mart状态： <text class='{{item.status ==1 ? "green" : "red"}}'>{{item.status == 1 ? "进行中" : item.status == 2 ? "mart结束" : item.status == 3 ? "活动提前终止" : "其它情况"}}</text>
+       Mart状态： <text class='{{item.status ==1 ? "green" : "red"}}'>{{item.status == 1 ? "进行中" : item.status == 2 ? "Mart结束" : item.status == 3 ? "活动提前终止" : "其它情况"}}</text>
       </view>
       <view class='right'>
-        mart类型：<text>自发mart</text>
+        Mart类型：<text>自发Mart</text>
       </view>
     </view>
     <view class='midCont'>

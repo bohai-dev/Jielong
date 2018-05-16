@@ -39,7 +39,7 @@ button::after{
   color: white;
   font-size: 28rpx;
   display: block;
-  margin:35rpx 0 0;
+  margin:25rpx 0 0;
 }
 .btn{
   color: #33CCFF;
