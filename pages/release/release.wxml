@@ -62,7 +62,7 @@
     <view>
       <view class="containerView rowIconView">
         <text class='center'>设置截止时间</text>
-        <switch type="switch" checked color='#2CBB6B' bindchange="timeChange" />
+        <switch type="switch" checked="{{setFinishTime}}" color='#2CBB6B' bindchange="timeChange" />
       </view>
     </view>
     <!--截止时间-->

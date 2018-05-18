@@ -1051,7 +1051,7 @@ Page({
         introImages: copyData.introImages.split(","),              //服务器图片介绍数组 用逗号隔开"001.png,002.png"
         // goodsAddresses: copyData.goodsAddresses,            //用户自提地址id数组，用逗号隔开"1,2"
         phoneNumber: copyData.phoneNumber,                    //用户手机号
-        setFinishTime: 1,               //是否设置截止时间
+        setFinishTime: 0,               //是否设置截止时间
         // multiArray: [],                 //截至时间日期
         // finishTime: [],                 //截至时间
         // seleAddrNum: copyData.goodsAddresses.split(",").length,                  //已设置地址数量  
