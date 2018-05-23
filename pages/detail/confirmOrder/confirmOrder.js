@@ -271,7 +271,7 @@ Page({
               wx.hideLoading();   //关闭模态框
               wx.showModal({
                 title: '提示',
-                content: '该mart已结束！',
+                content: '该Mart已结束！',
                 confirmColor: "#2CBB6B",
                 showCancel: false,
                 success: function (res) {
@@ -285,7 +285,7 @@ Page({
             wx.hideLoading();   //关闭模态框
             wx.showModal({
               title: '提示',
-              content: '商品mart剩余发生变化，请刷新后重新选择商品！',
+              content: '商品Mart剩余发生变化，请刷新后重新选择商品！',
               confirmColor: "#2CBB6B",
               showCancel: false,
               success: function (res) {

@@ -175,6 +175,21 @@ Page({
             joingoodsnum: joingoodsnum
           },function(){
              _this.getheight();
+             if (res.data.data.status != 1 && fromMine == 0){
+               wx.showModal({
+                 title: '提示',
+                 content: '该Mart已结束！',
+                 confirmColor: "#2CBB6B",
+                 showCancel: false,
+                 success: function (res) {
+                   if (res.confirm) {
+                     wx.switchTab({
+                       url: '../index/index'
+                     })
+                   }
+                 }
+               })
+             }
           })
         }      
         //获取参与记录
