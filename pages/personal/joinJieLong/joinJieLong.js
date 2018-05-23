@@ -8,8 +8,8 @@ Page({
    */
   data: {
     isShow:false,
-    data:[]
-  
+    data:[],
+    remind: "加载中，请稍后..."
   },
 
   /**
@@ -80,14 +80,26 @@ Page({
       data:{
         customerId:wx.getStorageSync("userId")
       },
-      success:function(res){
+      success: function (res) {
         console.log(res)
-        if(res.statusCode == 200){
+        _this.remind = res.data.data.length ? "加载中，请稍后..." : "您还没有参与过Mart"
+        // console.log(_this.remind)
+        if (res.statusCode == 200 && res.data.data.length) {
           _this.setData({
-            data:res.data.data,
-            isShow:true
+            data: res.data.data,
+            isShow: true,
+          })
+        } else {
+          _this.setData({
+            isShow: false,
+            remind: _this.remind
           })
         }
+      },
+      fail: function (err) {
+        _this.setData({
+          isShow: false
+        })
       },
        complete: function () {
         wx.hideLoading();

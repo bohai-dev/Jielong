@@ -9,7 +9,7 @@ Page({
   data: {
     data:{},
     isShow:false,
-
+    remind:"加载中，请稍后..."
   },
 
   /**
@@ -80,14 +80,17 @@ Page({
       data: { userId: wx.getStorageSync("userId") },
       success: function (res) {
         console.log(res)
+        _this.remind = res.data.data.length ? "加载中，请稍后..." : "您还没有发起过Mart"
+        //console.log(_this.remind)
         if (res.statusCode == 200 && res.data.data.length) {
           _this.setData({
             data: res.data.data,
-            isShow: true
+            isShow: true,
           })
         } else {
           _this.setData({
-            isShow: false
+            isShow: false,
+            remind: _this.remind
           })
         }
       },
