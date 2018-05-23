@@ -10,7 +10,7 @@
     </view>
     <!--mart介绍 -->
     <view class='containerView' id='description'>
-       <textarea name="description" class='describe' placeholder-class='{{isHighlight == 2 ? "phcolorhighlight": "phcolor"}}' placeholder="请详细描述一下你MART吧，让大家了解多多，才能定多多哦" bindinput="bindTextAreaChange" maxlength="{{noteMaxLen}}" value="{{description}}"/>
+       <textarea name="description" class='describe' placeholder-class='{{isHighlight == 2 ? "phcolorhighlight": "phcolor"}}' placeholder="请详细描述一下你MART吧，让大家了解多多，才能订多多哦" bindinput="bindTextAreaChange" maxlength="{{noteMaxLen}}" value="{{description}}"/>
       <view class="number-limit">
         <text class="greenfont">{{noteNowLen}}</text>/{{noteMaxLen}}
       </view>

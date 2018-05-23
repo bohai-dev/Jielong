@@ -78,23 +78,22 @@ Page({
   //确认自提点
   sureAddr:function(){
     var _this = this;
-    if (_this.data.selectId){
+    var page = getCurrentPages();
+    var prePage = page[page.length - 2];
+    if (prePage.data.selectAddresses != "查看并选择取货点及时间" || _this.data.selectId){
       this.data.addressList.forEach(function(e){
         if (e.id == _this.data.selectId){
-          var page = getCurrentPages();
-          var prePage = page[page.length - 2];
           prePage.data.selectAddresses = "取货点：" + e.detail;
           prePage.setData({
             selectAddrId: _this.data.selectId,
             selectAddresses: prePage.data.selectAddresses,
             selectAddrDetail:e.detail
           })
+        }
+      })
           wx.navigateBack({
             delta: 1
           })
-        }
-      })
-
     }
   },
 
