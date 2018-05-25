@@ -143,16 +143,22 @@ Page({
               }
             })
           }else{
-            clear(order)
             //删除字段
-            function clear(order) {
-              delete order.createdAt;
-              delete order.updatedAt;
-              if (order.orderGoods){
-                clear(order.orderGoods[0])
-                clear(order.orderGoods[0].goods)
-              }
-            }
+            delete order.createdAt;
+            delete order.updatedAt;
+            delete order.orderGoods[0].createdAt;
+            delete order.orderGoods[0].updatedAt;
+            delete order.orderGoods[0].goods.createdAt;
+            delete order.orderGoods[0].goods.updatedAt;
+            // clear(order)
+            // function clear(order) {
+            //   delete order.createdAt;
+            //   delete order.updatedAt;
+            //   if (order.orderGoods){
+            //     clear(order.orderGoods[0])
+            //     clear(order.orderGoods[0].goods)
+            //   }
+            // }
             //取消订单接口
             wx.request({
               url: app.globalData.domain + '/order/cancelJoinGroup',
