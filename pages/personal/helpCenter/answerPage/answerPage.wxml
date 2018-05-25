@@ -1,8 +1,88 @@
 <!--pages/personal/helpCenter/answerPage/answerPage.wxml-->
-<view class='content'>
-    <!-- <text class='line'></text> -->
-      <text class='ques-style'>{{answerList.title}}</text>
-    <block wx:key="">
-      <text class='answer-style'>{{answerList.message}}</text>
-    </block>
+<view class='content' wx:if="{{!isStatic}}">
+  <!-- <text class='line'></text> -->
+  <text class='ques-style'>{{answerList.title}}</text>
+  <block wx:key="">
+    <text class='answer-style'>{{answerList.message}}</text>
+  </block>
+</view>
+
+<view class='content' wx:if="{{isStatic}}">
+  <!-- <text class='line'></text> -->
+  <block wx:if="{{static1}}">
+    <text class='ques-style'>如何发布Mart？</text>
+    <view class='answer-style'>
+      <text>1.第一次发布Mart或发布一个内容不同的Mart
+第一步：点击最下方导航按钮 “发布”
+第二步：在发布页面，填写相关的内容
+1.Mart的主题
+2.介绍Mart的整体情况
+3.上传整体说明图，最多9张（这些图片会在首页的列表中展示）。
+4.描述您的Mart覆盖的地区：例如温哥华，高贵林，东京，台湾，上海等。
+5.设置取货点及时间\n</text>
+      <image src='../../../../images/mine/plaint.png' class='palintImg'></image>
+      <text> 注意：请您一定要详细描述取货地址和取货时间。
+6.设置Mart的截止时间，截止时间一到，Mart会自动从首页下线。
+7.添加多个商品，若您只有一个商品，则无需打开。
+8.设置最小成团数量，若您1件商品起卖，则不需要设置。\n</text>
+      <text class='fontSize-b'>您第一次发布Mart时，系统会要求您填写：电话、姓名等信息，一定要如实填写，便于买家找到您。</text>
+      <text>
+第三步：添加商品
+1.商品名称
+2.上传商品图片，最多9张。
+3.填写规格：单位名称，或对商品的形容描述。
+4.价格：单位不需要填写，系统只支持 $。
+5.Mart总量，填写可以购买的最大数量。
+6.若您有多个商品，重复以上步骤即可。
+第四步，完成以上三步，点击下方红色发布按钮，即可完成发布。
+2.已发布过Mart且想要发布一个相同或类似的Mart
+第一步：请您在：“我的”-“我发起的Mart”中找到您想要模仿的Mart\n</text>
+      <image src='../../../../images/mine/plaint.png' class='palintImg'></image>
+      <text>注意：Mart结束后，才能复制本条Mart哦！
+第二步：点击右下角的复制本条Mart，开启新的Mart
+第三步：按照正常的发布流程，进行填写。\n</text>
+      <image src='../../../../images/mine/plaint.png' class='palintImg'></image>
+      <text>注意：
+1.Mart城市需要重新填写
+2.取货点及时间需要更新，特别是取货地点不变时，请别忘了更新时间
+3.更新截止时间
+4.检查商品内容是否需要更新
+第四步：完成以上三步，点击下方的红色发布按钮，即可完成发布。</text>
+    </view>
+  </block>
+
+  <block wx:if="{{static2}}">
+    <text class='ques-style'>如何参与Mart？</text>
+    <view class='answer-style'>
+      <text>第一步：在首页可以浏览所有正在进行的Mart，下拉页面，即可找到您想要参加的Mart。
+第二步：点击Mart，既可以进入详情页，请仔细阅读Mart的介绍和说明，如有需要明确的信息，可以直接打电话给发布人进行核实。确认好信息后，按照要求：填写您的购买数量，选择取货地点和取货时间。即可完成购买。\n</text>
+      <text class='fontSize-b'>如果您第一次购买，系统会要求您填写个人信息，请一定要如实填写，便于发布人与您沟通联系。\n</text> <image src='../../../../images/mine/plaint.png' class='palintImg'></image>
+      <text>请您注意：发布人与参与人之间的Mart交易是自由自愿发生的。95创享科技公司不为任何一方进行担保，为保证您的切身利益，请一定要谨慎发起，谨慎参与，谢谢！</text>
+    </view>
+  </block>
+
+
+  <block wx:if="{{static3}}">
+    <text class='ques-style'>联系客服</text>
+    <view class='answer-style'>
+      <text>您好，在您使用小程序的过程中，如有任何问题，都可以与我们联系。</text>
+      <text>
+电话：604-370-5100
+邮件：customerservice@95cfun.com
+客服微信：\n</text>
+      <image bindtap='showImg' src='../../../../images/mine/contact_service.png' class='contact_service'></image>
+    </view>
+  </block>
+
+
+  <block wx:if="{{static4}}">
+    <text class='ques-style'>我需要开发小程序</text>
+    <view class='answer-style'>
+      <text>95创享科技承接各类软件开发：APP、小程序、网站、微信商城、公众号代运营等工作。
+详情请垂询：604-370-5100
+邮件：customerservice@95cfun.com
+客服微信：\n</text>
+      <image bindtap='showImg' src='../../../../images/mine/contact_service.png' class='contact_service'></image>
+    </view>
+  </block>
 </view>

@@ -6,6 +6,12 @@ Page({
    */
   data: {
     // answerList: []
+    isStatic:false,
+    decode:true,
+    static1: false,
+    static2: false,
+    static3: false,
+    static4: false
   },
 
   /**
@@ -13,9 +19,42 @@ Page({
    */
   onLoad: function (options) {
       console.log(options)
+      if(options.index == "static-1"){
+        wx.setNavigationBarTitle({
+          title: "如何发布Mart？"
+        })
+        this.setData({
+          isStatic:true,
+          static1:1
+        })
+      } else if (options.index == "static-2") {
+        wx.setNavigationBarTitle({
+          title: "如何参与Mart？"
+        })
+        this.setData({
+          isStatic: true,
+          static2: 1
+        })
+      } else if (options.index == "static-3") {
+        wx.setNavigationBarTitle({
+          title: "联系客服"
+        })
+        this.setData({
+          isStatic: true,
+          static3: 1
+        })
+      } else if (options.index == "static-4") {
+        wx.setNavigationBarTitle({
+          title: "我需要开发小程序"
+        })
+        this.setData({
+          isStatic: true,
+          static4: 1
+        })
+      }else{
      var _this = this;
      var app = getApp();
-      var index = options.index;
+     var index = options.index;
      console.log(index)
       wx.request({
         url: app.globalData.domain + '/helpMessage/selectAll',
@@ -33,7 +72,8 @@ Page({
           })
 
         }
-      })    
+      })
+      }    
   },
 
   /**
@@ -83,5 +123,13 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  //预览
+  showImg:function(){
+    wx.previewImage({
+      current:"https://qswebsite.oss-cn-beijing.aliyuncs.com/concat_service/contact_service.png",
+      urls: ["https://qswebsite.oss-cn-beijing.aliyuncs.com/concat_service/contact_service.png"]
+    })
   }
 })

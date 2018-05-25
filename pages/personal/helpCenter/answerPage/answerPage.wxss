@@ -29,3 +29,15 @@ page{
   font-size:30rpx;
   color:#999;
 }
+.palintImg{
+  width: 30rpx;
+  height: 28rpx
+}
+.contact_service{
+  width: 300rpx;
+  height: 300rpx;
+}
+.fontSize-b{
+  color: #333;
+  font-weight: 600;
+}

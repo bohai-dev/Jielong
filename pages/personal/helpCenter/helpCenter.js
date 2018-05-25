@@ -21,7 +21,20 @@ Page({
       // {
       //   title: '如何发布到朋友圈？'
       // }
-    ]
+    ],
+    StaticQuestionList:[{
+      staticIndex:"static-1",
+      staticTitle:"如何发布Mart？"
+    }, {
+      staticIndex: "static-2",
+      staticTitle: "如何参与Mart？"
+      }, {
+        staticIndex: "static-3",
+        staticTitle: "联系客服"
+    }, {
+      staticIndex: "static-4",
+      staticTitle: "我需要开发小程序"
+    }]
   },
 
   /**

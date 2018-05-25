@@ -1,4 +1,12 @@
 <!--pages/personal/helpCenter/helpCenter.wxml-->
+<block wx:for="{{StaticQuestionList}}" wx:key="" >
+  <view class='content'>
+    <navigator url='./answerPage/answerPage?index={{item.staticIndex}}' class='mineNavTo' hover-class='mineNavTohover'>
+      <text class="font-style" bindtap='answerQues'>{{item.staticTitle}}</text>
+      <image src='../../../images/rightShot.png' class='rightShotImg'></image>
+    </navigator>
+  </view>
+  </block>
 <block wx:for="{{questionList}}" wx:key="">
   <view class='content'>
     <navigator url='./answerPage/answerPage?index={{index}}' class='mineNavTo' hover-class='mineNavTohover'>
