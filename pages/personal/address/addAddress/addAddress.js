@@ -247,6 +247,12 @@ Page({
                 })
               }
             })
+          }else{
+            wx.showToast({
+              title: res.data.errorMessage,
+              icon:"none",
+              duration:2500
+            })
           }
         }
       })
