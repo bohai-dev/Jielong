@@ -94,3 +94,41 @@ button::after{
   height: 24rpx;
 }
 /*模板end  */
+/*联系电话  */
+.bo_zan{
+  width: 180rpx;
+  height: 80rpx;
+  position: fixed;
+  bottom: 40rpx;
+  right: 0;
+  display: flex;
+}
+.bo_zan>view{
+  width: 80rpx;
+  height: 80rpx;
+  border-top-left-radius:50%;
+  border-bottom-left-radius: 50%;  
+  padding: 20rpx;
+  padding-right: 0;
+}
+.bo_zan>view>image{
+  width: 40rpx;
+  height: 40rpx;
+   border-radius: 50%; 
+  z-index: 999;
+  
+}
+.bo_zan>text{
+  display: block;
+  width: 120rpx;
+  font-size: 26rpx;
+  color: #fff;
+  line-height: 80rpx;
+}
+.disabledImg{
+    background-color: #bfbfbf;
+}
+.showImg{
+  background-color: #0a9c23;
+}
+/*联系电话  */

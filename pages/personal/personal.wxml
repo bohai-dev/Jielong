@@ -6,7 +6,7 @@
   <button wx:if="{{!initUserInfo}}" class='cont_btns' open-type="getUserInfo" bindgetuserinfo="getUserInfo2" data-navUrl="0">
     <image class="user_image" mode="scaleToFill" src="../../images/mine/unlogin.png" />
     <text class="text_username">点击登录WeMart</text>
-  </button>  
+  </button>
 </view>
 
 <!--模板start  -->
@@ -19,17 +19,38 @@
       <image src='../../images/rightShot.png' class='rightShotImg'></image>
     </navigator> -->
 
-    <button class='mineNavTo cont_btn' hover-class='mineNavTohover' open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-navUrl="{{item.navUrl}}"> 
+    <button class='mineNavTo cont_btn' hover-class='mineNavTohover' open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-navUrl="{{item.navUrl}}">
       <image class='tempIcon' src='{{item.mineIcon}}'></image>
-      <text class='tempName' bindtap='findAddress'>{{item.mineName}}</text> 
+      <text class='tempName' bindtap='findAddress'>{{item.mineName}}</text>
       <text class='tempRlCont'>{{item.rlCont}}</text>
       <image src='../../images/rightShot.png' class='rightShotImg'></image>
     </button>
+
+  </view>
+  <view>
   </view>
 </block>
+<view class='section getTemp  mineMarginTop'>
+  <button class='mineNavTo cont_btn' hover-class='mineNavTohover' open-type="contact">
+    <image class='tempIcon' src='../../images/mine/concat.png'></image>
+    <text class='tempName' bindtap='findAddress'>联系客服</text>
+    <text class='tempRlCont'></text>
+    <image src='../../images/rightShot.png' class='rightShotImg'></image>
+  </button>
+</view>
 <!--模板end  -->
 <!-- <view style='height:100rpx' class='section getTemp mineNavTo'>
   <image class='tempIcon' src='../../images/mine/personal-center.png'></image>
   <button open-type="getUserInfo" bindgetuserinfo="userInfoHandler">点击登陆</button>
   <image src='../../images/rightShot.png' class='rightShotImg'></image>
 </view> -->
+
+<view class='bo_zan' bindtap='phone_bozan'>
+  <view class='{{bo_zan ? "disabledImg" : "showImg"}}'>
+    <image wx:if="{{!bo_zan}}" src='../../images/mine/phone_bo.png'></image>
+    <image wx:if="{{bo_zan}}" src='../../images/mine/phone_zan.png'></image>
+  </view>
+  <text class='{{bo_zan ? "disabledImg" : "showImg"}}'>客服热线</text>
+
+  <!-- <view > 播放</view> -->
+</view>

@@ -12,33 +12,37 @@ Page({
    */
 
   data: {
-    userDetialList:[{
-      mineIcon:"../../images/mine/training.png",
-      mineName:"我发起的Mart",
+    userDetialList: [{
+      mineIcon: "../../images/mine/training.png",
+      mineName: "我发起的Mart",
       rlCont: "0个",
       navUrl: "./mineJieLong/mineJieLong"
     }, {
       mineIcon: "../../images/mine/supplier-features.png",
       mineName: "我参与的Mart",
-      mineMarginTop:"mineMarginTop",
+      mineMarginTop: "mineMarginTop",
       rlCont: "0次",
       navUrl: "./joinJieLong/joinJieLong"
-    },{
+    }, {
       mineIcon: "../../images/mine/personal-center.png",
       mineName: "个人资料",
       navUrl: "./userInfo/userInfo"
     }, {
       mineIcon: "../../images/mine/map.png",
       mineName: "取货点及时间管理",
-      navUrl:  "./address/address",
+      navUrl: "./address/address",
       mineMarginTop: "mineMarginTop"
     }, {
       mineIcon: "../../images/mine/comments.png",
       mineName: "帮助中心",
       navUrl: "./helpCenter/helpCenter"
     }],
-    userInfo:{},
-    initUserInfo:false
+    userInfo: {},
+    initUserInfo: false,
+    phoneNumber: "6043755100",//电话客服联系电话
+    bo_zan: 0,//电话客服在线时间判断
+    startPhoneTime: "9:30",//电话客服在线时间
+    endPhoneTime: "18:00",//电话客服在线时间
 
 
   },
@@ -63,12 +67,13 @@ Page({
   onShow() {
     if (app.globalData.userInfo) {
       this.setData({
-        initUserInfo:true,
+        initUserInfo: true,
         userInfo: app.globalData.userInfo
       })
     }
     //初始化mart数据
     this.initData();
+    this.formatTime();
   },
 
   /**
@@ -128,7 +133,7 @@ Page({
       }
     })
   },
-  userInfoHandler:function(e){
+  userInfoHandler: function (e) {
     console.log(e)
   },
   //获取登陆用户信息
@@ -151,7 +156,7 @@ Page({
               wx.hideLoading();
             }
           })
-        },2000)
+        }, 2000)
       } else {
         wx.navigateTo({
           url: res.currentTarget.dataset.navurl
@@ -174,7 +179,7 @@ Page({
         app.login();
         _this.initData();
         _this.setData({
-          initUserInfo:true,
+          initUserInfo: true,
           userInfo: app.globalData.userInfo
         })
         setTimeout(function () {
@@ -185,7 +190,40 @@ Page({
     } else {
 
     }
+  },
+  phone_bozan: function (e) {
+    // console.log(this.data.bo_zan);
+    var _this = this;
+    if (!_this.data.bo_zan) {
+      wx.makePhoneCall({
+        phoneNumber: _this.data.phoneNumber
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '客服热线工作时间是9:30-18:00,非工作时间请使用联系客服功能！',
+      })
     }
+
+  },
+  formatTime: function () {
+    var st_arr = this.data.startPhoneTime.split(":");
+    var end_arr = this.data.endPhoneTime.split(":");
+    var s_date = new Date();
+    var e_date = new Date();
+    var n_date = new Date();
+
+    s_date.setHours(st_arr[0]);
+    s_date.setMinutes(st_arr[1]);
+    e_date.setHours(end_arr[0]);
+    e_date.setMinutes(end_arr[1]);
+
+    if (n_date.getTime() > s_date.getTime() && n_date.getTime() < e_date.getTime()) {
+      this.setData({ bo_zan: 0 })
+    } else {
+      this.setData({ bo_zan: 1 })
+    }
+  }
 
 
 })
