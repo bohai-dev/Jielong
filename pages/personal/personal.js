@@ -39,7 +39,7 @@ Page({
     }],
     userInfo: {},
     initUserInfo: false,
-    phoneNumber: "6043755100",//电话客服联系电话
+    phoneNumber: "6043705100",//电话客服联系电话
     bo_zan: 0,//电话客服在线时间判断
     startPhoneTime: "9:30",//电话客服在线时间
     endPhoneTime: "18:00",//电话客服在线时间
