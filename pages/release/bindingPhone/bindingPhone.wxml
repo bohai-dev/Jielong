@@ -8,12 +8,12 @@
     <!--姓名-->
     <view class='columnView block'>
       <label>姓名</label>
-      <input name="name" type='text'value='{{name}}'></input>
+      <input name="name" placeholder='请输入你的姓名' type='text'value='{{name}}'></input>
     </view>
     <!--手机-->
     <view class='columnView block'>
       <label>手机</label>
-      <input name="phone" type='number' bindblur="telCheck" value='{{phone}}' maxlength="11"></input>
+      <input name="phone" type='number' placeholder='请输入你的手机号(提示:手机号码10位)' bindblur="telCheck" value='{{phone}}' maxlength="11"></input>
     </view>
     <button type='primary' hover-class="opacity" formType="submit">绑定手机</button>
   </view>

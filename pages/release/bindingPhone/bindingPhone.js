@@ -144,7 +144,7 @@ Page({
       wx.hideLoading();   //关闭模态框
       wx.showModal({
         title: '提示',
-        content: '请输入正确手机号码',
+        content: '请输入正确手机号码(提示:手机号码10位)',
         confirmColor: "#2CBB6B",
         showCancel: false,
         success: function (res) {
