@@ -191,7 +191,8 @@ App({
   //全局数据
   globalData: {
     userInfo: null,
-    domain: "https://www.95cfun.com",
+    // domain: "https://www.95cfun.com",
+    domain: "https://www.95cfuns.com",
     domainUpload: "https://upload.95cfun.com/",
     xOssProcess:"?x-oss-process=image/quality,q_60",    
   //  domain: "http://47.100.12.188:8081",

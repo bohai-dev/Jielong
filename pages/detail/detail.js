@@ -92,9 +92,9 @@ Page({
    */
   onLoad(e) {
     var _this = this;
-    //console.log(e)
+    // console.log(e)
     var id = e.id;
-    var fromMine = Number(e.fromMine);
+    var fromMine = Number(e.fromMine) | 0;
     _this.data.jieLongId = id;
     var app = getApp();
     var userid = wx.getStorageSync("userId");
@@ -468,6 +468,7 @@ Page({
   //二维码
   qrTap:function(e){
     var _this = this;
+    // console.log(app.globalData.domain + '/getQRcode/' + _this.data.jieLongId)
     _this.setData({
       QR_CodeSrc: app.globalData.domain + '/getQRcode/' + _this.data.jieLongId,
       hiddenModal:true
