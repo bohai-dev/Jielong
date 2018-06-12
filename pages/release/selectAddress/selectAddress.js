@@ -42,8 +42,8 @@ Page({
     arr[0] = this.getAllYMD();
     arr[1] = obj1.dateTimeArray[3];
     arr[2] = obj1.dateTimeArray[4];
-    date[1] = obj1.dateTime[4];
-    date[2] = obj1.dateTime[5];
+    date[1] = obj1.dateTime[3];
+    date[2] = obj1.dateTime[4];
     this.setData({
       dateTimeArray1: arr,
       dateTime1: date,
@@ -263,6 +263,9 @@ Page({
         })
         return;
       }
+        wx.showLoading({
+          title: '数据保存中...',
+        })
       if (_this.data.judeAddEdit == "add") {
         if (_this.data.addrDetail) {
           data.detail = data.detail +"***"+data.claimTime;
@@ -287,9 +290,13 @@ Page({
                   }
                 })
               }
+            },
+            complete:function(res){
+              wx.hideLoading();
             }
           })
         } else {
+          wx.hideLoading();
           wx.showModal({
             title: '请输入取货详细地址',
             showCancel: false
@@ -317,6 +324,9 @@ Page({
                 }
               })
             }
+          },
+          complete: function (res) {
+            wx.hideLoading();
           }
         })
       }

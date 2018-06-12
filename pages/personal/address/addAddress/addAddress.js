@@ -40,8 +40,8 @@ Page({
     arr[0] = this.getAllYMD();
     arr[1] = obj1.dateTimeArray[3];
     arr[2] = obj1.dateTimeArray[4];
-    date[1] = obj1.dateTime[4];
-    date[2] = obj1.dateTime[5];
+    date[1] = obj1.dateTime[3];
+    date[2] = obj1.dateTime[4];
     this.setData({
       dateTimeArray1: arr,
       dateTime1: date,
@@ -145,6 +145,9 @@ Page({
       claimTime: e.detail.value.claimTimeOne + "至" + e.detail.value.claimTimeTwo
     };
     console.log(data)
+    wx.showLoading({
+      title: '数据保存中...',
+    })
     //修改信息
     if (e.detail.value.detail && this.data.id && data.claimTime){
       data.detail = data.detail + "***" + data.claimTime;
@@ -167,6 +170,9 @@ Page({
               }
             })
           } 
+        },
+        complete:function(res){
+          wx.hideLoading();
         }
       })
     }
@@ -192,9 +198,13 @@ Page({
             }
           })
         }
+      },
+      complete: function (res) {
+        wx.hideLoading();
       }
     })
     }else{
+      wx.hideLoading();
       if(!data.detail){
         wx.showModal({
           title: '请填写详细的取货地址',
