@@ -22,7 +22,8 @@ Page({
     dateTimeArray1: null,
     dateTime1: null,
     startYear: 2018,
-    endYear: 3500
+    endYear: 3500,
+    clickSureTime:"0"
   },
 
   /**
@@ -184,7 +185,8 @@ Page({
       hiddenModal: true,
       claimTime:"",
       claimTimeTwo:"",
-      claimTimeOne:""
+      claimTimeOne:"",
+      clickSureTime: "0"
     })
   },
   //修改自提点
@@ -210,7 +212,8 @@ Page({
           claimTime:addrPJson.claimTime,
           claimTimeOne: _this.data.claimTimeOne,
           claimTimeTwo: _this.data.claimTimeTwo,
-          hiddenModal: true
+          hiddenModal: true,
+          clickSureTime: "0"
         })
       }
     });
@@ -220,24 +223,38 @@ Page({
   listenerConfirm: function (e) {
     var _this = this;
     var self = e;
+    _this.data.clickSureTime++
+    console.log(_this.data.clickSureTime)
+    if (_this.data.clickSureTime != 1){
+      return false;
+    }
     console.log(this)
     if (!this.data.claimTimeOne) {
       wx.showModal({
         content: '请填写取货起始时间',
-        showCancel: false
+        showCancel: false,
+      })
+      _this.setData({
+        clickSureTime: "0"
       })
       return;
-    } else if (!this.data.claimTimeOne) {
+    } else if (!this.data.claimTimeTwo) {
       wx.showModal({
         content: '请填写取货截止时间',
-        showCancel: false
+        showCancel: false,
       })
+        _this.setData({
+          clickSureTime: "0"
+        })
       return;
     } else if (Date.parse(this.data.claimTimeOne) > Date.parse(this.data.claimTimeTwo)) {
       wx.showModal({
         content: '取货截止时间不能小于取货起始时间',
-        showCancel: false
+        showCancel: false,
       })
+        _this.setData({
+          clickSureTime: "0"
+        })
       return;
     }
     setTimeout(function () {
@@ -253,19 +270,23 @@ Page({
       if(!data.detail){
         wx.showModal({
           title: '请输入取货详细地址',
-          showCancel: false
+          showCancel: false,
         })
-        return;
-      }else if(!data.claimTime){
-        wx.showModal({
-          title: '请输入取货时间',
-          showCancel: false
-        })
+          _this.setData({
+            clickSureTime: "0"
+          })
         return;
       }
         wx.showLoading({
           title: '数据保存中...',
+          mask: 'true'
         })
+        setTimeout(function(){
+          wx.hideLoading();
+          _this.setData({
+            clickSureTime: "0"
+          })
+        },30000)
       if (_this.data.judeAddEdit == "add") {
         if (_this.data.addrDetail) {
           data.detail = data.detail +"***"+data.claimTime;
@@ -278,21 +299,25 @@ Page({
             data: data,
             success: function (res) {
               _this.data.addrDetail = "";
-              var data = res.data
+              var data = res.data;
               if (data.errorCode == 0) {
                 wx.showToast({
                   title: '保存成功',
+                  mask: "true",
                   success: function () {
-                    _this.setData({
-                      hiddenModal: false
-                    })
-                    _this.toShow();
+                _this.setData({
+                  hiddenModal: false,
+                })
+                _this.toShow();
                   }
                 })
               }
             },
             complete:function(res){
               wx.hideLoading();
+              _this.setData({
+                clickSureTime: "0"
+              })
             }
           })
         } else {
@@ -300,6 +325,9 @@ Page({
           wx.showModal({
             title: '请输入取货详细地址',
             showCancel: false
+          })
+          _this.setData({
+            clickSureTime: "0"
           })
         }
       } else {
@@ -312,21 +340,25 @@ Page({
           },
           data: data,
           success: function (res) {
-            var data = res.data
+            var data = res.data;
             if (data.errorCode == 0) {
+              _this.setData({
+                hiddenModal: false,
+              })
+              _this.toShow();
               wx.showToast({
                 title: '修改成功',
+                mask: "true",
                 success: function () {
-                  _this.setData({
-                    hiddenModal: false
-                  })
-                  _this.toShow();
                 }
               })
             }
           },
           complete: function (res) {
             wx.hideLoading();
+            _this.setData({
+              clickSureTime: "0"
+            })
           }
         })
       }

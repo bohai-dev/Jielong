@@ -14,7 +14,8 @@ Page({
     latitude:"",
     id:"",
     startYear:2018,
-    endYear:3500
+    endYear:3500,
+    clickSureTime: "0"
   },
 
   /**
@@ -115,23 +116,35 @@ Page({
   },
   // 保存信息
   formSubmit: function (e) {
+    var _this = this;
+    _this.data.clickSureTime++
+    console.log(_this.data.clickSureTime)
+    if (_this.data.clickSureTime != 1) {
+      return false;
+    }
     console.log(e)    
     if (!e.detail.value.claimTimeOne){
       wx.showModal({
         content: '请填写取货起始时间',
-        showCancel: false
+      })
+      _this.setData({
+        clickSureTime: "0"
       })
       return;
     }else if(!e.detail.value.claimTimeTwo){
       wx.showModal({
         content: '请填写取货截止时间',
-        showCancel: false
+      })
+      _this.setData({
+        clickSureTime: "0"
       })
       return;      
     } else if (Date.parse(this.data.claimTimeOne) > Date.parse(this.data.claimTimeTwo)){
       wx.showModal({
         content: '取货截止时间不能小于取货起始时间',
-        showCancel: false
+      })
+      _this.setData({
+        clickSureTime: "0"
       })
       return; 
     }
@@ -147,7 +160,14 @@ Page({
     console.log(data)
     wx.showLoading({
       title: '数据保存中...',
+      mask:'true'
     })
+    setTimeout(function () {
+      wx.hideLoading();
+      _this.setData({
+        clickSureTime: "0"
+      })
+    }, 30000)
     //修改信息
     if (e.detail.value.detail && this.data.id && data.claimTime){
       data.detail = data.detail + "***" + data.claimTime;
@@ -163,6 +183,7 @@ Page({
           if (data.errorCode == 0) {
             wx.showToast({
               title: '保存成功',
+              mask:"true",
               success: function () {
                 wx.navigateBack({
                   delta: 1
@@ -173,6 +194,9 @@ Page({
         },
         complete:function(res){
           wx.hideLoading();
+          _this.setData({
+            clickSureTime: "0"
+          })
         }
       })
     }
@@ -191,6 +215,7 @@ Page({
         if (data.errorCode == 0) {
           wx.showToast({
             title: '保存成功',
+            mask: "true",
             success: function(){
               wx.navigateBack({
                 delta:1
@@ -201,6 +226,9 @@ Page({
       },
       complete: function (res) {
         wx.hideLoading();
+        _this.setData({
+          clickSureTime: "0"
+        })
       }
     })
     }else{
@@ -208,12 +236,10 @@ Page({
       if(!data.detail){
         wx.showModal({
           title: '请填写详细的取货地址',
-          showCancel: false
         })
       }else if(!data.claimTime){
         wx.showModal({
           title: '请填写取货时间',
-          showCancel: false
         })
       }
 
@@ -251,6 +277,7 @@ Page({
           if(res.data.errorCode == 0){
             wx.showToast({
               title: '删除成功',
+              mask: "true",
               success:function(){
                 wx.navigateBack({
                   delta: 1
@@ -260,6 +287,7 @@ Page({
           }else{
             wx.showToast({
               title: res.data.errorMessage,
+              mask: "true",
               icon:"none",
               duration:2500
             })
