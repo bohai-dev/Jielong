@@ -223,6 +223,16 @@ Page({
     } else {
       this.setData({ bo_zan: 1 })
     }
+  },
+
+  // 测试支付
+  navPay:function(){
+    wx.navigateTo({
+      url: './testPay/testPay',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
   }
 
 
