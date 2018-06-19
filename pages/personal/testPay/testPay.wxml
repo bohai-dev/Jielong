@@ -1,2 +1,0 @@
-<!--pages/personal/testPay/testPay.wxml-->
-<button type='success' bindtap='testPay'>点击支付</button>
