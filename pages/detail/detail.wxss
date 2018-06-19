@@ -1,4 +1,15 @@
 /* pages/detail/detail.wxss */
+button::after{
+  border: none;
+  border-radius:0px!important;
+}
+.cont_btn{
+  padding: 0;
+  height: auto;
+  background-color:#eee;
+  border: 0;
+  border-radius:0px!important;
+}
 .goodsshow{
   width: 100%;
   background-color: rgb(255, 255, 255);

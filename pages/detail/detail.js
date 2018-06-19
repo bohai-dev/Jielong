@@ -425,6 +425,30 @@ Page({
       urls: imgUrl,
     })
   },
+  //获取登陆用户信息
+  getUserInfo: function (res) {
+    var _this = this;
+    // console.log(res)
+    if (res.detail.rawData) {
+      // console.log(app.globalData.userInfo)
+      if (!app.globalData.userInfo) {
+        wx.showLoading({
+          title: "数据加载中...",
+          mask: true
+        })
+        app.globalData.userInfo = JSON.parse(res.detail.rawData);
+        app.login();
+        setTimeout(function () {
+          _this.buyGoods();
+          wx.hideLoading();
+        }, 2000)
+      } else {
+          _this.buyGoods();
+      }
+    } else {
+
+    }
+  },
   //提交购买商品
   buyGoods:function(e){
     var _this = this;
