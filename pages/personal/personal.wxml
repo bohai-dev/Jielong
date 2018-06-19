@@ -38,6 +38,14 @@
     <image src='../../images/rightShot.png' class='rightShotImg'></image>
   </button>
 </view>
+<view class='section getTemp  mineMarginTop'>
+  <button class='mineNavTo cont_btn' hover-class='mineNavTohover' bindtap='navPay'>
+    <image class='tempIcon' src='../../images/mine/concat.png'></image>
+    <text class='tempName'   >测试支付</text>
+    <text class='tempRlCont'></text>
+    <image src='../../images/rightShot.png' class='rightShotImg'></image>
+  </button>
+</view>
 <!--模板end  -->
 <!-- <view style='height:100rpx' class='section getTemp mineNavTo'>
   <image class='tempIcon' src='../../images/mine/personal-center.png'></image>
