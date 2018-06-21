@@ -66,13 +66,49 @@ Page({
   
   // 测试支付
   testPay:function(){
-    wx.requestPayment({
-      timeStamp: '',
-      nonceStr: '',
-      package: '',
-      signType: '',
-      paySign: '',
+    //支付测试接口 
+    var payUrl ="http://47.88.54.113:8081/wxpay/pay";
+    wx.request({
+      url: payUrl,
+      success:function(res){
+   
+       var data=res.data;      
+       if (data.errorCode==0){
+         console.log(data.data);
+         var params=data.data;
+
+         //请求参数成功，发起支付
+          wx.requestPayment({
+            timeStamp: params.timeStamp,
+            nonceStr: params.nonceStr,
+            package: params.package,
+            signType: params.signType,
+            paySign: params.paySign,
+            success: function (res) {
+              console.log(res)
+            },
+            fail: function (res) {
+              console.log(res)
+            }  
+          })
+       
+       }else{
+         console.log(data.errorMessage);
+       }
+      },
+      fail:function(err){
+        console.log(err);
+      }
     })
+    
+
+    // wx.requestPayment({
+    //   timeStamp: '',
+    //   nonceStr: '',
+    //   package: '',
+    //   signType: '',
+    //   paySign: '',
+    // })
 
 
   }

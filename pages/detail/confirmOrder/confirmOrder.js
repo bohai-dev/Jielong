@@ -203,6 +203,10 @@ Page({
           }
         })
       }
+      /**
+       *不用检查库存了，下单时由后台来检查，如库存不足，不会下单成功，会返回错误 
+       */
+      /*
       wx.request({
         url: app.globalData.domain + '/jielong/selectById',
         data: {
@@ -296,7 +300,70 @@ Page({
             })
           }         
         }
-      })
+      })*/
+
+     //包含支付下单
+      console.log('订单信息'+_this.data)
+     wx.request({
+       url: app.globalData.domain + '/order/insertWithPay',
+       method: 'POST',
+       data:_this.data,
+       header: {
+         'content-type': 'application/json'
+       },
+       success:function(res){
+         var data = res.data; 
+         if (res.statusCode == 200 && data.errorCode == 0){
+           var params = data.data;
+           console.log(params);
+           //调用支付
+           //请求参数成功，发起支付
+           wx.requestPayment({
+             timeStamp: params.timeStamp,
+             nonceStr: params.nonceStr,
+             package: params.package,
+             signType: params.signType,
+             paySign: params.paySign,
+             success: function (res) {
+               //支付成功
+
+               console.log(res)
+               wx.hideLoading();
+               wx.showToast({
+                 title: '成功',
+                 icon: 'success',
+                 mask: true,
+                 duration: 2000
+               })
+             },
+             fail: function (res) {
+               console.log(res)
+             }
+           })
+
+         }else{
+           //关闭进度框，弹出错误信息
+           var errMsg='下单失败'
+           if (data.errorMessage != null && data.errorMessage!=undefined){
+             errMsg = data.errorMessage; 
+           }
+           wx.hideLoading();
+           wx.showModal({
+             title: '提示',
+             content: errMsg,
+             showCancel:false
+           })
+
+         } 
+       },
+       fail:function(res){
+          console.log(res);
+       }
+
+     })
+
+
+
     }
   }
 })
