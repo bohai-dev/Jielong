@@ -5,15 +5,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    orderGoods:[],
-    total:0,
-    userName:"",
-    userPhone:"",
-    userEmail:"",
-    userDetail:"",
+    orderGoods: [],
+    total: 0,
+    userName: "",
+    userPhone: "",
+    userEmail: "",
+    userDetail: "",
     addressName: "",
-    addressId:0,
-    remark:"",
+    addressId: 0,
+    remark: "",
   },
 
   /**
@@ -25,7 +25,7 @@ Page({
     console.log(data)
     var userId = wx.getStorageSync("userId");
     var total = 0;
-    for (var i=0;i<data.orderGoods.length;i++){
+    for (var i = 0; i < data.orderGoods.length; i++) {
       total += data.orderGoods[i].total
     }
     _this.setData({
@@ -69,49 +69,49 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   },
   //检查手机号
   telCheck: function (e) {
@@ -139,13 +139,13 @@ Page({
   //修改用户手机
   inputUserPhone: function (e) {
     this.data.userPhone = e.detail.value;
-  }, 
+  },
   //填写备注
-  inputMemoChange: function(e) {
+  inputMemoChange: function (e) {
     this.data.remark = e.detail.value;
   },
   //提交订单
-  submitOrder:function(e){
+  submitOrder: function (e) {
     var _this = this;
     var app = getApp();
     wx.showLoading({
@@ -184,7 +184,7 @@ Page({
     } else {
       var id = _this.data.jielongId;
       var orderGoods = _this.data.orderGoods;
-      if (this.data.userName != this.data.olduserName || this.data.userPhone != this.data.olduserPhone){
+      if (this.data.userName != this.data.olduserName || this.data.userPhone != this.data.olduserPhone) {
         wx.request({
           url: app.globalData.domain + '/userInfo/update',
           method: 'POST',
@@ -302,65 +302,74 @@ Page({
         }
       })*/
 
-     //包含支付下单
-      console.log('订单信息'+_this.data)
-     wx.request({
-       url: app.globalData.domain + '/order/insertWithPay',
-       method: 'POST',
-       data:_this.data,
-       header: {
-         'content-type': 'application/json'
-       },
-       success:function(res){
-         var data = res.data; 
-         if (res.statusCode == 200 && data.errorCode == 0){
-           var params = data.data;
-           console.log(params);
-           //调用支付
-           //请求参数成功，发起支付
-           wx.requestPayment({
-             timeStamp: params.timeStamp,
-             nonceStr: params.nonceStr,
-             package: params.package,
-             signType: params.signType,
-             paySign: params.paySign,
-             success: function (res) {
-               //支付成功
+      //包含支付下单
+      console.log('订单信息' + _this.data)
+      wx.request({
+        url: app.globalData.domain + '/order/insertWithPay',
+        method: 'POST',
+        data: _this.data,
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          var data = res.data;
+          if (res.statusCode == 200 && data.errorCode == 0) {
+            var params = data.data;
+            console.log(params);
+            //调用支付
+            //请求参数成功，发起支付
+            wx.requestPayment({
+              timeStamp: params.timeStamp,
+              nonceStr: params.nonceStr,
+              package: params.package,
+              signType: params.signType,
+              paySign: params.paySign,
+              success: function (res) {
 
-               console.log(res)
-               wx.hideLoading();
-               wx.showToast({
-                 title: '成功',
-                 icon: 'success',
-                 mask: true,
-                 duration: 2000
-               })
-             },
-             fail: function (res) {
-               console.log(res)
-             }
-           })
+                //支付成功
+                console.log(res)
+                wx.hideLoading();
+                wx.showToast({
+                  title: '成功',
+                  icon: 'success',
+                  mask: true,
+                  duration: 2000
+                })
+              },
+              fail: function (res) {
+                console.log(res.errMsg)
+                
+                wx.hideLoading();
+                wx.showModal({
+                  title: '提示',
+                  content: res.errMsg,
+                  showCancel: false
+                })
 
-         }else{
-           //关闭进度框，弹出错误信息
-           var errMsg='下单失败'
-           if (data.errorMessage != null && data.errorMessage!=undefined){
-             errMsg = data.errorMessage; 
-           }
-           wx.hideLoading();
-           wx.showModal({
-             title: '提示',
-             content: errMsg,
-             showCancel:false
-           })
 
-         } 
-       },
-       fail:function(res){
+              }
+            })
+
+          } else {
+            //关闭进度框，弹出错误信息
+            var errMsg = '下单失败'
+            if (data.errorMessage != null && data.errorMessage != undefined) {
+              errMsg = data.errorMessage;
+            }
+            wx.hideLoading();
+            wx.showModal({
+              title: '提示',
+              content: errMsg,
+              showCancel: false
+            })
+
+          }
+        },
+        fail: function (res) {
           console.log(res);
-       }
+        }
 
-     })
+      })
 
 
 
