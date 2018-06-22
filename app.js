@@ -193,7 +193,8 @@ App({
     userInfo: null,
     domain: "https://www.95cfuns.com",
     domainUpload: "https://upload.95cfuns.com/",
-    xOssProcess:"?x-oss-process=image/quality,q_60",    
+    //大小：宽度110px,高度110px,质量80%
+    xOssProcess:"?x-oss-process=image/resize,w_110,h_110/quality,q_80",    
   //  domain: "http://47.100.12.188:8081",
     // domain: "http://192.168.1.108:8081",
     classifyData:[],
