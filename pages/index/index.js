@@ -16,6 +16,7 @@ Page({
     appGlobalUrl: app.globalData.domain,
     appGlobalHost: app.globalData.domainUpload,
     xOssProcess: app.globalData.xOssProcess,
+    swiperXOssProcess: app.globalData.swiperXOssProcess,
     swiperList: [],                //轮播图片数据
     containerList: [],             //首页内容数据
     showLoading: false,
