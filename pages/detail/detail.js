@@ -157,6 +157,7 @@ Page({
             _this.data.GoodList[i]["goodsnum"] = 0;
           }
           // var jieLongStatus = res.data.data.status == 2 ? true : false;
+          console.log(_this.data.GoodList)
           _this.setData({
             userImg: res.data.data.userInfo.avatarUrl,
             goodstopic: res.data.data.topic,
@@ -172,8 +173,7 @@ Page({
             goodsUserid: goodsUserid,
             overSolitaire: res.data.data.status == 2 ? true : false,
             Group: Group,
-            joingoodsnum: joingoodsnum,
-            GoodList: _this.data.GoodList
+            joingoodsnum: joingoodsnum
           },function(){
              _this.getheight();
              if (res.data.data.status != 1 && fromMine == 0){
@@ -203,7 +203,8 @@ Page({
             'content-type': 'application/json' // 默认值
           },
           success: function (res) {
-            //console.log(res)
+            console.log(res)
+            console.log(res.data.data)
             //参与记录列表
             var partakeRecord = new Array();
             for (var i = 0; i < res.data.data.length; i++){
@@ -217,8 +218,10 @@ Page({
               partakeRecord[i] = { userimg, username, joinnumber, partakedate}
             }
             partakeRecord.reverse();
-            //参与份数
+            console.log(partakeRecord)
+            //`参与份数`
             var goodsSum = [];
+            console.log(_this.data.GoodList)
             for (var i = 0; i < _this.data.GoodList.length; i++) {
               var goodsid = _this.data.GoodList[i].id;
               var joinsum = 0;
@@ -233,7 +236,7 @@ Page({
                 }
               }
             }
-            //console.log(goodsSum)
+            console.log(goodsSum)
             for (var k = 0; k < _this.data.GoodList.length; k++) {
               for (var l = 0; l < goodsSum.length; l++) {
                 if (goodsSum[l].goodsid == _this.data.GoodList[k].id) {
