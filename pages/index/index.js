@@ -29,7 +29,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
+  onLoad(e) {
+    // console.log(e)
+    if (e.parentUserId){
+      //上级分销者
+      app.globalData.parentUserId = e.parentUserId
+    }
+
     // mart首页所有的数据量
     this.selectAllCount();
     // 加载首页轮播图片
@@ -130,6 +136,9 @@ Page({
 
   },
 
+  onShareAppMessage:function(res){
+  },
+
   //以下为自定义点击事件
 
   //加载轮播图
@@ -206,6 +215,12 @@ Page({
       scrollTop: 1000,
       duration: 300
     })
+  },
+  //上级分销者
+  parentSellPeople:function(pId){
+    console.log(pId)
+
+
   },
   //获取登陆用户信息
   getUserInfo:function(res){

@@ -28,6 +28,11 @@ Page({
       mineName: "个人资料",
       navUrl: "./userInfo/userInfo"
     }, {
+      mineIcon: "../../images/mine/yard.png",
+      mineName: "我的专属二维码",
+      mineMarginTop: "mineMarginTop",
+      navUrl: "./mineProgramYard/mineProgramYard"
+    }, {
       mineIcon: "../../images/mine/map.png",
       mineName: "取货点及时间管理",
       navUrl: "./address/address",
@@ -95,6 +100,9 @@ Page({
    */
   onPullDownRefresh() {
 
+  },
+
+  onShareAppMessage: function (res) {
   },
 
 

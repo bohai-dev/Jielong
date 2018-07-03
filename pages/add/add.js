@@ -59,6 +59,8 @@ Page({
 
   },
 
+  onShareAppMessage: function (res) {
+  },
 
   //以下为自定义点击事件
   //初始化数据

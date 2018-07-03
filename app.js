@@ -2,7 +2,7 @@ App({
 
   onLaunch: function () {
    
-    this.getPermissions()   //获取权限
+    // this.getPermissions()   //获取权限
 
    
  },
@@ -31,7 +31,7 @@ App({
 
   //登录方法
   login: function () {
-    var self = this
+    var self = this;
     wx.login({
       success: function (res) {
 
@@ -39,13 +39,15 @@ App({
         if (code) {
           console.log('获取用户登录凭证：' + code);
        //   console.log(self.globalData)
-
+          var loginParams = {code:code};
+          if (self.globalData.parentUserId){
+            loginParams.parentUserId = self.globalData.parentUserId;
+          }
+          // console.log(loginParams);
           // 发送 res.code 到后台登录
           wx.request({
             url: self.globalData.domain + '/user/login',
-            data: {
-              code: code
-            },
+            data:loginParams,
             success: function (res) {
               console.log(res.data)
               var response = res.data;
@@ -54,10 +56,10 @@ App({
                 console.log(userId)
                 wx.setStorageSync("session", response.data.sessionId)
                 wx.setStorageSync("userId", userId)
-
+                
                 //插入用户信息
                 console.log('插入用户信息')
-                self.insertUserInfo()
+                self.insertUserInfo();
 
               }
 
@@ -191,6 +193,7 @@ App({
   //全局数据
   globalData: {
     userInfo: null,
+    parentUserId:null,
     domain: "https://www.95cfuns.com",
     domainUpload: "https://upload.95cfuns.com/",
     //大小：宽度110px,高度110px,质量80%

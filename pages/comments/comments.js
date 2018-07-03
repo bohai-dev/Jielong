@@ -81,6 +81,8 @@ Page({
 
   },
 
+  onShareAppMessage: function (res) {
+  },
 
   //以下为自定义点击事件
   //获取登陆用户信息
