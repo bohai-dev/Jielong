@@ -31,6 +31,7 @@ Page({
    */
   onLoad(e) {
     // console.log(e)
+    console.log(app.globalData.userInfo)
     if (e.parentUserId){
       //上级分销者
       app.globalData.parentUserId = e.parentUserId
@@ -225,13 +226,15 @@ Page({
   //获取登陆用户信息
   getUserInfo:function(res){
     console.log(res)
+    console.log(app.globalData.userInfo)
     if(res.detail.rawData){
       wx.showLoading({
         title: "数据加载中...",
         mask: true
       })
       if(!app.globalData.userInfo){
-        app.globalData.userInfo = JSON.parse(res.detail.rawData); 
+        app.globalData.userInfo = JSON.parse(res.detail.rawData);
+        console.log("11") 
         app.login();
         setTimeout(function () {
           wx.navigateTo({
@@ -242,6 +245,7 @@ Page({
           })
         }, 2000)
       }else{
+        console.log("22") 
         wx.navigateTo({
           url: '../detail/detail?id=' + res.currentTarget.dataset.id + '&fromMine=0',
           complete:function(){

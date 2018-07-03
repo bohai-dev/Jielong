@@ -3,6 +3,7 @@ App({
   onLaunch: function () {
    
     // this.getPermissions()   //获取权限
+    this.getUserInfo();
 
    
  },
