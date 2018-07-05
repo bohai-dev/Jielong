@@ -16,19 +16,27 @@ Page({
     appGlobalUrl: app.globalData.domain,
     appGlobalHost: app.globalData.domainUpload,
     xOssProcess: app.globalData.xOssProcess,
+    swiperXOssProcess: app.globalData.swiperXOssProcess,
     swiperList: [],                //轮播图片数据
     containerList: [],             //首页内容数据
     showLoading: false,
     pageSize: 10,                   //每页加载的数据量
-    jielongAllCount:0,              //总的页数
-    showAllData:false,               //是否加载完所有的数据
+    jielongAllCount: 0,              //总的页数
+    showAllData: false,               //是否加载完所有的数据
 
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
+  onLoad(e) {
+    // console.log(e)
+    console.log(app.globalData.userInfo)
+    if (e.parentUserId) {
+      //上级分销者
+      app.globalData.parentUserId = e.parentUserId
+    }
+
     // mart首页所有的数据量
     this.selectAllCount();
     // 加载首页轮播图片
@@ -62,13 +70,13 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        for(var i=0;i<res.data.data.length;i++){
-          if (res.data.data[i].isRead == 0){
+        for (var i = 0; i < res.data.data.length; i++) {
+          if (res.data.data[i].isRead == 0) {
             wx.showTabBarRedDot({
               index: 2
             })
             break;
-          }else{
+          } else {
             wx.hideTabBarRedDot({
               index: 2
             })
@@ -76,7 +84,7 @@ Page({
         }
       }
     })
-    
+
   },
 
   /**
@@ -100,8 +108,8 @@ Page({
     wx.showNavigationBarLoading();
     pageNum = 1;
     this.setData({
-      containerList:[],
-      showAllData:false
+      containerList: [],
+      showAllData: false
     })
 
     this.loadContainer(1);
@@ -115,18 +123,21 @@ Page({
  * 页面相关事件处理函数--监听用户上拉动作
  */
   onReachBottom() {
-    if (pageNum < this.data.jielongAllCount){
+    if (pageNum < this.data.jielongAllCount) {
       this.setData({
         showLoading: true
       })
       this.loadContainer(++pageNum);
-    }else{
+    } else {
       this.setData({
         showAllData: true
       })
     }
 
 
+  },
+
+  onShareAppMessage: function (res) {
   },
 
   //以下为自定义点击事件
@@ -165,8 +176,8 @@ Page({
         console.log(res);
         if (res.data.errorCode == 0 && res.data.data) {
           _this.data.containerList = _this.data.containerList.concat(res.data.data)
-          for (var i = 0; i < _this.data.containerList.length ; i++){
-            _this.data.containerList[i].createTimeStr = _this.data.containerList[i].createTimeStr.slice(0,10);
+          for (var i = 0; i < _this.data.containerList.length; i++) {
+            _this.data.containerList[i].createTimeStr = _this.data.containerList[i].createTimeStr.slice(0, 10);
           }
           _this.setData({
             containerList: _this.data.containerList,
@@ -176,7 +187,7 @@ Page({
           wx.stopPullDownRefresh();
         }
       },
-      fail:function(err){
+      fail: function (err) {
         _this.setData({
           showLoading: false
         })
@@ -185,13 +196,13 @@ Page({
     console.log(this)
   },
   //查找所有的数据
-  selectAllCount:function(){
+  selectAllCount: function () {
     var _this = this;
     wx.request({
       url: app.globalData.domain + '/jielong/selectCount',
       method: "GET",
-      success:function(res){
-        if(res.statusCode == 200){
+      success: function (res) {
+        if (res.statusCode == 200) {
           _this.setData({
             jielongAllCount: Math.ceil(res.data.data / _this.data.pageSize)
           })
@@ -200,43 +211,52 @@ Page({
       }
     })
   },
-  test:function(){
+  test: function () {
     wx.pageScrollTo({
       scrollTop: 1000,
       duration: 300
     })
   },
+  //上级分销者
+  parentSellPeople: function (pId) {
+    console.log(pId)
+
+
+  },
   //获取登陆用户信息
-  getUserInfo:function(res){
+  getUserInfo: function (res) {
     console.log(res)
-    if(res.detail.rawData){
+    console.log(app.globalData.userInfo)
+    if (res.detail.rawData) {
       wx.showLoading({
         title: "数据加载中...",
         mask: true
       })
-      if(!app.globalData.userInfo){
-        app.globalData.userInfo = JSON.parse(res.detail.rawData); 
+      if (!app.globalData.userInfo) {
+        app.globalData.userInfo = JSON.parse(res.detail.rawData);
+        console.log("11")
         app.login();
         setTimeout(function () {
           wx.navigateTo({
             url: '../detail/detail?id=' + res.currentTarget.dataset.id + '&fromMine=0',
-            complete:function(){
+            complete: function () {
               wx.hideLoading();
             }
           })
         }, 2000)
-      }else{
+      } else {
+        console.log("22")
         wx.navigateTo({
           url: '../detail/detail?id=' + res.currentTarget.dataset.id + '&fromMine=0',
-          complete:function(){
+          complete: function () {
             wx.hideLoading();
           }
         })
       }
-    }else{
+    } else {
 
     }
-    }
+  }
 
 })
 

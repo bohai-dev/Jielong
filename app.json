@@ -25,7 +25,8 @@
     "pages/detail/solitaireStatistics/Goodsstatistics/Goodsstatistics",
     "pages/detail/addrRemake/addrRemake",
     "pages/release/copySolitaire/copySolitaire",
-    "pages/personal/testPay/testPay"
+    "pages/personal/testPay/testPay",
+    "pages/personal/mineProgramYard/mineProgramYard"
   ],
   "window": {
     "backgroundTextStyle": "light",

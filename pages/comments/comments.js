@@ -19,7 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    
+
   },
 
   /**
@@ -34,7 +34,7 @@ Page({
    */
   onShow() {
     var app = getApp();
-    var _this=this;
+    var _this = this;
     var userId = wx.getStorageSync("userId");
     wx.request({
       url: app.globalData.domain + '/userMessage/selectByUserId',
@@ -81,6 +81,8 @@ Page({
 
   },
 
+  onShareAppMessage: function (res) {
+  },
 
   //以下为自定义点击事件
   //获取登陆用户信息
@@ -105,7 +107,7 @@ Page({
       } else {
         wx.hideLoading();
         wx.navigateTo({
-          url: './systemNotice/systemNotice', 
+          url: './systemNotice/systemNotice',
           complete: function () {
             wx.hideLoading();
           }

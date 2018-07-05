@@ -18,7 +18,7 @@
   <!-- 商品图品 -->
   <view class="goodsimgbox">
     <block wx:for="{{goodsImg}}" wx:for-index="index" wx:key="">
-      <image class="goodsimg" mode="aspectFill" src="{{appGlobalHost + item + xOssProcess}}" bindtap='preViewImg' data-index="{{index}}" data-imgSrc="{{appGlobalHost + item + xOssProcess}}" data-viewList='head' />
+      <image class="goodsimg" mode="aspectFill" src="{{appGlobalHost + item + xOssProcess}}" bindtap='preViewImg' data-index="{{index}}" data-imgSrc="{{appGlobalHost + item}}" data-viewList='head' />
     </block> 
   </view>
   <!-- 商品地址 -->
@@ -36,7 +36,7 @@
 <view class="container">
   <block wx:for="{{GoodList}}" wx:for-index="goodsIndex" wx:key="">
     <view class='goodsbuy'>
-      <image class="goodsbuyimg" mode="aspectFill" src="{{appGlobalHost + item.serverPaths[0] + xOssProcess}}" bindtap='preViewImg' data-index="{{goodsIndex}}" data-imgSrc="{{appGlobalHost + item.serverPaths[0]  + xOssProcess}}" data-viewList='goods' >
+      <image class="goodsbuyimg" mode="aspectFill" src="{{appGlobalHost + item.serverPaths[0] + xOssProcess}}" bindtap='preViewImg' data-index="{{goodsIndex}}" data-imgSrc="{{appGlobalHost + item.serverPaths[0]}}" data-viewList='goods' >
       <view class='imgNum'>{{item.serverPaths.length}}张</view>
       </image>
       <view class='goodsinfo'>
@@ -106,7 +106,7 @@
           </navigator>
         </block>
       </view>
-      <view class="{{count > 0 ? 'foot_right_green' : 'foot_right'}}" bindtap="buyGoods">{{buy}}</view>  
+      <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cont_btn {{count > 0 ? 'foot_right_green' : 'foot_right'}}">{{buy}}</button>  
     </block>
     <!-- 从我的进 -->
     <block wx:if="{{fromMine}}">

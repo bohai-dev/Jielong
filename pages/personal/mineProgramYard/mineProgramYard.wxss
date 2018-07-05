@@ -1,0 +1,40 @@
+/* pages/personal/mineProgramYard/miniProgramYard.wxss */
+.yardPage{
+  height: 100%;
+  background-color: #EEE;
+  padding: 50rpx;
+}
+.yardPage>.cont{
+  height: 80%;
+  width: 650rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: space-around;
+  text-align: center;
+  
+}
+.yard_title{
+  font-size: 34rpx;
+  color: #333;
+  text-shadow: #ccc 10rpx 10rpx 4rpx;
+}
+.yard_img{
+  width: 400rpx;
+  height: 400rpx;
+  margin: 0 auto;
+}
+.yard_footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #666;
+  text-align: left;
+  padding: 0 50rpx;
+}
+.yard_notice{
+
+  color: red;
+}

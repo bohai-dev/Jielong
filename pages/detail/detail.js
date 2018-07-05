@@ -11,33 +11,33 @@ Page({
     xOssProcess: app.globalData.xOssProcess,
     userImg: "",                                //发布用户头像
     goodstopic: "",                             //mart主题
-    goodsdata:"",                               //mart日期
-    person:0,                                   //浏览人数
-    goodsdescribe:"",                           //mart描述
+    goodsdata: "",                               //mart日期
+    person: 0,                                   //浏览人数
+    goodsdescribe: "",                           //mart描述
     showMask: true,                             //是否显示遮罩层
     showMaskbar: false,                         //遮罩层
     arrow: "../../images/arrowdown.png",        //箭头
     goodsImg: [],                               //mart图片
-    SetGroup:true,                              //是否设置最小成员团
-    Group:0,                                    //最小开团数量
-    joingoodsnum:0,                             //参团商品数量
+    SetGroup: true,                              //是否设置最小成员团
+    Group: 0,                                    //最小开团数量
+    joingoodsnum: 0,                             //参团商品数量
     buy: "请选择商品",                           //购买商品
     count: 0,                                   //商品总数
     total: 0,                                   //商品总价
     selectAddrId: "",                           //mart的自提点id
     selectAddrDetail: "",                       //mart的自提点详细地址
-    jieLongId:"",                               //martid
-    QR_CodeSrc:"",                              //二维码地址
-    hiddenModal:false,                           
+    jieLongId: "",                               //martid
+    QR_CodeSrc: "",                              //二维码地址
+    hiddenModal: false,
     fromMine: 0,                                //是否从发起mart进入
-    overSolitaire:false,                        //mart数据状态
-    goodsAddresses:"",
-    selectAddresses:"查看并选择取货点及时间",
+    overSolitaire: false,                        //mart数据状态
+    goodsAddresses: "",
+    selectAddresses: "查看并选择取货点及时间",
     GoodsDetialList: [{                         //mart信息
       mineIcon: "../../images/position.png",
       mineName: "",
       show: true,
-      rightArrow:"dn"
+      rightArrow: "dn"
       // bindTap:"showMap",
       // addressDetail:"",
       // addressLatitude:"",
@@ -45,20 +45,20 @@ Page({
     }, {
       mineIcon: "../../images/phone.png",
       mineName: "",
-      phone:"",
+      phone: "",
       show: true,
       bindTap: "callPhone"
-    // }, {
-    //   mineIcon: "../../images/location.png",
-    //   mineName: "查看并选择自提点",
-    //   goodsAddresses:"",
-    //   show: true,
-    //   bindTap: "showLocation"
+      // }, {
+      //   mineIcon: "../../images/location.png",
+      //   mineName: "查看并选择自提点",
+      //   goodsAddresses:"",
+      //   show: true,
+      //   bindTap: "showLocation"
     }, {
       mineIcon: "../../images/time.png",
       mineName: "",
-      show:true,
-      rightArrow:"dn"
+      show: true,
+      rightArrow: "dn"
     }],
     GoodList: [],
     record: [{                                   //mart记录数据
@@ -66,14 +66,14 @@ Page({
       recordText: "浏览(人)",
       rightBorder: "rightborder"
     }, {
-      recordNumber:0,
-      recordText:"参与Mart(人)",
+      recordNumber: 0,
+      recordText: "参与Mart(人)",
       rightBorder: "rightborder"
     }, {
       recordNumber: 0.00,
       recordText: "Mart金额(元)"
     }],
-  partakeRecord: [],                             //参与记录
+    partakeRecord: [],                             //参与记录
     footnav: [{
       navIcon: "../../images/home.png",
       navText: "首页",
@@ -84,7 +84,7 @@ Page({
       navText: "发布Mart",
       navUrl: "../add/add"
     }],
-    
+
   },
 
   /**
@@ -142,7 +142,7 @@ Page({
           _this.data.GoodsDetialList[1].mineName = res.data.data.phoneNumber + "(" + res.data.data.userInfo.name + ")";
           _this.data.GoodsDetialList[1].phone = res.data.data.phoneNumber;
           //_this.data.GoodsDetialList[2].goodsAddresses = res.data.data.goodsAddresses;
-          _this.data.GoodsDetialList[2].show = (res.data.data.setFinishTime==1)?true:false;
+          _this.data.GoodsDetialList[2].show = (res.data.data.setFinishTime == 1) ? true : false;
           _this.data.GoodsDetialList[2].mineName = "Mart截止时间: " + res.data.data.finishTime;
           _this.data.GoodList = res.data.data.goodsList;
           _this.data.record[0].recordNumber = res.data.data.browseSum;
@@ -152,11 +152,12 @@ Page({
           var Group = res.data.data.goodsList[0].groupSum;
           var joingoodsnum = res.data.data.goodsList[0].remainSum;
           var goodsUserid = res.data.data.userId;
-          for (var i = 0; i < (_this.data.GoodList.length); i++){
+          for (var i = 0; i < (_this.data.GoodList.length); i++) {
             _this.data.GoodList[i].serverPaths = _this.data.GoodList[i].serverPaths.split(",");
             _this.data.GoodList[i]["goodsnum"] = 0;
           }
           // var jieLongStatus = res.data.data.status == 2 ? true : false;
+          console.log(_this.data.GoodList)
           _this.setData({
             userImg: res.data.data.userInfo.avatarUrl,
             goodstopic: res.data.data.topic,
@@ -172,27 +173,26 @@ Page({
             goodsUserid: goodsUserid,
             overSolitaire: res.data.data.status == 2 ? true : false,
             Group: Group,
-            joingoodsnum: joingoodsnum,
-            GoodList: _this.data.GoodList
-          },function(){
-             _this.getheight();
-             if (res.data.data.status != 1 && fromMine == 0){
-               wx.showModal({
-                 title: '提示',
-                 content: '该Mart已结束！',
-                 confirmColor: "#2CBB6B",
-                 showCancel: false,
-                 success: function (res) {
-                   if (res.confirm) {
-                     wx.switchTab({
-                       url: '../index/index'
-                     })
-                   }
-                 }
-               })
-             }
+            joingoodsnum: joingoodsnum
+          }, function () {
+            _this.getheight();
+            if (res.data.data.status != 1 && fromMine == 0) {
+              wx.showModal({
+                title: '提示',
+                content: '该Mart已结束！',
+                confirmColor: "#2CBB6B",
+                showCancel: false,
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.switchTab({
+                      url: '../index/index'
+                    })
+                  }
+                }
+              })
+            }
           })
-        }      
+        }
         //获取参与记录
         wx.request({
           url: _this.data.appGlobalUrl + '/jielong/selectJoin',
@@ -203,29 +203,32 @@ Page({
             'content-type': 'application/json' // 默认值
           },
           success: function (res) {
-            //console.log(res)
+            console.log(res)
+            console.log(res.data.data)
             //参与记录列表
             var partakeRecord = new Array();
-            for (var i = 0; i < res.data.data.length; i++){
+            for (var i = 0; i < res.data.data.length; i++) {
               var userimg = res.data.data[i].userInfo.avatarUrl;
               var username = res.data.data[i].userInfo.nickName;
               var joinnumber = 0;
-              for (var j = 0; j < res.data.data[i].orderGoods.length;j++){
+              for (var j = 0; j < res.data.data[i].orderGoods.length; j++) {
                 joinnumber += res.data.data[i].orderGoods[j].sum;
               }
               var partakedate = res.data.data[i].createdAt;
-              partakeRecord[i] = { userimg, username, joinnumber, partakedate}
+              partakeRecord[i] = { userimg, username, joinnumber, partakedate }
             }
             partakeRecord.reverse();
-            //参与份数
+            console.log(partakeRecord)
+            //`参与份数`
             var goodsSum = [];
+            console.log(_this.data.GoodList)
             for (var i = 0; i < _this.data.GoodList.length; i++) {
               var goodsid = _this.data.GoodList[i].id;
               var joinsum = 0;
-              goodsSum[i] = { goodsid, joinsum}
+              goodsSum[i] = { goodsid, joinsum }
               for (var j = 0; j < res.data.data.length; j++) {
                 if (res.data.data[j].userId == userid) {
-                  for (var n = 0; n < res.data.data[j].orderGoods.length; n++){
+                  for (var n = 0; n < res.data.data[j].orderGoods.length; n++) {
                     if (goodsSum[i].goodsid == res.data.data[j].orderGoods[n].goodsId) {
                       goodsSum[i].joinsum += res.data.data[j].orderGoods[n].sum;
                     }
@@ -233,7 +236,7 @@ Page({
                 }
               }
             }
-            //console.log(goodsSum)
+            console.log(goodsSum)
             for (var k = 0; k < _this.data.GoodList.length; k++) {
               for (var l = 0; l < goodsSum.length; l++) {
                 if (goodsSum[l].goodsid == _this.data.GoodList[k].id) {
@@ -290,7 +293,7 @@ Page({
   /**
    * 转发
    */
-  onShareAppMessage(options){
+  onShareAppMessage(options) {
     var _this = this;
     return {
       title: _this.data.goodstopic + "，已有" + _this.data.record[1].recordNumber + "人参与",
@@ -308,7 +311,7 @@ Page({
 
   //以下为自定义点击事件
   //查看地图
-  showMap:function(){
+  showMap: function () {
     var _this = this;
     wx.openLocation({
       //当前经纬度
@@ -332,12 +335,12 @@ Page({
   //选择自提点
   showLocation: function () {
     var _this = this;
-    this.data.takeGoodsAddressList.forEach(function(e){
-      if (_this.data.selectAddrId == e.id){
-          e.selectVal = true;
-        }else{
+    this.data.takeGoodsAddressList.forEach(function (e) {
+      if (_this.data.selectAddrId == e.id) {
+        e.selectVal = true;
+      } else {
         e.selectVal = false;
-        }
+      }
     })
     var jsonStr = JSON.stringify(_this.data.takeGoodsAddressList);
     wx.navigateTo({
@@ -390,7 +393,7 @@ Page({
           }
         }
       })
-      if (repertory>0){
+      if (repertory > 0) {
         var buy = "已选：$" + this.data.total;
       }
     } else {
@@ -407,18 +410,18 @@ Page({
     })
   },
   //预览图片
-  preViewImg:function(e){
+  preViewImg: function (e) {
     var imgUrl = [];
     var _this = this;
-    if(e.currentTarget.dataset.viewlist == "head"){
+    if (e.currentTarget.dataset.viewlist == "head") {
       _this.data.goodsImg.forEach(function (e) {
-        imgUrl.push(_this.data.appGlobalHost + e + _this.data.xOssProcess);
+        imgUrl.push(_this.data.appGlobalHost + e);
       })
-      
-    }else{
+
+    } else {
       console.log(_this.data.GoodList)
       _this.data.GoodList[e.currentTarget.dataset.index].serverPaths.forEach(function (e) {
-        imgUrl.push(_this.data.appGlobalHost + e + _this.data.xOssProcess);
+        imgUrl.push(_this.data.appGlobalHost + e);
       })
     }
     wx.previewImage({
@@ -426,11 +429,35 @@ Page({
       urls: imgUrl,
     })
   },
+  //获取登陆用户信息
+  getUserInfo: function (res) {
+    var _this = this;
+    // console.log(res)
+    if (res.detail.rawData) {
+      // console.log(app.globalData.userInfo)
+      if (!app.globalData.userInfo) {
+        wx.showLoading({
+          title: "数据加载中...",
+          mask: true
+        })
+        app.globalData.userInfo = JSON.parse(res.detail.rawData);
+        app.login();
+        setTimeout(function () {
+          _this.buyGoods();
+          wx.hideLoading();
+        }, 2000)
+      } else {
+        _this.buyGoods();
+      }
+    } else {
+
+    }
+  },
   //提交购买商品
-  buyGoods:function(e){
+  buyGoods: function (e) {
     var _this = this;
     var count = this.data.count;
-    if(count == 0 ){
+    if (count == 0) {
       return false;
     } else {
       var jielongId = Number(this.data.id);
@@ -439,16 +466,16 @@ Page({
       var addressName = this.data.selectAddrDetail;
       var orderGoods = [];
       var isSetGroup = this.data.SetGroup ? 1 : 0;
-      for (var i = 0; i < this.data.GoodList.length; i++){
-        if (this.data.GoodList[i].goodsnum>0){
-          var orderGoodsList = { goodsId: this.data.GoodList[i].id, sum: this.data.GoodList[i].goodsnum, money: this.data.GoodList[i].price, total: this.data.GoodList[i].goodsnum * this.data.GoodList[i].price, goodsname: this.data.GoodList[i].name}
+      for (var i = 0; i < this.data.GoodList.length; i++) {
+        if (this.data.GoodList[i].goodsnum > 0) {
+          var orderGoodsList = { goodsId: this.data.GoodList[i].id, sum: this.data.GoodList[i].goodsnum, money: this.data.GoodList[i].price, total: this.data.GoodList[i].goodsnum * this.data.GoodList[i].price, goodsname: this.data.GoodList[i].name }
           orderGoods.push(orderGoodsList)
         }
       }
-      var goodsInfo = { jielongId, goodsUserid, addressId, orderGoods, addressName, isSetGroup};
+      var goodsInfo = { jielongId, goodsUserid, addressId, orderGoods, addressName, isSetGroup };
       var jsonStr = JSON.stringify(goodsInfo);
       //console.log(goodsInfo)
-      if (!addressId){
+      if (!addressId) {
         wx.showModal({
           content: '请选择取货点及时间',
           confirmColor: "#2CBB6B",
@@ -459,7 +486,7 @@ Page({
             }
           }
         })
-      }else{
+      } else {
         wx.navigateTo({
           url: './confirmOrder/confirmOrder?jsonStr=' + jsonStr
         })
@@ -467,22 +494,22 @@ Page({
     }
   },
   //二维码
-  qrTap:function(e){
+  qrTap: function (e) {
     var _this = this;
     // console.log(app.globalData.domain + '/getQRcode/' + _this.data.jieLongId)
     _this.setData({
       QR_CodeSrc: app.globalData.domain + '/getQRcode/' + _this.data.jieLongId,
-      hiddenModal:true
+      hiddenModal: true
     })
   },
   //取消二维码
-  listenerConfirm:function(e){
+  listenerConfirm: function (e) {
     this.setData({
-      hiddenModal:false
+      hiddenModal: false
     })
   },
   //保存二维码图片
-  saveQr_code:function(e){
+  saveQr_code: function (e) {
     var _this = this;
     wx.previewImage({
       current: _this.data.QR_CodeSrc,
@@ -490,28 +517,28 @@ Page({
     })
   },
   //跳转mart统计
-  solitaireStatistics:function(e){
+  solitaireStatistics: function (e) {
     var _this = this;
     wx.navigateTo({
       url: './solitaireStatistics/solitaireStatistics?jieLongId=' + _this.data.jieLongId,
     })
   },
   //跳转到自提标记
-  addrRemake:function(e){
-    var _this = this;    
+  addrRemake: function (e) {
+    var _this = this;
     wx.navigateTo({
       url: './addrRemake/addrRemake?jieLongId=' + _this.data.jieLongId,
     })
   },
   //结束mart
-  overSolitaire:function(e){
+  overSolitaire: function (e) {
     var _this = this;
     console.log(_this)
     wx.showModal({
       title: '确定结束Mart？',
       confirmColor: "#2CBB6B",
-      success:function(res){
-        if(res.confirm){
+      success: function (res) {
+        if (res.confirm) {
           wx.request({
             url: app.globalData.domain + '/jielong/closeJielong',
             method: "GET",
@@ -520,7 +547,7 @@ Page({
             },
             success: function (res) {
               console.log(res)
-              if(res.statusCode == 200){
+              if (res.statusCode == 200) {
                 wx.showToast({
                   title: '结束Mart成功!',
                   duration: 4000,
@@ -530,7 +557,7 @@ Page({
                     })
                   }
                 })
-              }else{
+              } else {
                 wx.showToast({
                   title: '结束Mart失败!',
                   duration: 4000,
@@ -545,7 +572,7 @@ Page({
     })
   },
   //复制mart
-  copySolitaire:function(){
+  copySolitaire: function () {
     var _this = this;
     console.log(_this.data.allData);
     wx.removeStorage({
@@ -561,7 +588,7 @@ Page({
 
   },
   //获取高度
-  getheight:function(){
+  getheight: function () {
     var _this = this;
     var query = wx.createSelectorQuery();
     query.select('#mjltest').boundingClientRect()
@@ -570,27 +597,27 @@ Page({
       console.log(res);
       //取高度
       console.log(res[0].height);
-      if (res[0].height>150){
+      if (res[0].height > 150) {
         var showMask = false;
         _this.setData({
           initialHeight: res[0].height,
           showMask: showMask,
-          showMaskbar:true
+          showMaskbar: true
         })
       }
     })
   },
   //显示描述全部内容
-  showMaskFun:function(){
+  showMaskFun: function () {
     var showMask = this.data.showMask;
-    if (showMask){
+    if (showMask) {
       showMask = false;
       this.setData({
         showMask: showMask,
         arrow: "../../images/arrowdown.png"
       })
       console.log(111)
-    }else{
+    } else {
       showMask = true;
       console.log(this.data.initialHeight)
       this.setData({
@@ -601,10 +628,10 @@ Page({
     }
   },
   //手动输入商品数量
-  inputGoodsNum:function(e){
+  inputGoodsNum: function (e) {
     var _this = this;
     var index = e.currentTarget.dataset.index;
-    if (e.detail.value > this.data.GoodList[index].repertory){
+    if (e.detail.value > this.data.GoodList[index].repertory) {
       wx.showModal({
         title: '',
         content: '抱歉，该商品Mart剩余不足!',
@@ -628,7 +655,7 @@ Page({
           }
         }
       })
-    }else{
+    } else {
       const goodsnumlast = this.data.GoodList[index].goodsnum;
       var countnum = e.detail.value - goodsnumlast;
       var pricediff = this.data.GoodList[index].price * countnum;

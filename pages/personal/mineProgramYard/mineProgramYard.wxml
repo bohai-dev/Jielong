@@ -1,0 +1,19 @@
+<!--pages/personal/mineProgramYard/miniProgramYard.wxml-->
+<view class="yardPage">
+  <view class='cont'>
+      <text class='yard_title'>我的专属二维码</text>
+
+      <image class='yard_img' src='{{yardImgSrc}}' bindtap='previewYard' bindlongpress='saveToAlbum'></image>
+
+      <view class='yard_footer'>
+        <text>1.长按保存二维码到相册;</text>
+        <text>2.点击预览二维码,长按即可分享;</text>
+        <text>3.长按识别或者微信扫一扫二维码进入小程序;</text>
+      </view>
+
+      <view class='yard_footer yard_notice'>
+        <text>其他用户通过自己分享的二维码注册小程序后下单，自己都会得到提成;</text>
+      </view>
+  </view>
+
+</view>

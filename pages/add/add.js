@@ -59,6 +59,8 @@ Page({
 
   },
 
+  onShareAppMessage: function (res) {
+  },
 
   //以下为自定义点击事件
   //初始化数据
@@ -74,7 +76,7 @@ Page({
   getUserInfo: function (res) {
     if (res.detail.rawData) {
       wx.showLoading({
-        title:"数据加载中...",
+        title: "数据加载中...",
         mask: true
       })
       if (!app.globalData.userInfo) {
@@ -88,7 +90,7 @@ Page({
             }
           })
         }, 2000)
-      }else{
+      } else {
         wx.navigateTo({
           url: '../release/release',
           complete: function () {
@@ -96,7 +98,7 @@ Page({
           }
         })
       }
-    }else{
+    } else {
 
     }
   }
