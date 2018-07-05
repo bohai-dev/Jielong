@@ -172,7 +172,8 @@ Page({
             goodsUserid: goodsUserid,
             overSolitaire: res.data.data.status == 2 ? true : false,
             Group: Group,
-            joingoodsnum: joingoodsnum
+            joingoodsnum: joingoodsnum,
+            GoodList: _this.data.GoodList
           },function(){
              _this.getheight();
              if (res.data.data.status != 1 && fromMine == 0){
