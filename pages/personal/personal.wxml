@@ -31,7 +31,7 @@
   </view>
 </block>
 <view class='section getTemp  mineMarginTop'>
-  <button class='mineNavTo cont_btn' hover-class='mineNavTohover' open-type="contact" show-message-card="true">
+  <button class='mineNavTo cont_btn' hover-class='mineNavTohover' open-type="contact">
     <image class='tempIcon' src='../../images/mine/concat.png'></image>
     <text class='tempName' bindtap='findAddress'>联系客服</text>
     <text class='tempRlCont'></text>
